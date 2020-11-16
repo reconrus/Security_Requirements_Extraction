@@ -28,6 +28,12 @@ parser.add_argument(
     help="Path to folder with Concord xml data files",
 )
 parser.add_argument(
+    "-o",
+    default="result.csv",
+    type=str,
+    help="Output file path",
+)
+parser.add_argument(
     "--min_len",
     default=3,
     type=int,
@@ -51,7 +57,7 @@ def read_seqreq(path, resulting_dataset):
 
 
 def read_promise(path, resulting_dataset):
-    data = arff.load(open(path, "r"))
+    data = arff.load(open(path, "r", encoding="cp1252"))
     adjust_class = lambda x: "sec" if x == "SE" else "nonsec"
     data = [[row[1].strip(), adjust_class(row[2])] for row in data["data"]]
     df = pd.DataFrame(data, columns=resulting_dataset.columns)
@@ -103,7 +109,7 @@ def read_datasets(args):
     resulting_dataset = read_seqreq(args.sec_req, resulting_dataset)
     resulting_dataset = read_promise(args.promise, resulting_dataset)
     resulting_dataset = read_concord(args.concord, resulting_dataset, args.min_len)
-    resulting_dataset.to_csv("f.csv", sep="\t", index=False)
+    resulting_dataset.to_csv(args.o, sep="\t", index=False)
 
 
 if __name__ == "__main__":

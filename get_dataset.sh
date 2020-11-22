@@ -19,8 +19,11 @@ wget -O Concordia.tar.gz https://www.semanticsoftware.info/system/files/NFRClass
 tar -xzf Concordia.tar.gz
 rm Concordia.tar.gz
 
+# CCHIT Dataset
+wget -O CCHIT.xls https://www.dropbox.com/s/7pe4xq0ntwbbrlx/CCHIT%20Certified%202011%20Ambulatory%20EHR%20Criteria%2020110517.xls?dl=1
+
 cd ..
 python3 -m venv env
 . ./env/bin/activate
-pip3 install pandas liac-arff
-python3 prepare_data.py --sec_req ./RawDatasets/SecReq --promise ./RawDatasets/nfr/nfr.arff --concord ./RawDatasets/NFRClassifier/gate/application-resources/Requirements/
+pip3 install pandas liac-arff xlrd
+python3 prepare_data.py --sec_req ./RawDatasets/SecReq --promise ./RawDatasets/nfr/nfr.arff --concord ./RawDatasets/NFRClassifier/gate/application-resources/Requirements/ --cchit ./RawDatasets/CCHIT.xls

@@ -28,6 +28,12 @@ parser.add_argument(
     help="Path to folder with Concord xml data files",
 )
 parser.add_argument(
+    "--cchit",
+    default="./Datasets/CCHIT.xls",
+    type=str,
+    help="Path to CCHIT Excel Sheet",
+)
+parser.add_argument(
     "-o",
     default="result.csv",
     type=str,
@@ -103,12 +109,31 @@ def read_concord(path, resulting_dataset, min_len):
     return resulting_dataset
 
 
+def read_cchit(path, resulting_dataset): 
+    columns = ["Criteria #", "Criteria", "Comments"]
+    cchit_data = pd.read_excel(path, header=5, usecols=columns)
+    # cchit_data = pd.read_excel(path, header=5)
+    cchit_data = cchit_data[cchit_data[columns[0]].notna()].dropna()    
+    cchit_data.to_csv("wtf.csv")
+
+    prepare_label = lambda x: "sec" if "SC" in x else "nonsec"
+    prepare_text = lambda x: f"{x[0].strip()} {x[1].strip()}".replace("\n", " ") if type(x[1]) == str else x[0].strip().replace("\n", " ")
+    labels = cchit_data[columns[0]].map(prepare_label)
+    texts = cchit_data[columns[1:]].apply(prepare_text, axis=1)
+
+    data = {resulting_dataset.columns[0]: texts, resulting_dataset.columns[1]: labels} 
+    df = pd.DataFrame(data).dropna()
+    return resulting_dataset.append(df)
+
 def read_datasets(args):
     columns = ["Text", "Label"]
     resulting_dataset = pd.DataFrame(columns=columns)
     resulting_dataset = read_seqreq(args.sec_req, resulting_dataset)
     resulting_dataset = read_promise(args.promise, resulting_dataset)
     resulting_dataset = read_concord(args.concord, resulting_dataset, args.min_len)
+    resulting_dataset = read_cchit(args.cchit, resulting_dataset)
+
+    resulting_dataset = resulting_dataset.drop_duplicates()
     resulting_dataset.to_csv(args.o, sep="\t", index=False)
 
 

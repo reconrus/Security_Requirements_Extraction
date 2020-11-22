@@ -132,83 +132,20 @@ The CND shall support protocols to access Self Configuration application (as def
 The CND shall be able to download and install client application services.	nonsec
 The CND should be able to communicate its services related capabilities to the CNG.	nonsec
 The CND should be able to support one or more codecs for communication services (as defined by TS�181 005 [1]).	nonsec
-The CNG shall support mechanisms to authenticate itself to the NGN for connectivity purposes.	sec
-The CNG shall support mechanisms to authenticate itself to the NGN for service usage purposes.	sec
-The CNG shall support mechanisms to authenticate CNDs to the NGN for service usage purposes if they are not able to fully support the related procedures in an autonomous way.	sec
-The CNG shall support mechanisms for authentication of wireless CNDs for local connectivity. Similar mechanisms may be also implemented for non-wireless devices.	sec
-The CNG and CPN shall support mechanisms that prevent access to the network by unauthorized users.	sec
-The capacity of the authorized entities should depend on the security policies defined by the service providers, managing the CNG.	sec
-The CNG and the CPN shall implement mechanisms to limit the visibility of the WAN side network and resources to authorized entities.	sec
-The diagnostic operations on the CPN by an operator shall be performed in accordance with rules protecting the users' privacy.	sec
-CPN environment shall be protected with a stateful firewall function, that may be implemented in the CNG.	sec
-The CNG and the CPN shall be able to support parental control related functionalities limiting the use of the broadband connection on a user or time basis. Limitations on a content basis may be shared with devoted network servers.	sec
-"The CNG shall be equipped with a WAN interface towards the NGN, implementing layer 1 and 2 functionalities (""one-box"" solution)."	nonsec
-LAN interfaces. The CNG shall be equipped with at least one Ethernet (minimum 100 Mbit/s) is interface. Optional interfaces could be present, e.g.: wireless LAN Wi-Fi Alliance certified, Powerlines, Plastic Optical Fiber, USB device and/or host, one or more FXS for analog telephony, DECT Cat-iq.	nonsec
-The CNG shall support both routed and bridged modes of operation.	nonsec
-The CNG shall support direct intra-LAN connectivity between any appropriate pair of devices on the Customer Premises Network.	nonsec
-The CNG shall support different IP address schemes and subnets on the same physical LAN port, and on different LAN ports, irrespective of routed or bridged mode of operation, allowing the direct addressability of CNDs from the NGN side in relation to data plane, control plane and management plane flows.	nonsec
-The CNG and devices shall support mechanisms to identify and share information about the customer network devices (e.g. type of device and basic capabilities, services supported etc.) within the customer environment. Some of this information can be used locally, while a subset of it can be forwarded to the NGN.	nonsec
-The CNG shall support use of one user identity on several terminals as well as to share one terminal with several identities.	nonsec
-The CNG and the Customer Network shall support the NGN services usage (e.g. voice communications, video communications, IPTV, entertainment, �) allowing the connection to the right service control platforms.	nonsec
 The CNG should support or not prevent redirection of IP Multimedia sessions, as defined by TS 181 005 [1], independently from the type of device used (NGN terminal or other CND).	nonsec
-The CNG and the Customer Network shall assure the confidentiality, the integrity of signalling/control/media and management flows.	nonsec
-The CNG and the Customer Network shall provide the opportunity for a customer network administrator to perform service and network-related configuration. According to the service/network provider choices, the CNG and Customer Network may prevent - user initiated modification of network and service related parameters.	nonsec
-The CNG should negotiate session parameters (bandwidth, screen resolution, codecs�) with the NGN transparently to the user.	nonsec
 The CPN shall support secure remote access control, based on NGN network functions.	nonsec
-The CNG shall allow the customer remote access to a CND in the Customer Network, for example a surveillance video camera.	nonsec
-Standard NGN authentication, routing and connectivity should be used to establish remote access connectivity.	nonsec
-The CNG may allow secure dynamic firewall opening for remote access devices based on NGN authentication functions.	nonsec
-The CPN may support encrypted communication with remote access devices, and the encrypted communication can be terminated either at the CNG or CND.	nonsec
-The CNG may act as a proxy for handling messages (requests and responses) related to the remote access scenarios to and from the home.	nonsec
-The CNG may support mechanisms supporting nomadism of the users and their subscribed services from one physical customer environment to another.	nonsec
 Multiple identities should be supported within the same subscription. Personal service profiles per each identity within the same subscription should be supported. A shared public identity on several terminals, with different private identities, shall be supported (shared IMPU).	nonsec
-Multiple public identities on the same terminal shall be supported.	nonsec
 The CNG shall support a mechanism allowing the support of call forking towards customer non-IMS capable devices and shall able to store information related to private identities of non-IMS capable CNDs.	nonsec
-The CNG shall support a mechanism allowing the support of call forwarding toward non-IMS capable CNDs.	nonsec
-The CNG shall support intra-CPN communication between IMS and non-IMS capable CNDs.	nonsec
-The customer environment (CNG and/or CNDs) should support a mechanism to allow service roaming	nonsec
 (i.e. using the same CND in two different CPNs declaring the same public identity). Supporting this scenario for non IMS capable CNDs is still to be discussed.	nonsec
-The NGN network should be provided with a CND location information.	nonsec
-Codec requirements and capabilities for the User Equipment (including the CNG) are already defined in TS�181 005 [1] which describes service requirements and capabilities for the TISPAN NGN.	nonsec
-The CNG shall support mechanisms for managing IPTV flows provided both in unicast and multicast mode.	nonsec
-In case of multicast flows the CNG shall keep a record of which devices are subscribed to which multicast group.	nonsec
-"An IPTV media flow shall be terminated by a STB or by a specific device called ""media gateway"" (or ""application gateway""). The CNG shall not terminate any IPTV flow by itself."	nonsec
-The CNG shall support the connection to a STB (or media gateway) both in a bridged or in a routed mode of operation.	nonsec
-Depending on the operation mode chosen (bridged or touted) and on the type of flow treated (unicast or multicast) the CNG shall forward packets only to the physical interfaces which are connected to devices interested to the IPTV flow.	nonsec
-In case of multicast streams the CNG should support proxy functionalities to optimize the management of information related to signalling.	nonsec
-CNG shall perform a link layer multicast to unicast translation if the STB or media gateway are connected using customer network technologies not supporting multicast flows (e.g. powerlines, wireless).	nonsec
-STB or media gateways should be equipped with a programmable open API allowing the implementation of specific service logics.	nonsec
-Functionalities related to Electronic Programming Guide and DRM management shall be implemented in STB or media gateway and not in CNG.	nonsec
-Media flows (data plane) transcoding shall be performed by STB or media gateway and not by the CNG.	nonsec
-Protocols adaptation for control plane or management plane may be performed by CNG.	nonsec
-Presence related information shall be sent to the NGN by the STB or the CNG (depending on the specific architectural choices, CNG could manage the presence related information on behalf of the specific device used) to enable specific services tailored on the specific user's profile.	nonsec
-The CNG shall classify packets entering the CPN through its WAN interface (downstream direction) according to a number of predefined priorities. Classification can be done on the basis of different layer 2 and/or layer 3 parameters.	nonsec
-The number of possible values defining the packet priority and, by consequence, the number of queues managed in the downstream direction shall be coherent with the number of concurrent services (data, communication, entertainment) to be treated and supported.	nonsec
-When forwarding packets from the WAN interface to the customer network, the CNG shall perform one of the following three actions, depending on the classification results: manage a number of queues corresponding to the different priorities detected in the classification phase for each packet processed, send the packets to some internal buffers or simply drop the packet.	nonsec
-The CNG shall classify packets coming from the CPN through its LAN interfaces (upstream direction) according to a number of predefined priorities. Classification can be done on the basis of different layer 2 and/or layer 3 parameters.	nonsec
-The number of possible values defining the packet priority and, by consequence, the number of queues managed in the upstream direction shall be coherent with the number of concurrent services (data, communication, entertainment) to be treated and supported.	nonsec
-When forwarding packets from the customer network to the WAN interface, the CNG shall manage a number of queues corresponding to the different priorities detected in the classification phase for each packet processed.	nonsec
 CNG shall be able to classify intra-LAN traffic that is simply bridged by the CNG itself within the CPN.	nonsec
-Traffic marking: depending on what are the parameters used to perform classification, CNDs or CNG itself on behalf of the CNDs shall be able to modify the packets' priority.	nonsec
-In case of huge amount of traffic in upstream or downstream directions, a congestion management mechanism shall be implemented in the CNG to minimize the impact from the user experience point of view.	nonsec
 In case of managed services, QoS rules applied by CNG shall be configurable by a remote management system	nonsec
-In case of unmanaged services, user shall be able to access a QoS configuration function implemented in the CNG.	nonsec
 The CNG shall be equipped with an application client to be remotely manageable by the service providers for configuration, monitoring, firmware upgrade purposes. In case of multiple service providers multiple clients configuring different sets of parameters (for example referring to different services) may be present. A single parameter can be modified by a single client only.	nonsec
-It shall be possible to configure the CNG (e.g. firmware downloading) according to the subscribed services. This operation may be performed when the CNG is connected to the network for the first time, for each new service subscription/modification, or for any technical management (e.g. security, patches, etc.).	nonsec
 The CNG shall support mechanisms for secure authentication and communication with the remote management system.	nonsec
-The CNG shall be associated with a unique Hardware ID to be used for identification NGN side.	nonsec
 In case of managed services, the CNG shall support zero-touch provisioning to activate new services, starting from Internet access to voice and video services and shall be remotely manageable. In case of unmanaged services the user shall be able to configure the CNG by himself.	nonsec
-The CNG Remote Management requires to manage a specific set of parameters. At least the following list of parameters shall be available: Customer Identification, Physical Line Identification, list of subscribed services, CNG IP address.	nonsec
-For the CNG management it is recommended to use a single protocol, so as to minimize the complexity and the cost of the service.	nonsec
 CNDs connected to the CPN and devoted to specific managed services shall be remotely manageable	nonsec
 (e.g. VoIP phones, Video phones, STBs, etc).	nonsec
-CNG shall support mechanisms allowing the CNDs remote management when applicable.	nonsec
-Protection mechanisms shall be implemented to avoid that a management client could access and modify parameters that is not allow to configure.	nonsec
-The CPN (trough CNDs and/or CNG) shall support manual configuration to insert information to access IMS network (e.g. IMPU, IMPI, Shared keys, Home Network Domain or P-CSCF IP Address, etc.).	nonsec
 The CND directly or through the CNG must be able to access to Network Configuration Service Function avoiding any user interaction. (and so the Network Configuration Server should be able to upload different parameter related to service subscription).	nonsec
-The CND should be able to support bootstrap capabilities in order to retrieve network configuration data to connect the NGN.	nonsec
 The CND/CNG shall support a mechanism allowing the user to manually modify the association between a public identity (e.g. phone number) and a specific private identity corresponding to a single customer device not provided with a UICC.	nonsec
-The CPN (CND and/or CNG) shall support a method to access a Self Configuration Server.	nonsec
 Successful authentication is a prerequisite for the processing of any on-line or offline CEPS transaction	sec
 On-line authentication must take place between the card issuer and the CEP card for load, unload, and currency exchange transactions	sec
 The card issuer and the CEP card share a secret key to generate and verify MACs	sec
@@ -482,16 +419,13 @@ Depending on the relevant privileges of the requesting entity, the following ser
  On cards that are aware of logical channels, the MANAGE CHANNEL commands are only processed by the OPEN and are not dispatched to an Application.	nonsec
  All other commands (including the MANAGE CHANNEL commands on cards that are not aware of logical channels or SELECT commands not described in section 6.4.2.1.2 - Explicit Selection) are immediately dispatched to the Application currently selected on the Basic Logical Channel. The processing of the command by the Application is beyond the scope of this Specification.	nonsec
 " ""The OPEN shall support Application selection on an available Supplementary Logical Channel via two processes:   Implicit Selection following a successful MANAGE CHANNEL [open] command,   Explicit Selection through the SELECT [by name] command."""	nonsec
- The OPEN may also support additional selection processes.	nonsec
  Partial AID selection as defined in section 6.4.3.1.2 - Explicit Selection, shall be supported on Supplementary Logical Channels.	nonsec
  At any time on an open Supplementary Logical Channel, the OPEN may receive a request to select an Application on this Supplementary Logical Channel (SELECT [by name] [first or only occurrence] command). The OPEN shall determine if the requested AID matches or partially matches an entry within the GlobalPlatform Registry and whether this entry is selectable.	nonsec
  At any time on an open Supplementary Logical Channel that has already contained a SELECT [by name] [first or only occurrence] command since the Supplementary Logical Channel was last opened, the OPEN may receive a request to select a next Application (SELECT [by name] [next occurrence] command) on this Supplementary Logical Channel. The OPEN shall determine if the requested AID matches or partially matches another entry within the GlobalPlatform Registry and whether this entry is selectable.	nonsec
 " ""For both the SELECT [by name] [first or only occurrence] command and the SELECT [by name] [next occurrence] command, an Application becomes the selected Application on the Supplementary Logical Channel if:   The requested AID matches (fully or partially) the Application�s AID,   The Application being selected is in the correct Life Cycle State,   The Application has no restrictions due to multi-selection, and supports the current card interface."""	nonsec
 " ""If the card is in the Life Cycle State CARD_LOCKED or TERMINATED: - Close the Supplementary Logical Channel, if currently open, - Return the appropriate error,"""	nonsec
  If a SELECT [by name] [first or only occurrence] or SELECT [by name] [next occurrence] is received and the data field of the command message is not present, the Issuer Security Domain shall become the currently selected Application and the SELECT command is dispatched to the Issuer Security Domain,	nonsec
- If a SELECT [by name] [first or only occurrence] is received, the search always begins from the start of the GlobalPlatform Registry,	nonsec
  If a SELECT [by name] [next occurrence] is received, the search always begins from the entry following the currently selected Application on this Supplementary Logical Channel in the GlobalPlatform Registry,	nonsec
- If a full or partial match is found and this Application is in the Life Cycle State INSTALLED, continue searching through the GlobalPlatform Registry for a subsequent full or partial match. If no subsequent full or partial match is found, the OPEN shall return the appropriate error to the off-card entity,	nonsec
  If a full or partial match is found and this Application is in the Life Cycle State LOCKED, continue searching through the GlobalPlatform Registry for a subsequent full or partial match. In the eventuality that this locked Application is already currently selected on the same Supplementary Logical Channel, the OPEN shall terminate this Application Session. If no subsequent full or partial match is found, the OPEN shall return the appropriate error to the off-card entity,	nonsec
 " ""If a full or partial match is found and this Application cannot be selected due to a multi-selection restriction or because the Application refuses selection (e.g. because it does not support the current card interface), continue searching through the GlobalPlatform Registry for a subsequent full or partial match. If no subsequent full or partial match is found, the OPEN shall return the appropriate error to the off-card entity,"""	nonsec
  If a full or partial match is found and this Application is selectable (i.e. in the correct Life Cycle State and has no multi-selection restrictions), then it shall become the currently selected Application on this Supplementary Logical Channel and the SELECT [by name] command, whether [first or only occurrence] or [next occurrence], shall be processed according to the requirements of the runtime environment (e.g. dispatched to the Application),	nonsec
@@ -597,26 +531,25 @@ The system shall be expected to manage the nursing program curriculum and class/
 The system shall able to operate within a business office environment typical of the Nursing Department at DePaul University.	nonsec
 The system shall be used within the specifications defined by the computers used by the Program Administrators/Nursing Staff Members.	nonsec
 The system shall operate within the Windows XP Professional operating system.	nonsec
-The system shall interface with CampusConnect�s central server	nonsec
+The system shall interface with CampusConnect’s central server	nonsec
 The system shall interface with the faculty central server.	nonsec
 The system shall interface with the student master server.	nonsec
 We must be able to interface with any HTML browser.	nonsec
 Only authorized users shall have access to clinical site information.	sec
 Program Administrators/Nursing Staff Members are the only people who shall have access to clinical site details.	sec
-Only authorized users shall have access to students� personal information.	sec
-Dr Susan Poslusny and Dr Julie Donalek are the only people who shall have access to students� personal information.	sec
+Only authorized users shall have access to students’ personal information.	sec
+Dr Susan Poslusny and Dr Julie Donalek are the only people who shall have access to students’ personal information.	sec
 Only authorized users shall have access to the portion of the system that interfaces with CampusConnect.	sec
 Fit Criterion: Dr Susan Poslusny and Karen Sysol are the only people who shall have access to the final class section scheduling for the system that interfaces with CampusConnect.	sec
 The system shall have basic data integrity checking to reduce the possibility of incorrect or invalid data being introduced.	sec
-The system shall protect private information in accordance with the organization�s information policy.	sec
+The system shall protect private information in accordance with the organization’s information policy.	sec
 The system shall be built such that it is as secure as possible from malicious interference.	sec
-The system shall use the organization�s standard virus protection software to help monitor threats to itself.	sec
+The system shall use the organization’s standard virus protection software to help monitor threats to itself.	sec
 A cohort shall be associated to one Program of Study offered by the department.	nonsec
 Program Administrators and Nursing Staff Members shall be able to add a listing of students to a cohort.	nonsec
 Program Administrators and Nursing Staff Members shall be able to add a single student to a cohort	nonsec
-Students added to a cohort shall be eligible for the cohort�s Program of Study.	nonsec
+Students added to a cohort shall be eligible for the cohort’s Program of Study.	nonsec
 Program Administrators and Nursing Staff Members shall be able to specify the preferred sequence of classes for a given cohort.	nonsec
-For each class within a sequence for a cohort  Program Administrators and Nursing Staff Members shall be able to specify which quarter that class will be offered.	nonsec
 For each class within a sequence for a cohort  Program Administrators and Nursing Staff Members shall be able to specify which quarter that class will be offered.	nonsec
 Program Administrators and Nursing Staff Members shall be able to add new classes to a sequence of classes	nonsec
 Program Administrators and Nursing Staff Members shall be able to add clinical classes or sections to a sequence of classes	nonsec
@@ -628,7 +561,7 @@ A clinical class shall specify the course name  lecture room requirements  clini
 Program Administrators/Nursing Staff Members shall be able to create a new Program of Study.	nonsec
 A Program of Study shall consist of a program name and listing of required classes (both clinical and non-clinical) that must be completed.	nonsec
 Program Administrators and Nursing Staff Members shall have the ability to specify which classes are required for a Program of Study	nonsec
-The system shall be able to display a report of needed classes for a given quarter for all cohorts of all programs for Program Administrators/Nursing Staff Members� planning purposes.	nonsec
+The system shall be able to display a report of needed classes for a given quarter for all cohorts of all programs for Program Administrators/Nursing Staff Members’ planning purposes.	nonsec
 The report of needed classes shall include (but not be limited to) classes to be offered  number of sections needed  number of labs needed  and room types needed.	nonsec
 Classes for a given cohort shall not conflict with regards to the time and day that they are offered.	nonsec
 Program Administrators and Nursing Staff Members shall be able to add a new clinical site into the system.	nonsec
@@ -651,8 +584,8 @@ The system will use the stored e-mail addresses as a primary means of communicat
 The system will notify affected parties for routine communication purposes  including but not limited to informing students of upcoming offered classes (timeline) and what their schedule will be/shall be.	nonsec
 The system will notify affected parties when changes occur affecting clinicals  including but not limited to clinical section capacity changes  and clinical section cancellations.	nonsec
 The system will notify affected parties when changes occur affecting classes  including but not limited to class cancellations  class section detail changes  and changes to class offerings for a given quarter.	nonsec
-The system will notify affected parties when changes occur affecting cohorts  including but not limited to changes to the sequence for a cohort�s program of study and changes to a given week�s schedule (lab cancelled this week due to instructor illness).	nonsec
-The system will notify affected parties when changes occur affecting specific students  including but not limited to changing a student�s status from full time to part time and moving a student to a different clinical section.	nonsec
+The system will notify affected parties when changes occur affecting cohorts  including but not limited to changes to the sequence for a cohort’s program of study and changes to a given week’s schedule (lab cancelled this week due to instructor illness).	nonsec
+The system will notify affected parties when changes occur affecting specific students  including but not limited to changing a student’s status from full time to part time and moving a student to a different clinical section.	nonsec
 Program Administrators/Nursing Staff Members shall have the ability to modify information relating to cohorts  including cohort identifier  program of study  preferred sequence of classes and quarters that a cohort will be taking specific classes.	nonsec
 Program Administrators/Nursing Staff Members shall have the ability to modify information relating to a Program of Study within the Nursing Department  including the Program of study name  and required classes for that Program of Study.	nonsec
 Program Administrators/Nursing Staff Members shall have the ability to modify information relating to a Clinical Site  including the clinical site name  site contact person  contact information  and address.	nonsec
@@ -666,18 +599,18 @@ The list of dispute cases that are displayed after a search is performed must be
 100% of merchant services representatives shall be able to successfully perform a follow up action on a dispute case on the first encounter after completing the training course.	nonsec
 The maximum wait time for a user navigating from one screen to another within the Disputes application shall be no more than 5 seconds.	nonsec
 The Disputes application shall support 350 concurrent users without any degradation of performance in the application.	nonsec
-The Disputes application shall be available 24x7x365  with the exception of the following scheduled maintenance windows.  Monday � Saturday 3:00am to 4:00am EST Sunday 1:00amd to 5:00am EST	nonsec
+The Disputes application shall be available 24x7x365  with the exception of the following scheduled maintenance windows.  Monday – Saturday 3:00am to 4:00am EST Sunday 1:00amd to 5:00am EST	nonsec
 The Disputes application shall interface with the Statement Database. The Statement Database provides the transaction details to the Disputes System. All transaction details must be obtained from the Statement Database	nonsec
 The Disputes application shall interface with the Cardmember Information Database.  The Cardmember Information Database provides detailed information with regard to a cardmember.  All cardmember detail information must be obtained from the Cardmember Information Database.	nonsec
 The Disputes applications shall interface with the Merchant Information Database.  The Merchant Information Database provides detailed information with regard to the merchant. All merchant detail information shall be obtained from the Merchant Information Database.	nonsec
 The Disputes application shall interface with the Letters application.  This will allow the Disputes application to request letters as part of the dispute initiation and dispute follow up process. All letter requests must be sent to the Print Letter Utility application.	nonsec
-The Disputes application shall interface with the Cardmember Posting and Billing System.  This will allow the Disputes application to request adjustments to cardmember and merchant�s accounts. All adjustment requests must be sent to the Cardmember Posting and Billing System.	nonsec
+The Disputes application shall interface with the Cardmember Posting and Billing System.  This will allow the Disputes application to request adjustments to cardmember and merchant’s accounts. All adjustment requests must be sent to the Cardmember Posting and Billing System.	nonsec
 The Disputes application shall ensure that only users with the appropriate access level are allowed to initiate dispute requests.	sec
 Only users with Update access must be able to initiate dispute requests.	sec
 The Disputes application shall ensure that only authorized users are allowed to logon to the application.	sec
 All authorized users  once authenticated must be able to logon to the Disputes System	sec
-The Disputes System shall generate a User Report that details any new users that have been added and any changes to an existing user�s access level.  The report will be reviewed for auditing purposes.	sec
-All additions of new users and modifications to user�s access shall be recorded on the User Report.	sec
+The Disputes System shall generate a User Report that details any new users that have been added and any changes to an existing user’s access level.  The report will be reviewed for auditing purposes.	sec
+All additions of new users and modifications to user’s access shall be recorded on the User Report.	sec
 If a user account is revoked  it can only be re-instantiated by the System Administrator.	sec
 Only the System Administrator shall be able to reset a revoked user logon account	sec
 The Disputes application shall manipulate and view business data. Users will not have direct access to data files or databases.	sec
@@ -791,7 +724,7 @@ The product will function alongside server software on any operating system wher
 The product will require collaboration with a database management system (DBMS).  The DBMS may be located on the same machine as the product or on a separate machine residing on the same computer network.	nonsec
 The product must make use of web/application server technology.  Open source examples include Apache web server  Tomcat  and the JBoss application server.	nonsec
 A database management system such as Oracle  DB2  MySql or HSQL will need to be integrated with the product.	nonsec
-The product�s Look and Feel shall be able to incorporate aspects of the customer�s organization such as logo  branding  and identity	nonsec
+The product’s Look and Feel shall be able to incorporate aspects of the customer’s organization such as logo  branding  and identity	nonsec
 The product shall have a conservative and professional appearance.	nonsec
 The product shall make the users want to use it. 80% of the users surveyed report they are regularly using the product after the first 2 weeks post-launch.	nonsec
 The product shall be easy to use. 90% of users will be able to successfully reserve a conference room within 5 minutes of product use.	nonsec
@@ -802,7 +735,7 @@ An employee will be able to successfully use the product within a few minutes.  
 The product shall use a standard navigation menu familiar to most web users.	nonsec
 The product shall allow for intuitive searching of available conference rooms.	nonsec
 The product shall conform to the Americans with Disabilities Act.	nonsec
-The response shall be fast enough to avoid interrupting the user�s flow of thought.  90% of tasks shall complete within 5 seconds.  98% of tasks shall complete within 8 seconds.	nonsec
+The response shall be fast enough to avoid interrupting the user’s flow of thought.  90% of tasks shall complete within 5 seconds.  98% of tasks shall complete within 8 seconds.	nonsec
 Aside from server failure  the software product shall achieve 99.99% up time.	nonsec
 The product shall create an exception log of problems encountered within the product for transmission to our company for analysis and resolution.	nonsec
 The product shall be capable of handling up to 1 000 concurrent requests.  This number will increase to 2 000 by Release 2.  The concurrency capacity must be able to handle peak scheduling times such as early morning and late afternoon hours.	nonsec
@@ -817,21 +750,21 @@ The product shall be available for distribution as a packaged CD.	nonsec
 The product will be available for licensing as a one-server  two-five servers  or five-or-more servers license.	nonsec
 A new user must be able to be added to the system within 10 minutes.  90% of new users are able to log into the system within 10 minutes.	nonsec
 The product must be designed using Design Patterns and coding best practices.  90% of maintenance software developers are able to integrate new functionality into the product with 2 working days.	nonsec
-The product must be highly configurable for use with various database management systems for the end users.  80% of end users are able to integrate new database management systems with the product without changing the product�s software code.	nonsec
+The product must be highly configurable for use with various database management systems for the end users.  80% of end users are able to integrate new database management systems with the product without changing the product’s software code.	nonsec
 Maintenance releases will be offered to customers once a year.  The releases shall take no longer than 5 minutes for 80% of the customer base to install.	nonsec
-Every registered user will have access to the product�s support site via the Internet.  70% of registered users shall find a solution to their problem within 5 minutes of using the support site.	nonsec
-The customer shall be able to easily integrate new building maps with the product throughout the product�s lifecycle.  Integration of new maps with the product shall be possible with little to no support from product support staff.	nonsec
-The product shall be translated into foreign languages other than the target market countries� languages in future releases.  For each emerging target market  it shall take no more than 5 days to configure the product for that market�s language.	nonsec
+Every registered user will have access to the product’s support site via the Internet.  70% of registered users shall find a solution to their problem within 5 minutes of using the support site.	nonsec
+The customer shall be able to easily integrate new building maps with the product throughout the product’s lifecycle.  Integration of new maps with the product shall be possible with little to no support from product support staff.	nonsec
+The product shall be translated into foreign languages other than the target market countries’ languages in future releases.  For each emerging target market  it shall take no more than 5 days to configure the product for that market’s language.	nonsec
 The product is expected to integrate with multiple database management systems.  The product will operate with Oracle  SQL Server  DB2  MySQL  HSQL  and MS Access.	nonsec
 The product shall be able to be installed in any operating environment within 2 days.	nonsec
 The product shall ensure that only company employees or external users with company-approved user IDs may have product access.  100% of all logons shall be by either company employees or external users with company-approved user IDs.	sec
 Only managers are able to perform search queries for reservations by user.  100% of all search queries for reservations by user shall be from logons of only management logons.	sec
-The product shall ensure that the database�s data corresponds to the data entered by the user.  Each conference room reservation in the system will contain the same information as was entered by the user.	sec
-The product shall prevent the input of malicious data.  The product and/or adjacent hardware/software systems� data shall remain 100% uncorrupted each time malicious data is input into the product.	sec
+The product shall ensure that the database’s data corresponds to the data entered by the user.  Each conference room reservation in the system will contain the same information as was entered by the user.	sec
+The product shall prevent the input of malicious data.  The product and/or adjacent hardware/software systems’ data shall remain 100% uncorrupted each time malicious data is input into the product.	sec
 The product and/or dependent databases/filesystems shall remain operational as a result of the input of malicious data.  The product and/or dependent databases/filesystems shall not crash 100% of the time that malicious data is input into the product.	nonsec
 The product shall have the ability to receive automatic software updates as new threats emerge.  100% of customers will be able to receive automatic software updates transmitted to the installed product.	sec
 The language of the product shall accommodate all of the target market countries. 90% of survey respondents from each target market country will find that the language of the product is acceptable.	nonsec
-The product shall be able to display calendar dates and times according to the user�s locale.  90% of survey respondents from each target market country will find that the date and time formatting of the product is correct.	nonsec
+The product shall be able to display calendar dates and times according to the user’s locale.  90% of survey respondents from each target market country will find that the date and time formatting of the product is correct.	nonsec
 The product must be developed with the J2SE/J2EE programming language libraries	nonsec
 The product shall record meeting entries.	nonsec
 The product will notify employees of meeting invitations.	nonsec
@@ -885,8 +818,8 @@ The System shall generate Inventory Quantity Adjustment document based on produc
 The System shall generate Inventory Quantity Adjustment document automatically when daily Product Sales data is available.	nonsec
 Administrator shall be able to activate a pre-paid card via the Administration section in under 5 seconds.	nonsec
 Customer shall be able to check the status of their prepaid card  by entering in the PIN number  in under 5 seconds.	nonsec
-System shall let customers register on the website as a �pay as you go� user in under 5 minutes.	nonsec
-System shall let customers register on the website as a �unlimited movie subscriber� user in under 10 minutes.	nonsec
+System shall let customers register on the website as a “pay as you go” user in under 5 minutes.	nonsec
+System shall let customers register on the website as a “unlimited movie subscriber” user in under 10 minutes.	nonsec
 System shall let existing customers log into the website with their email address and password in under 5 seconds.	nonsec
 System shall let customers cancel their account  process shall take no longer than 2 minutes.  Database will mark the account as inactive  and user will not be able to log into the website.	nonsec
 System shall let administrator de-activate a customer account in under 1 minute. Customer will no longer be able to access the website.	nonsec
@@ -902,14 +835,14 @@ Users should only have to navigate through a maximum of 4 pages  to create an ac
 Users should be able to access their streaming movies in under 2 clicks after logging into the website.	nonsec
 An anonymous survey will show that 70% of customers are comfortable purchasing streaming movies after 2 weeks using the website.	nonsec
 An anonymous survey will show that 95% of customers are comfortable using and purchasing pre-paid cards after a month of using the system.	nonsec
-The product shall retain the customer�s buying preferences and information.	nonsec
+The product shall retain the customer’s buying preferences and information.	nonsec
 The product shall be easy for customers with novice skills on the  Internet to purchase and watch streaming movies.  Customers should be able to purchase and watch a pre-determined movie in under 3 minutes.	nonsec
 The product shall use symbols and words that are naturally understandable by users familiar with websites	nonsec
 The website will use standard Internet conventions when interacting with the user.	nonsec
 Any interface between a user and the automated system shall have a maximum response time of 5 seconds  unless noted by an exception below.	nonsec
 When purchasing a streaming movie or pre-paid card via credit card  the processing time should have a maximum response time of 15 seconds.	nonsec
-When streaming a movie  the buffering time should take no longer than 10 seconds (plus any latency on the user�s connection.)	nonsec
-While streaming a movie  buffering should only occur if there is latency in the user�s connection.	nonsec
+When streaming a movie  the buffering time should take no longer than 10 seconds (plus any latency on the user’s connection.)	nonsec
+While streaming a movie  buffering should only occur if there is latency in the user’s connection.	nonsec
 All credit card information will be secured on the server  and only accessible by authorized Izogn administrators.  Information will be encrypted in the database.	sec
 The website shall be available for use 24 hours per day  365 days per year.	nonsec
 The website shall achieve 99.5% up time.	nonsec
@@ -945,7 +878,7 @@ The website shall protect itself from intentional abuse  and notify the administ
 Data integrity scripts will be run on a weekly basis to verify the integrity of the database.	sec
 The website shall make its user aware of its information practices before collection data from them via a Privacy Policy  accessible on all pages of the website.	sec
 The system shall notify customers of changes to its information policy.	sec
-The system shall reveal private information only in compliance with the organization�s information policy.	sec
+The system shall reveal private information only in compliance with the organization’s information policy.	sec
 All customer information will be stored on a secure database  accessible only to authorized personnel.	sec
 All credit card information will be encrypted in the database.	sec
 The streaming server will have anti-virus software to prevent infection of malicious viruses.	sec
@@ -967,7 +900,7 @@ Website shall allow the Izogn administrator to approve a review posted by a cust
 System will allow customers to pay for a streaming movie with a pre-paid card.	nonsec
 Website shall allow customers to purchase pre-paid cards of $5  $10  or $20 value either by credit card or mail-in payment option.	nonsec
 System shall automatically update the main page of the website every Friday  and show the 4 latest movies that have been added to the website.	nonsec
-System shall allow users to update their billing and contact information via the �My Account� section of the website.	nonsec
+System shall allow users to update their billing and contact information via the “My Account” section of the website.	nonsec
 Pre-paid cards shall be distributed via email  or via a printed paper card.	nonsec
 Only registered customers can purchase streaming movies.	nonsec
 Movies can only be streamed if the customer has purchased a movie  and is within the 2-day time period to stream the movie.	nonsec
@@ -1047,7 +980,7 @@ If the shot was marked as a hit  the product shall allow the offensive player to
 If the shot was marked as a miss  the product shall change the status of the offensive player to defensive	nonsec
 If the shot was marked as a miss  the product shall change the status of the defensive player to offensive	nonsec
 The product shall continue to assign turns until the game is ended.	nonsec
-The product shall end a game when a hit by the offensive player results in sinking the last of the defensive player�s ships  which had not been previously marked as sunk.	nonsec
+The product shall end a game when a hit by the offensive player results in sinking the last of the defensive player’s ships  which had not been previously marked as sunk.	nonsec
 The product shall allow a player to end a game at any time during the game.	nonsec
 When a game is ended  the product shall notify the players that the game is ended.	nonsec
 The notification of the game ending will include the reason the game is ended (i.e.  a player has won the game or a player has ended the game).	nonsec
@@ -1062,7 +995,7 @@ The system shall have high availability every day of the year.The system must be
 The system must be available for use between 7:00AM and 11:59PM all days of the year.	nonsec
 The product shall be internet browser independent.The product must run using Internet Explorer and Netscape Navigator.	nonsec
 The product shall ensure that only supervisors can advertise empty time slots.The product must ensure that supervisors are allowed to access advertise empty time slots.	sec
-The product shall ensure that only supervisors can enter a caller�s schedule.The product must ensure that supervisors are allowed to access advertise empty time slots.	sec
+The product shall ensure that only supervisors can enter a caller’s schedule.The product must ensure that supervisors are allowed to access advertise empty time slots.	sec
 The product shall ensure that only supervisors can view schedule of all callers.The product must ensure that supervisors are allowed to access advertise empty time slots.	sec
 The interface shall have a simple look. In the interface and usability survey  90% of beta testers must report that the interface is adequately simple.	nonsec
 The interface shall be appealing to callers and supervisors. In the interface and usability survey  80% of beta testers must report that the interface is appealing.	nonsec
@@ -1091,14 +1024,14 @@ The product shall have audit capabilities.The product shall store messages for a
 The system shall use IBM and CCR branding standards. The interface must have one IBM logo and one CCR logo.	nonsec
 The system shall be displayable on any work computer a CCR user may have. The system interface shall be formatted to display at 800 by 600 pixel resolution.	nonsec
 The system interface will use CCR nomenclature. The system must use the same nomenclature used in the existing WCS system and reports	nonsec
-The interface must summarize the data in a fashion that�s appealing to CCR management. Every report type must have at least one high level summary shown in the results dashboard/interface	nonsec
+The interface must summarize the data in a fashion that’s appealing to CCR management. Every report type must have at least one high level summary shown in the results dashboard/interface	nonsec
 The system must use a point and click interface. 100% of all selection and navigation functionality must be able to be activated/selected by either a mouse or a keyboard	nonsec
 The interface shall be easy to use. 90% of users should be able to successfully use the system to generate a report on their first use. The interface should adhere to IBM usability standards.	nonsec
 Rreports must be easy to generate. eports must be generated within one button click and exported within one button click (after selecting the report)	nonsec
 A user shall be able to use the system without instruction after a short amount of time. After one use a user should understand and remember 90% of the system usage and navigation.	nonsec
 All CCR users shall receive training before the WCS system is deployed. One training session will be held for 100% of CCR users before system deployment (based on a CCR user being available)	nonsec
 The WCS system shall use appropriate nomenclature and terminology as defined by the Corporate Community Grants organization. All interfaces and reports will undergo usability tests by CCR users.	nonsec
-The WCS system shall be available at all times as long as IBM�s internal intranet W3 is accessible. The WCS system will be available 95% of the time IBM�s internal intranet W3 is available.	nonsec
+The WCS system shall be available at all times as long as IBM’s internal intranet W3 is accessible. The WCS system will be available 95% of the time IBM’s internal intranet W3 is available.	nonsec
 The WCS system shall have the ability to connect other designated WCS databases currently not included in the system.	nonsec
 The WCS system shall have the ability to include data for regions outside the United States and be accessed by users outside of the United States if approved by CCR management.	nonsec
 The WCS system shall be run in a Windows environment. The WCS shall be accessed by users through the Internet on an IBM computer running a Windows 2000 or above operating system.	nonsec
@@ -1106,14 +1039,14 @@ The Brio portion of the WCS system must be able to export files in spreadsheet f
 The WCS system must run queries to the WCS databases once again (on a specified day) to update the available data available to CCR users. Queries must be made to external databases for data refresh once a week.	nonsec
 All changes  updates  and additions to the WCS system shall be updated in the WCS Developer and WCS User Guides. Every change must be reflected in WCS system documentation	nonsec
 The system shall only be accessed by authorized Corporate Community Grants (CCR) employees. Users must be authenticated using their IBM intranet user name and password.	sec
-The WCS system shall not allow automatic logins by any user. Cookies containing WCS login information about a user will not be stored on a user�s computer.	sec
-Each team owner will need to use a username and password in order to be authenticated to reach the team owner�s page	sec
+The WCS system shall not allow automatic logins by any user. Cookies containing WCS login information about a user will not be stored on a user’s computer.	sec
+Each team owner will need to use a username and password in order to be authenticated to reach the team owner’s page	sec
 The Commissioner will be the only authorized user per league to adjust league settings.	sec
 Each page shall contain a navigation menu which shows the index into which the current page is contained.	nonsec
 Each page shall contain a similar format with action items in one location and navigation buttons in a different location.	nonsec
 The message board shall contain the 5 most recently posted messages on the league page. The messages will contain up to the first 150 characters of the message.	nonsec
 A new user shall be able to navigate through the league and team pages within 30 seconds of reaching the start-up page.	nonsec
-Users shall be able to reach the �add�  �drop�  and �trade player� pages with one click from the team owner�s page.	nonsec
+Users shall be able to reach the ‘add’  ‘drop’  and ‘trade player’ pages with one click from the team owner’s page.	nonsec
 Users shall be able to view at least 25 NFL player statistics and points on each page.	nonsec
 The application shall ask the user to confirm dropping a player or trading a player before performing the action.	nonsec
 The application shall be able to complete every user transaction within one fourth of a second of receiving the request over the network.	nonsec
@@ -1126,7 +1059,7 @@ New System version releases shall be released at the beginning of each NFL seaso
 The RFS system should be available 24/7  especially during the budgeting period. The RFS system shall be available 90% of the time all year  and 98% during the budgeting period. 2% of the time  the system will become available within 1 hour of the time that the situation is reported.	nonsec
 98% of the user workstations shall meet the minimum hardware requirements prior to implementation. Minimum Hard Disk Space:  400MB.	nonsec
 98% of the user workstations shall meet the minimum software requirements prior to implementation: Microsoft Internet Explorer 5.0. Microsoft .NET Framework 1.1. Microsoft Internet Explorer Web Controls	nonsec
-"The RFS system should be able to easily interface with the BDW environment  in order to load the data. �	7 data files shall be received from the BDW and loaded into the RFS system within 3 hours one day prior to the start of budgeting process  every year. The data will be as of October month-end. 	Test files (7) shall be loaded up to 5 times throughout the year  from the BDW."	nonsec
+"The RFS system should be able to easily interface with the BDW environment  in order to load the data. •	7 data files shall be received from the BDW and loaded into the RFS system within 3 hours one day prior to the start of budgeting process  every year. The data will be as of October month-end. 	Test files (7) shall be loaded up to 5 times throughout the year  from the BDW."	nonsec
 Changes to revenue and expense formulae must be applied to the RFS system  every year  prior to the budgeting process start. Revenue and expense formulae will be updated within one week of their receipt  after which 2 weeks will be allotted to testing of the budget calculations  to be conducted jointly by the project development team and PCG Finance.	nonsec
 New branches/complexes/districts/regions and revenue/expense accounts added to the BDW  must be reflected in the RFS system. 100% of the entities (mentioned above) available as of October month-end  will be loaded into the RFS system  prior to the budget start process.	nonsec
 Only authorized user shall access the RFS system. ONLY users that exist in the UAS system  with the RFS system assigned to their role(s)  shall access the RFS system and use it.	sec
@@ -1204,7 +1137,6 @@ N.SHARADHEE RAM (B2003069)	nonsec
 A.CHARAN TEJA (B2003001)	nonsec
 For online shopping security in formations please  refer the following web links	nonsec
 APPENDIX:-	nonsec
-http://www.ftc.gov/bcp/menu-internet.htm	nonsec
 http://www.ftc.gov/bcp/menu-internet.htm	nonsec
 multiple user interface	nonsec
 Future Developments :-	nonsec
@@ -1313,18 +1245,13 @@ The web application will be hosted on one of the department’s Linux servers an
 User class – System Administrator	nonsec
 a.Server Side	nonsec
 Unit Cohort co-ordinator can reset the student’s password if required.	sec
-List Student	nonsec
 Software interfaces	nonsec
 System Administrator can list all students in different period of different group to check any error.	nonsec
-a.Server Side	nonsec
 The system is a web based application; clients are requiring using a modern web browser such as Mozilla Firebox 1.5, Internet Explorer 6 and Enable Cookies.	nonsec
-Change Password	nonsec
 The computer must have an Internet connection in order to be able to access the system.	nonsec
 System Administrator can reset the student’s password if required.	sec
 User class – Administration Staff	nonsec
 A development database will be hosted locally (using MySQL); the production database is hosted centrally (using Oracle).	nonsec
-b.Client Side	nonsec
-List Student	nonsec
 The UOP already has the required software to host a Java web application.	nonsec
 Administration Staff can list all students in different period of different group.	nonsec
 An Apache Web server will accept all requests from the client and forward SUMS specific requests to Tomcat 5.5 Servlet Container with J2EE 5.0 and Strut 1.2.8 hosting SUMS.	nonsec
@@ -1378,7 +1305,6 @@ Preface	nonsec
 Draft	nonsec
 th December 2005	nonsec
 Jim made some formatting and content changes	nonsec
-th December 2005	nonsec
 Description	nonsec
 Date	nonsec
 Version Number	nonsec
@@ -1444,10 +1370,8 @@ Revision of draft and adding of necessary omissions	nonsec
 SRS033          Web-Based	nonsec
 Shao Jingqiu, Chad	nonsec
 The system shall be a Web-based application.	nonsec
-Draft	nonsec
 Non-Functional Requirements	nonsec
 Oct-2002	nonsec
-Security	nonsec
 Initial draft created for early distribution and review	nonsec
 SRS034          Patient Identification	nonsec
 This document is a Software Requirements Specification (SRS) for the Hospital Patient Management System (HPMS).	nonsec
@@ -1468,7 +1392,6 @@ The system must comply with the Regional Health Authority Regulations concerning
 SRS046           Back Up	nonsec
 The system shall provide the capability to back-up the Data	nonsec
 The systems must conform to the Microsoft Accessibility guidelines	nonsec
-Maintainability	nonsec
 Reliability	nonsec
 SRS048           Availability	nonsec
 SRS047           Errors	nonsec
@@ -1610,8 +1533,6 @@ These include, but are not necessarily limited to, the following: administrative
 Developers should consult this document and its revisions as the only source of requirements for the project.	nonsec
 They should not consider any requirements statements, written or verbal as valid until they appear in this document or its revision.	nonsec
 The hospital management and its team members should use this document and its revisions as the primary means to communicate confirmed requirements to the development team.	nonsec
-Introduction	nonsec
-Purpose	nonsec
 The purpose of this document is to describe all the requirements for the Hospital Patient Management System (HPMS).	nonsec
 The intended audience includes all stakeholders in the potential system.	nonsec
 and 4 p.m.	nonsec
@@ -1623,7 +1544,6 @@ We would be grateful if you accept this document as the beginning of the process
 If you have any questions about this document please contact Chad La Fournie at (403) 210 7545 between 9 a.	nonsec
 The primary areas of concern are performance, security and user-interface.	sec
 For these requirements, Software Team Development recommends that the Hospital management identify a set of experts from their computer department and their legal department to formally accept the requirements.	nonsec
-Software Team Development Inc.	nonsec
 Functional requirements, on the other hand, are requirements directly related to the hospital management.	nonsec
 Waiting list: Monitoring to see if there are any patients waiting for available beds, assigning them to doctors and beds once these become available	nonsec
 Ward Management - Planning and coordinating the management of wards and rooms	nonsec
@@ -1639,9 +1559,7 @@ The document lists the following features as the high-level requirements that th
 STD).	nonsec
 It includes the results of both business analysis and systems analysis efforts.	nonsec
 Various techniques were used to elicit the requirements and we have identified your needs, analyzed and refined them.	nonsec
-Overview	nonsec
 This Software Requirements Specification (SRS) is the requirements work product that formally specifies Hospital Patient Management System (HPMS).	nonsec
-References	nonsec
 No formal documents have been referenced in this document.	nonsec
 GUI                                         Graphical User Interface	nonsec
 SRS                                        Software Requirements Speficification	nonsec
@@ -1666,7 +1584,6 @@ Nurses who are in direct contact with the patients will use the system to keep t
 Doctors will also use the system to keep track of the patients assigned to them.	nonsec
 The system will be used to allocate beds to patients on a priority basis, and to assign doctors to patients in designated wards as need arises.	nonsec
 The proposed software product is the Hospital Patient Management System (HPMS).	nonsec
-Scope	nonsec
 Please note that only the requirements that appear in this document or a future revision, however, will be used to define the scope of the system.	nonsec
 The development team expects many face-to-face conversations that will undoubtedly be about requirements and ideas for requirements.	nonsec
 Supplementary Specification	nonsec
@@ -1715,7 +1632,6 @@ This approach will make adaptability intrinsic to the system, allowing it to ada
 Massachusetts: Addison-Wesley.	nonsec
 This will make the information transmitted unreadable to any intruder that may want to intercept the messages.	nonsec
 Licensing Requirements	nonsec
-Overview	nonsec
 "Communications Interfaces	8"	nonsec
 "Legal, Copyright and Other Notices	8"	nonsec
 Version 2.0	nonsec
@@ -1738,8 +1654,6 @@ David L. Parnas, “Software Aging”, Proceedings of ICSE, 1994	nonsec
 In doing so, the system will be built by incrementally adding requirements to implement, starting with those of high risk/value.	nonsec
 As such, the requirements that earn the highest value for the system or that pose the highest risk will be tackled in the earlier iterations.	nonsec
 "Pattern-Based Development	7"	nonsec
-References	nonsec
-Introduction	nonsec
 "Definitions, Acronyms and Abbreviations	4"	nonsec
 These guidelines will force the developers to rank their requirements in terms of high/low risk/value to the system.	nonsec
 "Hardware Interfaces	8"	nonsec
@@ -1771,7 +1685,6 @@ Communications Interfaces	nonsec
 "Rehearsal and Practices	6"	nonsec
 It contains definitions and acronyms of terms in the project.	nonsec
 "Glossary	9"	nonsec
-Purpose	nonsec
 Gamma, Erich; Helm, Richard; Johnson, Ralph; Vlissides, John (1995).	nonsec
 The three notable Object-Oriented languages available for use are C++, C#, and Java.	nonsec
 Exam Creation/Question Creation	nonsec
@@ -1841,7 +1754,6 @@ Attribute of Exam Script; the length of time students have to complete the exam	
 Essay-based questions need to be marked manually by an instructor.	nonsec
 The system shall allow the system administrator to create, edit, and delete courses.	nonsec
 "Designed for Change	7"	nonsec
-Scope	nonsec
 Question Solution	nonsec
 The system will use these assigned properties to filter questions from the pool when an instructor searches for questions to use on an exam.	nonsec
 During exams or quizzes, the GUI should provide the simplest design, so students can focus their attention on exams and not be distracted by the GUI.	nonsec
@@ -1895,7 +1807,6 @@ Hardware Interfaces	nonsec
 In addition, the system shall allow all users to authenticate in order to gain access to the system and be presented with the tools specific to that user.	sec
 The system will be required to communicate using standard protocols for internet communications.	nonsec
 Provides a specific list of multiple-choice answers that obtain a full mark, or list of criteria for which essay question are corrected	nonsec
-Design Constraints	nonsec
 Supportability	nonsec
 Libraries	nonsec
 "Introduction	4"	nonsec
@@ -1920,7 +1831,6 @@ Request made by student for participation in an exam session	nonsec
 Pattern-Based Development	nonsec
 Exam Schedule	nonsec
 Registration Request	nonsec
-Exam Mark	nonsec
 Science analysis software developed by the ASPERA-3 MO PI team for this project shall be integrated into the NASA approved data repository.	nonsec
 Necessary: It states a condition for the acceptance of the system.	nonsec
 APAF-OPD-15-03561 APAF Operations Procedures Document	nonsec
@@ -1931,7 +1841,6 @@ The PI team and the science community shall have equal on-line access to this so
 SCOPE	nonsec
 Precedence and Criticality of Requirements	nonsec
 Virtual Instrument Descriptions for the ASPERA-3 Experiment Data and the Mars Express Orbit/Attitude Data	nonsec
-SOFTWARE REQUIREMENTS SPECIFICATION	nonsec
 Approved by: _______________________________________________ _____ Prof. Rickard Lundin IRF Principal Investigator	nonsec
 Interface ID Interface Description Document Reference Programmers Guide to the ASPERA-3.org Web Server This document describes the configuration of phobos.space.swri.edu, which is the computer to be used for the development of the APAF data system ESOC Data Disposition system Interface control Document (DDID) ME-ESC-IF-5001 Mars Express Space / Ground Interface Control Document (SGICD) (ESA Document) Packet Definitions (from FMI and UMU)	nonsec
 In addition, the APAF Operations Procedures Document shall provide installation and operations procedures of the APAF system in enough detail where there are no training-related requirements for users and operators of the APAF data system.	nonsec
@@ -1971,7 +1880,6 @@ Analysis: processing accumulated data obtained during characterization, calibrat
 In Section 4.5.3, Data Management Plan, it states: “The ASPERA-3 MO Project shall develop a project data management plan to address the total activity associated with the flow of science data, including planning, acquisition, processing, data product generation and validation, archiving, and preservation.	nonsec
 Personnel-Related Requirements	nonsec
 Sequential numbers starting at 1 follow to uniquely identify the interfaces.	nonsec
-Date	nonsec
 SwRI Project No.	nonsec
 These are taken directly from the Program-Level Requirements for the ASPERA-3 Mission of Opportunity Project which is an appendix to the NASA Discovery Program Plan.	nonsec
 Initial Review (Draft) Initial Release (1.0)	nonsec
@@ -2028,7 +1936,6 @@ Other Requirements Considered	nonsec
 Web-based displays defined by the ASPERA-3 team shall be provided where any available ASPERA-3 data (as opposed to just the most current) can be used for science analysis.	nonsec
 The ASPERA-3 Processing and Archiving Facility (APAF) is a ground data system responsible for processing all of the ASPERA-3 telemetry.	nonsec
 annotated with associated qualification (verification) methods (see section 2.2).	nonsec
-Requirement Description	nonsec
 annotated with associated traceability to their source (see section 2.4).	nonsec
 The specific measurements delivered shall be as follows: 4.1.1.1 Measure integral ENA fluxes in the energy range of 0.1 to 60 keV.	nonsec
 The relationship between each requirement and the project item(s) that it addresses is documented along with each requirement identified in Section 3.	nonsec
@@ -2045,7 +1952,6 @@ In addition, validation and archiving of all ASPERA-3 scientific data in the NAS
 The ASPERA-3 and MEX OA IDFS data sets shall be stored on a local SwRI archive.	nonsec
 SwRI shall provide IDFS data processing algorithms to IRF.	nonsec
 There shall be a UNIX-based APAF system development computer.	nonsec
-APAF-SRS-15-03561-V1.0 April 24, 2001	nonsec
 The logistics-related requirements of the APAF ground data system are itemized in the following table.	nonsec
 Done: phobos.space.swri.edu) There shall be a UNIX-based APAF system production computer with an archival system.	nonsec
 The ASPERA-3 and MEX OA telemetry data shall be stored on a local SwRI archive.	nonsec
@@ -2053,7 +1959,6 @@ For each requirement in Section 3, the method(s) to be used to verify that the r
 For The	nonsec
 Web-based displays of the most current ASPERA-3 data shall be provided for public view.	nonsec
 The APAF data system is not required to operate in more than one state or mode.	nonsec
-Version 1.0	nonsec
 Science analysis software shall be integrated into the NASA approved data repository.	nonsec
 The APAF system shall process the engineering and ancillary information necessary for calibration and science validation into IDFS data sets.	nonsec
 The APAF ground data system is to provide data processing algorithms and support to IRF for the ASPERA-3 science team (including Co-I’s) in preparation for the Mission Operations and Data Analysis (MO&DA) phase of the Mars Express mission.	nonsec
@@ -2061,8 +1966,6 @@ The first step in defining the IDFS data sets is to identify the physical instru
 SwRI shall provide APAF system maintenance.	nonsec
 These data products will be put into a form known as the Instrument Data File Set (IDFS).	nonsec
 The web-based displays defined by the ASPERA-3 team to be used for science analysis shall be password protected until the ASPERA-3 data is made public.	sec
-Requirement Description	nonsec
-Requirement Identifier	nonsec
 ASPERA-3 data shall be provided to NASA PDS no later than 6 months after acquisition.	nonsec
 The APAF ground data system shall have built-in error handling.	nonsec
 ASPERA-3 data shall be provided to NASA PDS in PDS-compliant form.	nonsec
@@ -2073,7 +1976,6 @@ There are six components of the ASPERA-3 package, plus the orbit and attitude da
 The APAF system shall process all ASPERA-3 science data into IDFS data sets.	nonsec
 ASPERA-3 IDFS data and MEX OA IDFS data shall be provided to NASA PDS.	nonsec
 IDFS data access software developed by SwRI shall be made available to the ASPERA-3 Co-I’s.	nonsec
-Date	nonsec
 The APAF system web server shall be password protected where appropriate to allow only pertinent ASPERA-3 team members access.	sec
 Revision	nonsec
 Safety Requirements	nonsec
@@ -2082,8 +1984,6 @@ Each of the seven components described above will have an associated Software De
 Section 2 is an overview of the descriptions of requirement determination, qualification procedures, rationale, and traceability that are used in the identification and the definitions of the requirements.	nonsec
 The APAF data system requirements for delivering the ASPERA-3 IDFS data, Mars Express Orbit/Attitude IDFS data, and software are described in the following table.	nonsec
 ASPERA-3 and MEX OA IDFS data and any APAF-generated intermediate files of ASPERA-3 and MEX OA cleaned-up telemetry shall be provided to all ASPERA-3 Co-I’s.	nonsec
-Date	nonsec
-IDFS data access software developed by SwRI shall be made available to the ASPERA-3 Co-I’s.	nonsec
 The mnemonic, DR, is used in the requirement identifiers to show that these requirements are Delivery Requirements.	nonsec
 APAF-LR-01	nonsec
 Goals and Objectives	nonsec
@@ -2094,18 +1994,15 @@ Science analysis software developed by SwRI to analyze IDFS-formatted data shall
 The requirement associated with the privacy of the APAF ground data system is in the table below.	nonsec
 Capability or Functional Requirements	nonsec
 April 24, 2001	nonsec
-Science analysis software developed by SwRI to analyze IDFS-formatted data shall be made available to the ASPERA-3 Co-I’s.	nonsec
 REVISION NOTICE	nonsec
 Document Overview	nonsec
 How the ASPERA-3 and MEX OA data and exactly what data sets are to be distributed to each Co-I shall be determined by the needs and resources available six months prior to MEX launch.	nonsec
-Date	nonsec
 Intermediate files of cleaned-up ASPERA-3 and MEX OA telemetry shall be generated in the event that cleaned-up telemetry is not provided by ESOC.	nonsec
 Section 4 contains general information to aid in the understanding of this specification.	nonsec
 The APAF ground data system requirements are categorized according to functional areas and are defined in the following sections in table format.	nonsec
 Document Revision History Date Section Description of Changes	nonsec
 Prepared by: ____________________________________________________ Sandee Jeffers SwRI Software Project Manager	nonsec
 The distribution mechanisms shall be clearly defined/described in the APAF Operation Procedures Document.	nonsec
-Date	nonsec
 Done: www.aspera-3.org) There shall be a network connection between SwRI and NISN.	nonsec
 The requirements of the APAF data system are categorized and defined in Section 3.	nonsec
 ASPERA-3 and MEX OA IDFS APAF-DR-01 data and any APAF-generated (Also Listed in intermediate files of ASPERA-3 Functional and MEX OA cleaned-up telemetry Requirements) shall be provided to all ASPERA-3 Co-I’s.	nonsec
@@ -2137,21 +2034,14 @@ Interface Description Distribution of ASPERA-3 and MEX OA IDFS Data Sets System 
 Scanning Unit (SU) 7.	nonsec
 The next two characters refer to the category of the interface – either II for Input Interface or OI for Output Interface.	nonsec
 Therefore, there are no safety requirements of the APAF ground data system.	nonsec
-SwRI Project No.	nonsec
 APAF-FR-01	nonsec
-Version 1.0	nonsec
 Interface ID APAF-DS-OI-1	nonsec
 Some of the software quality factors that will be considered when developing the APAF data system include: reliability, maintainability, availability, flexibility, portability, testability, and usability.	nonsec
-Requirement Description	nonsec
 Design and Implementation Requirements	nonsec
 Operator Input	nonsec
 The APAF system shall acquire from ESOC the telemetry data of the ASPERA-3 Experiment and Mars Express Orbit/Attitude.	nonsec
-Requirement Description	nonsec
-Requirement Description	nonsec
-Requirement Identifier	nonsec
 APAF-DS-II-4	nonsec
 Measure ions and electrons in the energy range of 0.001 to 40 keV; 1-1e6 amu/q.	nonsec
-SOFTWARE REQUIREMENTS SPECIFICATION	nonsec
 Prepared by: Sandee Jeffers SOUTHWEST RESEARCH INSTITUTE Space Science and Engineering Division	nonsec
 The mnemonic, CR, is used in the requirement identifiers to show that these requirements are Computer resource Requirements.	nonsec
 ASPERA-3 IDFS data that are electronically distributed shall be provided to the ASPERA-3 Co-I’s within 24 hours of acquiring ASPERA-3 telemetry as long as the transmission and processing are error-free.	nonsec
@@ -2167,7 +2057,6 @@ Primary Actor indicates he/she wishes to search for a course	nonsec
 a Primary Actor did not find desired exam	nonsec
 Package: Manage Exam Marks	nonsec
 Use case ends successfully	nonsec
-System prompts for confirmation	nonsec
 System prompts for confirmation	nonsec
 System prompts for confirmation of registration request	nonsec
 Precondition	nonsec
@@ -2185,42 +2074,27 @@ System displays a list of users matching the search criteria	nonsec
 System displays a list of users that are not administrators.	nonsec
 System displays the list of existing courses	nonsec
 Students can only register for one session of an exam.	nonsec
-Use case ends successfully	nonsec
-Precondition	nonsec
 primary actor accepts	nonsec
 Primary actor: Instructor	nonsec
 System displays list of exams that the user has scheduled.	nonsec
 System displays exams for the selected course	nonsec
 Primary Actor accepts confirmation	nonsec
 Use case resumes at step 2.	nonsec
-System prompts for confirmation	nonsec
 Primary Actor indicates he/she wishes to cancel	nonsec
 Primary Actor declines the confirmation	nonsec
 Primary Actor assigns marking scheme values	nonsec
-Properties	nonsec
 Primary Actor indicates he/she wishes to cancel the cancellation	nonsec
 Primary Actor confirms	nonsec
 Primary Actor is authenticated	nonsec
 Minimal guarantee: System offers the student the option to start the exam	nonsec
-Primary Actor is authenticated	sec
 Use case ends unsuccessfully	nonsec
 This package offers administrators the ability to manage the system’s users by creating users, modifying them, or deleting them.	nonsec
-Precondition	nonsec
 Primary Actor indicates he/she wishes to search for an exam in selected course	nonsec
 This collection of sub-function scenarios serves the secondary purposes of their actors.	nonsec
-Use case ends unsuccessfully	nonsec
-Extensions	nonsec
-Use case resumes at step 6.	nonsec
-Use case ends unsuccessfully.	nonsec
-Use case ends unsuccessfully.	nonsec
 Main scenario	nonsec
 Primary Actor submits the exam	nonsec
-Primary Actor indicates he/she wishes to cancel the cancellation	nonsec
-Use case ends unsuccessfully.	nonsec
 System displays exam script	nonsec
-Extensions	nonsec
 Success guarantee: A registration request was processed	nonsec
-Use case ends unsuccessfully.	nonsec
 Package: Manage courses	nonsec
 Primary Actor selects the questions to include in the exam	nonsec
 Minimal guarantee: List of scheduled exams was displayed	nonsec
@@ -2228,252 +2102,102 @@ Use case resumes at step 7	nonsec
 Use case resumes step 5	nonsec
 Use case resumes at step 3.	nonsec
 There are no courses assigned to this instructor	nonsec
-Extensions	nonsec
 System adds selected found questions to the exam.	nonsec
-Use case resumes at step 4.	nonsec
 Level: User-goal.	nonsec
-Primary Actor indicates he/she wishes to cancel	nonsec
 Primary actor submits question	nonsec
 Manage exam scripts {create, update, delete exams scripts}	nonsec
 Primary actor selects an exam session for the exam he/she wishes to register for.	nonsec
 Rules	nonsec
-Use case ends unsuccessfully	nonsec
 Go to use case “Searching Users”	nonsec
-Precondition	nonsec
 Primary Actor selects the desired course.	nonsec
-Use case ends successfully	nonsec
-Properties	nonsec
-System prompts for confirmation	nonsec
 Minimal guarantee: N/A	nonsec
-Use case resumes at step 5.	nonsec
 System displays editable properties of user	nonsec
 System prompts the user for confirmation	nonsec
-Primary Actor indicates he/she wishes to search for an exam in selected course	nonsec
-Primary Actor indicates he/she wishes to search for a course	nonsec
 Go to use case “Create for Course”.	nonsec
-Primary Actor accepts confirmation	nonsec
 Primary Actor selects the course he/she wishes to assign users to.	nonsec
 This package offers Instructors the ability to manage their students’ registration requests for exams they have scheduled.	nonsec
 Success guarantee: Student has modified an exam registration	nonsec
-Students can only register for one session of an exam.	nonsec
-Use case ends unsuccessfully	nonsec
 Success guarantee: Exam mark was updated	nonsec
 Primary Actor submits the modification	nonsec
 Minimal guarantee: no change to the system’s course list	nonsec
 Summary:	nonsec
-Use case resumes at step 3.	nonsec
-Primary Actor accepts confirmation	nonsec
-Precondition	nonsec
 System does not allow re-scheduling of exams that are in progress or that have been written.	nonsec
-System prompts for confirmation	nonsec
 Use case resumes at step 2	nonsec
-Use case ends unsuccessfully	nonsec
-Primary Actor indicates he/she wishes to cancel	nonsec
-Primary Actor is authenticated	sec
 This package offers administrators the ability to manage the system’s courses by creating courses, modifying them, or deleting them.	nonsec
-Primary Actor indicates he/she wishes to search for a course	nonsec
-Go to use case “Search for Exam”.	nonsec
-Use case ends unsuccessfully	nonsec
-Use case resumes at step 7	nonsec
 The desired user exists in the system	nonsec
 Minimal guarantee: List of courses was displayed	nonsec
 Go to use case “Search for User”.	nonsec
-Primary Actor indicates he/she wishes to cancel the cancellation	nonsec
-Extensions	nonsec
-Extensions	nonsec
 Use Case: Re-Mark Exam	nonsec
-Use case resumes at step 7	nonsec
-Properties	nonsec
-Use case ends unsuccessfully	nonsec
 System does not find any exam that the student has registered for that has not yet been written	nonsec
 Primary actor modifies properties	nonsec
 Primary Actor accepts confirmation.	nonsec
 Primary actor: Student	nonsec
-a Primary Actor did not find desired course	nonsec
-Use case ends unsuccessfully.	nonsec
-Primary Actor indicates he/she wishes to search for a course	nonsec
-Minimal guarantee: List of courses was displayed	nonsec
 Use case resumes point of extension	nonsec
 Use Case: Edit User	nonsec
 Primary Actor declines	nonsec
-Primary Actor indicates he/she wishes to search for an exam in selected course	nonsec
-Level: User-goal.	nonsec
-Rules	nonsec
-Primary Actor accepts confirmation	nonsec
-Precondition	nonsec
-a Primary Actor did not find desired course	nonsec
-Level: User-goal.	nonsec
-a Primary Actor did not find desired exam	nonsec
 Success guarantee: Users are unassigned from a course.	nonsec
-System prompts the user for confirmation	nonsec
-Primary Actor indicates he/she wishes to cancel the cancellation	nonsec
 Primary actor accepts	nonsec
 System does not allow editing of authentication credentials	sec
 Use case resumes at step 5	nonsec
-Go to use case “Search for Exam”.	nonsec
-Use case resumes at step 2.	nonsec
-Primary Actor indicates he/she wishes to cancel	nonsec
-Extensions	nonsec
 Go to use case “Search for Course”.	nonsec
-Precondition	nonsec
-Primary Actor accepts confirmation	nonsec
-Primary Actor declines the confirmation	nonsec
-Primary Actor indicates he/she wishes to search for an exam in selected course	nonsec
-Use case resumes at step 2.	nonsec
-Primary Actor is authenticated	nonsec
-Primary Actor declines	nonsec
-Rules	nonsec
 Success guarantee: System displays the marks for each question of marked exams	nonsec
-Properties	nonsec
-Use case ends unsuccessfully.	nonsec
-Minimal guarantee: List of instructor’s courses was displayed	nonsec
-Primary Actor accepts confirmation	nonsec
-Use case ends unsuccessfully	nonsec
 Primary actor indicates he/she wishes to edit a user.	nonsec
-Go to use case “Search for Exam”.	nonsec
-Properties	nonsec
-Primary actor accepts	nonsec
-Primary Actor is authenticated	nonsec
 System displays the list of exams for the course	nonsec
-Use case resumes at step 2.	nonsec
-System does not allow editing of authentication credentials	sec
-Precondition	nonsec
 System saves updated properties	nonsec
-System saves updated properties	nonsec
-Primary actor: Administrator	nonsec
 Primary actor: Administrator	nonsec
 System informs user that there are no requests for exams of selected course	nonsec
-Extensions	nonsec
 Primary actor selects an exam to view the details of his/her marks	nonsec
 System enters the mark in the system	nonsec
 Primary actor indicates he/she wishes to delete an exam registration.	nonsec
 Primary actor edits solution	nonsec
 Go to Use Case “Create Exam Question”	nonsec
-Precondition	nonsec
-Primary Actor indicates he/she wishes to cancel	nonsec
 Primary Actor selects the course for which to upload marks of exams.	nonsec
 Primary actor selects course	nonsec
 System does not find any scheduled exams for the courses assigned to this student	nonsec
 Success guarantee: Student is un-assigned from the exam session.	nonsec
-Minimal guarantee: List of instructor’s courses was displayed	nonsec
-System saves updated properties	nonsec
-Use case resumes point of extension	nonsec
-Main scenario	nonsec
-Level: User-goal.	nonsec
-a Primary Actor did not find desired course	nonsec
-Use case ends unsuccessfully.	nonsec
 Use Case: Delete User	nonsec
-Rules	nonsec
-Primary Actor indicates he/she wishes to cancel	nonsec
-Use case ends successfully.	nonsec
-Use case resumes at step 4.	nonsec
 Primary actor indicates he/she wishes to edit a course.	nonsec
-Primary actor: Administrator	nonsec
-Primary Actor indicates he/she wishes to search for an exam in selected course	nonsec
-Primary Actor indicates he/she wishes to cancel	nonsec
-Use case ends unsuccessfully	nonsec
-Use case resumes at step 3.	nonsec
-Use case resumes point of extension	nonsec
-System prompts for confirmation	nonsec
-System prompts for confirmation of registration request	nonsec
 Primary actor indicates he/she wishes to view their marks from an exam which they have written.	nonsec
-Use case ends unsuccessfully	nonsec
 Manage user accounts {create, update, delete users}	nonsec
 System prompts the user for confirmation.	nonsec
-Primary actor: Administrator	nonsec
-a Primary Actor did not find desired course	nonsec
-System prompts the user for confirmation	nonsec
-Use case resumes point of extension	nonsec
 Use case resumes at step 3	nonsec
 System assigns the selected exam to all selected time slots	nonsec
-Use case ends successfully	nonsec
-Use case ends successfully	nonsec
-a Primary Actor did not find desired exam	nonsec
-Main scenario	nonsec
-Go to use case “Search for Course”.	nonsec
 Actor	nonsec
-Use case resumes at step 2.	nonsec
-Main scenario	nonsec
-Use case resumes at step 4.	nonsec
-Use case ends successfully	nonsec
-System prompts for confirmation	nonsec
-System prompts the user for confirmation.	nonsec
 Primary Actor selects the course he/she wishes to assign non-administration users to.	nonsec
-Properties	nonsec
-Primary Actor indicates he/she wishes to search for a course	nonsec
-Use case resumes at step 2	nonsec
 Success guarantee: User is logged out	sec
-Use case ends unsuccessfully	nonsec
-Main scenario	nonsec
 Primary Actor selects the users to edit	nonsec
-Use case resumes at step 2	nonsec
 System informs user that no exams available	nonsec
 Essentially, an instructor either accepts or declines registration requests.	nonsec
-Primary Actor accepts confirmation	nonsec
-Primary Actor is authenticated	sec
 This package offers all actors the ability to search for information they have access to.	nonsec
 System informs user that he/she is not assigned to any course	nonsec
 System informs the Primary Actor that no courses are available	nonsec
-Primary Actor indicates he/she wishes to search for a course	nonsec
-Go to use case “Search for Course”.	nonsec
-Primary Actor indicates he/she wishes to cancel the cancellation	nonsec
 Primary Actor cancels the exam	nonsec
 Primary actor selects the course	nonsec
 Manage questions {create, update, delete questions}	nonsec
 System displays the questions from the course pool	nonsec
-Use case ends unsuccessfully.	nonsec
-Primary Actor indicates he/she wishes to cancel the cancellation	nonsec
-Primary Actor accepts confirmation	nonsec
 a Primary Actor did not find desired user	nonsec
 Primary Actor selects at least one available time slot	nonsec
 System displays a list of the scheduled exams for the courses the instructor is teaching	nonsec
 system informs user that no courses assigned	nonsec
 System does not find any courses assigned to this student	nonsec
-Primary Actor declines	nonsec
 System displays a list of marked exams	nonsec
-Primary Actor indicates he/she wishes to search for an exam in selected course	nonsec
-Use case ends unsuccessfully	nonsec
-Summary:	nonsec
-Summary:	nonsec
-Primary Actor assigns marking scheme values	nonsec
-Primary Actor is authenticated	nonsec
-System prompts for confirmation	nonsec
-Use case ends unsuccessfully.	nonsec
 Goal	nonsec
 System displays list of courses for instructor	nonsec
-Use case resumes at step 4.	nonsec
-System adds selected found questions to the exam.	nonsec
-Extensions	nonsec
-Use case resumes point of extension	nonsec
-Use case resumes at step 2	nonsec
-Rules	nonsec
 Primary Actor selects the course section desired.	nonsec
 Use case resumes at step 6	nonsec
 System automatically adds the newly created question to the exam script	nonsec
 Primary Actor selects the exam of a particular student	nonsec
-Primary Actor accepts confirmation	nonsec
-Use case resumes at step 2.	nonsec
 Primary actor selects the courses for which he/she would like to register an exam.	nonsec
 use case resumes at step 5	nonsec
 Level: User-goal	nonsec
-Go to use case “Search for Exam”.	nonsec
-Main scenario	nonsec
-Precondition	nonsec
 System un-assigns the Primary Actor from the original session	nonsec
-Main scenario	nonsec
 System displays the courses that the student is assigned to.	nonsec
 System does not allow registration for an exam 24 hours before its start	nonsec
 Specifically, instructors can mark essay-based questions, update a mark, or upload the class marks and statistics.	nonsec
-System prompts the user for confirmation	nonsec
-Use case resumes at step 2	nonsec
 Primary actor indicates he/she wishes to log in.	sec
-Primary actor: Instructor	nonsec
 System does not allow registration into a session that is already at maximum capacity	nonsec
-Primary Actor is authenticated	nonsec
 System prompts user for confirmation	nonsec
-Primary Actor indicates he/she wishes to cancel the cancellation	nonsec
 System prompts for confirmation.	nonsec
-Primary Actor indicates he/she wishes to search for a course	nonsec
 System displays the student’s exam marks and statistics	nonsec
 Success guarantee: The user is logged into the system.	nonsec
 System displays the list of existing users	nonsec
@@ -2481,1043 +2205,474 @@ System removes the Primary Actor from the list of registered users for the exam 
 System does not allow editing the properties of exams that are in progress or that have been written.	nonsec
 Students can only register for exams in courses they are registered in	nonsec
 Go to use case “Search for Question”.	nonsec
-System prompts for confirmation	nonsec
-Primary Actor indicates he/she wishes to cancel the cancellation	nonsec
-Summary:	nonsec
-Primary Actor is authenticated	sec
 Success guarantee: An exam matching the search criteria was found	nonsec
-Primary actor: Student	nonsec
-Primary Actor indicates he/she wishes to search for a course	nonsec
-Properties	nonsec
 System displays a list of courses.	nonsec
-Go to use case “Search for Exam”.	nonsec
 Success guarantee: a new user is created and stored in the system.	nonsec
-System enters the mark in the system	nonsec
-Use case ends unsuccessfully.	nonsec
 System does not find any courses assigned to the student	nonsec
-Use case ends successfully.	nonsec
-System enters the mark in the system	nonsec
 System does not allow deleting exams that are in progress or that have been written	nonsec
-Main scenario	nonsec
 Primary Actor has signed Expectations of Originality and Integrity	nonsec
-Primary Actor confirms	nonsec
-Primary Actor is authenticated	sec
-There are no courses assigned to this instructor	nonsec
-Use case ends unsuccessfully.	nonsec
-Use case resumes at step 2.	nonsec
 Use Case: Delete Exam Registration	nonsec
 Success guarantee: A course is deleted from the system	nonsec
-Use case ends unsuccessfully	nonsec
-Main scenario	nonsec
-Use case ends successfully.	nonsec
-Primary Actor indicates he/she wishes to cancel the cancellation	nonsec
-Go to use case “Search for Course”.	nonsec
 Primary actor selects the course from which he/she wishes to un-register an exam.	nonsec
-Use case ends successfully	nonsec
-Primary Actor indicates he/she wishes to cancel the cancellation	nonsec
-Use case resumes at step 4.	nonsec
-Extensions	nonsec
 System does not all cancellation of exams in progress, exams that have been written, or exams scheduled to be written within 24 hours.	nonsec
 System prompts the Primary actor for confirmation	nonsec
 Primary actor enters values to search for in the corresponding fields	nonsec
-a Primary Actor did not find desired course	nonsec
 Use Case: Edit Exam Script	nonsec
-System displays a list of courses.	nonsec
 Primary actor selects the question to edit	nonsec
-Use case resumes point of extension	nonsec
-Use case ends successfully.	nonsec
-System informs user that no exams available	nonsec
-Primary Actor indicates he/she wishes to cancel the cancellation	nonsec
 Primary Actor starts the exam	nonsec
-Use case resumes point of extension	nonsec
-Primary Actor indicates he/she wishes to cancel	nonsec
-Use case ends unsuccessfully.	nonsec
 Primary Actor selects the exam for which he/she wishes to consult the solutions	nonsec
 System displays the public properties of the exam and its available sessions (sessions for this exam that are not at maximum capacity or sessions during which the student is registered for another exam)	nonsec
 Primary actor indicates he/she wishes to un-assign users from a course.	nonsec
-Primary Actor indicates he/she wishes to search for an exam in selected course	nonsec
 Each question is assigned a solution that is used for marking purposes.	nonsec
 System displays a list of search fields for course properties.	nonsec
-Use case resumes at step 2.	nonsec
-Use case resumes step 5	nonsec
-Use case resumes at step 7	nonsec
-a Primary Actor did not find desired course	nonsec
-There are no courses assigned to this instructor	nonsec
-Use case resumes at step 4.	nonsec
-Primary Actor indicates he/she wishes to search for a course	nonsec
-Primary actor: Administrator	nonsec
-Level: User-goal	nonsec
-Rules	nonsec
 use case resumes at step 2	nonsec
-Use case ends unsuccessfully	nonsec
 Success guarantee: Instructor creates exam script	nonsec
 Success guarantee: Exam marks were uploaded	nonsec
-System prompts the Primary actor for confirmation	nonsec
-Extensions	nonsec
 Use Case: Search for Course	nonsec
-Minimal guarantee: List of courses was displayed	nonsec
-System informs user that no exams available	nonsec
-Level: User-goal	nonsec
 Use Case: Schedule Exam	nonsec
 Minimal guarantee: List of instructor’s exams was displayed	nonsec
-Primary actor declines	nonsec
-Use case ends unsuccessfully	nonsec
 System informs the Primary Actor that no exams are available	nonsec
-Use case resumes at step 3.	nonsec
 System displays a list of exams that the student has written with their grade for each and the class average	nonsec
-Use case resumes at step 2	nonsec
-Properties	nonsec
-Main scenario	nonsec
 Primary Actor initiates a searching	nonsec
-a Primary Actor did not find desired user	nonsec
 Primary actor indicates he/she wishes to search for courses	nonsec
-There are no courses assigned to this instructor	nonsec
-Use case ends unsuccessfully	nonsec
-Use case ends unsuccessfully	nonsec
-Primary actor accepts	nonsec
-a Primary Actor did not find desired course	nonsec
-Use case resumes at step 2.	nonsec
 System displays list of course sections	nonsec
-Level: User-goal	nonsec
-Use case resumes at step 7	nonsec
 Minimal guarantee: List of users was displayed	nonsec
-Precondition	nonsec
-Primary Actor accepts confirmation.	nonsec
-Level: User-goal	nonsec
 Primary Actor submits his/her registration request.	nonsec
-Extensions	nonsec
 Package: Manage Course Assessment	nonsec
 Use Case: Create Exam Script	nonsec
-System prompts the user for confirmation	nonsec
-Primary Actor indicates he/she wishes to cancel	nonsec
-Primary actor: Administrator	nonsec
 Primary Actor selects the exam’s scope (sample exam, official exam) and its duration (in minutes).	nonsec
-Use case ends successfully	nonsec
 Primary actor indicates he/she wishes to create a question	nonsec
-Use case resumes at step 6.	nonsec
 Success guarantee: A user matching the search parameters was found	nonsec
-Go to use case “Search for User”.	nonsec
-System prompts the user for confirmation	nonsec
-Precondition	nonsec
-Main scenario	nonsec
-Use case ends unsuccessfully.	nonsec
 Go to use case “Create User”.	nonsec
-use case resumes at step 5	nonsec
-Primary Actor is authenticated	sec
-Primary Actor is authenticated	nonsec
 Primary Actor selects students requests	nonsec
-Use case resumes point of extension	nonsec
-Properties	nonsec
 Use case resumes at point of extension	nonsec
-Go to use case “Search for User”.	nonsec
 System displays the list of users assigned to the course	nonsec
-Primary Actor is authenticated	sec
 Primary actor: instructor	nonsec
-Level: User-goal.	nonsec
 System displays list of courses that the instructor is teaching.	nonsec
 Primary Actor indicates he/she wishes to search for a user	nonsec
-a Primary Actor did not find desired exam	nonsec
-Primary Actor indicates he/she wishes to search for an exam in selected course	nonsec
-Primary Actor is authenticated	sec
-Use case ends unsuccessfully	nonsec
-Use case ends unsuccessfully	nonsec
-Use case ends successfully	nonsec
-Use case resumes at step 2.	nonsec
 Go to Use Case “Edit Exam Question”	nonsec
 There are no scheduled exams for the courses assigned to this instructor	nonsec
-Use case ends unsuccessfully.	nonsec
-Precondition	nonsec
-Main scenario	nonsec
-Main scenario	nonsec
 Level: Sub-function	nonsec
-Rules	nonsec
-a Primary Actor did not find desired exam	nonsec
-Success guarantee: A course is deleted from the system	nonsec
 Use Case: View Solutions	nonsec
-use case resumes at step 5	nonsec
-Go to use case “Search for Course”.	nonsec
 System displays the courses for the instructor	nonsec
 Use Case: Search for Question	nonsec
-Primary Actor indicates he/she wishes to search for an exam in selected course	nonsec
-Go to use case “Search for Course”.	nonsec
-Use case ends unsuccessfully.	nonsec
-Extensions	nonsec
 Success guarantee: User is authenticated	sec
 System displays a list of search fields for exam properties.	nonsec
 Use Case: Search for Exam	nonsec
-Use case resumes at step 4.	nonsec
-Use case resumes at step 4.	nonsec
 Use Case: Delete Exam Script	nonsec
-Primary Actor indicates he/she wishes to search for a course	nonsec
-Primary Actor indicates he/she wishes to search for a user	nonsec
-Use case ends unsuccessfully.	nonsec
-Primary actor: Instructor	nonsec
-Student	nonsec
-There are no courses assigned to this instructor	nonsec
 System displays student registration requests	nonsec
-Main scenario	nonsec
-Go to use case “Search for Exam”.	nonsec
 System displays a list of available time slots that can accommodate the exam’s specified duration	nonsec
-Use case resumes at step 3.	nonsec
-Use case ends unsuccessfully	nonsec
 Primary actor indicates he/she wishes to create an exam script.	nonsec
 Primary Actor selects the course to delete	nonsec
-Primary actor selects course	nonsec
 Primary Actor indicates he/she wishes to edit a selected question	nonsec
 Package: Manage Course Registrations	nonsec
 System informs students that no exams were found	nonsec
 Primary actor indicates he/she wishes to log out.	sec
-Properties	nonsec
-a Primary Actor did not find desired course	nonsec
-Go to use case “Search for Course”.	nonsec
 Authenticated user is a student that has not signed the Expectations of Originality and Integrity Form	sec
-Go to use case “Search for Exam”.	nonsec
 System searches for existence of specified username	nonsec
-System prompts for confirmation	nonsec
 Primary Actor selects the exam.	nonsec
-Use case resumes point of extension	nonsec
 Minimal guarantee: List of editable exams was displayed	nonsec
-Precondition	nonsec
-Primary Actor indicates he/she wishes to cancel	nonsec
-System prompts the user for confirmation	nonsec
 There are no exams that can be deleted for the courses assigned to this instructor	nonsec
 System assigns the students of the selected requests to the exam session of their choice	nonsec
-System prompts the user for confirmation	nonsec
-Use case resumes point of extension	nonsec
-Primary Actor indicates he/she wishes to cancel the cancellation	nonsec
 Success guarantee: The use is logged in and is accessing the course question pool.	nonsec
 Primary actor submitted a question that already exists	nonsec
-Primary Actor is authenticated	sec
-System prompts the user for confirmation	nonsec
-System informs the Primary Actor that no exams are available	nonsec
-Go to use case “Search for Exam”.	nonsec
 Primary actor submits search request	nonsec
-Primary Actor accepts confirmation	nonsec
-Primary Actor declines	nonsec
-Use case resumes point of extension	nonsec
-Properties	nonsec
-Primary Actor indicates he/she wishes to cancel	nonsec
-Use case resumes at step 4.	nonsec
-Primary Actor indicates he/she wishes to search for a course	nonsec
 System displays the question properties that can be edited	nonsec
-Use case resumes point of extension	nonsec
 Primary Actor selects the course for which the exam is to be created.	nonsec
-Use case resumes at step 4.	nonsec
-Use case resumes at step 2	nonsec
-Extensions	nonsec
 Manage exam registrations requests {create, update, delete requests}	nonsec
 System automatically updates the selected question in the exam script	nonsec
 a Primary Actor did not find desired couuserrse	nonsec
-Properties	nonsec
-a Primary Actor did not find desired user	nonsec
-Properties	nonsec
 Package: Manage Users Accounts	nonsec
 Success guarantee: A course matching the search parameters is found	nonsec
 Primary actor indicates he/she wishes to mark an exam script.	nonsec
 Primary Actor accepts the confirmation.	nonsec
-a Primary Actor did not find desired course	nonsec
-Primary actor: Student	nonsec
-Use case ends successfully	nonsec
-Extensions	nonsec
-Precondition	nonsec
-Use case resumes point of extension	nonsec
-Use case resumes at step 6.	nonsec
-Primary actor: Instructor	nonsec
 System matches the password of the specified username with the one entered by the Primary Actor	nonsec
-Use case resumes at point of extension	nonsec
-System displays a list of the scheduled exams for the courses the instructor is teaching	nonsec
-Primary Actor accepts confirmation	nonsec
-Primary Actor accepts confirmation	nonsec
-Summary:	nonsec
 Use Case: Create Exam Registration	nonsec
-System displays list of courses that the instructor is teaching.	nonsec
-Rules	nonsec
-Rules	nonsec
-System does not allow registration into a session that is already at maximum capacity	nonsec
-Use case ends unsuccessfully	nonsec
 System assigns the Primary Actor to the newly-selected session	nonsec
-a Primary Actor did not find desired course	nonsec
-System displays list of courses that the instructor is teaching.	nonsec
-Use case resumes point of extension	nonsec
-Primary actor accepts	nonsec
-Primary Actor indicates he/she wishes to cancel the cancellation	nonsec
 Primary Actor enters his/her answers for the questions	nonsec
 Manage exam marks {mark/re-mark/upload}	nonsec
 Success guarantee: Users are assigned to a course.	nonsec
 Primary actor indicates he/she wishes to search for questions	nonsec
-Main scenario	nonsec
 System informs Primary Actor there is no matches result	nonsec
-Primary Actor is authenticated	sec
-System informs students that no exams were found	nonsec
-a Primary Actor did not find desired exam	nonsec
-Use case resumes point of extension	nonsec
 System informs the Primary Actor that authentication was successful	sec
 Success guarantee: Student is registered to write an upcoming exam	nonsec
-Primary Actor declines the confirmation	nonsec
-There are no courses assigned to this instructor	nonsec
 For scenarios of the system, actors require to be authenticated.	nonsec
-Use case resumes at step 2	nonsec
-Use case ends successfully	nonsec
 System displays the list of courses assigned to the student	nonsec
 Figure 1: Use Case Model (Summary & User-Goals)	nonsec
-Level: User-goal.	nonsec
 a Primary Actor did not find desired question	nonsec
-System prompts the user for confirmation	nonsec
-Primary Actor declines the confirmation	nonsec
 System prompts the user to start the exam or cancel	nonsec
-Primary Actor indicates he/she wishes to cancel the cancellation	nonsec
 Use Case: Assign User to Course	nonsec
-System displays the list of existing users	nonsec
-Use case ends unsuccessfully	nonsec
-Primary Actor has signed Expectations of Originality and Integrity	nonsec
 Administrators can only search for users and courses; instructors can search courses, exams, and questions; students can only search for courses and exams.	nonsec
 system informs user that question exists	nonsec
 Primary actor indicates he/she wishes to edit an exam script.	nonsec
 System does not find any exams to mark	nonsec
 System displays Originality and Integrity Policy	sec
-Primary actor selects course	nonsec
-a Primary Actor did not find desired course	nonsec
-Use case ends unsuccessfully	nonsec
-Use case ends unsuccessfully.	nonsec
-Properties	nonsec
-Primary actor: Administrator	nonsec
 In either case, instructor formulates a question statement (that may have choices), then assigns a solution (which may be text-based or choice-selection-based).	nonsec
-system informs user that question exists	nonsec
-Use case ends successfully.	nonsec
-Use case ends successfully	nonsec
 System does not find any exams for the courses assigned to this student	nonsec
-Use case resumes at step 6.	nonsec
-Minimal guarantee: List of courses was displayed	nonsec
 Primary actor submits course	nonsec
-Precondition	nonsec
-Use case resumes at point of extension	nonsec
 Primary Actor submits the exam scheduling request	nonsec
-Use case resumes at step 2	nonsec
-Go to use case “Search for Course”.	nonsec
 Primary Actor selects the course for which the exam is to be marked.	nonsec
 Primary actor indicates he/she wishes to re-schedule an exam	nonsec
 Primary Actor selects the exams he/she wishes to delete	nonsec
-Primary Actor is authenticated	sec
 a Use case resumes at step 7	nonsec
 System informs student that his/her time has run out and all answers will be submitted for marking	nonsec
 Primary actor submits	nonsec
 Use Case: Write Exam	nonsec
-a Primary Actor did not find desired course	nonsec
-Primary Actor indicates he/she wishes to cancel the cancellation	nonsec
-Students can only register for exams in courses they are registered in	nonsec
-Primary Actor indicates he/she wishes to cancel	nonsec
 Mange courses {create, update, delete courses}	nonsec
 Primary actor submits user	nonsec
-Main scenario	nonsec
 Primary Actor selects the course for which the exam is to be re-marked.	nonsec
-Primary Actor submits the exam	nonsec
-Primary actor: Student	nonsec
 Primary Actor is registered for an exam that he/she has started but not completed	nonsec
 Primary actor: instructor, student	nonsec
-Go to Use Case “Create Exam Question”	nonsec
-Primary actor accepts	nonsec
-Use case resumes at step 4.	nonsec
-Use case ends unsuccessfully.	nonsec
-Use case ends unsuccessfully	nonsec
-a Primary Actor did not find desired course	nonsec
 Primary Actor selects exams for which to process requests	nonsec
-Precondition	nonsec
-Use case ends unsuccessfully	nonsec
-Use case resumes at step 5.	nonsec
-Use case resumes at step 2	nonsec
-Primary Actor declines	nonsec
-Primary Actor is authenticated	nonsec
 Primary Actor selects an available section	nonsec
 Primary actor enters question type, statement and other properties	nonsec
-Use case ends successfully	nonsec
-Extensions	nonsec
-System does not find any courses assigned to this student	nonsec
-Properties	nonsec
-System informs user that he/she is not assigned to any course	nonsec
-There are no courses assigned to this instructor	nonsec
-System informs the Primary Actor that no exams are available	nonsec
-Go to use case “Search for Course”.	nonsec
 Primary actor declines confirmation	nonsec
 System does not allowing deleting a registration for exams starting within 24 hours or that are in progress	nonsec
 Primary actor indicates he/she wishes to process registration requests.	nonsec
 System displays list of exams for the courses the instructor is teaching.	nonsec
-a Primary Actor did not find desired course	nonsec
-Use case resumes at step 4.	nonsec
 Primary actor selects exam	nonsec
-a Primary Actor did not find desired exam	nonsec
-Primary Actor accepts confirmation	nonsec
-Primary Actor submits the exam scheduling request	nonsec
 Use case resumes step 7	nonsec
-Primary Actor confirms	nonsec
 Use Case: Un-assign User from Course	nonsec
 System informs the Primary Actor he/she is submitting an existing registration	nonsec
-Main scenario	nonsec
-Primary actor: Instructor	nonsec
-Primary Actor confirms	nonsec
-Primary Actor indicates he/she wishes to cancel the cancellation	nonsec
 System has not received exam submission within the allocated time	nonsec
-Level: User-goal	nonsec
-Success guarantee: The use is logged in and is accessing the course question pool.	nonsec
-Primary Actor indicates he/she wishes to search for an exam in selected course	nonsec
 Primary Actor enters the username and password.	sec
-Primary actor: Administrator	nonsec
 No matches display	nonsec
-Properties	nonsec
-Use case resumes at step 4.	nonsec
-Primary Actor is authenticated	sec
-Primary Actor is authenticated	sec
-Go to use case “Search for Course”.	nonsec
-Use case ends unsuccessfully	nonsec
-Primary Actor indicates he/she wishes to cancel the cancellation	nonsec
-Use case ends successfully	nonsec
-Use case ends unsuccessfully	nonsec
-Primary Actor accepts confirmation.	nonsec
-a Primary Actor did not find desired exam	nonsec
 Primary Actor de-selects users from the list of users assigned to the selected course’s section	nonsec
-Properties	nonsec
-Primary actor submits search request	nonsec
-Level: User-goal	nonsec
-Use case resumes at step 2.	nonsec
-Primary Actor indicates he/she wishes to cancel	nonsec
 System fails to match the specified password with the one in the system	nonsec
-Go to use case “Search for Course”.	nonsec
-Primary Actor accepts confirmation	nonsec
-Precondition	nonsec
-System assigns the selected exam to all selected time slots	nonsec
 System displays questions from the pool	nonsec
 Primary actor indicates he/she wishes to delete a question	nonsec
 System displays the list of completed exams for courses they have taken	nonsec
 Primary actor indicates he/she wishes to search for exams	nonsec
-Precondition	nonsec
-Precondition	nonsec
 Primary Actor selects the exam he/she wishes to re-schedule	nonsec
-Use case resumes point of extension	nonsec
 Use Case: Upload Exam Marks	nonsec
-Primary Actor indicates he/she wishes to search for a course	nonsec
-Primary Actor accepts confirmation	nonsec
-a Primary Actor did not find desired exam	nonsec
 Primary Actor indicates he/she wishes to create a new course.	nonsec
 System displays list of courses the student is assigned to.	nonsec
-System prompts the user for confirmation	nonsec
 There are no un-scheduled exams for the courses assigned to this instructor	nonsec
-Extensions	nonsec
-a Primary Actor did not find desired course	nonsec
-Primary Actor indicates he/she wishes to cancel	nonsec
-Primary Actor indicates he/she wishes to cancel	nonsec
-Primary Actor indicates he/she wishes to search for a course	nonsec
 a Primary Actor did not find desired questions	nonsec
-Use case ends successfully	nonsec
-Primary actor: Student	nonsec
 System displays the student’s exam with his/her answers and the mark value they obtained for each question	nonsec
-Primary actor selects course	nonsec
-Primary Actor is authenticated	nonsec
-Precondition	nonsec
 System informs user that there are no exams to mark	nonsec
-Properties	nonsec
-System informs Primary Actor there is no matches result	nonsec
-Extensions	nonsec
-Primary Actor indicates he/she wishes to search for a course	nonsec
-a Primary Actor did not find desired course	nonsec
-System prompts for confirmation	nonsec
 Primary Actor submits a registration request for an exam session he/she is already registered in	nonsec
-Primary Actor indicates he/she wishes to search for an exam in selected course	nonsec
-Go to use case “Search for Exam”.	nonsec
-Use case resumes at step 2	nonsec
 Success guarantee: A question was created and added to a course’s question pool	nonsec
-Use case resumes at step 7	nonsec
 System creates the new course.	nonsec
 Primary Actor accepts the confirmation	nonsec
 This package offers instructors the ability to manage their course exams by creating new ones, editing existing exams, or deleting them.	nonsec
-Primary Actor indicates he/she wishes to cancel	nonsec
-Use case resumes at point of extension	nonsec
-System prompts for confirmation	nonsec
-Use case resumes point of extension	nonsec
-Primary Actor indicates he/she wishes to search for a course	nonsec
-Primary actor: Instructor	nonsec
-System prompts the user for confirmation	nonsec
-Properties	nonsec
 Primary Actor indicates he/she wishes to create a question not found in question pool	nonsec
 Success guarantee: System displays the solutions for a selected exam after all students registered for the exam have written it	nonsec
 Minimal guarantee: List of upcoming exams is displayed	nonsec
-Precondition	nonsec
-a Primary Actor did not find desired exam	nonsec
 System displays the exam with the correct solution of all its questions	nonsec
 Primary Actor submits his/her exam	nonsec
 System un-assigns de-selected users from the course section.	nonsec
 Success guarantee: Exam was deleted from the system	nonsec
-There are no courses assigned to this instructor	nonsec
 System displays the list of courses that the instructor has access to	nonsec
-Use case ends unsuccessfully.	nonsec
-Primary actor submitted a question that already exists	nonsec
-Precondition	nonsec
-Primary Actor indicates he/she wishes to search for a course	nonsec
-Use case resumes at step 2.	nonsec
 Use Case: Edit Course	nonsec
-Use case resumes at step 2	nonsec
-System displays list of courses that the instructor is teaching.	nonsec
-Primary Actor indicates he/she wishes to cancel the cancellation	nonsec
 Use case resumes at step 7.	nonsec
 Primary actor: All	nonsec
-Level: User-goal	nonsec
-Use case ends successfully.	nonsec
 System enters the exam in the system	nonsec
-Use case ends unsuccessfully	nonsec
-Primary Actor indicates he/she wishes to search for a course	nonsec
-a Primary Actor did not find desired course	nonsec
 Primary Actor submits authentication request.	sec
 Primary Actor adds an exam section (Multiple Choice or Essay Questions)	nonsec
-Primary Actor accepts confirmation.	nonsec
-Use case ends unsuccessfully	nonsec
-Properties	nonsec
-Level: User-goal	nonsec
-Go to use case “Search for Course”.	nonsec
 Primary actor selects questions to delete	nonsec
-Primary actor selects an exam session for the exam he/she wishes to register for.	nonsec
-Primary Actor accepts confirmation	nonsec
-Primary Actor indicates he/she wishes to cancel the cancellation	nonsec
 System displays a list of completed students’ exams that have not yet been marked for the selected exam	nonsec
-There are no un-scheduled exams for the courses assigned to this instructor	nonsec
 Package: Manage Question	nonsec
-Minimal guarantee: List of instructor’s exams was displayed	nonsec
-Summary:	nonsec
-Primary Actor is authenticated	sec
-Use case ends successfully	nonsec
-System does not find any exams to mark	nonsec
-Primary Actor confirms	nonsec
 Primary Actor selects the course for which to process requests.	nonsec
 Primary Actor selects the exam	nonsec
-Primary Actor indicates he/she wishes to search for a course	nonsec
-System prompts for confirmation	nonsec
-use case resumes at step 5	nonsec
-Use case ends unsuccessfully	nonsec
-Level: User-goal	nonsec
-Use case ends unsuccessfully.	nonsec
-a Primary Actor did not find desired exam	nonsec
-Properties	nonsec
-Primary Actor accepts confirmation.	nonsec
-Primary actor: Instructor	nonsec
-Use case resumes point of extension	nonsec
 Use Case: Create Course	nonsec
-Main scenario	nonsec
 Primary Actor provides the course details	nonsec
 Systems marks selected requests as declined	nonsec
-System displays list of courses that the instructor is teaching.	nonsec
-Primary Actor indicates he/she wishes to search for an exam in selected course	nonsec
-Extensions	nonsec
 System informs the user that the username was not found	nonsec
-Properties	nonsec
-Primary actor declines confirmation	nonsec
-Main scenario	nonsec
-Level: User-goal	nonsec
-Primary Actor submits the exam	nonsec
-Primary actor: Instructor	nonsec
-Primary Actor indicates he/she wishes to cancel	nonsec
-Level: User-goal	nonsec
-Primary Actor indicates he/she wishes to cancel	nonsec
 Primary actor indicates he/she wishes to register for an exam.	nonsec
 Primary Actor selects an exam to re-schedule	nonsec
-System prompts for confirmation	nonsec
-System informs Primary Actor there is no matches result	nonsec
-Rules	nonsec
 Primary actor indicates he/she wishes to edit a question	nonsec
-System displays list of courses for instructor	nonsec
 That is, the creation or editing scenarios do not change depending on question type.	nonsec
 Minimal guarantee: System remains unchanged	nonsec
-Primary Actor is authenticated	sec
 Primary Actor selects the course for which the exam is to be edited.	nonsec
-Use case ends unsuccessfully.	nonsec
-Primary Actor indicates he/she wishes to cancel	nonsec
-Use case resumes at step 2	nonsec
 System does not allow registration of time slot for which the student is already registered in for another exam (no simultaneous registrations in more than one session)	nonsec
-Primary Actor indicates he/she wishes to search for a course	nonsec
-System displays a list of users matching the search criteria	nonsec
-Use case resumes at step 6.	nonsec
-Extensions	nonsec
-System saves updated properties	nonsec
-Primary Actor submits the exam	nonsec
-Use case resumes at point of extension	nonsec
-Use case resumes at step 4.	nonsec
-Go to use case “Search for Course”.	nonsec
-System prompts the user for confirmation.	nonsec
-System informs user that there are no exams to mark	nonsec
 System does not allow editing a registration for an exam 24 hours before its start	nonsec
-Level: User-goal.	nonsec
-Use case resumes step 7	nonsec
-Use case resumes at step 4.	nonsec
-Primary Actor indicates he/she wishes to cancel the cancellation	nonsec
-Primary Actor declines	nonsec
-Go to use case “Search for Exam”.	nonsec
-Precondition	nonsec
-Extensions	nonsec
 Primary Actor selects the course to edit	nonsec
 Package: Manage Exam Scripts	nonsec
-Primary actor: Instructor	nonsec
-Use case ends unsuccessfully	nonsec
-Primary actor selects course	nonsec
 System displays the student’s exam questions and answers	nonsec
-Precondition	nonsec
-System displays a list of users matching the search criteria	nonsec
-Precondition	nonsec
-Use case ends successfully	nonsec
 Use Case: Edit Exam Registration	nonsec
-Go to use case “Search for Course”.	nonsec
-Go to use case “Search for Question”.	nonsec
 System informs students that no courses were found	nonsec
-Use case resumes at step 6.	nonsec
-System prompts for confirmation	nonsec
-System does not find any exams to mark	nonsec
-Rules	nonsec
 Primary actor indicates he/she wishes to delete a course.	nonsec
-Go to use case “Search for Course”.	nonsec
-Primary Actor indicates he/she wishes to cancel the cancellation	nonsec
 System does not allow deleting courses for which there are students scheduled to write exams	nonsec
-Level: User-goal	nonsec
-Primary Actor is authenticated	sec
 The use case ends successfully.	nonsec
-Rules	nonsec
 a Primary Actor cancels signature	nonsec
-Properties	nonsec
-Extensions	nonsec
-System prompts the user for confirmation	nonsec
 Primary actor indicates he/she wishes to delete a user.	nonsec
 System displays list of exams the student may still register in for selected course.	nonsec
-Use case ends unsuccessfully	nonsec
-Main scenario	nonsec
-Primary Actor accepts confirmation	nonsec
-Level: User-goal.	nonsec
-Primary Actor declines	nonsec
-Primary actor submits	nonsec
 Use Case: Search for User	nonsec
-System does not find any courses assigned to the student	nonsec
-Primary actor: Instructor	nonsec
-Use case resumes at step 7	nonsec
-System prompts for confirmation	nonsec
-Use case resumes at step 2	nonsec
-Properties	nonsec
-Use case ends unsuccessfully.	nonsec
 Use Case: Logout User	nonsec
-Primary Actor indicates he/she wishes to cancel the cancellation	nonsec
 Primary Actor selects the user to delete	nonsec
 Primary actor indicates he/she wishes to delete an exam script.	nonsec
-Use case resumes at step 4.	nonsec
-a Primary Actor did not find desired exam	nonsec
-system informs user that no courses assigned	nonsec
-Use case resumes at step 5	nonsec
-Go to use case “Search for Question”.	nonsec
-Use case resumes point of extension	nonsec
 Primary actor: Administrator, instructor, student	nonsec
 This package offers instructors the ability to manage the marks for exams their students have taken.	nonsec
-Go to use case “Search for Exam”.	nonsec
-System prompts for confirmation	nonsec
-a Primary Actor did not find desired questions	nonsec
-Instructor	nonsec
-Minimal guarantee: N/A	nonsec
-System informs user that he/she is not assigned to any course	nonsec
 There are no registration requests for exams of selected course	nonsec
-Use case resumes at step 6	nonsec
-System assigns the selected exam to all selected time slots	nonsec
-Primary Actor indicates he/she wishes to cancel	nonsec
-Use case ends unsuccessfully	nonsec
-Primary actor submits	nonsec
-Primary Actor accepts confirmation	nonsec
-Use case resumes at step 2.	nonsec
 System displays editable properties of course	nonsec
-Rules	nonsec
-Extensions	nonsec
-Main scenario	nonsec
 Primary actor indicates he/she wishes to re-mark an exam script.	nonsec
 Primary Actor edits the selected the questions to include in the exam	nonsec
-Primary Actor indicates he/she wishes to cancel the cancellation	nonsec
-System displays the student’s exam questions and answers	nonsec
-Go to Use Case “Edit Exam Question”	nonsec
-Use case ends unsuccessfully	nonsec
-Primary Actor indicates he/she wishes to cancel	nonsec
-Main scenario	nonsec
-Primary Actor indicates he/she wishes to search for an exam in selected course	nonsec
-Properties	nonsec
-System prompts the user for confirmation	nonsec
 Primary actor indicates he/she wishes to un-schedule an exam	nonsec
-System prompts for confirmation.	nonsec
 System does not find any written marked exams written by the student	nonsec
-Primary actor enters values to search for in the corresponding fields	nonsec
-Use case resumes at step 2	nonsec
-Properties	nonsec
-Primary Actor is authenticated	nonsec
-Primary actor accepts	nonsec
 Primary Actor confirms delete operation	nonsec
-Primary actor submits question	nonsec
-Precondition	nonsec
-primary actor accepts	nonsec
-Minimal guarantee: List of instructor’s courses was displayed	nonsec
-System displays the list of existing courses	nonsec
-Use case ends unsuccessfully.	nonsec
-Primary Actor accepts confirmation	nonsec
-Properties	nonsec
 This package offers instructors the ability to manage their courses’ question pools by creating questions, modifying them, or deleting them.	nonsec
 Primary actor selects the course for which he/she wishes to re-schedule the exam.	nonsec
-Go to use case “Search for Course”.	nonsec
-Main scenario	nonsec
 Success guarantee: A user’s information is modified.	nonsec
-System enters the exam in the system	nonsec
-System prompts the user for confirmation	nonsec
 Use Case: Delete Question	nonsec
-Primary actor: Administrator	nonsec
-Primary Actor accepts confirmation.	nonsec
-Primary Actor accepts confirmation	nonsec
-Level: User-goal.	nonsec
-Primary Actor accepts confirmation	nonsec
-system informs user that question exists	nonsec
-use case resumes at step 5	nonsec
 Success guarantee: Edited exam was updated in the system	nonsec
 System prompts for delete confirmation	nonsec
 Minimal guarantee: The persisted information retains integrity	nonsec
-Primary actor submits search request	nonsec
-Primary Actor declines	nonsec
-Summary:	nonsec
-Extensions	nonsec
-Primary Actor submits his/her registration request.	nonsec
-Main scenario	nonsec
 System displays the list of courses the student is assigned in	nonsec
-Rules	nonsec
-Use case resumes at step 2.	nonsec
 Primary actor indicates he/she wishes to assign a user to a course.	nonsec
-Go to use case “Search for Course”.	nonsec
-Primary Actor indicates he/she wishes to cancel the cancellation	nonsec
-Main scenario	nonsec
-No matches display	nonsec
 System displays a list of the un-scheduled exams for the courses the instructor is teaching	nonsec
 Primary Actor indicates he/she wishes to create a course	nonsec
-Use case ends unsuccessfully	nonsec
-Properties	nonsec
-Use case resumes at step 6.	nonsec
-Main scenario	nonsec
-Use case ends unsuccessfully	nonsec
-Primary actor accepts	nonsec
-a Primary Actor did not find desired course	nonsec
-Primary Actor indicates he/she wishes to cancel	nonsec
 Package: Manage Authentication	nonsec
-Use case ends unsuccessfully.	nonsec
-Use case ends unsuccessfully	nonsec
-Primary Actor indicates he/she wishes to cancel	nonsec
-System automatically adds the newly created question to the exam script	nonsec
-Use case resumes point of extension	nonsec
-Primary Actor accepts confirmation	nonsec
-Extensions	nonsec
 System displays the list of available course sections that are not at maximum capacity	nonsec
-Use case ends unsuccessfully	nonsec
-Primary actor declines confirmation	nonsec
 Success guarantee: System has persisted the user’s answer for the exam	nonsec
 Primary Actor indicates he/she wishes to decline selected requests	nonsec
 Success guarantee: A course’s information is modified.	nonsec
 Primary actor indicates he/she wishes to upload marks.	nonsec
-System prompts the user for confirmation.	nonsec
-Summary:	nonsec
-Primary Actor accepts confirmation	nonsec
-System displays list of courses for instructor	nonsec
-Minimal guarantee: List of instructor’s courses was displayed	nonsec
-Use case ends unsuccessfully	nonsec
-Primary actor: Instructor	nonsec
 System informs Primary Actor that the desired new course exists in the system.	nonsec
-Properties	nonsec
-Primary Actor indicates he/she wishes to search for a course	nonsec
 System displays a list of courses the student is registered in	nonsec
 System displays a list of search fields for user properties.	nonsec
-Use case ends unsuccessfully.	nonsec
-Primary Actor cancels the exam	nonsec
 Primary actor indicates he/she wishes to search for users	nonsec
-Primary Actor indicates he/she wishes to cancel	nonsec
-Properties	nonsec
 Use case resumes at step 12	nonsec
 Success guarantee: Instructor has removed the schedule of an exam for one of his/her courses	nonsec
 The desired course exists in the system	nonsec
-Minimal guarantee: List of instructor’s courses was displayed	nonsec
-use case resumes at step 5	nonsec
-Use case resumes point of extension	nonsec
-Primary Actor declines	nonsec
-Level: User-goal.	nonsec
-Summary:	nonsec
-System displays a list of available time slots that can accommodate the exam’s specified duration	nonsec
-Primary Actor indicates he/she wishes to cancel the cancellation	nonsec
-a Primary Actor did not find desired exam	nonsec
-Use case ends unsuccessfully	nonsec
 Package: Manage Searching	nonsec
-System prompts the user for confirmation.	nonsec
-System prompts the user for confirmation.	nonsec
-Primary Actor indicates he/she wishes to cancel the cancellation	nonsec
 System displays the exam the student is to write with its rules and regulations	nonsec
-a Primary Actor did not find desired course	nonsec
-Use case ends unsuccessfully.	nonsec
-a Primary Actor did not find desired course	nonsec
-Primary Actor indicates he/she wishes to cancel the cancellation	nonsec
-Primary Actor declines the confirmation	nonsec
-Primary Actor selects at least one available time slot	nonsec
 Use case resumes step 2	nonsec
-Primary Actor confirms	nonsec
-Primary Actor accepts confirmation	nonsec
-Use case resumes at step 7.	nonsec
-Use case resumes at step 4.	nonsec
 Use Case: Edit Question	nonsec
-primary actor accepts	nonsec
-System informs user that he/she is not assigned to any course	nonsec
-Use case ends unsuccessfully.	nonsec
-The use case ends successfully.	nonsec
 Use Case: Un-Schedule Exam	nonsec
-Summary:	nonsec
-Minimal guarantee: N/A	nonsec
-Go to use case “Search for Question”.	nonsec
-Primary Actor is authenticated	sec
-Use case resumes point of extension	nonsec
-System prompts the user for confirmation	nonsec
 Primary Actor selects the exams he/she wishes to un-register from.	nonsec
-system informs user that no courses assigned	nonsec
-Precondition	nonsec
-Primary Actor indicates he/she wishes to search for a course	nonsec
-Primary Actor is authenticated	sec
-Extensions	nonsec
-Use case resumes at step 6.	nonsec
-Primary Actor declines	nonsec
-Minimal guarantee: List of instructor’s exams was displayed	nonsec
-No matches display	nonsec
-Go to use case “Search for Exam”.	nonsec
-Extensions	nonsec
-System prompts the user for confirmation	nonsec
-Use case resumes step 2	nonsec
-Use case resumes at step 7	nonsec
-Use case resumes at step 4.	nonsec
 Success guarantee: Instructor has scheduled an exam for one of his/her courses	nonsec
-System displays a list of users matching the search criteria	nonsec
 Use Case: Mark Exam	nonsec
-Use case ends unsuccessfully.	nonsec
-Use case resumes point of extension	nonsec
-Use case resumes at step 4.	nonsec
 System informs the user that the password is incorrect	nonsec
-Extensions	nonsec
 Package: Manage Exam Registrations	nonsec
 System performs course assignment.	nonsec
-Primary Actor accepts the confirmation	nonsec
-System automatically updates the selected question in the exam script	nonsec
-Administrator	nonsec
 Use Case: Login User	nonsec
-Level: User-goal.	nonsec
-Main scenario	nonsec
 This package offers students the ability to manage their registrations for scheduled exams.	nonsec
-Use case ends unsuccessfully.	nonsec
-System prompts the Primary actor for confirmation	nonsec
-Primary Actor indicates he/she wishes to search for a course	nonsec
-Primary Actor submits the exam scheduling request	nonsec
-Properties	nonsec
-Level: User-goal	nonsec
-Use case resumes at step 2	nonsec
-Precondition	nonsec
 Primary Actor indicates he/she wishes to approve the selected requests	nonsec
-System does not allow registration of time slot for which the student is already registered in for another exam (no simultaneous registrations in more than one session)	nonsec
 Success guarantee: Instructor has modified the schedule of an exam for one of his/her courses	nonsec
-System displays the list of courses that the instructor has access to	nonsec
-Use case resumes point of extension	nonsec
-Primary actor accepts	nonsec
-Primary Actor accepts confirmation	nonsec
-Primary actor submits selection	nonsec
-Use case ends successfully.	nonsec
 System informs Primary Actor that the desired new user exists in the system.	nonsec
-There are no courses assigned to this instructor	nonsec
-Main scenario	nonsec
-Use case ends unsuccessfully	nonsec
 Use Case: Create User	nonsec
-Use case ends unsuccessfully	nonsec
-Use case resumes at step 2	nonsec
 This package offers administrators the ability to manage the registrations of students and instructors into their respective course sections.	nonsec
-Level: User-goal.	nonsec
-Primary Actor accepts confirmation.	nonsec
 Level: subfuction	nonsec
 A student can only write any given exam only once.	nonsec
 This package offers instructors the ability to manage their courses’ exam schedule by scheduling exams in available time slots, modifying the schedule, or canceling an exam.	nonsec
 Use Case: Process Registration Request	nonsec
-System informs the Primary Actor that no courses are available	nonsec
-Primary Actor indicates he/she wishes to edit a selected question	nonsec
-Use case ends unsuccessfully.	nonsec
-Primary actor enters question type, statement and other properties	nonsec
-Extensions	nonsec
-Use case ends unsuccessfully	nonsec
-Go to use case “Search for Exam”.	nonsec
-Main scenario	nonsec
-Primary Actor is authenticated	sec
-Primary Actor indicates he/she wishes to search for an exam in selected course	nonsec
-Use case ends unsuccessfully.	nonsec
 Primary Actor selects an exam to un-schedule	nonsec
 Manage user registrations in courses {assign, un-assign user)	nonsec
-Primary Actor indicates he/she wishes to create a question not found in question pool	nonsec
 Primary actor assigns solution	nonsec
 Minimal guarantee: no change to the system’s user list	nonsec
 System displays list of exams for which the student is registered for.	nonsec
 Primary Actor has signed Expectations of Originality and Integrity Form	nonsec
-Minimal guarantee: List of instructor’s exams was displayed	nonsec
-Primary actor selects course	nonsec
-Primary Actor indicates he/she wishes to cancel the cancellation	nonsec
 Use Case: View Exam Marks	nonsec
-Primary Actor accepts confirmation	nonsec
-Go to use case “Search for Course”.	nonsec
-Go to use case “Search for Course”.	nonsec
-System prompts for confirmation	nonsec
 The student need not answer all the questions to be able to submit	nonsec
-Primary actor selects the course	nonsec
-Primary actor: Instructor	nonsec
-System prompts the user for confirmation.	nonsec
-Properties	nonsec
-Primary Actor indicates he/she wishes to search for an exam in selected course	nonsec
-Use case resumes point of extension	nonsec
-No matches display	nonsec
-Level: Sub-function	nonsec
 Manage exam schedule {schedule/re-schedule/un-schedule exam}	nonsec
-Use case resumes at point of extension	nonsec
-Use case resumes at step 2.	nonsec
-Go to use case “Search for Course”.	nonsec
-System displays the list of courses that the instructor has access to	nonsec
-Primary Actor indicates he/she wishes to cancel the cancellation	nonsec
-Go to use case “Search for Course”.	nonsec
-Primary actor enters values to search for in the corresponding fields	nonsec
 Primary Actor selects the exam he/she wishes to schedule	nonsec
 Success guarantee: a new course is created and stored in the system.	nonsec
 Actor/Goal List	nonsec
-Primary Actor indicates he/she wishes to cancel the cancellation	nonsec
 System informs user that there are no exams to upload marks for	nonsec
-a Primary Actor did not find desired question	nonsec
-System prompts the user for confirmation	nonsec
-Primary Actor indicates he/she wishes to cancel	nonsec
-System does not find any courses assigned to this student	nonsec
 This package offers students the ability to manage their course assessment by writing exams or viewing their marks and solutions.	nonsec
-Primary actor: Instructor	nonsec
-Precondition	nonsec
-Use case ends unsuccessfully	nonsec
-Primary Actor indicates he/she wishes to cancel	nonsec
-Level: User-goal	nonsec
 System does not find a user in the system with the specified username	nonsec
-Primary actor: All	nonsec
 Primary Actor provides the user details	nonsec
-Primary actor submits search request	nonsec
-Main scenario	nonsec
-Main scenario	nonsec
-Use case ends unsuccessfully	nonsec
-Use case ends unsuccessfully	nonsec
-Primary Actor indicates he/she wishes to search for a user	nonsec
-Primary Actor indicates he/she wishes to cancel	nonsec
-Primary Actor indicates he/she wishes to cancel	nonsec
-Minimal guarantee: N/A	nonsec
-Main scenario	nonsec
-Primary actor submits	nonsec
-Primary Actor indicates he/she wishes to cancel	nonsec
-Primary Actor is authenticated	sec
 System displays list of previously-created questions for the specified section’s type	nonsec
 Primary Actor signs the form with his/her username and password	sec
-Use case resumes at step 6.	nonsec
-Use case resumes at step 5	nonsec
-Primary actor declines	nonsec
-The use case ends successfully.	nonsec
-Primary Actor indicates he/she wishes to search for an exam in selected course	nonsec
 Primary Actor has signed Confirmation of Originality and Integrity	nonsec
-Primary actor selects course	nonsec
-Use case resumes point of extension	nonsec
-System prompts the user for confirmation	nonsec
 Primary Actor indicates he/she wishes to create a new user.	nonsec
 System displays the exam that is in progress with the answers loaded from the last automatic save	nonsec
-System does not find any written marked exams written by the student	nonsec
 Success guarantee: Exam mark was assigned to marked exam	nonsec
 Use Case: Create Question	nonsec
-System creates the new course.	nonsec
 Use Case: Delete Course	nonsec
-Primary actor: Student	nonsec
 Primary actor indicates he/she wishes to edit an exam registration.	nonsec
 Primary actor indicates he/she wishes to write an exam.	nonsec
-Use case resumes at step 7	nonsec
-Use case resumes at point of extension	nonsec
-Primary Actor indicates he/she wishes to search for a course	nonsec
-Summary:	nonsec
-Go to use case “Search for User”.	nonsec
 Minimal guarantee: List of registered exams is displayed	nonsec
-Use case resumes at step 3.	nonsec
 Primary actor indicates he/she wishes to view the solutions for an exam.	nonsec
 a Primary Actor declines confirmation	nonsec
 Minimal guarantee: The question pool retains integrity	nonsec
 Use Case: Re-Schedule Exam	nonsec
-Extensions	nonsec
-System prompts the user for confirmation	nonsec
-Go to use case “Search for Course”.	nonsec
-Use case ends successfully	nonsec
-Primary actor submitted a question that already exists	nonsec
 System displays a list of search fields for quesion properties.	nonsec
 Primary Actor modifies the mark for applicable questions	nonsec
 Figure 2: Use Case Model - Sub-function Scenarios	nonsec
-Level: Sub-function	nonsec
-Use case resumes at step 6.	nonsec
-System prompts for confirmation	nonsec
 Students may create registrations, modify them, or delete them.	nonsec
-Use case ends unsuccessfully.	nonsec
-Minimal guarantee: The question pool retains integrity	nonsec
-System informs students that no courses were found	nonsec
 Primary Actor selects users he/she wishes to assign to the selected course in the given section.	nonsec
-Primary Actor indicates he/she wishes to cancel	nonsec
 Package: Manage Exam Registration Requests	nonsec
-Extensions	nonsec
-System displays a list of marked exams	nonsec
 System displays the public properties of the exam and its available sessions	nonsec
-a Primary Actor did not find desired exam	nonsec
-System informs Primary Actor there is no matches result	nonsec
 Minimal Guarantee: System displays list of courses that the student is registered in	nonsec
-Primary Actor indicates he/she wishes to cancel	nonsec
-Primary Actor indicates he/she wishes to search for a course	nonsec
 System informs student that he/she is not scheduled for any exams at this time	nonsec
 Package: Manage Exam Schedule	nonsec
 Primary Actor selects an exam to schedule	nonsec
-Use case resumes point of extension	nonsec
-Use case resumes at point of extension	nonsec
-Use case ends unsuccessfully	nonsec
-Use case resumes step 4	nonsec
-Precondition	nonsec
-Primary actor declines	nonsec
-Primary actor modifies properties	nonsec
-System prompts for confirmation	nonsec
-Primary Actor indicates he/she wishes to cancel the cancellation	nonsec
 Primary Actor submits exam for upload	nonsec
-Summary:	nonsec
 Manage course assessment {write exam, view marks, view solutions}	nonsec
-System prompts the user for confirmation	nonsec
 Primary Actor indicates he/she wishes to create a user	nonsec
-Use case resumes at step 5	nonsec
 Primary actor indicates he/she wishes to perform a parameterized search.	nonsec
 Primary Actor assigns a mark for each question that has not been marked automatically	nonsec
 System persists the user’s answers	nonsec
-Minimal guarantee: List of courses was displayed	nonsec
-a Primary Actor did not find desired course	nonsec
-There are no courses assigned to this instructor	nonsec
-Level: User-goal	nonsec
-Primary actor accepts	nonsec
-System displays list of courses that the instructor is teaching.	nonsec
-Main scenario	nonsec
-Primary Actor indicates he/she wishes to search for a user	nonsec
-Level: User-goal.	nonsec
-Use case resumes at step 2	nonsec
-Primary actor enters values to search for in the corresponding fields	nonsec
-Extensions	nonsec
-Use case ends unsuccessfully	nonsec
-Use case resumes point of extension	nonsec
-Extensions	nonsec
-Use case resumes at step 4.	nonsec
-Use case ends unsuccessfully.	nonsec
 When creating a question, there is no distinction made between the type of question and how it is stated.	nonsec
-Primary Actor indicates he/she wishes to cancel the cancellation	nonsec
-Use case resumes at step 3.	nonsec
-Primary Actor accepts confirmation	nonsec
-Primary Actor is authenticated	sec
-Use case resumes at step 2	nonsec
-Use case ends unsuccessfully	nonsec
-Precondition	nonsec
-System informs the Primary Actor that no courses are available	nonsec
-System does not find any exams for the courses assigned to this student	nonsec
-Primary Actor is authenticated	sec
-Use case ends unsuccessfully.	nonsec
-System prompts the user for confirmation	nonsec
 Primary actor indicates he/she wishes to schedule an exam	nonsec
-Primary Actor accepts confirmation.	nonsec
-Use case resumes at step 4.	nonsec
 Manage exam registration requests {process requests}	nonsec
-Precondition	nonsec
-Use case ends unsuccessfully.	nonsec
+The system shall associate (store and link) key identifier information (e.g., system ID, medical record number) with each patient record. Key identifier information must be unique to the patient record but may take any system defined internal or external form.	nonsec
+The system shall provide the ability to store more than one identifier for each patient record. For interoperability, practices need to be able to store additional patient identifiers.  Examples include an ID generated by an Enterprise Master Patient Index, a health plan or insurance subscriber ID, regional and/or national patient identifiers if/when such become available.	nonsec
+"The system shall provide a field which will identify patients as being exempt from reporting functions. Examples may include patients who are deceased, transferred, moved, seen as consults only.  Being exempt from reporting is not the same as de-identifying a patient who will be included in reports.  De-identifying patients for reporting is addressed in the ""Health record output"" functionality."	nonsec
+The system shall provide the ability to merge patient information from two patient records into a single patient record. If a duplicate chart is created, information could be merged into one chart.  Does not imply an unmerge capability.  The intent is to merge information for a single patient; this would include discrete data elements from both patient records.	nonsec
+"The system shall provide the ability to include demographic information in reports. This includes using demographics to generate reports and also allows demographics to be gathered into a report.  See also ""Report generation"" functionality."	nonsec
+The system shall provide the ability to maintain and make available historic information for demographic data including prior names, addresses, phone numbers and email addresses. Providers need this for look up and contact purposes, e.g., when attempting to locate a patient or family member for clinical communications.	nonsec
+The system shall provide the ability to access demographic information such as name, date of birth and gender needed for patient care functions. Examples of a minimum set of demographic data elements include:  name, address, phone number and date of birth.  It is assumed that all demographic fields necessary to meet legislative, regulatory, research and public health requirements will be included. This criterion will be replaced by FN 01.01.01 in 10.	nonsec
+The system shall capture and maintain demographic information as discrete data elements as part of the patient record. Examples of a minimum set of demographic data elements include:  name, address, phone number and date of birth.  It is assumed that all demographic fields necessary to meet legislative, regulatory, research and public health requirements will be included. This criterion will be replaced by FN 01.01.01.	nonsec
+The system shall provide the ability to query for a patient by more than one form of identification. For example, patient last name, medical record number, account number or phone number.	nonsec
+The system shall provide the ability to capture and maintain, as discrete data elements, the identity of all providers associated with a specific patient encounter. A provider is defined as anyone delivering clinical care such as physicians, PAs, CNPs and Nurses; the provider is the person who completes the note.	nonsec
+The system shall provide the ability to capture, maintain and display, as discrete data elements, all problems/diagnoses associated with a patient. Would include current/active and past/resolved problems.	nonsec
+The system shall provide the ability to maintain the onset date of the problem/diagnosis. It is a vendor design decision whether to require complete date or free text of approximate date.	nonsec
+The system shall provide the ability to associate orders, medications, and notes with one or more problems/diagnoses. Association can be made in structured data or in non-structured data.  This item will be removed once AM 08.03.01 and AM 08.03.02 are both in effect.	nonsec
+The system shall provide the ability to maintain a coded list of problems/diagnoses. For example:  ICD-9 CM, ICD-10 CM,  SNOMED-CT, DSM-IV.  The Work Group will not specify which code set(s) are to be employed.	nonsec
+The system shall provide the ability to display different views of the problem / diagnosis list based upon the status of the problem. For example, active, all, or resolved or charted in error.	nonsec
+The system shall provide the ability to display medication history for the patient. For clarification, medication history includes all medications prescribed since the EMR was established.	nonsec
+"The system shall provide the ability to capture medications entered by authorized users other than the prescriber. It is important to have all current medications in the system for drug interaction checking. This in the future would include the incorporation of medication history obtained from outside  electronic interfaces from insurers, PBMs, etc. ""User"" means medical and non-medical staff who are authorized by policy to enter prescriptions or other documentation."	nonsec
+The system shall provide the ability to enter uncoded or free text medications when medications are not on the vendor-provided medication database or information is insufficient to completely identify the medication. Medications that are not on the vendor-provided medication database or not enough information is available to completely identify the medication. This could be either uncoded (Synthroid unknown dose) or free text (blue hypertension pill).	nonsec
+The system shall provide the ability to record the date of changes made to a patient's medication list and the identity of the user who made the changes. This information may appear as an optional view rather than a required view on the main screen.  Need to capture the identity of the user and the date of changes made. Changes are to be recorded at the level of the individual medication.	nonsec
+"The system shall provide the ability to modify or inactivate an item on the allergy and adverse reaction list. This could include removal, marking as erroneous, or marking as inactive.  ""Remove"" in this context implies specifying that an allergy or allergen specification is no longer valid or active, as opposed to deleting the information from the database entirely. Could include changing the type of reaction for a particular allergy."	nonsec
+The system shall provide the ability to capture and maintain, as discrete data, the identity of the user who added, modified, inactivated or removed items from the allergy and adverse reaction list, including attributes of the changed items.  The user ID and date/time stamp shall be recorded. Attributes include the name of the allergen and the action (added, modified, inactivated or removed).	nonsec
+The system shall provide the ability to display the allergy list, including date of entry. It must be possible for a user to view the date of entry for any allergy on the allergy list,  but it is acceptable if that is viewed on another screen, e.g. a 'details' screen.	nonsec
+The system shall provide the ability to capture, store, display, and manage patient history. Examples include past medical/surgical problems, diagnoses, procedures, family history and social history.	nonsec
+The system shall provide the ability to capture structured data in the patient history. This function demonstrates the ability of a system to capture structured data but does not define the required elements of the patient history that shall be structured.  Discrete data elements allow for searching and/or reporting by the EHR, and for this criterion the data could be free text or codified. Future functions would define the required patient history elements that shall be captured discretely as structured data, and where appropriate codified terminologies will be used.	nonsec
+The system shall provide the ability to update a patient history by modifying, adding or removing items from the patient history as appropriate. Requirement not predicated on the capture of structured data.	nonsec
+The system shall provide the ability to capture patient history as both a presence and absence of conditions, i.e., the specification of the absence of a personal or family history of a specific diagnosis, procedure or health risk behavior. Requirement not predicated on the capture of structured data.	nonsec
+The system shall provide the ability to capture history collected from outside sources. This could include data from a personal health record, online patient histories, and information from pharmacy benefit management organizations. Please see interoperability criteria (IO-AM 11.xx) for specific requirements for electronic importation.	nonsec
+The system shall provide the ability to capture patient history in a standard coded form. Not all data elements may currently be represented in existing standard coding schemes.  An example would be diagnostic and procedural history using ICD-9, CPT, or SNOMED codes.	nonsec
+The system shall provide the ability to create and display a summary list for each patient that includes, at a minimum, the active problem/diagnosis list, current medication list, medication allergies and adverse reactions Health record summary is at the patient level as opposed to at the level of an individual visit or episode of care.	nonsec
+The system shall provide the ability to save a note in progress prior to finalizing the note. This item is likely to be removed in favor of PC 04.08.	nonsec
+"The system shall provide the ability to finalize a note, i.e., change the status of the note from in progress to complete so that any subsequent changes are recorded as such. Medico-Legal.  User rights are determined by role-based access defined in security.  Only authorized users can complete, change or finalize a clinical note. The words, ""sign,"" ""signature,"" ""cosign,"" and ""cosignature"" are intended here to convey actions, rather than referring to digital signature standards.  It is recognized that an electronic signature is useful here.  However, a widely accepted standard for electronic signatures does not exist.  Thus, the criteria calls for documenting the actions of authenticated users at a minimum.  In the future, when appropriate digital signature standards are available, certification criteria may be introduced using such standards."	nonsec
+"The system shall provide the ability to record the identity of the user finalizing each note and the date and time of finalization. Medico-Legal.  User rights are determined by role-based access defined in security.  Only authorized users can complete, change or finalize a clinical note. The words, ""sign,"" ""signature,"" ""cosign,"" and ""cosignature"" are intended here to convey actions, rather than referring to digital signature standards.  It is recognized that an electronic signature is useful here.  However, a widely accepted standard for electronic signatures does not exist.  Thus, the criteria calls for documenting the actions of authenticated users at a minimum.  In the future, when appropriate digital signature standards are available, certification criteria may be introduced using such standards."	nonsec
+"The system shall provide the ability to cosign a note and record the date and time of signature. The words, ""sign,"" ""signature,"" ""cosign,"" and ""cosignature"" are intended here to convey actions, rather than referring to digital signature standards.  It is recognized that an electronic signature is useful here.  However, a widely accepted standard for electronic signatures does not exist.  Thus, the criteria calls for documenting the actions of authenticated users at a minimum.  In the future, when appropriate digital signature standards are available, certification criteria may be introduced using such standards. ASTM has developed ""2003 Updated ASTM Standard Guide for Electronic Authentication of Health Care Information"" to address some of these issues."	nonsec
+"The system shall provide the ability to addend and/or correct notes that have been finalized. The words, ""sign,"" ""signature,"" ""cosign,"" and ""cosignature"" are intended here to convey actions, rather than referring to digital signature standards.  It is recognized that an electronic signature is useful here.  However, a widely accepted standard for electronic signatures does not exist.  Thus, the criteria calls for documenting the actions of authenticated users at a minimum.  In the future, when appropriate digital signature standards are available, certification criteria may be introduced using such standards."	nonsec
+The system shall provide the ability to identify the full content of a modified note, both the original content and the content resulting after any changes, corrections, clarifications, addenda, etc. to a finalized note. This may be in the GUI or in the audit trail. It is adequate to be able to access pre- and post-modification versions of a note; i.e. it is not necessary for the system to have a single display that shows what modifications were made. The intent of this criterion is to specify the information stored after finalization of a note; other criteria specify requirements prior to finalization.	nonsec
+"The system shall provide the ability to record and display the identity of the user who addended or corrected a note and the date and time of the change. Necessary for medico-legal purposes.  The words, ""sign,"" ""signature,"" ""cosign,"" and ""cosignature"" are intended here to convey actions, rather than referring to digital signature standards.  It is recognized that an electronic signature is useful here.  However, a widely accepted standard for electronic signatures does not exist.  Thus, the criteria calls for documenting the actions of authenticated users at a minimum.  In the future, when appropriate digital signature standards are available, certification criteria may be introduced using such standards."	nonsec
+The system shall provide the ability to filter, search or order notes by associated diagnosis within a patient record. This is intended to be the coded diagnosis and not free text in the body of a note.	nonsec
+The system shall provide the ability to capture patient vital signs, including blood pressure, heart rate, respiratory rate, height, and weight, as discrete data. It is understood that vendors should support conversion to numeric values that can be graphed.  Coding in ICD-9 CM, ICD-10 CM,  SNOMED, UMLS, etc., would enhance interoperability and for public health surveillance or clinical research.	nonsec
+The system shall provide the ability to capture and display temperature, weight and height in both metric and English units The criterion requires that the system be able to display both; it does not require that both are able to display on the same screen at the same time.	nonsec
+The system shall be capable of indicating to the user when a vital sign measurement falls outside a preset normal range as set by authorized users. Normal range shall be set at system level as opposed to individual patient level.  At a minimum, this must be possible for the following vital signs:  systolic and diastolic blood pressures, heart rate, temperature and respiratory rate.	nonsec
+The system shall provide the ability to capture other clinical data elements as discrete data. For example, quantitative tobacco consumption, peak expiratory flow rate, size of lesions, severity of pain, etc.	nonsec
+The system shall provide templates for inputting data in a structured format as part of clinical documentation. Templates may include any patient encounter note documentation tool that provide a pre-set collection of clinical findings or fields, including macros driven by speech recognition technology, branching logic.   This list is not necessarily all inclusive of all the technology that may arrive in future.	nonsec
+The system shall provide the ability to customize clinical templates. Customization at the level of clinical content is satisfactory.	nonsec
+The system shall be capable of recording comments by the patient or the patient's representative regarding the accuracy or veracity of information in the patient record (henceforth 'patient annotations'). For the current year it is sufficient for these to be recorded as either free-text notes or scanned paper documents.  It is not required that the system facilitate direct entry into the system by the patient or patient's representative.	nonsec
+The system shall display patient annotations in a manner which distinguishes them from other content in the system. A patient annotation in free-text or scanned-document form as described in AM 08.18, when displayed, should indicate that it comes from a patient.  This could be a text label on the screen or part of the free-text note itself.  It is not necessary to make patient annotations visible from any and all sections of the patient record.	nonsec
+The system shall provide the ability to capture and store external documents. Scanned documents are sufficient; structured data will be expected in the future. This covers all types of documents received by the practice that would typically be incorporated into a medical record, including but not limited to faxes, referral authorizations, consultant reports, and patient correspondence of a clinical nature.	nonsec
+The system shall provide the ability to receive, store in the patient's record, and display text-based outside reports. This could be either from an outside system or from scanning with optical character recognition.	nonsec
+The system shall provide the ability to index scanned documents and associate a date and document type to the document. These dates may include the date the original document was produced, received and/or scanned.   Indexing implies associating a scanned document with an individual patient record.	nonsec
+The system shall provide the ability to retrieve indexed scanned documents based on document type and date. Document types might include lab notes, progress notes, etc.	nonsec
+The system shall provide access to clinical images.  They must be accessible from within the patient's chart and labeled and date-time stamped or included in a patient encounter document.  These images may be stored within the system or be provided through direct linkage to external sources. These images may include but are not limited to radiographic, digital or graphical images.  Eventually the goal would be to allow linkage to outside systems such as a hospital PAC system.  The date/time stamp may  be the date/time of image creation or acquisition, the date/time of image importation/incorporation into the system, date/time of the clinical encounter with which the image is associated, or manually entered by the user.	nonsec
+The system shall provide the ability to accept, store in the patient's record, and display clinical results received through an interface with an external source. This is limited to clinical data received through interfaces as defined in CCHIT interoperability criteria. It is acceptable if certain data received through an interface, if not relevant to the end user, are not displayed in the application.	nonsec
+The system shall provide the ability to produce patient instructions and patient educational materials which may reside within the system or be provided through links to external source. An example would be a vaccine information statement.	nonsec
+The system shall have the ability to provide access to patient-specific test and procedure instructions that can be modified by the physician or health organization; these instructions are to be given to the patient.  These instructions may reside within the system or be provided through links to external sources. It is not required that the modified document be stored in the patient record.	nonsec
+The system shall have the ability to provide access to patient-specific test and procedure instructions that can be modified by the physician or health organization; these instructions are to be given to the filler of the order.  These instructions may reside within the system or be provided through links to external sources. It is not required that the modified document be stored in the patient record.	nonsec
+The system shall provide the ability to record that patient specific instructions or educational material were provided to the patient. This does not require automatic documentation.	nonsec
+The system shall provide the ability to create prescription or other medication orders with sufficient information for correct filling and dispensing by a pharmacy. The term pharmacy here refers to all entities which fill prescriptions and dispense medications including but not limited to retail pharmacies, specialty,  and mail order pharmacies.	nonsec
+The system shall provide the ability to capture common content for prescription details including strength, sig, quantity, and refills to be selected by the ordering clinician. We encourage the development of standard national abbreviations and that only approved abbreviations should be supported.	nonsec
+The system shall provide the ability to receive and display information received through electronic prescription eligibility checking. Will be required by e-prescribing. This criterion should maintain a record of whether the patient was eligible for coverage in the system.	nonsec
+The system shall provide the ability to re-print and re-fax prescriptions. This allows a prescription that did not come out of the printer, or a fax that did not go through, to be resent/reprinted without entering another prescription.	nonsec
+"The system shall provide the ability to display a dose calculator for patient-specific dosing based on weight. The intent is to allow input of dose-per-weight and patient weight and calculate the corresponding dose. The dose-per-weight might be directly inputted by a user at the time the dose calculation is to occur, or might have been inputted previously as the default for a particular medication. The output may be in terms that take into account a particular strength and dosage form of a medication (e.g. ""5ml or ""2 tablets"") OR may be simply in terms of the amount of the active drug component (e.g. ""250""). It is not required that the dose calculator automatically populate fields in the prescription itself."	nonsec
+The system shall provide the ability to identify medication samples dispensed, including lot number and expiration date. Lot numbers and expiration date could be entered in free text or encoded.	nonsec
+"The system shall provide the ability to alert the user if the drug interaction information is outdated. The drug database should have  an ""expiration date"" based on the frequency of their updates such that when that date has passed, the user is alerted.  This criterion applies if the system requires user action to provide database updates as opposed to providing them automatically."	nonsec
+"The system shall provide the ability to allow the user to configure prescriptions to incorporate fixed text according to the user's specifications. This refers to the ""written"" output and language on the printed prescription such as practice address, practice telephone number, legally mandated text.  For instance, users should be able to modify the format/content of printed prescriptions to comply with state Board of Pharmacy requirements."	nonsec
+The system shall provide the ability to display the associated problem or diagnosis (indication) on the printed prescription. At least one diagnosis shall be able to be displayed but the ability to display more than one is desirable. Associated problem or diagnosis can be non-structured data or structured data.	nonsec
+The system shall provide the ability to add reminders for necessary follow up tests based on medication prescribed. Does not imply that this must be an automated process.  It is acceptable if the system requires an action by the user, separate from the action of prescribing the medication, to configure the system to issue future reminders related to follow-up tests for the medication.	nonsec
+The system shall provide the ability to access reference information for prescribing/ordering. The reference information may reside within the system or be provided through links to external sources.	nonsec
+The system shall provide the ability to order diagnostic tests, including labs and imaging studies. This includes physicians and authorized non-physicians.	nonsec
+The system shall provide the ability to capture appropriate order entry detail, including associated diagnosis. Including associated diagnoses.  It is desirable that all information for medical necessity checking be captured.	nonsec
+The system shall provide the ability to display user created instructions and/or prompts when ordering diagnostic tests or procedures. Refers to diagnostic test or procedure specific instructions and/or prompts; not patient specific instructions and/or prompts.   Instructions and/or prompts may be created by the system administrator. A 3rd party product may be used, providing that the instructions and/or prompts appear at the point of care.	nonsec
+The system shall provide the ability to relay orders for a diagnostic test to the correct destination for completion. Mechanisms for relaying orders may include providing a view of the order, sending it electronically, or printing a copy of the order or order requisition.	nonsec
+The system shall have the ability to provide a view of active orders for an individual patient. Additional sorts and filters may be provided by the vendors but not required.	nonsec
+The system shall have the ability to provide a view of orders by like or comparable type, e.g., all radiology or all lab orders. May include filters or sorts.	nonsec
+The system shall provide the ability to display outstanding orders for multiple patients (as opposed to outstanding orders for a single patient). A report may satisfy this criterion. Multiple patients may be defined as all patients in the organization or a subset.	nonsec
+The system shall provide the ability to view status information for ordered services. Status may be electronically or manually updated.	nonsec
+The system shall provide the ability to define a set of items to be ordered as a group. The intent is that the Order Set thus defined will be used across multiple patients on multiple occasions.	nonsec
+The system shall provide the ability to indicate normal and abnormal results based on data provided from the original data source. As each lab has it's own normal values, these should be reflected in the indication as to whether a lab is normal or abnormal.	nonsec
+The system shall provide the ability to display numerical results in flow sheets and graphical form in order to compare results, and shall provide the ability to display values graphed over time. It is desirable for the system indicate if abnormal results are high or low.	nonsec
+"The system shall provide the ability to notify the relevant providers (ordering, copy to) that new results have been received. Examples of notifying the provider include but are not limited to a reference to the new result in a provider ""to do"" list or inbox."	nonsec
+The system shall provide the ability to link the results to the original order. In the current year this link can be effected manually by changing the status of the order from pending to complete.  Future requirements could automate this link for certain electronically received labs although the requirement should not require that all types of  orders be electronically linked to the results since the variety of result formats can be quite large (PT consult, Diabetes education...) and even the variety of lab result formats can be wide.	nonsec
+The system shall provide the ability to associate one or more images with a non-numerical result. Through direct storage or links to the data.	nonsec
+The system shall provide the ability for a user to whom a result is presented to acknowledge the result. This is separate from audit trail.	nonsec
+The system shall provide the ability to store, display and print patient consent forms. Example:  Consent forms stored in the computer which are capable of being signed by the patient with either an electronic pen or a digital signature once widely available.	nonsec
+The system shall provide the ability to store and display administrative documents (e.g. privacy notices). Needed for HIPAA.  Scanned copy is acceptable for current year.	nonsec
+The system shall provide the ability to indicate that a patient has completed advance directive(s). Important for appropriate use of resources at end of life and may just include a yes, no indication.	nonsec
+"The system shall provide the ability to indicate the type of advance directives, such as living will, durable power of attorney, or a ""Do Not Resuscitate"" order. This may be recorded in non-structured data or as discrete data."	nonsec
+The system shall provide the ability to indicate when advance directives were last reviewed. This may be recorded in non-structured data or as discrete data.	nonsec
+The system shall have the ability to provide access to standard care plan, protocol and guideline documents when requested at the time of the clinical encounter. These documents may reside within the system or be provided through links to external sources. This requirement could be met by simply including links or access to a text document.  Road map would require more comprehensive decision support in the future. This includes the use of clinical trial protocols to ensure compliance.	nonsec
+The system shall provide the ability to create site-specific care plan, protocol, and guideline documents. This includes the use of clinical trial protocols to ensure compliance. It is expected that in the future discrete data elements from other areas of the chart will populate matching fields.	nonsec
+The system shall provide the ability to create referral orders with detail adequate for correct routing. This could include referrals to sub-specialists, physical therapy, speech therapy, nutritionists, and other non-medication, non-clinical order. Adequate detail includes but is not limited to: Date, Patient name and identifier, “Refer to” specialist name, address and telephone number, “Refer to” specialty, Reason for referral and Referring physician name.	nonsec
+The system shall provide the ability to record user ID and date/time stamp for all referral related events. Necessary for medico-legal purposes.	nonsec
+The system shall provide the ability to display alerts based on established guidelines. Guidelines may be from national organizations, payers, or internal protocols.	nonsec
+The system shall provide the ability to establish criteria for disease management, wellness, and preventive services based on clinical data (problem/diagnosis list, current medications). Lab results in future years	nonsec
+The system shall provide the ability to update disease management guidelines and any associated reference material. This allows the system's decision support tools to support changes in best practice guidelines.  Associated reference material can be within the system or accessed through links to external sources.	nonsec
+The system shall provide the ability to update preventive services/wellness guidelines and any associated reference material. Associated reference material can be within the system or accessed through links to external sources.	nonsec
+The system shall provide the ability to override guidelines. The end user can override guidelines when appropriate to a specific clinical situation.	nonsec
+The system shall provide the ability to document reasons disease management or preventive services/wellness prompts were overridden. Needed for medico-legal reasons and clinical decision support.	nonsec
+The system shall provide the ability to modify the rules or parameters upon which guideline-related alerts are based. This is necessary for modifications as guidelines change or practices wish to adhere to more stringent levels for example, using a HbA1c target of 6.5% instead of 7%.	nonsec
+The system shall provide the ability to document that a disease management or preventive service has been performed with associated dates or other relevant details recorded. This could include services performed internally or external to the practice.	nonsec
+The system shall provide the ability to individualize alerts to address a patient's specific clinical situation. This is done at the patient level.  Examples include but are not limited to: Remove mammography for woman that has had a mastectomy, Remove annual pap smear alert for a woman who has had a complete hysterectomy or Inactivate an alert for routine colon cancer screening in a patient who is terminally ill.	nonsec
+The system shall provide the ability to modify the guidelines, criteria or rules that trigger the reminders. This refers to any practice defined authorized user.	nonsec
+The system shall provide the ability to automatically generate reminder letters for patients who are due or are overdue for disease management, preventive or wellness services. The term 'automatically' means that the system is able to generate patient recalls for all due or overdue reminders for an individual patient based on the current date, regardless of whether a user initiates this action, or if the action is triggered by pre-set parameters in the system. An example would be generating a letter to all patients overdue for a screening mammography. It is acceptable if the output allows generation of letters, such as a mail merge file.	nonsec
+The system shall provide the ability to create and assign tasks by user or user role. Examples of tasks are messages, notifications, inbox items, worklist to-do's. This task assignment refers to internal users. External tasks would be handled under ordering section.	nonsec
+The system shall provide the ability to present a list of tasks by user or user role. Examples of tasks are messages, notifications, inbox items, worklist to-do's. This task assignment refers to internal users. External tasks would be handled under ordering section.	nonsec
+"The system shall provide the ability to remove a task without completing the task. Removing a task eliminates it from an individual user's ""to do"" list, not from audit logs, etc."	nonsec
+The system shall support messaging between users. Results and other patient data could be included. As clarification, messaging is defined as any text string sent from one person to another in the office.	nonsec
+The system shall have the ability to provide electronic communication between prescribers and pharmacies or other intended recipients of the medication order. 	nonsec
+The system shall provide the ability to maintain a directory which contains identifiers required for licensed clinicians to support the practice of medicine including at a minimum state medical license, DEA, and NPI. This directory may be the same as that in criterion AM 27.01 for this functionality.	nonsec
+The system shall provide the ability to create and maintain a directory of clinical personnel external to the organization who are not users of the system to facilitate communication and information exchange. This directory may be the same as that in criterion AM 27.01 for this functionality.	nonsec
+The system shall provide the ability to generate reports of clinical and administrative data using either internal or external reporting tools. Needed for pay for performance, quality improvement activities. All data that is entered in a structured format should be individually reportable.	nonsec
+The system shall provide the ability to generate reports consisting of all or part of an individual patient’s medical record (e.g. patient summary). Report format may be plain text.	nonsec
+The system shall provide the ability to generate reports regarding multiple patients (e.g. diabetes roster). Any disease registry might be included.	nonsec
+The system shall provide the ability to specify report parameters (sort and filter criteria) based on patient demographic and clinical data (e.g., all male patients over 50 that are diabetic and have a HbA1c value of over 7.0 or that are on a certain medication). Minimum demographic data are age and gender.	nonsec
+The system shall provide the ability to access reports outside the EHR application. For example, printed output, export to a file, etc.	nonsec
+The system shall provide the ability to modify one or more parameters of a saved report specification when generating a report using that specification. It is acceptable if a 3rd-party reporting tool or application is used.	nonsec
+The system shall provide the ability to define one or more reports as the formal health record for disclosure purposes. This allows the practice to not print demographics, certain confidential sections, or other items.  Report format may be plain text initially.  In the future there will be a need for structured reports as interoperability standards evolve.	nonsec
+The system shall provide the ability to generate hardcopy or electronic output of part or all of the individual patient's medical record. This could include but is not limited to the ability to generate standardized reports needed for work, school, or athletic participation.	nonsec
+The system shall provide the ability to generate hardcopy and electronic output by date and/or date range. It is not required that output by date or date range includes items that are not date specific.	nonsec
+The system shall provide the ability to export structured data which removes those identifiers listed in the HIPAA definition of a limited dataset.  This export on hardcopy and electronic output shall leave the actual PHI data unmodified in the original record. De-identifying data on hardcopy or electronic output is necessary for research.  However, it must be emphasized that this function is not intended to cleanse the text in the note or data in the original record. As per HIPAA Standards for Privacy of Individually Identifiable Health Information, 45 CFR Parts 160 and 164, identifiers that shall be removed are: 1. Names; 2. Postal address information, other than town or city, state and zip code; 3. Telephone numbers; 4. Fax numbers; 5. Electronic mail addresses; 6. Social security numbers; 7. Medical record numbers; 8. Health plan beneficiary numbers; 9. Account numbers; 10. Certificate/license numbers; 11. Vehicle identifiers and serial numbers, including license plate numbers; 12. Device identifiers and serial numbers; 13. Web Universal Resource Locators (URLs); 14. Internet Protocol (IP) address numbers; 15. Biometric identifiers, including finger and voice prints; and  16. Full face photographic images and any comparable images.	nonsec
+The system shall provide the ability to create hardcopy and electronic report summary information (procedures, medications, labs, immunizations, allergies, and vital signs). The report that's produced should be organized by section to make it easier to read.	nonsec
+The system shall have the ability to provide support for disclosure management in compliance with HIPAA and applicable law. This criterion may be satisfied by providing the ability to create a note in the patient's record.  More advanced functionality may be market differentiators or requirements in later years.	nonsec
+The system shall provide the ability to document encounters by one or more of the following means: direct keyboard entry of text; structured data entry utilizing templates, forms, pick lists or macro substitution; dictation with subsequent transcription of voice to text, either manually or via voice recognition system. This does not preclude entry via new technologies.	nonsec
+The system shall provide the ability to display medical eligibility obtained from patient's insurance carrier, populated either through data entry in the system itself or through an external application interoperating with the system. The EHR need only provide information for the physician as to whether the patient is covered by that insurance plan.  At this time this can be accomplished by a text note following telephone verification. In the future this data will need to be structured in compliance with evolving interoperability standards.	nonsec
+The system shall provide the ability to specify the role of each provider associated with a patient, such as encounter provider, primary care provider, attending, resident, or consultant using structured data. This is simply meant as a means to define the provider role.  Display of that data is not addressed.	nonsec
+The system shall provide the ability to update the clinical content or rules utilized to generate clinical decision support reminders and alerts. Growth charts, CPT-4 codes, drug interactions would be an example.  Any method of updating would be acceptable. Content could be third party or customer created.	nonsec
+The system shall provide the ability to update clinical decision support guidelines and associated reference material. Any method of updating would be acceptable. Content could be third party or customer created.	nonsec
+"The system shall provide the ability to capture and maintain, as discrete data, the reason for variation from rule-based clinical messages (for example alerts and reminders). An example would be ""patient refused."""	nonsec
+The system shall provide a means to document a patient's dispute with information currently in their chart. This does not imply that the patient can document directly in their chart. Some methods include but are not limited to allowing the patient a view only access to their record, printing a copy of the record for a patient to review. Methods to include the information in the chart could be as a note, a scanned copy of patient comments, an addendum to the note or other method not described.	nonsec
+"The system shall provide the ability to identify certain information as confidential and only make that accessible by appropriately authorized users. This may be implemented by having a ""confidential"" section of the chart.  In the future such confidential designation will be required at the data element level, e.g., individual problems on the problem list, medications, allergies, results, etc."	nonsec
+The system shall provide the ability to prevent specified user(s) from accessing a designated patient's chart. An example would be to block a user who has a personal relationship with a patient from accessing that patient's chart.	nonsec
+The system shall provide the ability to export (extract) pre-defined set(s) of data out of the system. For example, export of performance measures, ability to query data base, chronic disease management tools.	nonsec
+The system shall provide protection to maintain the integrity of clinical data during concurrent access. To prevent users from simultaneously attempting to update a record with resultant loss of data	nonsec
+The system shall provide the ability to receive and store general laboratory results using the HL7 v.2.5.1 ORU message standard The test files are designed so that products implementing HL7 v2.5.1 standard will be found compliant.  The test identifier will be encoded in LOINC, and will be drawn from among common test codes from the HEDIS subset.  See LOINC.org for more about HEDIS.	nonsec
+The system shall provide the ability to send a query to verify prescription drug insurance eligibility and apply response to formulary and benefit files to determine coverage An essential first step prior to sending a query for medication history or formulary information directed at prescription drug coverage.	nonsec
+The system shall provide the ability to capture and display formulary information from pharmacy or PBM (Pharmacy Benefits Manager)  by applying eligibility response Usually preceded by a query for insurance eligibility to verify potential source of data.	nonsec
+The system shall provide the ability to display HITSP C32/CCD documents and file them as intact documents in the EHR.                       Summary patient record content information will include: patient demographics, medication list, medication allergy list. Requires the Document Consumer only to have the ability to display the document as requested. (it may not be able to locally import it in the patient record).	nonsec
+The system shall provide the ability to generate and format patient summary  documents per the following specifications:  HITSP C32 (v2.3 or v2.5)     Summary patient record content information will include: patient demographics, medications, medication allergies  Generated xml documents must demonstrate use of industry-standard vocabularies/terminologies.   The intent is to test the Required (R) fields, including the product coded terminology for the medication and medication allergy. Structured entries, narrative text and specified coded terminologies are required for the following patient summary sections: patient demographics, medication list, medication allergy list;   Vocabularies Medications: RxNORM/NDC Allergies: RxNORM, UNII	nonsec
+The system shall provide the ability for a clinical or other authorized user to view the full content of a finalized note. The full content of a finalized note includes the finalized note and any finalized modifications to that note including finalized changes  referred to as corrections, clarifications, addenda, etc. Finalizing is the act of publishing into the system in a way that others may access information that has changed. PC 01.11 is addressing finalized notes and changes made to a final note.                                                       PC 01.11 does not address a  'note in progress' which is a note that has not been finalized.	nonsec
+The system shall provide the ability to save a note in progress prior to finalizing the note. Intent: any method of flagging incomplete notes is acceptable example: autosave function, amendment function.	nonsec
+The system shall have the ability to record and display the identity and credentials of all users who entered all or part of a note even if they did not finalize the note. Clarification: This criterion does not require that the system identify or display which portion or portions of a final note were entered by each user but rather that the system record and display which users were involved in any part of the creation of the note.	nonsec
+The system shall enforce the most restrictive set of rights/privileges or accesses needed by users/groups (e.g. System Administration, Clerical, Nurse, Doctor, etc.), or processes acting on behalf of users, for the performance of specified tasks. 	sec
+The system shall support logging to a common audit engine using the schema and transports specified in the Audit Log specification of IHE Audit Trails and Node Authentication (ATNA) Profile. 	sec
+The system shall provide authorized administrators with the capability to read all audit information from the audit records in one of the following two ways:  1) The system shall provide the audit records in a manner suitable for the user to interpret the information.  The system shall provide the capability to generate reports based on ranges of system date and time that audit records were collected. 2) The system shall be able to export logs into text format in such a manner as to allow correlation based on time (e.g. UTC synchronization). Assignable to third party.	sec
+The system shall be able to support time synchronization using NTP/SNTP, and use this synchronized time in all security records of time. Assignable to third party.	sec
+"The system shall have the ability to format for export recorded time stamps using UTC based on ISO 8601.  Example: ""1994-11-05T13:15:30-05:00"" corresponds to November 5, 1994, 8:15:30 am, US Eastern Standard Time. "	sec
+The system shall prohibit all users read access to the audit records, except those users that have been granted explicit read-access.  The system shall protect the stored audit records from unauthorized deletion. The system shall prevent modifications to the audit records. Assignable to third party.	sec
+The system shall authenticate the user before any access to Protected Resources (e.g. PHI) is allowed, including when not connected to a network e.g. mobile devices. Assignable to third party.	sec
+When passwords are used, the system shall support password strength rules that allow for minimum number of characters, and inclusion of alpha-numeric complexity. Assignable to third party.	sec
+The system upon detection of inactivity of an interactive session shall prevent further viewing and access to the system by that session by terminating the session, or by initiating a session lock that remains in effect until the user reestablishes access using appropriate identification and authentication procedures. The inactivity timeout shall be configurable. Assignable to third party.	sec
+The system shall enforce a limit of (configurable) consecutive invalid access attempts by a user. The system shall protect against further, possibly malicious, user authentication attempts using an appropriate mechanism (e.g. locks the account/node until released by an administrator, locks the account/node for a configurable time period, or delays the next login prompt according to a  configurable delay algorithm). Assignable to third party.	sec
+When passwords are used, the system shall provide an administrative function that resets passwords. Assignable to third party.	sec
+When passwords are used, user accounts that have been reset by an administrator shall require the user to change the password at next successful logon. Assignable to third party.	sec
+The system shall provide only limited feedback information to the user during the authentication. Assignable to third party.	sec
+The system shall support case-insensitive usernames that contain typeable alpha-numeric characters in support of ISO-646/ECMA-6 (aka US ASCII). Assignable to third party.	sec
+When passwords are used, the system shall allow an authenticated user to change their password consistent with password strength rules (SC 03.02). Assignable to third party.	sec
+When passwords are used, the system shall support case-sensitive passwords that contain typeable alpha-numeric characters in support of ISO-646/ECMA-6 (aka US ASCII). Assignable to third party.	sec
+When passwords are used, the system shall use either standards-based encryption, e.g., 3DES, AES, or standards-based hashing, e.g., SHA1 to store or transport passwords. Assignable to third party.	sec
+"When passwords are used, the system shall prevent the reuse of passwords previously used within a specific (configurable) timeframe (i.e., within the last X days, etc. - e.g. ""last 180 days""), or shall prevent the reuse of a certain (configurable) number of the most recently used passwords (e.g. ""last 5 passwords""). Assignable to third party."	sec
+The system shall include documentation available to the customer that provides guidelines for configuration and use of the security controls necessary to support secure and reliable operation of the system, including but not limited to: creation, modification, and deactivation of user accounts, management of roles, reset of passwords, configuration of password constraints, and audit logs. Assignable to third party.	sec
+The system shall be configurable to prevent corruption or loss of data already accepted into the system in the event of a system failure (e.g. integrating with a UPS, etc.). Assignable to third party.	sec
+The system shall support protection of confidentiality of all Protected Health Information (PHI) delivered over the Internet or other known open networks via encryption using triple-DES (3DES) or the Advanced Encryption Standard (AES) and an open protocol such as TLS, SSL, IPSec, XML encryptions, or S/MIME or their successors. Assignable to third party.	sec
+When passwords are used, the system shall not display passwords while being entered. Assignable to third party.	sec
+For systems that provide access to PHI through a web browser interface (i.e. HTML over HTTP) shall include the capability to encrypt the data communicated over the network via SSL (HTML over HTTPS). Note: Web browser interfaces are often used beyond the perimeter of the protected enterprise network Assignable to third party.	sec
+The system shall support protection of integrity of all Protected Health Information (PHI) delivered over the Internet or other known open networks via SHA1 hashing and an open protocol such as TLS, SSL, IPSec, XML digital signature, or S/MIME or their successors. Assignable to third party.	sec
+The system shall support ensuring the authenticity of remote nodes (mutual node authentication) when communicating Protected Health Information (PHI) over the Internet or other known open networks using an open protocol (e.g. TLS, SSL, IPSec, XML sig, S/MIME). Assignable to third party.	sec
+"The system, prior to access to any PHI, shall display a configurable warning or login banner (e.g. ""The system should only be accessed by authorized users""). In the event that a system does not support pre-login capabilities, the system shall display the banner immediately following authorization. Assignable to third party."	sec
+The system shall be able to generate a backup copy of the application data, security credentials, and log/audit files. Assignable to third party.	sec
+The system restore functionality shall result in a fully operational and secure state.  This state shall include the restoration of the application data, security credentials, and log/audit files to their previous state. Assignable to third party.	sec
+If the system claims to be available 24x7 then the system shall have ability to run a backup concurrently with the operation of the application. Assignable to third party.	sec

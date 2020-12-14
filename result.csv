@@ -1,23 +1,23 @@
 Text	Label
- Internally to the CPN, a CNG transmitting private or other critical information (i.e. to a CND) shall protect the data from unauthorised disclosure.	sec
- Internally to the CPN, a CNG receiving private or other critical information (i.e. from a CND) should verify that the data was protected from unauthorised disclosure. 	sec
+Internally to the CPN, a CNG transmitting private or other critical information (i.e. to a CND) shall protect the data from unauthorised disclosure.	sec
+Internally to the CPN, a CNG receiving private or other critical information (i.e. from a CND) should verify that the data was protected from unauthorised disclosure.	sec
 The CNG shall detect the end of the life of the key used for cryptographic protection of the wireless communication between the CND and the CNG.	sec
- A CPN-user attempting to invoke a CNG-mediated service shall be identified and authenticated by the CNG before being granted access to the service.	sec
+A CPN-user attempting to invoke a CNG-mediated service shall be identified and authenticated by the CNG before being granted access to the service.	sec
 The CNG shall implement an authentication failure handling policy.	sec
 The CNG shall take action according to local authentication failure handling policy (which may include silently discarding the authentication and explicit failure notification, or in the case of a replay of credentials may include notification of the true owner of the credentials) upon detection of failure during identification, authentication and authorization.	sec
 The CNG should detect replayed user and/or device credentials.	sec
 When the CNG detects replayed user and/or device credentials, the CNG shall stop the relevant processes.	sec
 The CNG shall implement a privacy protection policy specifying as a minimum private and critical information.	sec
- When the CNG detects violation of the privacy protection policy the CNG shall discard all signalling, including signalling from the NGN.	sec
+When the CNG detects violation of the privacy protection policy the CNG shall discard all signalling, including signalling from the NGN.	sec
 The CNG shall implement an authorization management handling policy.	sec
 On reception at the CNG of a message to access configuration information for update and detection of authorization failure the CNG shall reject the request and manage the failure in accordance with the CPN authorization management handling policy.	sec
 Where a CND invokes a session at the CNG the CNG shall record the association of session-id, invoking device identity and invoking user-id.	sec
 On transmission of management information from the CNG to a CND the CNG shall append a timestamp or sequence number to the outgoing message.	sec
- On reception at the CNG of a message containing management information the CNG shall extract the timestamp or sequence number and verify that the message has not been replayed.	sec
- On reception at the CNG of a message to access or update configuration information the CNG shall allow access only if the sender is an administrator.	sec
- On detection of a message integrity error at the CNG the CNG shall discard the message.	sec
+On reception at the CNG of a message containing management information the CNG shall extract the timestamp or sequence number and verify that the message has not been replayed.	sec
+On reception at the CNG of a message to access or update configuration information the CNG shall allow access only if the sender is an administrator.	sec
+On detection of a message integrity error at the CNG the CNG shall discard the message.	sec
 On indication received at the CNG of a resource allocation expiry the CNG shall delete all residual data associated with the invocation of the resource.	sec
- On receipt of a valid (i.e. authorized) request for data stored in the CNG the CNG shall return the requested data to the requesting user.	sec
+On receipt of a valid (i.e. authorized) request for data stored in the CNG the CNG shall return the requested data to the requesting user.	sec
 On receipt of a valid (i.e. authorized) request for access to a CNG hosted service or application the CNG shall provide the requested service or application to the requesting user.	sec
 On detection of any system failure or discontinuity not specifically handled by other mechanisms the CNG shall revert to a known safe state.	sec
 The CNG shall support mechanisms to authenticate itself to the NGN for connectivity purposes.	sec
@@ -111,7 +111,7 @@ CNDs connected to the CPN and devoted to specific NGN managed services shall be 
 CNG shall support mechanisms allowing the CNDs remote management when applicable.	nonsec
 Protection mechanisms shall be implemented to avoid that a management client could access and modify parameters that is not allow to configure.	nonsec
 The CPN (trough CNDs and/or CNG) shall support manual configuration to insert information to access IMS network (e.g. IMPU, IMPI, Shared keys, Home Network Domain or P-CSCF IP Address, etc.).	nonsec
-The CND directly or through the CNG must be able to access to Network Configuration Service Function without involving any user interaction. 	nonsec
+The CND directly or through the CNG must be able to access to Network Configuration Service Function without involving any user interaction.	nonsec
 The Network Configuration Server should be able to upload different parameter sets related to service subscription.	nonsec
 The CND should be able to support bootstrap capabilities in order to retrieve network configuration data to connect the NGN.	nonsec
 The CND/CNG shall support a mechanism allowing the user to manually modify the association between a public identity (e.g. phone number) and a specific private identity corresponding to a single customer device not provided with a UICC and corresponding also to legal service level agreements between the user and the service provider.	nonsec
@@ -270,180 +270,180 @@ The load device must support on-line PIN encryption or off-line PIN verification
 The load device which supports only off-line PIN verification must support both the off-line PIN encryption method and the off-line PIN plain text verification method as defined in EMV	sec
 Unload transactions do not require cardholder authentication. (However, an acquirer�??s devices may be configured such that authentication is required for access.)	sec
 The architecture for the electronic purse should not preclude the eventual deployment of a variety of devices to meet the needs of many card acceptance environments. Unload must not be precluded from being supported on any or all of these devices at the option of the acquirer	nonsec
-All applications under the GlobalPlatform shall be implemented in a hardware-neutral secure runtime environment  	sec
- The run time environment shall be responsible to separate secure storage for the application code and data 	sec
- The run time environment shall responsible to establish communication services  between card and off-card entities	nonsec
- Security domain shall ensure complete seperation of keys among the card issuers and other application providers	sec
-" ""Security Domains shall support security services such as key handling, encryption, decryption, digital signature generation and verification for their providers' such as card issuer, applicaiton providers and controlling authority"""	sec
- The GlobalPlatform Environment(OPEN) shall responsible for to provide an API to applications,command dispatch, Application selection, (optional) logical channel management, and Card Content management	nonsec
- The OPEN shall responsible to load application code, card content and memory management 	nonsec
- The OPEN shall responsible to enforce security principles defined for Card Content management.	sec
- The OPEN shall own the GlobalPlatform register that contains information for managing the card, Executable Load Files,Applications, Security Domain associations, and privileges.	nonsec
- The GlobalPlatform API shall provides services to the application such as card verification and security services 	sec
- The GlobalPlatform API shall provides services  to the card content management such as  card locking and application life cycle state update 	nonsec
- The primary goal of the GlobalPlatform is to ensure the security and integrity of the card's components for the life of the card. These components are The runtime environment,The OPEN,The Issuer Security Domain,Supplementary Security Domains, The Applications.	sec
- To ensure card security and integrity, the GlobalPlatform is designed to support a range of secure mechanisms for: Data integrity, Resource availability, Confidentiality, Authentication.	sec
- The Card Issuer is responsible for Generating and loading the Issuer Security Domain keys,	sec
-" ""The Card Issuer is responsible for Enforcing standards and policies for Application Providers governing all aspects of Applications to be provided to the Card Issuer or operated on the Card Issuer's cards,"""	sec
-" ""The Card Issuer is responsible for Working with Application Providers to create and initialize Security Domains other than the Issuer Security Domain,"""	nonsec
-" ""The Card Issuer is responsible for Determining policy with regards to card and Application Life Cycle management, velocity checking levels, privileges, and other security parameters,"""	nonsec
- The Card Issuer is responsible for Managing the application code loading and installing both on a Pre-Issuance and Post-Issuance basis	nonsec
- The Card Issuer is responsible for Cryptographically authorizing load, install, and extradition to be performed by Application Providers.	sec
-" ""The Application Provider is responsible for Generating the keys for its own Security Domains or obtaining Security Domain keys from a trusted third party,"""	sec
- The Application Provider is responsible for Working with the Card Issuer to load generated keys into the Application Provider's Security Domain,	sec
- The Application Provider is responsible for Providing applications that meet the Card Issuer's security standards and policies,	nonsec
-" ""The Application Provider is responsible for Providing load file data block signatures according to its own security policy for integrity and source authenticity,"""	sec
- The Application Provider is responsible for Obtaining pre-authorization for load, install, and extradition from the Card Issuer,	nonsec
- The Application Provider is responsible for Returning receipts for load, install, delete, and extradition, according to the Card Issuer's policy.	nonsec
-" ""A Controlling Authority is responsible for Generating the keys for its own Security Domain or obtaining Security Domain keys from a trusted third party,"""	sec
- A Controlling Authority is responsible for Working with the Card Issuer to load generated keys into the Controlling Authority's Security Domain,	sec
-" ""A Controlling Authority is responsible for Providing load file data block signatures according to its own security policy for integrity and source authenticity."""	sec
-" ""The runtime environment is responsible for Providing an interface to all Applications that ensures that the runtime environment security mechanisms cannot be bypassed, deactivated, corrupted or otherwise circumvented,"""	sec
- The runtime environment is responsible for Performing secure memory management	sec
-" ""Secure memory management shall ensure that Each application's code and data (including transient session data) as well as the runtime environment itself and its data (including transient session data) is protected from unauthorized access from within the card,"""	sec
-" ""Secure memory management shall ensure that When more than one logical channel is supported, each concurrently selected Application's code and data (including transient session data) as well as the runtime environment itself and its data (including transient session data) is protected from unauthorized access from within the card,"""	sec
- Secure memory management shall ensure that The previous contents of the memory is not accessible when that memory is reused,	sec
-" ""Secure memory management shall ensure that The memory recovery process is secure and consistent in case of a loss of power or withdrawal of the card from the card reader while an operation is in progress,"""	sec
-" ""The runtime environment is responsible for Providing communication services with off-card entities that ensures the proper transmission (according to the specific communication protocol rules) of unaltered command and response messages."""	sec
- Each Trusted Framework present on the card shall Check the application access rules of the inter-acting Applications according to their respective privileges,	sec
-" ""Each Trusted Framework present on the card shall Enforce the Trusted Framework security rules for inter-application communication, including the rules, defined in appendix G,"""	sec
- Each Trusted Framework present on the card shall Ensure that incoming messages are properly routed unaltered to their intended destinations,	sec
-" ""Each Trusted Framework present on the card shall Ensure that any response messages are properly returned unaltered (except for any cryptographic protection) to the original receiver of the incoming message."""	sec
-" ""The OPEN shall Provide an interface to all Applications that ensures that the GlobalPlatform security mechanism cannot be bypassed, deactivated, corrupted or otherwise circumvented,"""	sec
- The OPEN shall Check application access rules according to the Applications' privileges,	sec
- The OPEN shall Manage card and Application Life Cycle	nonsec
- The OPEN shall Ensure that the Card Content changes are authorized by the Card Issuer,	sec
- The OPEN shall Ensure that application code has been signed by the Controlling Authority represented on the card,	sec
- The OPEN shall Ensure that application code has been signed by Application Providers represented on the card, if required.	sec
- Security Domains enforce the security policies of their off-card Security Domain Provider.	sec
-" ""When applicable a Security Domain shall Communicate with off-card entities in accordance with its Security Domain Provider's security policy in Pre-Issuance and Post-Issuance,"""	sec
- When applicable a Security Domain shall Manage on-card data securely,	sec
-" ""When applicable a Security Domain shall Provide cryptographic protection services for its own Applications during their personalization and optionally during their subsequent operation,"""	sec
- When applicable a Security Domain shall Request the OPEN to load, install, extradite, and delete card content,	nonsec
- When applicable a Security Domain shall Return to the off-card entity any receipt for load, install, extradition, and delete,	nonsec
- When applicable a Security Domain shall Verify the authorization for Card Content changes initiated by an off-card authority,	sec
- When applicable a Security Domain shall Generate receipts for load, install, extradition, and delete,	nonsec
- When applicable a Security Domain shall Verify the load file data block signature when requested by the OPEN.	sec
- A Global Services Application shall Be able to provide services to other Applications, such as CVM services,	nonsec
- A Global Services Application shall Hold the Global Services application-related data securely,	sec
- A Global Services Application shall Perform internal security measures as required by the service.	sec
- Applications should Expose only data and resources that are necessary for proper application functionality	sec
- Applications should Perform internal security measures required by the Application Provider	sec
- The back-end systems (multiple back-end systems may exist for a single card), which communicate with the cards, perform the verifications, and manage the off-card key databases, also shall be trusted.	sec
-" ""One of the major requirements for a GlobalPlatform card is the ability to provide a minimum level of cryptographic functionality. This cryptography is, for example, used for the generation of signatures, and is available for use by the Applications present on the card."""	sec
- The Issuer Security Domain shall implement one Secure Channel Protocol.	sec
- A Security Domain other than the Issuer Security Domain shall implement [at least] one Secure Channel Protocol.	sec
- A GlobalPlatform card should support symmetric cryptography such as the Data Encryption Standard (DES) algorithm.	sec
- A GlobalPlatform card may also support asymmetric cryptography such as the Rivest / Shamir / Adleman (RSA) algorithm.	sec
- When present, services to encrypt and decrypt any pattern of data using these algorithms shall be available to Applications.	sec
-" ""It is the responsibility of the Card Issuer or the Controlling Authority to set up the appropriate off-card procedures to comply with the governmental restrictions upon cryptography. Features to disable or restrict cryptography usage by Applications on a card are beyond the scope of this Specification."""	sec
- The Load File Data Block Hash is intended to verify the integrity of a complete Load File Data Block when loaded to a GlobalPlatform card.	sec
- The Load File Data Block Hash is used in the computation of The Load File Data Block Signature	sec
- The Load File Data Block Hash is used in the computation of The Load Token	nonsec
- When present during the loading of a Load File to the card, each signature shall be verified by the appropriate Security Domain.	sec
- Tokens shall be verified by the appropriate Security Domain.	sec
- The appropriate Security Domain may generate Receipts during Delegated Management.	nonsec
- A GlobalPlatform card may provide security services related to information exchanged between the card and an offcard entity.	nonsec
- The security level of the communication with an off-card entity does not necessarily apply to each individual message being transmitted but can only apply to the environment and/or context in which messages are transmitted.	nonsec
- The concept of the Life Cycle of the card (see section 5.1 - Card Life Cycle) may be used to determine the security level of the communication between the card and an off-card entity.	nonsec
- A GlobalPlatform card offers Entity authentication - in which the card or the off-card entity proves its authenticity to the other entity through a cryptographic exchange,	sec
- A GlobalPlatform card offers Integrity and authentication - in which the receiving entity (the card or off-card entity) ensures that the data being received from the sending entity (respectively the off-card entity or card) actually came from an authenticated entity in the correct sequence and has not been altered,	sec
- A GlobalPlatform card offers Confidentiality - in which data being transmitted from the sending entity (the off-card entity or card) to the receiving entity (respectively the card or off-card entity) is not viewable by an unauthenticated entity.	sec
- The life cycle models is responsible to functionality and security of Card, Executable Load Files, Executable Modules, Security Domains, and Applications.	sec
- The OPEN shall owns and maintains the Life Cycle information within the GlobalPlatform Registry 	nonsec
- The OPEN shall be responsible to maintain security and administration of the card and its content	sec
- At OP_READY state, the OPEN shall be available and ready for execution 	nonsec
- At OP_READY state, the runtime environment shall be  ready for execution 	nonsec
- At OP_READY state, issuer security domain shall be implicitly selected application for all card interfaces	nonsec
- At OP_READY state,Executable Load Files that were included in Immutable Persistent Memory shall be registered in the GlobalPlatform Registry	nonsec
- At OP_READY, initial key shall be available within the issuer security domain	nonsec
- The off-card entity under the OP_READY state may insert Security Domain keys  in order to maintain a cryptographic key separation from the Issuer Security Domain keys	sec
- The SECURED state may be used to enforce the relevant security policies of the security domain and applications	sec
- The off-card entity under the SECURE state shall be used to ensure the availability of all keys by the issuer security domain	sec
- The CARD_LOCKED state shall has the ability to disable the selected security domain and application	nonsec
- The card under CARD_LOCKED state shall only allow the application to select the final application privilege	nonsec
- The Card Content changes including any type of data management (specifically Security Domain keys and data) shall not allowed in the CARD_LOCKED state.	nonsec
- The state TERMINATED shall be used to permanently disable all card functionality with respect to any card content management and any life cycle changes.	nonsec
- The GlobalPlatform Environment (OPEN) supports Command Dispatch functions (Application and Security Domain selection, (Optional) Logical channel management, Command dispatching) if the underlying runtime environment does not support them:	nonsec
- The GlobalPlatform Environment (OPEN) supports Card Content Management functions (Content verification, Content loading, Content installation, Content removal, Access control rules for card content management) if the underlying runtime environment does not support them:	nonsec
- The GlobalPlatform Environment (OPEN) supports Security Management functions (Security Domain locking and unlocking, Application locking and unlocking, Card locking and unlocking, Card termination, Privilege usage, Security Domain, privilege usage, Tracing and event logging) if the underlying runtime environment does not support them:	nonsec
- The GlobalPlatform Environment (OPEN) supports GlobalPlatform Trusted Framework functions (Secure inter-application communication) if the underlying runtime environment does not support them:	nonsec
- The GlobalPlatform Registry is a data store required to support the various system functions of the GlobalPlatform.	nonsec
- Applications and Security Domains may access andor modify some content known or managed by the OPEN.	nonsec
+All applications under the GlobalPlatform shall be implemented in a hardware-neutral secure runtime environment	sec
+The run time environment shall be responsible to separate secure storage for the application code and data	sec
+The run time environment shall responsible to establish communication services  between card and off-card entities	nonsec
+Security domain shall ensure complete seperation of keys among the card issuers and other application providers	sec
+"""Security Domains shall support security services such as key handling, encryption, decryption, digital signature generation and verification for their providers' such as card issuer, applicaiton providers and controlling authority"""	sec
+The GlobalPlatform Environment(OPEN) shall responsible for to provide an API to applications,command dispatch, Application selection, (optional) logical channel management, and Card Content management	nonsec
+The OPEN shall responsible to load application code, card content and memory management	nonsec
+The OPEN shall responsible to enforce security principles defined for Card Content management.	sec
+The OPEN shall own the GlobalPlatform register that contains information for managing the card, Executable Load Files,Applications, Security Domain associations, and privileges.	nonsec
+The GlobalPlatform API shall provides services to the application such as card verification and security services	sec
+The GlobalPlatform API shall provides services  to the card content management such as  card locking and application life cycle state update	nonsec
+The primary goal of the GlobalPlatform is to ensure the security and integrity of the card's components for the life of the card. These components are The runtime environment,The OPEN,The Issuer Security Domain,Supplementary Security Domains, The Applications.	sec
+To ensure card security and integrity, the GlobalPlatform is designed to support a range of secure mechanisms for: Data integrity, Resource availability, Confidentiality, Authentication.	sec
+The Card Issuer is responsible for Generating and loading the Issuer Security Domain keys,	sec
+"""The Card Issuer is responsible for Enforcing standards and policies for Application Providers governing all aspects of Applications to be provided to the Card Issuer or operated on the Card Issuer's cards,"""	sec
+"""The Card Issuer is responsible for Working with Application Providers to create and initialize Security Domains other than the Issuer Security Domain,"""	nonsec
+"""The Card Issuer is responsible for Determining policy with regards to card and Application Life Cycle management, velocity checking levels, privileges, and other security parameters,"""	nonsec
+The Card Issuer is responsible for Managing the application code loading and installing both on a Pre-Issuance and Post-Issuance basis	nonsec
+The Card Issuer is responsible for Cryptographically authorizing load, install, and extradition to be performed by Application Providers.	sec
+"""The Application Provider is responsible for Generating the keys for its own Security Domains or obtaining Security Domain keys from a trusted third party,"""	sec
+The Application Provider is responsible for Working with the Card Issuer to load generated keys into the Application Provider's Security Domain,	sec
+The Application Provider is responsible for Providing applications that meet the Card Issuer's security standards and policies,	nonsec
+"""The Application Provider is responsible for Providing load file data block signatures according to its own security policy for integrity and source authenticity,"""	sec
+The Application Provider is responsible for Obtaining pre-authorization for load, install, and extradition from the Card Issuer,	nonsec
+The Application Provider is responsible for Returning receipts for load, install, delete, and extradition, according to the Card Issuer's policy.	nonsec
+"""A Controlling Authority is responsible for Generating the keys for its own Security Domain or obtaining Security Domain keys from a trusted third party,"""	sec
+A Controlling Authority is responsible for Working with the Card Issuer to load generated keys into the Controlling Authority's Security Domain,	sec
+"""A Controlling Authority is responsible for Providing load file data block signatures according to its own security policy for integrity and source authenticity."""	sec
+"""The runtime environment is responsible for Providing an interface to all Applications that ensures that the runtime environment security mechanisms cannot be bypassed, deactivated, corrupted or otherwise circumvented,"""	sec
+The runtime environment is responsible for Performing secure memory management	sec
+"""Secure memory management shall ensure that Each application's code and data (including transient session data) as well as the runtime environment itself and its data (including transient session data) is protected from unauthorized access from within the card,"""	sec
+"""Secure memory management shall ensure that When more than one logical channel is supported, each concurrently selected Application's code and data (including transient session data) as well as the runtime environment itself and its data (including transient session data) is protected from unauthorized access from within the card,"""	sec
+Secure memory management shall ensure that The previous contents of the memory is not accessible when that memory is reused,	sec
+"""Secure memory management shall ensure that The memory recovery process is secure and consistent in case of a loss of power or withdrawal of the card from the card reader while an operation is in progress,"""	sec
+"""The runtime environment is responsible for Providing communication services with off-card entities that ensures the proper transmission (according to the specific communication protocol rules) of unaltered command and response messages."""	sec
+Each Trusted Framework present on the card shall Check the application access rules of the inter-acting Applications according to their respective privileges,	sec
+"""Each Trusted Framework present on the card shall Enforce the Trusted Framework security rules for inter-application communication, including the rules, defined in appendix G,"""	sec
+Each Trusted Framework present on the card shall Ensure that incoming messages are properly routed unaltered to their intended destinations,	sec
+"""Each Trusted Framework present on the card shall Ensure that any response messages are properly returned unaltered (except for any cryptographic protection) to the original receiver of the incoming message."""	sec
+"""The OPEN shall Provide an interface to all Applications that ensures that the GlobalPlatform security mechanism cannot be bypassed, deactivated, corrupted or otherwise circumvented,"""	sec
+The OPEN shall Check application access rules according to the Applications' privileges,	sec
+The OPEN shall Manage card and Application Life Cycle	nonsec
+The OPEN shall Ensure that the Card Content changes are authorized by the Card Issuer,	sec
+The OPEN shall Ensure that application code has been signed by the Controlling Authority represented on the card,	sec
+The OPEN shall Ensure that application code has been signed by Application Providers represented on the card, if required.	sec
+Security Domains enforce the security policies of their off-card Security Domain Provider.	sec
+"""When applicable a Security Domain shall Communicate with off-card entities in accordance with its Security Domain Provider's security policy in Pre-Issuance and Post-Issuance,"""	sec
+When applicable a Security Domain shall Manage on-card data securely,	sec
+"""When applicable a Security Domain shall Provide cryptographic protection services for its own Applications during their personalization and optionally during their subsequent operation,"""	sec
+When applicable a Security Domain shall Request the OPEN to load, install, extradite, and delete card content,	nonsec
+When applicable a Security Domain shall Return to the off-card entity any receipt for load, install, extradition, and delete,	nonsec
+When applicable a Security Domain shall Verify the authorization for Card Content changes initiated by an off-card authority,	sec
+When applicable a Security Domain shall Generate receipts for load, install, extradition, and delete,	nonsec
+When applicable a Security Domain shall Verify the load file data block signature when requested by the OPEN.	sec
+A Global Services Application shall Be able to provide services to other Applications, such as CVM services,	nonsec
+A Global Services Application shall Hold the Global Services application-related data securely,	sec
+A Global Services Application shall Perform internal security measures as required by the service.	sec
+Applications should Expose only data and resources that are necessary for proper application functionality	sec
+Applications should Perform internal security measures required by the Application Provider	sec
+The back-end systems (multiple back-end systems may exist for a single card), which communicate with the cards, perform the verifications, and manage the off-card key databases, also shall be trusted.	sec
+"""One of the major requirements for a GlobalPlatform card is the ability to provide a minimum level of cryptographic functionality. This cryptography is, for example, used for the generation of signatures, and is available for use by the Applications present on the card."""	sec
+The Issuer Security Domain shall implement one Secure Channel Protocol.	sec
+A Security Domain other than the Issuer Security Domain shall implement [at least] one Secure Channel Protocol.	sec
+A GlobalPlatform card should support symmetric cryptography such as the Data Encryption Standard (DES) algorithm.	sec
+A GlobalPlatform card may also support asymmetric cryptography such as the Rivest / Shamir / Adleman (RSA) algorithm.	sec
+When present, services to encrypt and decrypt any pattern of data using these algorithms shall be available to Applications.	sec
+"""It is the responsibility of the Card Issuer or the Controlling Authority to set up the appropriate off-card procedures to comply with the governmental restrictions upon cryptography. Features to disable or restrict cryptography usage by Applications on a card are beyond the scope of this Specification."""	sec
+The Load File Data Block Hash is intended to verify the integrity of a complete Load File Data Block when loaded to a GlobalPlatform card.	sec
+The Load File Data Block Hash is used in the computation of The Load File Data Block Signature	sec
+The Load File Data Block Hash is used in the computation of The Load Token	nonsec
+When present during the loading of a Load File to the card, each signature shall be verified by the appropriate Security Domain.	sec
+Tokens shall be verified by the appropriate Security Domain.	sec
+The appropriate Security Domain may generate Receipts during Delegated Management.	nonsec
+A GlobalPlatform card may provide security services related to information exchanged between the card and an offcard entity.	nonsec
+The security level of the communication with an off-card entity does not necessarily apply to each individual message being transmitted but can only apply to the environment and/or context in which messages are transmitted.	nonsec
+The concept of the Life Cycle of the card (see section 5.1 - Card Life Cycle) may be used to determine the security level of the communication between the card and an off-card entity.	nonsec
+A GlobalPlatform card offers Entity authentication - in which the card or the off-card entity proves its authenticity to the other entity through a cryptographic exchange,	sec
+A GlobalPlatform card offers Integrity and authentication - in which the receiving entity (the card or off-card entity) ensures that the data being received from the sending entity (respectively the off-card entity or card) actually came from an authenticated entity in the correct sequence and has not been altered,	sec
+A GlobalPlatform card offers Confidentiality - in which data being transmitted from the sending entity (the off-card entity or card) to the receiving entity (respectively the card or off-card entity) is not viewable by an unauthenticated entity.	sec
+The life cycle models is responsible to functionality and security of Card, Executable Load Files, Executable Modules, Security Domains, and Applications.	sec
+The OPEN shall owns and maintains the Life Cycle information within the GlobalPlatform Registry	nonsec
+The OPEN shall be responsible to maintain security and administration of the card and its content	sec
+At OP_READY state, the OPEN shall be available and ready for execution	nonsec
+At OP_READY state, the runtime environment shall be  ready for execution	nonsec
+At OP_READY state, issuer security domain shall be implicitly selected application for all card interfaces	nonsec
+At OP_READY state,Executable Load Files that were included in Immutable Persistent Memory shall be registered in the GlobalPlatform Registry	nonsec
+At OP_READY, initial key shall be available within the issuer security domain	nonsec
+The off-card entity under the OP_READY state may insert Security Domain keys  in order to maintain a cryptographic key separation from the Issuer Security Domain keys	sec
+The SECURED state may be used to enforce the relevant security policies of the security domain and applications	sec
+The off-card entity under the SECURE state shall be used to ensure the availability of all keys by the issuer security domain	sec
+The CARD_LOCKED state shall has the ability to disable the selected security domain and application	nonsec
+The card under CARD_LOCKED state shall only allow the application to select the final application privilege	nonsec
+The Card Content changes including any type of data management (specifically Security Domain keys and data) shall not allowed in the CARD_LOCKED state.	nonsec
+The state TERMINATED shall be used to permanently disable all card functionality with respect to any card content management and any life cycle changes.	nonsec
+The GlobalPlatform Environment (OPEN) supports Command Dispatch functions (Application and Security Domain selection, (Optional) Logical channel management, Command dispatching) if the underlying runtime environment does not support them:	nonsec
+The GlobalPlatform Environment (OPEN) supports Card Content Management functions (Content verification, Content loading, Content installation, Content removal, Access control rules for card content management) if the underlying runtime environment does not support them:	nonsec
+The GlobalPlatform Environment (OPEN) supports Security Management functions (Security Domain locking and unlocking, Application locking and unlocking, Card locking and unlocking, Card termination, Privilege usage, Security Domain, privilege usage, Tracing and event logging) if the underlying runtime environment does not support them:	nonsec
+The GlobalPlatform Environment (OPEN) supports GlobalPlatform Trusted Framework functions (Secure inter-application communication) if the underlying runtime environment does not support them:	nonsec
+The GlobalPlatform Registry is a data store required to support the various system functions of the GlobalPlatform.	nonsec
+Applications and Security Domains may access andor modify some content known or managed by the OPEN.	nonsec
 Depending on the relevant privileges of the requesting entity, the following services shall be provided by the OPEN Retrieving the Applications own Life Cycle State stored by the OPEN in the GlobalPlatform Registry,   Retrieving the card Life Cycle State,   Obtaining access to the services of the Security Domain associated with the Application,   Transitioning the card Life Cycle State to CARD_LOCKED,   For contact cards according to ISOIEC 78164 and for contactless cards Type A according to ISOIEC 144433, setting the content of the historical bytes,   Transitioning the Applications own Application Life Cycle State stored by the OPEN in the GlobalPlatform Registry,   Transitioning the card Life Cycle State to TERMINATED,   Obtaining access to GlobalPlatform Registry information,   Obtaining access to Global Services Applications.	xyz
- The commands received by a GlobalPlatform card shall be processed by the OPEN or dispatched to the selected Application for processing.	nonsec
- The SELECT [by name] command is processed by the OPEN.	nonsec
- If the card is aware of logical channels but only supports the Basic Logical Channel, the OPEN shall respond with the appropriate error,	nonsec
- If the card is aware of logical channels and supports at least one Supplementary Logical Channel, the OPEN shall process the command,	nonsec
- If the card only supports the Basic Logical Channel and has no concept of logical channel support, the command shall be dispatched to the selected Application for processing.	nonsec
- Any other type of command received shall be dispatched to the currently selected Application.	nonsec
-" ""Commands are either received on the Basic Logical Channel (logical channel number zero) or on a Supplementary Logical Channel (logical channel number other than zero). In compliance with ISO/IEC 7816-4, logical channel information shall be indicated in the class byte of the APDU command header."""	nonsec
-" ""For all commands, if the command indicates a Supplementary Logical Channel that is not opened then:   If the card only supports the Basic Logical Channel and has no concept of logical channel support, the command shall be dispatched to the selected Application for processing.   If the card is aware of logical channels, the OPEN shall respond with the appropriate error. (This requirement may exclude the SELECT command, if the card supports opening of a logical channel using the SELECT command.)"""	nonsec
- For commands that are dispatched to an Application, it is the responsibility of the Application to correctly reject commands that it does not recognize, expect or cannot process.	nonsec
- The Issuer Security Domain shall have no multi-selection restrictions on cards that support multiple logical channels i.e. it shall be capable of being selected across multiple logical channels.	nonsec
- The Issuer Security Domain is by default the implicitly selectable Application on all logical channels of all card I/O interfaces supported by the card. Implicit selection on a specific logical channel of a specific card I/O interface may be assigned only if the Issuer Security Domain is the implicitly selectable Application on that logical channel of that card I/O interface and no other Locked Application is registered as implicitly selectable for the same logical channel and card I/O interface	nonsec
- An Application installed or made selectable with a specific Implicit Selection parameter is registered in the GlobalPlatform Registry as the implicitly selectable Application on the logical channel(s) of the card I/O interface(s) indicated in the parameter if no other Application (other than the Issuer Security Domain) is already registered as implicitly selectable on that logical channel(s) of that card I/O interface(s),	nonsec
- An Application installed or made selectable with the Card Reset privilege and no Implicit Selection parameter is registered in the GlobalPlatform Registry as the implicitly selectable Application on the Basic Logical Channel for all card I/O interfaces supported by the card if no other Application (other than the Issuer Security Domain) is already registered as implicitly selectable on the Basic Logical Channel of any card I/O interface,	nonsec
- If an Application implicitly selectable on specific logical channel(s) of specific card I/O interface(s) is deleted, the Issuer Security Domain becomes the implicitly selectable Application on that logical channel(s) of that card I/O interface(s).	nonsec
-" ""The OPEN shall use the implicit selection registration of each Application for controlling the following runtime behavioral requirements:   Identifying the Application which is implicitly selectable on the Basic Logical Channel of the current card I/O interface during the card reset or activation sequence,   Identifying the Application which is implicitly selectable when opening on the current card I/O interface a new Supplementary Logical Channel from the Basic Logical Channel."""	nonsec
- The Basic Logical Channel is the permanently available interface to a GlobalPlatform card and shall be supported by the OPEN.	nonsec
- The OPEN shall support Application selection on the Basic Logical Channel via Implicit Selection following the card reset (see ISO/IEC 7816-3 for contact cards) or activation sequence (see ISO/IEC 14443-3 for contactless cards),	nonsec
- The OPEN shall support Application selection on the Basic Logical Channel via Explicit Selection through the SELECT [by name] command.	nonsec
- The OPEN may also support additional selection processes.	nonsec
- Partial AID selection as defined in section 6.4.2.1.2 - Explicit Selection, shall be supported. (Partial AID selection does not require knowledge of the full AID by the off-card entity.)	nonsec
- As multiple Applications on the card may have the same partial AID, it is required that a method exists to select all Applications matching the partial AID.	nonsec
- Once the card session has been established (for contact cards according to ISO/IEC 7816-4 after Answer-to-Reset, or after the activation sequence for contactless cards according to ISO/IEC 14443-3), and before the first command is issued to the card, the Application defined as implicitly selectable on the Basic Logical Channel and for that card I/O interface shall become the selected Application on the Basic Logical Channel for that card I/O interface.	nonsec
- If the card is in the Life Cycle State CARD_LOCKED or TERMINATED, the Application with the Final Application privilege is the selected Application on the Basic Logical Channel and the OPEN shall not attempt to identify the implicitly selectable Application	nonsec
- In all other cases the OPEN shall search the GlobalPlatform Registry for an Application that is marked as implicitly selectable on the Basic Logical Channel for the current card I/O interface (e.g. contact or contactless), and if this Application is not in the Life Cycle State LOCKED, it shall become the selected Application on the Basic Logical Channel. If this is an Application in the Life Cycle State LOCKED, the Application with the Final Application privilege shall become the selected Application on the Basic Logical Channel.	nonsec
- At any time during a Card Session the OPEN may receive a request to select an Application on the Basic Logical Channel (SELECT [by name] [first or only occurrence] command). The OPEN shall determine if the requested AID matches or partially matches an entry within the GlobalPlatform Registry and whether this entry is selectable.	nonsec
- At any time during a Card Session that has already contained a SELECT [by name] [first or only occurrence] command, the OPEN may receive a request to select a next Application (SELECT [by name] [next occurrence] command) on the Basic Logical Channel. The OPEN shall determine if the requested AID matches or partially matches another entry within the GlobalPlatform Registry and whether this entry is selectable.	nonsec
-" ""For both the SELECT [by name] [first or only occurrence] command and the SELECT [by name] [next occurrence] command, an Application becomes the selected Application on the Basic Logical Channel if:   The requested AID matches (fully or partially) the Application�s AID,   The Application being selected is in the correct Life Cycle State,   The Application has no restrictions due to multi-selection, and supports the current card interface."""	nonsec
-" ""In the card Life Cycle State CARD_LOCKED: - If the Application being selected has the Final Application privilege, this Application is re-selected and a warning is returned to the off-card entity, - If any other Application is being selected, the Application with the Final Application privilege remains selected and an error is returned to the off- card entity,"""	nonsec
-" ""If a SELECT [by name] [first or only occurrence] or SELECT [by name] [next occurrence] is received and the data field of the command message is not present, the Issuer Security Domain shall become the currently selected Application and the SELECT command is dispatched to the Issuer Security Domain,"""	nonsec
- If a SELECT [by name] [first or only occurrence] is received, the search always begins from the start of the GlobalPlatform Registry,	nonsec
- If a SELECT [by name] [next occurrence] is received, the search always begins from the entry following the currently selected Application on the Basic Logical Channel in the GlobalPlatform Registry,	nonsec
- If a full or partial match is found and this Application is in the Life Cycle State INSTALLED, continue searching through the GlobalPlatform Registry for a subsequent full or partial match. If no subsequent full or partial match is found, the OPEN shall return the appropriate error to the off-card entity,	nonsec
- If a full or partial match is found and this Application is in the Life Cycle State LOCKED, continue searching through the GlobalPlatform Registry for a subsequent full or partial match. In the eventuality that this locked Application is already currently selected on the Basic Logical Channel, the OPEN shall terminate this Application Session. If no subsequent full or partial match is found, the OPEN shall return the appropriate error to the off-card entity,	nonsec
- If a full or partial match is found and this Application cannot be selected due to a multi-selection restriction or because the Application refuses selection (e.g. because it does not support the current card interface), continue searching through the GlobalPlatform Registry for a subsequent full or partial match. If no subsequent full or partial match is found, the OPEN shall return the appropriate error to the off-card entity,	nonsec
- If a full or partial match is found and this Application is selectable (i.e. in the correct Life Cycle State and has no multi-selection restrictions), then it shall become the currently selected Application on the Basic Logical Channel and the SELECT [by name] command, whether [first or only occurrence] or [next occurrence], shall be processed according to the requirements of the runtime environment (e.g. dispatched to the Application),	nonsec
-" ""If no full or partial match is found at all, the currently selected Application on the Basic Logical Channel shall remain the selected Application and - If the SELECT [by name] command has the [first or only occurrence] parameter set, the SELECT command is dispatched to the Application, - If the SELECT [by name] command has the [next occurrence] parameter set, the OPEN shall return the appropriate error to the off-card entity,"""	nonsec
- In the eventuality that the current Application Session has been terminated and no subsequent full or partial match is found, the OPEN shall make an attempt to select the Application that is marked as implicitly selectable on the Basic Logical Channel for the current card interface.	nonsec
- At any time during a Card Session the OPEN may receive a request on the Basic Logical Channel to either open or close a Supplementary Logical Channel.	nonsec
- If the card only supports the Basic Logical Channel and has no concept of logical channel support, the MANAGE CHANNEL command is dispatched to the currently selected Application. In this case, when a Security Domain is the currently selected Application, the command shall be rejected.	nonsec
-" ""On cards that support logical channels, if a MANAGE CHANNEL [open] is received:   If an Application is designated as implicitly selectable on the new Supplementary Logical Channel for the current card interface, that Application is implicitly selected on the newly opened Supplementary Logical Channel and runtime behavior requirements apply,   Otherwise the Application designated as implicitly selectable on the Basic Logical Channel for this card interface is implicitly selected on the newly opened Supplementary Logical Channel and runtime behavior requirements apply."""	nonsec
- On cards that support logical channels, if a MANAGE CHANNEL [close] is received, terminate the Application Session currently selected on the Supplementary Logical Channel indicated by the command and then close that logical channel. The Basic Logical Channel can never be closed.	nonsec
- If the card is in the Life Cycle State CARD_LOCKED or TERMINATED, return the appropriate error.	nonsec
- If the number of logical channels supported by the OPEN is not sufficient to open a new Supplementary Logical Channel, return the appropriate error.	nonsec
-" ""The OPEN shall search the GlobalPlatform Registry for the Application that supports the current card interface and that is marked as implicitly selectable on the new Supplementary Logical Channel (or failing that, on the Basic Logical Channel) and: - If this is an Application in the Life Cycle State LOCKED, the Application with the Final Application privilege shall become the selected Application on the Supplementary Logical Channel, - If this Application cannot be selected due to a multi-selection restriction, the new logical channel shall not be opened and the OPEN shall return the appropriate error, - Otherwise, the Supplementary Logical Channel is opened and this Application shall become the selected Application on the Supplementary Logical Channel."""	nonsec
- Once an Application becomes the selected Application on the Basic Logical Channel, the responsibility for subsequent command dispatching still rests with the OPEN.	nonsec
- On cards that are aware of logical channels, the MANAGE CHANNEL commands are only processed by the OPEN and are not dispatched to an Application.	nonsec
- All other commands (including the MANAGE CHANNEL commands on cards that are not aware of logical channels or SELECT commands not described in section 6.4.2.1.2 - Explicit Selection) are immediately dispatched to the Application currently selected on the Basic Logical Channel. The processing of the command by the Application is beyond the scope of this Specification.	nonsec
-" ""The OPEN shall support Application selection on an available Supplementary Logical Channel via two processes:   Implicit Selection following a successful MANAGE CHANNEL [open] command,   Explicit Selection through the SELECT [by name] command."""	nonsec
- Partial AID selection as defined in section 6.4.3.1.2 - Explicit Selection, shall be supported on Supplementary Logical Channels.	nonsec
- At any time on an open Supplementary Logical Channel, the OPEN may receive a request to select an Application on this Supplementary Logical Channel (SELECT [by name] [first or only occurrence] command). The OPEN shall determine if the requested AID matches or partially matches an entry within the GlobalPlatform Registry and whether this entry is selectable.	nonsec
- At any time on an open Supplementary Logical Channel that has already contained a SELECT [by name] [first or only occurrence] command since the Supplementary Logical Channel was last opened, the OPEN may receive a request to select a next Application (SELECT [by name] [next occurrence] command) on this Supplementary Logical Channel. The OPEN shall determine if the requested AID matches or partially matches another entry within the GlobalPlatform Registry and whether this entry is selectable.	nonsec
-" ""For both the SELECT [by name] [first or only occurrence] command and the SELECT [by name] [next occurrence] command, an Application becomes the selected Application on the Supplementary Logical Channel if:   The requested AID matches (fully or partially) the Application�s AID,   The Application being selected is in the correct Life Cycle State,   The Application has no restrictions due to multi-selection, and supports the current card interface."""	nonsec
-" ""If the card is in the Life Cycle State CARD_LOCKED or TERMINATED: - Close the Supplementary Logical Channel, if currently open, - Return the appropriate error,"""	nonsec
- If a SELECT [by name] [first or only occurrence] or SELECT [by name] [next occurrence] is received and the data field of the command message is not present, the Issuer Security Domain shall become the currently selected Application and the SELECT command is dispatched to the Issuer Security Domain,	nonsec
- If a SELECT [by name] [next occurrence] is received, the search always begins from the entry following the currently selected Application on this Supplementary Logical Channel in the GlobalPlatform Registry,	nonsec
- If a full or partial match is found and this Application is in the Life Cycle State LOCKED, continue searching through the GlobalPlatform Registry for a subsequent full or partial match. In the eventuality that this locked Application is already currently selected on the same Supplementary Logical Channel, the OPEN shall terminate this Application Session. If no subsequent full or partial match is found, the OPEN shall return the appropriate error to the off-card entity,	nonsec
-" ""If a full or partial match is found and this Application cannot be selected due to a multi-selection restriction or because the Application refuses selection (e.g. because it does not support the current card interface), continue searching through the GlobalPlatform Registry for a subsequent full or partial match. If no subsequent full or partial match is found, the OPEN shall return the appropriate error to the off-card entity,"""	nonsec
- If a full or partial match is found and this Application is selectable (i.e. in the correct Life Cycle State and has no multi-selection restrictions), then it shall become the currently selected Application on this Supplementary Logical Channel and the SELECT [by name] command, whether [first or only occurrence] or [next occurrence], shall be processed according to the requirements of the runtime environment (e.g. dispatched to the Application),	nonsec
-" ""If no full or partial match is found at all, the currently selected Application on the Supplementary Logical Channel shall remain the selected Application and - If the SELECT [by name] command has the [first or only occurrence] parameter set, the SELECT command is dispatched to the Application, - If the SELECT [by name] command has the [next occurrence] parameter set, the OPEN shall return the appropriate error to the off-card entity."""	nonsec
-" ""At any time on an open Supplementary Logical Channel the OPEN may receive a request to either open or close a Supplementary Logical Channel. If a MANAGE CHANNEL [open] is received and the Application selected on the original Supplementary Logical Channel has no multi-selection restrictions, this Application becomes the selected Application on the newly opened Supplementary Logical Channel. If a MANAGE CHANNEL [close] is received, terminate the Application Session currently selected on the Supplementary Logical Channel indicated by the command and then close that logical channel. The Basic Logical Channel can never be closed."""	nonsec
- If the card is in the Life Cycle State CARD_LOCKED or TERMINATED, return the appropriate error,	nonsec
- If the number of logical channels supported by the OPEN is not sufficient to open a new Supplementary Logical Channel, return the appropriate error,	nonsec
- If the Application currently selected on the original Supplementary Logical Channel cannot be selected on the new Supplementary Logical Channel due to a multi-selection restriction, the new logical channel shall not be opened and the OPEN shall return the appropriate error,	nonsec
- Otherwise, the Supplementary Logical Channel indicated by the command is opened and the Application currently selected on the original Supplementary Logical Channel shall become the selected Application on the newly opened Supplementary Logical Channel.	nonsec
- Once an Application becomes the selected Application on a Supplementary Logical Channel, the responsibility for subsequent command dispatching still rests with the OPEN.	nonsec
- The MANAGE CHANNEL commands are only processed by the OPEN and are not dispatched to an Application.	nonsec
- All other commands (including SELECT commands not described in section 6.4.3.1.2 - Explicit Selection) are immediately dispatched to the Application currently selected on the Supplementary Logical Channel. The processing of the command by the Application is beyond the scope of this Specification.	nonsec
-" ""The GlobalPlatform Registry is used to:   Store card management information,   Store relevant application management information (e.g., AID, associated Security Domain and Privileges),   Support card resource management data,   Store Application Life Cycle information,   Store card Life Cycle information,   Track any counters associated with logs."""	nonsec
-" ""The contents of the GlobalPlatform Registry may be updated in response to:   An internal OPEN invoked action,   An authorized Application invoked action."""	nonsec
- All Applications including all Security Domains, and all Executable Load Files, shall have an entry in the GlobalPlatform Registry.	nonsec
- Each Executable Load File or Executable Module is associated with an AID that shall be unique on the card.	nonsec
- An Application AID may be the same as that of an Executable Module but may not be the same as that of an Executable Load File or the same as another Application already present in the GlobalPlatform Registry.	nonsec
- This AID may be specified in a SELECT command to select the Application. It is not possible to select Executable Load Files or Executable Modules.	nonsec
+The commands received by a GlobalPlatform card shall be processed by the OPEN or dispatched to the selected Application for processing.	nonsec
+The SELECT [by name] command is processed by the OPEN.	nonsec
+If the card is aware of logical channels but only supports the Basic Logical Channel, the OPEN shall respond with the appropriate error,	nonsec
+If the card is aware of logical channels and supports at least one Supplementary Logical Channel, the OPEN shall process the command,	nonsec
+If the card only supports the Basic Logical Channel and has no concept of logical channel support, the command shall be dispatched to the selected Application for processing.	nonsec
+Any other type of command received shall be dispatched to the currently selected Application.	nonsec
+"""Commands are either received on the Basic Logical Channel (logical channel number zero) or on a Supplementary Logical Channel (logical channel number other than zero). In compliance with ISO/IEC 7816-4, logical channel information shall be indicated in the class byte of the APDU command header."""	nonsec
+"""For all commands, if the command indicates a Supplementary Logical Channel that is not opened then:   If the card only supports the Basic Logical Channel and has no concept of logical channel support, the command shall be dispatched to the selected Application for processing.   If the card is aware of logical channels, the OPEN shall respond with the appropriate error. (This requirement may exclude the SELECT command, if the card supports opening of a logical channel using the SELECT command.)"""	nonsec
+For commands that are dispatched to an Application, it is the responsibility of the Application to correctly reject commands that it does not recognize, expect or cannot process.	nonsec
+The Issuer Security Domain shall have no multi-selection restrictions on cards that support multiple logical channels i.e. it shall be capable of being selected across multiple logical channels.	nonsec
+The Issuer Security Domain is by default the implicitly selectable Application on all logical channels of all card I/O interfaces supported by the card. Implicit selection on a specific logical channel of a specific card I/O interface may be assigned only if the Issuer Security Domain is the implicitly selectable Application on that logical channel of that card I/O interface and no other Locked Application is registered as implicitly selectable for the same logical channel and card I/O interface	nonsec
+An Application installed or made selectable with a specific Implicit Selection parameter is registered in the GlobalPlatform Registry as the implicitly selectable Application on the logical channel(s) of the card I/O interface(s) indicated in the parameter if no other Application (other than the Issuer Security Domain) is already registered as implicitly selectable on that logical channel(s) of that card I/O interface(s),	nonsec
+An Application installed or made selectable with the Card Reset privilege and no Implicit Selection parameter is registered in the GlobalPlatform Registry as the implicitly selectable Application on the Basic Logical Channel for all card I/O interfaces supported by the card if no other Application (other than the Issuer Security Domain) is already registered as implicitly selectable on the Basic Logical Channel of any card I/O interface,	nonsec
+If an Application implicitly selectable on specific logical channel(s) of specific card I/O interface(s) is deleted, the Issuer Security Domain becomes the implicitly selectable Application on that logical channel(s) of that card I/O interface(s).	nonsec
+"""The OPEN shall use the implicit selection registration of each Application for controlling the following runtime behavioral requirements:   Identifying the Application which is implicitly selectable on the Basic Logical Channel of the current card I/O interface during the card reset or activation sequence,   Identifying the Application which is implicitly selectable when opening on the current card I/O interface a new Supplementary Logical Channel from the Basic Logical Channel."""	nonsec
+The Basic Logical Channel is the permanently available interface to a GlobalPlatform card and shall be supported by the OPEN.	nonsec
+The OPEN shall support Application selection on the Basic Logical Channel via Implicit Selection following the card reset (see ISO/IEC 7816-3 for contact cards) or activation sequence (see ISO/IEC 14443-3 for contactless cards),	nonsec
+The OPEN shall support Application selection on the Basic Logical Channel via Explicit Selection through the SELECT [by name] command.	nonsec
+The OPEN may also support additional selection processes.	nonsec
+Partial AID selection as defined in section 6.4.2.1.2 - Explicit Selection, shall be supported. (Partial AID selection does not require knowledge of the full AID by the off-card entity.)	nonsec
+As multiple Applications on the card may have the same partial AID, it is required that a method exists to select all Applications matching the partial AID.	nonsec
+Once the card session has been established (for contact cards according to ISO/IEC 7816-4 after Answer-to-Reset, or after the activation sequence for contactless cards according to ISO/IEC 14443-3), and before the first command is issued to the card, the Application defined as implicitly selectable on the Basic Logical Channel and for that card I/O interface shall become the selected Application on the Basic Logical Channel for that card I/O interface.	nonsec
+If the card is in the Life Cycle State CARD_LOCKED or TERMINATED, the Application with the Final Application privilege is the selected Application on the Basic Logical Channel and the OPEN shall not attempt to identify the implicitly selectable Application	nonsec
+In all other cases the OPEN shall search the GlobalPlatform Registry for an Application that is marked as implicitly selectable on the Basic Logical Channel for the current card I/O interface (e.g. contact or contactless), and if this Application is not in the Life Cycle State LOCKED, it shall become the selected Application on the Basic Logical Channel. If this is an Application in the Life Cycle State LOCKED, the Application with the Final Application privilege shall become the selected Application on the Basic Logical Channel.	nonsec
+At any time during a Card Session the OPEN may receive a request to select an Application on the Basic Logical Channel (SELECT [by name] [first or only occurrence] command). The OPEN shall determine if the requested AID matches or partially matches an entry within the GlobalPlatform Registry and whether this entry is selectable.	nonsec
+At any time during a Card Session that has already contained a SELECT [by name] [first or only occurrence] command, the OPEN may receive a request to select a next Application (SELECT [by name] [next occurrence] command) on the Basic Logical Channel. The OPEN shall determine if the requested AID matches or partially matches another entry within the GlobalPlatform Registry and whether this entry is selectable.	nonsec
+"""For both the SELECT [by name] [first or only occurrence] command and the SELECT [by name] [next occurrence] command, an Application becomes the selected Application on the Basic Logical Channel if:   The requested AID matches (fully or partially) the Application�s AID,   The Application being selected is in the correct Life Cycle State,   The Application has no restrictions due to multi-selection, and supports the current card interface."""	nonsec
+"""In the card Life Cycle State CARD_LOCKED: - If the Application being selected has the Final Application privilege, this Application is re-selected and a warning is returned to the off-card entity, - If any other Application is being selected, the Application with the Final Application privilege remains selected and an error is returned to the off- card entity,"""	nonsec
+"""If a SELECT [by name] [first or only occurrence] or SELECT [by name] [next occurrence] is received and the data field of the command message is not present, the Issuer Security Domain shall become the currently selected Application and the SELECT command is dispatched to the Issuer Security Domain,"""	nonsec
+If a SELECT [by name] [first or only occurrence] is received, the search always begins from the start of the GlobalPlatform Registry,	nonsec
+If a SELECT [by name] [next occurrence] is received, the search always begins from the entry following the currently selected Application on the Basic Logical Channel in the GlobalPlatform Registry,	nonsec
+If a full or partial match is found and this Application is in the Life Cycle State INSTALLED, continue searching through the GlobalPlatform Registry for a subsequent full or partial match. If no subsequent full or partial match is found, the OPEN shall return the appropriate error to the off-card entity,	nonsec
+If a full or partial match is found and this Application is in the Life Cycle State LOCKED, continue searching through the GlobalPlatform Registry for a subsequent full or partial match. In the eventuality that this locked Application is already currently selected on the Basic Logical Channel, the OPEN shall terminate this Application Session. If no subsequent full or partial match is found, the OPEN shall return the appropriate error to the off-card entity,	nonsec
+If a full or partial match is found and this Application cannot be selected due to a multi-selection restriction or because the Application refuses selection (e.g. because it does not support the current card interface), continue searching through the GlobalPlatform Registry for a subsequent full or partial match. If no subsequent full or partial match is found, the OPEN shall return the appropriate error to the off-card entity,	nonsec
+If a full or partial match is found and this Application is selectable (i.e. in the correct Life Cycle State and has no multi-selection restrictions), then it shall become the currently selected Application on the Basic Logical Channel and the SELECT [by name] command, whether [first or only occurrence] or [next occurrence], shall be processed according to the requirements of the runtime environment (e.g. dispatched to the Application),	nonsec
+"""If no full or partial match is found at all, the currently selected Application on the Basic Logical Channel shall remain the selected Application and - If the SELECT [by name] command has the [first or only occurrence] parameter set, the SELECT command is dispatched to the Application, - If the SELECT [by name] command has the [next occurrence] parameter set, the OPEN shall return the appropriate error to the off-card entity,"""	nonsec
+In the eventuality that the current Application Session has been terminated and no subsequent full or partial match is found, the OPEN shall make an attempt to select the Application that is marked as implicitly selectable on the Basic Logical Channel for the current card interface.	nonsec
+At any time during a Card Session the OPEN may receive a request on the Basic Logical Channel to either open or close a Supplementary Logical Channel.	nonsec
+If the card only supports the Basic Logical Channel and has no concept of logical channel support, the MANAGE CHANNEL command is dispatched to the currently selected Application. In this case, when a Security Domain is the currently selected Application, the command shall be rejected.	nonsec
+"""On cards that support logical channels, if a MANAGE CHANNEL [open] is received:   If an Application is designated as implicitly selectable on the new Supplementary Logical Channel for the current card interface, that Application is implicitly selected on the newly opened Supplementary Logical Channel and runtime behavior requirements apply,   Otherwise the Application designated as implicitly selectable on the Basic Logical Channel for this card interface is implicitly selected on the newly opened Supplementary Logical Channel and runtime behavior requirements apply."""	nonsec
+On cards that support logical channels, if a MANAGE CHANNEL [close] is received, terminate the Application Session currently selected on the Supplementary Logical Channel indicated by the command and then close that logical channel. The Basic Logical Channel can never be closed.	nonsec
+If the card is in the Life Cycle State CARD_LOCKED or TERMINATED, return the appropriate error.	nonsec
+If the number of logical channels supported by the OPEN is not sufficient to open a new Supplementary Logical Channel, return the appropriate error.	nonsec
+"""The OPEN shall search the GlobalPlatform Registry for the Application that supports the current card interface and that is marked as implicitly selectable on the new Supplementary Logical Channel (or failing that, on the Basic Logical Channel) and: - If this is an Application in the Life Cycle State LOCKED, the Application with the Final Application privilege shall become the selected Application on the Supplementary Logical Channel, - If this Application cannot be selected due to a multi-selection restriction, the new logical channel shall not be opened and the OPEN shall return the appropriate error, - Otherwise, the Supplementary Logical Channel is opened and this Application shall become the selected Application on the Supplementary Logical Channel."""	nonsec
+Once an Application becomes the selected Application on the Basic Logical Channel, the responsibility for subsequent command dispatching still rests with the OPEN.	nonsec
+On cards that are aware of logical channels, the MANAGE CHANNEL commands are only processed by the OPEN and are not dispatched to an Application.	nonsec
+All other commands (including the MANAGE CHANNEL commands on cards that are not aware of logical channels or SELECT commands not described in section 6.4.2.1.2 - Explicit Selection) are immediately dispatched to the Application currently selected on the Basic Logical Channel. The processing of the command by the Application is beyond the scope of this Specification.	nonsec
+"""The OPEN shall support Application selection on an available Supplementary Logical Channel via two processes:   Implicit Selection following a successful MANAGE CHANNEL [open] command,   Explicit Selection through the SELECT [by name] command."""	nonsec
+Partial AID selection as defined in section 6.4.3.1.2 - Explicit Selection, shall be supported on Supplementary Logical Channels.	nonsec
+At any time on an open Supplementary Logical Channel, the OPEN may receive a request to select an Application on this Supplementary Logical Channel (SELECT [by name] [first or only occurrence] command). The OPEN shall determine if the requested AID matches or partially matches an entry within the GlobalPlatform Registry and whether this entry is selectable.	nonsec
+At any time on an open Supplementary Logical Channel that has already contained a SELECT [by name] [first or only occurrence] command since the Supplementary Logical Channel was last opened, the OPEN may receive a request to select a next Application (SELECT [by name] [next occurrence] command) on this Supplementary Logical Channel. The OPEN shall determine if the requested AID matches or partially matches another entry within the GlobalPlatform Registry and whether this entry is selectable.	nonsec
+"""For both the SELECT [by name] [first or only occurrence] command and the SELECT [by name] [next occurrence] command, an Application becomes the selected Application on the Supplementary Logical Channel if:   The requested AID matches (fully or partially) the Application�s AID,   The Application being selected is in the correct Life Cycle State,   The Application has no restrictions due to multi-selection, and supports the current card interface."""	nonsec
+"""If the card is in the Life Cycle State CARD_LOCKED or TERMINATED: - Close the Supplementary Logical Channel, if currently open, - Return the appropriate error,"""	nonsec
+If a SELECT [by name] [first or only occurrence] or SELECT [by name] [next occurrence] is received and the data field of the command message is not present, the Issuer Security Domain shall become the currently selected Application and the SELECT command is dispatched to the Issuer Security Domain,	nonsec
+If a SELECT [by name] [next occurrence] is received, the search always begins from the entry following the currently selected Application on this Supplementary Logical Channel in the GlobalPlatform Registry,	nonsec
+If a full or partial match is found and this Application is in the Life Cycle State LOCKED, continue searching through the GlobalPlatform Registry for a subsequent full or partial match. In the eventuality that this locked Application is already currently selected on the same Supplementary Logical Channel, the OPEN shall terminate this Application Session. If no subsequent full or partial match is found, the OPEN shall return the appropriate error to the off-card entity,	nonsec
+"""If a full or partial match is found and this Application cannot be selected due to a multi-selection restriction or because the Application refuses selection (e.g. because it does not support the current card interface), continue searching through the GlobalPlatform Registry for a subsequent full or partial match. If no subsequent full or partial match is found, the OPEN shall return the appropriate error to the off-card entity,"""	nonsec
+If a full or partial match is found and this Application is selectable (i.e. in the correct Life Cycle State and has no multi-selection restrictions), then it shall become the currently selected Application on this Supplementary Logical Channel and the SELECT [by name] command, whether [first or only occurrence] or [next occurrence], shall be processed according to the requirements of the runtime environment (e.g. dispatched to the Application),	nonsec
+"""If no full or partial match is found at all, the currently selected Application on the Supplementary Logical Channel shall remain the selected Application and - If the SELECT [by name] command has the [first or only occurrence] parameter set, the SELECT command is dispatched to the Application, - If the SELECT [by name] command has the [next occurrence] parameter set, the OPEN shall return the appropriate error to the off-card entity."""	nonsec
+"""At any time on an open Supplementary Logical Channel the OPEN may receive a request to either open or close a Supplementary Logical Channel. If a MANAGE CHANNEL [open] is received and the Application selected on the original Supplementary Logical Channel has no multi-selection restrictions, this Application becomes the selected Application on the newly opened Supplementary Logical Channel. If a MANAGE CHANNEL [close] is received, terminate the Application Session currently selected on the Supplementary Logical Channel indicated by the command and then close that logical channel. The Basic Logical Channel can never be closed."""	nonsec
+If the card is in the Life Cycle State CARD_LOCKED or TERMINATED, return the appropriate error,	nonsec
+If the number of logical channels supported by the OPEN is not sufficient to open a new Supplementary Logical Channel, return the appropriate error,	nonsec
+If the Application currently selected on the original Supplementary Logical Channel cannot be selected on the new Supplementary Logical Channel due to a multi-selection restriction, the new logical channel shall not be opened and the OPEN shall return the appropriate error,	nonsec
+Otherwise, the Supplementary Logical Channel indicated by the command is opened and the Application currently selected on the original Supplementary Logical Channel shall become the selected Application on the newly opened Supplementary Logical Channel.	nonsec
+Once an Application becomes the selected Application on a Supplementary Logical Channel, the responsibility for subsequent command dispatching still rests with the OPEN.	nonsec
+The MANAGE CHANNEL commands are only processed by the OPEN and are not dispatched to an Application.	nonsec
+All other commands (including SELECT commands not described in section 6.4.3.1.2 - Explicit Selection) are immediately dispatched to the Application currently selected on the Supplementary Logical Channel. The processing of the command by the Application is beyond the scope of this Specification.	nonsec
+"""The GlobalPlatform Registry is used to:   Store card management information,   Store relevant application management information (e.g., AID, associated Security Domain and Privileges),   Support card resource management data,   Store Application Life Cycle information,   Store card Life Cycle information,   Track any counters associated with logs."""	nonsec
+"""The contents of the GlobalPlatform Registry may be updated in response to:   An internal OPEN invoked action,   An authorized Application invoked action."""	nonsec
+All Applications including all Security Domains, and all Executable Load Files, shall have an entry in the GlobalPlatform Registry.	nonsec
+Each Executable Load File or Executable Module is associated with an AID that shall be unique on the card.	nonsec
+An Application AID may be the same as that of an Executable Module but may not be the same as that of an Executable Load File or the same as another Application already present in the GlobalPlatform Registry.	nonsec
+This AID may be specified in a SELECT command to select the Application. It is not possible to select Executable Load Files or Executable Modules.	nonsec
 The system shall refresh the display every 60 seconds.	nonsec
 The application shall match the color of the schema set forth by Department of Homeland Security	nonsec
 If projected  the data must be readable.  On a 10x10 projection screen  90% of viewers must be able to read Event / Activity data from a viewing distance of 30	nonsec
@@ -2676,3 +2676,289 @@ The system shall support ensuring the authenticity of remote nodes (mutual node 
 The system shall be able to generate a backup copy of the application data, security credentials, and log/audit files. Assignable to third party.	sec
 The system restore functionality shall result in a fully operational and secure state.  This state shall include the restoration of the application data, security credentials, and log/audit files to their previous state. Assignable to third party.	sec
 If the system claims to be available 24x7 then the system shall have ability to run a backup concurrently with the operation of the application. Assignable to third party.	sec
+The Use Of A Secure Software Development Lifecycle That Addresses Security In All Stages Of Development.	sec
+The Use Of Threat Modeling For Every Design Change Or Sprint Planning To Identify Threats, Plan For Countermeasures, Facilitate Appropriate Risk Responses, And Guide Security Testing.	sec
+"All User Stories And Features Contain Functional Security Constraints, Such As ""As A User, I Should Be Able To View And Edit My Profile. I Should Not Be Able To View Or Edit Anyone Else'S Profile"""	sec
+Documentation And Justification Of All The Application'S Trust Boundaries, Components, And Significant Data Flows.	sec
+Definition And Security Analysis Of The Application'S High-Level Architecture And All Connected Remote Services.	sec
+Implementation Of Centralized, Simple (Economy Of Design), Vetted, Secure, And Reusable Security Controls To Avoid Duplicate, Missing, Ineffective, Or Insecure Controls.	sec
+Availability Of A Secure Coding Checklist, Security Requirements, Guideline, Or Policy To All Developers And Testers.	sec
+The Use Of Unique Or Special Low-Privilege Operating System Accounts For All Application Components, Services, And Servers.	sec
+Communications Between Application Components, Including Apis, Middleware And Data Layers, Are Authenticated. Components Should Have The Least Necessary Privileges Needed.	sec
+The Application Uses A Single Vetted Authentication Mechanism That Is Known To Be Secure, Can Be Extended To Include Strong Authentication, And Has Sufficient Logging And Monitoring To Detect Account Abuse Or Breaches.	sec
+All Authentication Pathways And Identity Management Apis Implement Consistent Authentication Security Control Strength, Such That There Are No Weaker Alternatives Per The Risk Of The Application.	sec
+Trusted Enforcement Points Such As At Access Control Gateways, Servers, And Serverless Functions Enforce Access Controls. Never Enforce Access Controls On The Client.	sec
+The Chosen Access Control Solution Is Flexible Enough To Meet The Application'S Needs.	sec
+Enforcement Of The Principle Of Least Privilege In Functions, Data Files, Urls, Controllers, Services, And Other Resources. This Implies Protection Against Spoofing And Elevation Of Privilege.	sec
+The Application Uses A Single And Well-Vetted Access Control Mechanism For Accessing Protected Data And Resources. All Requests Must Pass Through This Single Mechanism To Avoid Copy And Paste Or Insecure Alternative Paths.	sec
+Attribute Or Feature-Based Access Control Is Used Whereby The Code Checks The User'S Authorization For A Feature/Data Item Rather Than Just Their Role. Permissions Should Still Be Allocated Using Roles.	sec
+Input And Output Requirements Clearly Define How To Handle And Process Data Based On Type, Content, And Applicable Laws, Regulations, And Other Policy Compliance.	sec
+Serialization Is Not Used When Communicating With Untrusted Clients. If This Is Not Possible, Ensure That Adequate Integrity Controls (And Possibly Encryption If Sensitive Data Is Sent) Are Enforced To Prevent Deserialization Attacks Including Object Injection.	sec
+Input Validation Is Enforced On A Trusted Service Layer.	sec
+Output Encoding Occurs Close To Or By The Interpreter For Which It Is Intended.	sec
+There Is An Explicit Policy For Management Of Cryptographic Keys And That A Cryptographic Key Lifecycle Follows A Key Management Standard Such As Nist Sp 800-57.	sec
+Consumers Of Cryptographic Services Protect Key Material And Other Secrets By Using Key Vaults Or Api Based Alternatives.	sec
+All Keys And Passwords Are Replaceable And Are Part Of A Well-Defined Process To Re-Encrypt Sensitive Data.	sec
+The Architecture Treats Client-Side Secrets--Such As Symmetric Keys, Passwords, Or Api Tokens--As Insecure And Never Uses Them To Protect Or Access Sensitive Data.	sec
+A Common Logging Format And Approach Is Used Across The System.	sec
+Logs Are Securely Transmitted To A Preferably Remote System For Analysis, Detection, Alerting, And Escalation.	sec
+All Sensitive Data Is Identified And Classified Into Protection Levels.	sec
+All Protection Levels Have An Associated Set Of Protection Requirements, Such As Encryption Requirements, Integrity Requirements, Retention, Privacy And Other Confidentiality Requirements, And That These Are Applied In The Architecture.	sec
+The Application Encrypts Communications Between Components, Particularly When These Components Are In Different Containers, Systems, Sites, Or Cloud Providers.	sec
+Application Components Verify The Authenticity Of Each Side In A Communication Link To Prevent Person-In-The-Middle Attacks. For Example, Application Components Should Validate Tls Certificates And Chains.	sec
+A Source Code Control System Is In Use, With Procedures To Ensure That Check-Ins Are Accompanied By Issues Or Change Tickets. The Source Code Control System Should Have Access Control And Identifiable Users To Allow Traceability Of Any Changes.	sec
+The Definition And Documentation Of All Application Components In Terms Of The Business Or Security Functions They Provide.	sec
+All High-Value Business Logic Flows, Including Authentication, Session Management And Access Control, Do Not Share Unsynchronized State.	sec
+All High-Value Business Logic Flows, Including Authentication, Session Management And Access Control Are Thread Safe And Resistant To Time-Of-Check And Time-Of-Use Race Conditions.	sec
+User-Uploaded Files Are Stored Outside Of The Web Root.	sec
+User-Uploaded Files - If Required To Be Displayed Or Downloaded From The Application - Are Served By Either Octet Stream Downloads, Or From An Unrelated Domain, Such As A Cloud File Storage Bucket. Implement A Suitable Content Security Policy (Csp) To Reduce The Risk From Xss Vectors Or Other Attacks From The Uploaded File.	sec
+The Segregation Of Components Of Differing Trust Levels Through Well-Defined Security Controls, Firewall Rules, Api Gateways, Reverse Proxies, Cloud-Based Security Groups, Or Similar Mechanisms.	sec
+Binary Signatures, Trusted Connections, And Verified Endpoints Are Used To Deploy Binaries To Remote Devices.	sec
+The Build Pipeline Warns Of Out-Of-Date Or Insecure Components And Takes Appropriate Actions.	sec
+The Build Pipeline Contains A Build Step To Automatically Build And Verify The Secure Deployment Of The Application, Particularly If The Application Infrastructure Is Software Defined, Such As Cloud Environment Build Scripts.	sec
+Application Deployments Adequately Sandbox, Containerize And/Or Isolate At The Network Level To Delay And Deter Attackers From Attacking Other Applications, Especially When They Are Performing Sensitive Or Dangerous Actions Such As Deserialization.	sec
+The Application Does Not Use Unsupported, Insecure, Or Deprecated Client-Side Technologies Such As Nsapi Plugins, Flash, Shockwave, Activex, Silverlight, Nacl, Or Client-Side Java Applets.	sec
+User Set Passwords Are At Least 12 Characters In Length (After Multiple Spaces Are Combined).	sec
+Passwords 64 Characters Or Longer Are Permitted But May Be No Longer Than 128 Characters.	sec
+Password Truncation Is Not Performed. However, Consecutive Multiple Spaces May Be Replaced By A Single Space.	sec
+Any Printable Unicode Character, Including Language Neutral Characters Such As Spaces And Emojis Are Permitted In Passwords.	sec
+Users Can Change Their Password.	sec
+Password Change Functionality Requires The User'S Current And New Password.	sec
+Passwords Submitted During Account Registration, Login, And Password Change Are Checked Against A Set Of Breached Passwords Either Locally (Such As The Top 1,000 Or 10,000 Most Common Passwords Which Match The System'S Password Policy) Or Using An External Api. If Using An Api A Zero Knowledge Proof Or Other Mechanism Should Be Used To Ensure That The Plain Text Password Is Not Sent Or Used In Verifying The Breach Status Of The Password. If The Password Is Breached, The Application Must Require The User To Set A New Non-Breached Password.	sec
+A Password Strength Meter Is Provided To Help Users Set A Stronger Password.	sec
+There Are No Password Composition Rules Limiting The Type Of Characters Permitted. There Should Be No Requirement For Upper Or Lower Case Or Numbers Or Special Characters.	sec
+There Are No Periodic Credential Rotation Or Password History Requirements.	sec
+"""Paste"" Functionality, Browser Password Helpers, And External Password Managers Are Permitted."	sec
+The User Can Choose To Either Temporarily View The Entire Masked Password, Or Temporarily View The Last Typed Character Of The Password On Platforms That Do Not Have This As Built-In Functionality.	sec
+Anti-Automation Controls Are Effective At Mitigating Breached Credential Testing, Brute Force, And Account Lockout Attacks. Such Controls Include Blocking The Most Common Breached Passwords, Soft Lockouts, Rate Limiting, Captcha, Ever Increasing Delays Between Attempts, Ip Address Restrictions, Or Risk-Based Restrictions Such As Location, First Login On A Device, Recent Attempts To Unlock The Account, Or Similar. Verify That No More Than 100 Failed Attempts Per Hour Is Possible On A Single Account.	sec
+The Use Of Weak Authenticators (Such As Sms And Email) Is Limited To Secondary Verification And Transaction Approval And Not As A Replacement For More Secure Authentication Methods. Verify That Stronger Methods Are Offered Before Weak Methods, Users Are Aware Of The Risks, Or That Proper Measures Are In Place To Limit The Risks Of Account Compromise.	sec
+Secure Notifications Are Sent To Users After Updates To Authentication Details, Such As Credential Resets, Email Or Address Changes, Logging In From Unknown Or Risky Locations. The Use Of Push Notifications - Rather Than Sms Or Email - Is Preferred, But In The Absence Of Push Notifications, Sms Or Email Is Acceptable As Long As No Sensitive Information Is Disclosed In The Notification.	sec
+Impersonation Resistance Against Phishing, Such As The Use Of Multi-Factor Authentication, Cryptographic Devices With Intent (Such As Connected Keys With A Push To Authenticate), Or At Higher Aal Levels, Client-Side Certificates.	sec
+Where A Credential Service Provider (Csp) And The Application Verifying Authentication Are Separated, Mutually Authenticated Tls Is In Place Between The Two Endpoints.	sec
+Replay Resistance Through The Mandated Use Of One-Time Passwords (Otp) Devices, Cryptographic Authenticators, Or Lookup Codes.	sec
+Intent To Authenticate By Requiring The Entry Of An Otp Token Or User-Initiated Action Such As A Button Press On A Fido Hardware Key.	sec
+System Generated Initial Passwords Or Activation Codes Should Be Securely Randomly Generated, Should Be At Least 6 Characters Long, And May Contain Letters And Numbers, And Expire After A Short Period Of Time. These Initial Secrets Must Not Be Permitted To Become The Long Term Password.	sec
+Enrollment And Use Of Subscriber-Provided Authentication Devices Are Supported, Such As A U2F Or Fido Tokens.	sec
+Renewal Instructions Are Sent With Sufficient Time To Renew Time Bound Authenticators.	sec
+Passwords Are Stored In A Form That Is Resistant To Offline Attacks. Passwords Shall Be Salted And Hashed Using An Approved One-Way Key Derivation Or Password Hashing Function. Key Derivation And Password Hashing Functions Take A Password, A Salt, And A Cost Factor As Inputs When Generating A Password Hash.	sec
+The Salt Is At Least 32 Bits In Length And Be Chosen Arbitrarily To Minimize Salt Value Collisions Among Stored Hashes. For Each Credential, A Unique Salt Value And The Resulting Hash Shall Be Stored.	sec
+If Pbkdf2 Is Used, The Iteration Count Should Be As Large As Verification Server Performance Will Allow, Typically At Least 100,000 Iterations.	sec
+If Bcrypt Is Used, The Work Factor Should Be As Large As Verification Server Performance Will Allow, Typically At Least 13.	sec
+An Additional Iteration Of A Key Derivation Function Is Performed, Using A Salt Value That Is Secret And Known Only To The Verifier. Generate The Salt Value Using An Approved Random Bit Generator [Sp 800-90Ar1] And Provide At Least The Minimum Security Strength Specified In The Latest Revision Of Sp 800-131A. The Secret Salt Value Shall Be Stored Separately From The Hashed Passwords (E.G., In A Specialized Device Like A Hardware Security Module).	sec
+A System Generated Initial Activation Or Recovery Secret Is Not Sent In Clear Text To The User.	sec
+"Password Hints Or Knowledge-Based Authentication (So-Called ""Secret Questions"") Are Not Present."	sec
+Password Credential Recovery Does Not Reveal The Current Password In Any Way.	sec
+"Shared Or Default Accounts Are Not Present (E.G. ""Root"", ""Admin"", Or ""Sa"")."	sec
+If An Authentication Factor Is Changed Or Replaced, That The User Is Notified Of This Event.	sec
+Forgotten Password, And Other Recovery Paths Use A Secure Recovery Mechanism, Such As Time-Based Otp (Totp) Or Other Soft Token, Mobile Push, Or Another Offline Recovery Mechanism.	sec
+If Otp Or Multi-Factor Authentication Factors Are Lost, That Evidence Of Identity Proofing Is Performed At The Same Level As During Enrollment.	sec
+Lookup Secrets Can Be Used Only Once.	sec
+Lookup Secrets Have Sufficient Randomness (112 Bits Of Entropy), Or If Less Than 112 Bits Of Entropy, Salted With A Unique And Random 32-Bit Salt And Hashed With An Approved One-Way Hash.	sec
+Lookup Secrets Are Resistant To Offline Attacks, Such As Predictable Values.	sec
+"Clear Text Out Of Band (Nist ""Restricted"") Authenticators, Such As Sms Or Pstn, Are Not Offered By Default, And Stronger Alternatives Such As Push Notifications Are Offered First."	sec
+The Out Of Band Verifier Expires Out Of Band Authentication Requests, Codes, Or Tokens After 10 Minutes.	sec
+The Out Of Band Verifier Authentication Requests, Codes, Or Tokens Are Only Usable Once, And Only For The Original Authentication Request.	sec
+The Out Of Band Authenticator And Verifier Communicates Over A Secure Independent Channel.	sec
+The Out Of Band Verifier Retains Only A Hashed Version Of The Authentication Code.	sec
+The Initial Authentication Code Is Generated By A Secure Random Number Generator, Containing At Least 20 Bits Of Entropy (Typically A Six Digital Random Number Is Sufficient).	sec
+Time-Based Otps Have A Defined Lifetime Before Expiring.	sec
+Symmetric Keys Used To Verify Submitted Otps Are Highly Protected, Such As By Using A Hardware Security Module Or Secure Operating System Based Key Storage.	sec
+Approved Cryptographic Algorithms Are Used In The Generation, Seeding, And Verification Of Otps.	sec
+Time-Based Otp Can Be Used Only Once Within The Validity Period.	sec
+If A Time-Based Multi-Factor Otp Token Is Re-Used During The Validity Period, It Is Logged And Rejected With Secure Notifications Being Sent To The Holder Of The Device.	sec
+Physical Single-Factor Otp Generator Can Be Revoked In Case Of Theft Or Other Loss. Ensure That Revocation Is Immediately Effective Across Logged In Sessions, Regardless Of Location.	sec
+Biometric Authenticators Are Limited To Use Only As Secondary Factors In Conjunction With Either Something You Have And Something You Know.	sec
+Cryptographic Keys Used In Verification Are Stored Securely And Protected Against Disclosure, Such As Using A Trusted Platform Module (Tpm) Or Hardware Security Module (Hsm), Or An Os Service That Can Use This Secure Storage.	sec
+The Challenge Nonce Is At Least 64 Bits In Length, And Statistically Unique Or Unique Over The Lifetime Of The Cryptographic Device.	sec
+Approved Cryptographic Algorithms Are Used In The Generation, Seeding, And Verification.	sec
+Intra-Service Secrets Do Not Rely On Unchanging Credentials Such As Passwords, Api Keys Or Shared Accounts With Privileged Access.	sec
+If Passwords Are Required For Service Authentication, The Service Account Used Is Not A Default Credential. (E.G. Root/Root Or Admin/Admin Are Default In Some Services During Installation).	sec
+Passwords Are Stored With Sufficient Protection To Prevent Offline Recovery Attacks, Including Local System Access.	sec
+Passwords, Integrations With Databases And Third-Party Systems, Seeds And Internal Secrets, And Api Keys Are Managed Securely And Not Included In The Source Code Or Stored Within Source Code Repositories. Such Storage Should Resist Offline Attacks. The Use Of A Secure Software Key Store (L1), Hardware Tpm, Or An Hsm (L3) Is Recommended For Password Storage.	sec
+The Application Never Reveals Session Tokens In Url Parameters.	sec
+The Application Generates A New Session Token On User Authentication.	sec
+Session Tokens Possess At Least 64 Bits Of Entropy.	sec
+The Application Only Stores Session Tokens In The Browser Using Secure Methods Such As Appropriately Secured Cookies (See Section 3.4) Or Html 5 Session Storage.	sec
+Session Token Are Generated Using Approved Cryptographic Algorithms.	sec
+Logout And Expiration Invalidate The Session Token, Such That The Back Button Or A Downstream Relying Party Does Not Resume An Authenticated Session, Including Across Relying Parties.	sec
+If Authenticators Permit Users To Remain Logged In, Verify That Re-Authentication Occurs Periodically Both When Actively Used Or After An Idle Period.	sec
+The Application Gives The Option To Terminate All Other Active Sessions After A Successful Password Change (Including Change Via Password Reset/Recovery), And That This Is Effective Across The Application, Federated Login (If Present), And Any Relying Parties.	sec
+Users Are Able To View And (Having Re-Entered Login Credentials) Log Out Of Any Or All Currently Active Sessions And Devices.	sec
+Cookie-Based Session Tokens Have The 'Secure' Attribute Set.	sec
+Cookie-Based Session Tokens Have The 'Httponly' Attribute Set.	sec
+Cookie-Based Session Tokens Utilize The 'Samesite' Attribute To Limit Exposure To Cross-Site Request Forgery Attacks.	sec
+"Cookie-Based Session Tokens Use ""__Host-"" Prefix (See References) To Provide Session Cookie Confidentiality."	sec
+If The Application Is Published Under A Domain Name With Other Applications That Set Or Use Session Cookies That Might Override Or Disclose The Session Cookies, Set The Path Attribute In Cookie-Based Session Tokens Using The Most Precise Path Possible.	sec
+The Application Allows Users To Revoke Oauth Tokens That Form Trust Relationships With Linked Applications.	sec
+The Application Uses Session Tokens Rather Than Static Api Secrets And Keys, Except With Legacy Implementations.	sec
+Stateless Session Tokens Use Digital Signatures, Encryption, And Other Countermeasures To Protect Against Tampering, Enveloping, Replay, Null Cipher, And Key Substitution Attacks.	sec
+Relying Parties Specify The Maximum Authentication Time To Credential Service Providers (Csps) And That Csps Re-Authenticate The Subscriber If They Haven'T Used A Session Within That Period.	sec
+Credential Service Providers (Csps) Inform Relying Parties (Rps) Of The Last Authentication Event, To Allow Rps To Determine If They Need To Re-Authenticate The User.	sec
+The Application Ensures A Full, Valid Login Session Or Requires Re-Authentication Or Secondary Verification Before Allowing Any Sensitive Transactions Or Account Modifications.	sec
+The Application Enforces Access Control Rules On A Trusted Service Layer, Especially If Client-Side Access Control Is Present And Could Be Bypassed.	sec
+All User And Data Attributes And Policy Information Used By Access Controls Cannot Be Manipulated By End Users Unless Specifically Authorized.	sec
+The Principle Of Least Privilege Exists - Users Should Only Be Able To Access Functions, Data Files, Urls, Controllers, Services, And Other Resources, For Which They Possess Specific Authorization. This Implies Protection Against Spoofing And Elevation Of Privilege.	sec
+The Principle Of Deny By Default Exists Whereby New Users/Roles Start With Minimal Or No Permissions And Users/Roles Do Not Receive Access To New Features Until Access Is Explicitly Assigned.	sec
+Access Controls Fail Securely Including When An Exception Occurs.	sec
+Sensitive Data And Apis Are Protected Against Insecure Direct Object Reference (Idor) Attacks Targeting Creation, Reading, Updating And Deletion Of Records, Such As Creating Or Updating Someone Else'S Record, Viewing Everyone'S Records, Or Deleting All Records.	sec
+The Application Or Framework Enforces A Strong Anti-Csrf Mechanism To Protect Authenticated Functionality, And Effective Anti-Automation Or Anti-Csrf Protects Unauthenticated Functionality.	sec
+Administrative Interfaces Use Appropriate Multi-Factor Authentication To Prevent Unauthorized Use.	sec
+Directory Browsing Is Disabled Unless Deliberately Desired. Additionally, Applications Should Not Allow Discovery Or Disclosure Of File Or Directory Metadata, Such As Thumbs.Db, .Ds_Store, .Git Or .Svn Folders.	sec
+The Application Has Additional Authorization (Such As Step Up Or Adaptive Authentication) For Lower Value Systems, And / Or Segregation Of Duties For High Value Applications To Enforce Anti-Fraud Controls As Per The Risk Of Application And Past Fraud.	sec
+The Application Has Defenses Against Http Parameter Pollution Attacks, Particularly If The Application Framework Makes No Distinction About The Source Of Request Parameters (Get, Post, Cookies, Headers, Or Environment Variables).	sec
+Frameworks Protect Against Mass Parameter Assignment Attacks, Or That The Application Has Countermeasures To Protect Against Unsafe Parameter Assignment, Such As Marking Fields Private Or Similar.	sec
+All Input (Html Form Fields, Rest Requests, Url Parameters, Http Headers, Cookies, Batch Files, Rss Feeds, Etc) Is Validated Using Positive Validation (Allow Lists).	sec
+Structured Data Is Strongly Typed And Validated Against A Defined Schema Including Allowed Characters, Length And Pattern (E.G. Credit Card Numbers Or Telephone, Or Validating That Two Related Fields Are Reasonable, Such As Checking That Suburb And Zip/Postcode Match).	sec
+Url Redirects And Forwards Only Allow Destinations Which Appear On An Allow List, Or Show A Warning When Redirecting To Potentially Untrusted Content.	sec
+All Untrusted Html Input From Wysiwyg Editors Or Similar Is Properly Sanitized With An Html Sanitizer Library Or Framework Feature.	sec
+Unstructured Data Is Sanitized To Enforce Safety Measures Such As Allowed Characters And Length.	sec
+The Application Sanitizes User Input Before Passing To Mail Systems To Protect Against Smtp Or Imap Injection.	sec
+The Application Avoids The Use Of Eval() Or Other Dynamic Code Execution Features. Where There Is No Alternative, Any User Input Being Included Must Be Sanitized Or Sandboxed Before Being Executed.	sec
+The Application Protects Against Template Injection Attacks By Ensuring That Any User Input Being Included Is Sanitized Or Sandboxed.	sec
+The Application Protects Against Ssrf Attacks, By Validating Or Sanitizing Untrusted Data Or Http File Metadata, Such As Filenames And Url Input Fields, And Uses Allow Lists Of Protocols, Domains, Paths And Ports.	sec
+The Application Sanitizes, Disables, Or Sandboxes User-Supplied Scalable Vector Graphics (Svg) Scriptable Content, Especially As They Relate To Xss Resulting From Inline Scripts, And Foreignobject.	sec
+The Application Sanitizes, Disables, Or Sandboxes User-Supplied Scriptable Or Expression Template Language Content, Such As Markdown, Css Or Xsl Stylesheets, Bbcode, Or Similar.	sec
+Output Encoding Is Relevant For The Interpreter And Context Required. For Example, Use Encoders Specifically For Html Values, Html Attributes, Javascript, Url Parameters, Http Headers, Smtp, And Others As The Context Requires, Especially From Untrusted Inputs (E.G. Names With Unicode Or Apostrophes, Such As ねこ Or O'Hara).	sec
+Output Encoding Preserves The User'S Chosen Character Set And Locale, Such That Any Unicode Character Point Is Valid And Safely Handled.	sec
+Context-Aware, Preferably Automated - Or At Worst, Manual - Output Escaping Protects Against Reflected, Stored, And Dom Based Xss.	sec
+Data Selection Or Database Queries (E.G. Sql, Hql, Orm, Nosql) Use Parameterized Queries, Orms, Entity Frameworks, Or Are Otherwise Protected From Database Injection Attacks.	sec
+Where Parameterized Or Safer Mechanisms Are Not Present, Context-Specific Output Encoding Is Used To Protect Against Injection Attacks, Such As The Use Of Sql Escaping To Protect Against Sql Injection.	sec
+The Application Protects Against Javascript Or Json Injection Attacks, Including For Eval Attacks, Remote Javascript Includes, Content Security Policy (Csp) Bypasses, Dom Xss, And Javascript Expression Evaluation.	sec
+The Application Protects Against Ldap Injection Vulnerabilities, Or That Specific Security Controls To Prevent Ldap Injection Have Been Implemented.	sec
+The Application Protects Against Os Command Injection And That Operating System Calls Use Parameterized Os Queries Or Use Contextual Command Line Output Encoding.	sec
+The Application Protects Against Local File Inclusion (Lfi) Or Remote File Inclusion (Rfi) Attacks.	sec
+The Application Protects Against Xpath Injection Or Xml Injection Attacks.	sec
+The Application Uses Memory-Safe String, Safer Memory Copy And Pointer Arithmetic To Detect Or Prevent Stack, Buffer, Or Heap Overflows.	sec
+Format Strings Do Not Take Potentially Hostile Input, And Are Constant.	sec
+Sign, Range, And Input Validation Techniques Are Used To Prevent Integer Overflows.	sec
+Serialized Objects Use Integrity Checks Or Are Encrypted To Prevent Hostile Object Creation Or Data Tampering.	sec
+The Application Correctly Restricts Xml Parsers To Only Use The Most Restrictive Configuration Possible And To Ensure That Unsafe Features Such As Resolving External Entities Are Disabled To Prevent Xml External Entity (Xxe) Attacks.	sec
+Deserialization Of Untrusted Data Is Avoided Or Is Protected In Both Custom Code And Third-Party Libraries (Such As Json, Xml And Yaml Parsers).	sec
+When Parsing Json In Browsers Or Javascript-Based Backends, Json.Parse Is Used To Parse The Json Document. Do Not Use Eval() To Parse Json.	sec
+Regulated Private Data Is Stored Encrypted While At Rest, Such As Personally Identifiable Information (Pii), Sensitive Personal Information, Or Data Assessed Likely To Be Subject To Eu'S Gdpr.	sec
+Regulated Health Data Is Stored Encrypted While At Rest, Such As Medical Records, Medical Device Details, Or De-Anonymized Research Records.	sec
+Regulated Financial Data Is Stored Encrypted While At Rest, Such As Financial Accounts, Defaults Or Credit History, Tax Records, Pay History, Beneficiaries, Or De-Anonymized Market Or Research Records.	sec
+All Cryptographic Modules Fail Securely, And Errors Are Handled In A Way That Does Not Enable Padding Oracle Attacks.	sec
+Industry Proven Or Government Approved Cryptographic Algorithms, Modes, And Libraries Are Used, Instead Of Custom Coded Cryptography.	sec
+Encryption Initialization Vector, Cipher Configuration, And Block Modes Are Configured Securely Using The Latest Advice.	sec
+Random Number, Encryption Or Hashing Algorithms, Key Lengths, Rounds, Ciphers Or Modes, Can Be Reconfigured, Upgraded, Or Swapped At Any Time, To Protect Against Cryptographic Breaks.	sec
+Known Insecure Block Modes (I.E. Ecb, Etc.), Padding Modes (I.E. Pkcs#1 V1.5, Etc.), Ciphers With Small Block Sizes (I.E. Triple-Des, Blowfish, Etc.), And Weak Hashing Algorithms (I.E. Md5, Sha1, Etc.) Are Not Used Unless Required For Backwards Compatibility.	sec
+Nonces, Initialization Vectors, And Other Single Use Numbers Must Not Be Used More Than Once With A Given Encryption Key. The Method Of Generation Must Be Appropriate For The Algorithm Being Used.	sec
+Encrypted Data Is Authenticated Via Signatures, Authenticated Cipher Modes, Or Hmac To Ensure That Ciphertext Is Not Altered By An Unauthorized Party.	sec
+All Cryptographic Operations Are Constant-Time, With No 'Short-Circuit' Operations In Comparisons, Calculations, Or Returns, To Avoid Leaking Information.	sec
+All Random Numbers, Random File Names, Random Guids, And Random Strings Are Generated Using The Cryptographic Module'S Approved Cryptographically Secure Random Number Generator When These Random Values Are Intended To Be Not Guessable By An Attacker.	sec
+Random Guids Are Created Using The Guid V4 Algorithm, And A Cryptographically-Secure Pseudo-Random Number Generator (Csprng). Guids Created Using Other Pseudo-Random Number Generators May Be Predictable.	sec
+Random Numbers Are Created With Proper Entropy Even When The Application Is Under Heavy Load, Or That The Application Degrades Gracefully In Such Circumstances.	sec
+A Secrets Management Solution Such As A Key Vault Is Used To Securely Create, Store, Control Access To And Destroy Secrets.	sec
+Key Material Is Not Exposed To The Application But Instead Uses An Isolated Security Module Like A Vault For Cryptographic Operations.	sec
+The Application Does Not Log Credentials Or Payment Details. Session Tokens Should Only Be Stored In Logs In An Irreversible, Hashed Form.	sec
+The Application Does Not Log Other Sensitive Data As Defined Under Local Privacy Laws Or Relevant Security Policy.	sec
+The Application Logs Security Relevant Events Including Successful And Failed Authentication Events, Access Control Failures, Deserialization Failures And Input Validation Failures.	sec
+Each Log Event Includes Necessary Information That Would Allow For A Detailed Investigation Of The Timeline When An Event Happens.	sec
+All Authentication Decisions Are Logged, Without Storing Sensitive Session Tokens Or Passwords. This Should Include Requests With Relevant Metadata Needed For Security Investigations.	sec
+All Access Control Decisions Can Be Logged And All Failed Decisions Are Logged. This Should Include Requests With Relevant Metadata Needed For Security Investigations.	sec
+The Application Appropriately Encodes User-Supplied Data To Prevent Log Injection.	sec
+All Events Are Protected From Injection When Viewed In Log Viewing Software.	sec
+Security Logs Are Protected From Unauthorized Access And Modification.	sec
+Time Sources Are Synchronized To The Correct Time And Time Zone. Strongly Consider Logging Only In Utc If Systems Are Global To Assist With Post-Incident Forensic Analysis.	sec
+A Generic Message Is Shown When An Unexpected Or Security Sensitive Error Occurs, Potentially With A Unique Id Which Support Personnel Can Use To Investigate.	sec
+Exception Handling (Or A Functional Equivalent) Is Used Across The Codebase To Account For Expected And Unexpected Error Conditions.	sec
+"A ""Last Resort"" Error Handler Is Defined Which Will Catch All Unhandled Exceptions."	sec
+The Application Protects Sensitive Data From Being Cached In Server Components Such As Load Balancers And Application Caches.	sec
+All Cached Or Temporary Copies Of Sensitive Data Stored On The Server Are Protected From Unauthorized Access Or Purged/Invalidated After The Authorized User Accesses The Sensitive Data.	sec
+The Application Minimizes The Number Of Parameters In A Request, Such As Hidden Fields, Ajax Variables, Cookies And Header Values.	sec
+The Application Can Detect And Alert On Abnormal Numbers Of Requests, Such As By Ip, User, Total Per Hour Or Day, Or Whatever Makes Sense For The Application.	sec
+Regular Backups Of Important Data Are Performed And That Test Restoration Of Data Is Performed.	sec
+Backups Are Stored Securely To Prevent Data From Being Stolen Or Corrupted.	sec
+The Application Sets Sufficient Anti-Caching Headers So That Sensitive Data Is Not Cached In Modern Browsers.	sec
+Data Stored In Browser Storage (Such As Html5 Local Storage, Session Storage, Indexeddb, Or Cookies) Does Not Contain Sensitive Data Or Pii.	sec
+Authenticated Data Is Cleared From Client Storage, Such As The Browser Dom, After The Client Or Session Is Terminated.	sec
+Sensitive Data Is Sent To The Server In The Http Message Body Or Headers, And That Query String Parameters From Any Http Verb Do Not Contain Sensitive Data.	sec
+Users Have A Method To Remove Or Export Their Data On Demand.	sec
+Users Are Provided Clear Language Regarding Collection And Use Of Supplied Personal Information And That Users Have Provided Opt-In Consent For The Use Of That Data Before It Is Used In Any Way.	sec
+All Sensitive Data Created And Processed By The Application Has Been Identified, And Ensure That A Policy Is In Place On How To Deal With Sensitive Data.	sec
+Accessing Sensitive Data Is Audited (Without Logging The Sensitive Data Itself), If The Data Is Collected Under Relevant Data Protection Directives Or Where Logging Of Access Is Required.	sec
+Sensitive Information Contained In Memory Is Overwritten As Soon As It Is No Longer Required To Mitigate Memory Dumping Attacks, Using Zeroes Or Random Data.	sec
+Sensitive Or Private Information That Is Required To Be Encrypted, Is Encrypted Using Approved Algorithms That Provide Both Confidentiality And Integrity.	sec
+Sensitive Personal Information Is Subject To Data Retention Classification, Such That Old Or Out Of Date Data Is Deleted Automatically, On A Schedule, Or As The Situation Requires.	sec
+Secured Tls Is Used For All Client Connectivity, And Does Not Fall Back To Insecure Or Unencrypted Protocols.	sec
+Using Online Or Up To Date Tls Testing Tools That Only Strong Algorithms, Ciphers, And Protocols Are Enabled, With The Strongest Algorithms And Ciphers Set As Preferred.	sec
+Old Versions Of Ssl And Tls Protocols, Algorithms, Ciphers, And Configuration Are Disabled, Such As Sslv2, Sslv3, Or Tls 1.0 And Tls 1.1. The Latest Version Of Tls Should Be The Preferred Cipher Suite.	sec
+Connections To And From The Server Use Trusted Tls Certificates. Where Internally Generated Or Self-Signed Certificates Are Used, The Server Must Be Configured To Only Trust Specific Internal Cas And Specific Self-Signed Certificates. All Others Should Be Rejected.	sec
+Encrypted Communications Such As Tls Is Used For All Inbound And Outbound Connections, Including For Management Ports, Monitoring, Authentication, Api, Or Web Service Calls, Database, Cloud, Serverless, Mainframe, External, And Partner Connections. The Server Must Not Fall Back To Insecure Or Unencrypted Protocols.	sec
+All Encrypted Connections To External Systems That Involve Sensitive Information Or Functions Are Authenticated.	sec
+Proper Certification Revocation, Such As Online Certificate Status Protocol (Ocsp) Stapling, Is Enabled And Configured.	sec
+Backend Tls Connection Failures Are Logged.	sec
+A Code Analysis Tool Is In Use That Can Detect Potentially Malicious Code, Such As Time Functions, Unsafe File Operations And Network Connections.	sec
+The Application Source Code And Third Party Libraries Do Not Contain Unauthorized Phone Home Or Data Collection Capabilities. Where Such Functionality Exists, Obtain The User'S Permission For It To Operate  Before Collecting Any Data.	sec
+The Application Does Not Ask For Unnecessary Or Excessive Permissions To Privacy Related Features Or Sensors, Such As Contacts, Cameras, Microphones, Or Location.	sec
+The Application Source Code And Third Party Libraries Do Not Contain Back Doors, Such As Hard-Coded Or Additional Undocumented Accounts Or Keys, Code Obfuscation, Undocumented Binary Blobs, Rootkits, Or Anti-Debugging, Insecure Debugging Features, Or Otherwise Out Of Date, Insecure, Or Hidden Functionality That Could Be Used Maliciously If Discovered.	sec
+The Application Source Code And Third Party Libraries Do Not Contain Time Bombs By Searching For Date And Time Related Functions.	sec
+The Application Source Code And Third Party Libraries Do Not Contain Malicious Code, Such As Salami Attacks, Logic Bypasses, Or Logic Bombs.	sec
+The Application Source Code And Third Party Libraries Do Not Contain Easter Eggs Or Any Other Potentially Unwanted Functionality.	sec
+If The Application Has A Client Or Server Auto-Update Feature, Updates Should Be Obtained Over Secure Channels And Digitally Signed. The Update Code Must Validate The Digital Signature Of The Update Before Installing Or Executing The Update.	sec
+The Application Employs Integrity Protections, Such As Code Signing Or Subresource Integrity. The Application Must Not Load Or Execute Code From Untrusted Sources, Such As Loading Includes, Modules, Plugins, Code, Or Libraries From Untrusted Sources Or The Internet.	sec
+The Application Has Protection From Subdomain Takeovers If The Application Relies Upon Dns Entries Or Dns Subdomains, Such As Expired Domain Names, Out Of Date Dns Pointers Or Cnames, Expired Projects At Public Source Code Repos, Or Transient Cloud Apis, Serverless Functions, Or Storage Buckets (*Autogen-Bucket-Id*.Cloud.Example.Com) Or Similar. Protections Can Include Ensuring That Dns Names Used By Applications Are Regularly Checked For Expiry Or Change.	sec
+The Application Will Only Process Business Logic Flows For The Same User In Sequential Step Order And Without Skipping Steps.	sec
+The Application Will Only Process Business Logic Flows With All Steps Being Processed In Realistic Human Time, I.E. Transactions Are Not Submitted Too Quickly.	sec
+The Application Has Appropriate Limits For Specific Business Actions Or Transactions Which Are Correctly Enforced On A Per User Basis.	sec
+The Application Has Sufficient Anti-Automation Controls To Detect And Protect Against Data Exfiltration, Excessive Business Logic Requests, Excessive File Uploads Or Denial Of Service Attacks.	sec
+The Application Has Business Logic Limits Or Validation To Protect Against Likely Business Risks Or Threats, Identified Using Threat Modeling Or Similar Methodologies.	sec
+"The Application Does Not Suffer From ""Time Of Check To Time Of Use"" (Toctou) Issues Or Other Race Conditions For Sensitive Operations."	sec
+The Application Monitors For Unusual Events Or Activity From A Business Logic Perspective. For Example, Attempts To Perform Actions Out Of Order Or Actions Which A Normal User Would Never Attempt.	sec
+The Application Has Configurable Alerting When Automated Attacks Or Unusual Activity Is Detected.	sec
+The Application Will Not Accept Large Files That Could Fill Up Storage Or Cause A Denial Of Service.	sec
+"Compressed Files Are Checked For ""Zip Bombs"" - Small Input Files That Will Decompress Into Huge Files Thus Exhausting File Storage Limits."	sec
+A File Size Quota And Maximum Number Of Files Per User Is Enforced To Ensure That A Single User Cannot Fill Up The Storage With Too Many Files, Or Excessively Large Files.	sec
+Files Obtained From Untrusted Sources Are Validated To Be Of Expected Type Based On The File'S Content.	sec
+User-Submitted Filename Metadata Is Not Used Directly By System Or Framework Filesystems And That A Url Api Is Used To Protect Against Path Traversal.	sec
+User-Submitted Filename Metadata Is Validated Or Ignored To Prevent The Disclosure, Creation, Updating Or Removal Of Local Files (Lfi).	sec
+User-Submitted Filename Metadata Is Validated Or Ignored To Prevent The Disclosure Or Execution Of Remote Files Via Remote File Inclusion (Rfi) Or Server-Side Request Forgery (Ssrf) Attacks.	sec
+The Application Protects Against Reflective File Download (Rfd) By Validating Or Ignoring User-Submitted Filenames In A Json, Jsonp, Or Url Parameter, The Response Content-Type Header Should Be Set To Text/Plain, And The Content-Disposition Header Should Have A Fixed Filename.	sec
+Untrusted File Metadata Is Not Used Directly With System Api Or Libraries, To Protect Against Os Command Injection.	sec
+The Application Does Not Include And Execute Functionality From Untrusted Sources, Such As Unverified Content Distribution Networks, Javascript Libraries, Node Npm Libraries, Or Server-Side Dlls.	sec
+Files Obtained From Untrusted Sources Are Stored Outside The Web Root, With Limited Permissions, Preferably With Strong Validation.	sec
+Files Obtained From Untrusted Sources Are Scanned By Antivirus Scanners To Prevent Upload Of Known Malicious Content.	sec
+The Web Tier Is Configured To Serve Only Files With Specific File Extensions To Prevent Unintentional Information And Source Code Leakage. For Example, Backup Files (E.G. .Bak), Temporary Working Files (E.G. .Swp), Compressed Files (.Zip, .Tar.Gz, Etc) And Other Extensions Commonly Used By Editors Should Be Blocked Unless Required.	sec
+Direct Requests To Uploaded Files Will Never Be Executed As Html/Javascript Content.	sec
+The Web Or Application Server Is Configured With An Allow List Of Resources Or Systems To Which The Server Can Send Requests Or Load Data/Files From.	sec
+All Application Components Use The Same Encodings And Parsers To Avoid Parsing Attacks That Exploit Different Uri Or File Parsing Behavior That Could Be Used In Ssrf And Rfi Attacks.	sec
+Access To Administration And Management Functions Is Limited To Authorized Administrators.	sec
+Api Urls Do Not Expose Sensitive Information, Such As The Api Key, Session Tokens Etc.	sec
+Authorization Decisions Are Made At Both The Uri, Enforced By Programmatic Or Declarative Security At The Controller Or Router, And At The Resource Level, Enforced By Model-Based Permissions.	sec
+Requests Containing Unexpected Or Missing Content Types Are Rejected With Appropriate Headers (Http Response Status 406 Unacceptable Or 415 Unsupported Media Type).	sec
+Enabled Restful Http Methods Are A Valid Choice For The User Or Action, Such As Preventing Normal Users Using Delete Or Put On Protected Api Or Resources.	sec
+Json Schema Validation Is In Place And Verified Before Accepting Input.	sec
+Restful Web Services That Utilize Cookies Are Protected From Cross-Site Request Forgery Via The Use Of At Least One Or More Of The Following: Double Submit Cookie Pattern, Csrf Nonces, Or Origin Request Header Checks.	sec
+Rest Services Have Anti-Automation Controls To Protect Against Excessive Calls, Especially If The Api Is Unauthenticated.	sec
+Rest Services Explicitly Check The Incoming Content-Type To Be The Expected One, Such As Application/Xml Or Application/Json.	sec
+The Message Headers And Payload Are Trustworthy And Not Modified In Transit. Requiring Strong Encryption For Transport (Tls Only) May Be Sufficient In Many Cases As It Provides Both Confidentiality And Integrity Protection. Per-Message Digital Signatures Can Provide Additional Assurance On Top Of The Transport Protections For High-Security Applications But Bring With Them Additional Complexity And Risks To Weigh Against The Benefits.	sec
+Xsd Schema Validation Takes Place To Ensure A Properly Formed Xml Document, Followed By Validation Of Each Input Field Before Any Processing Of That Data Takes Place.	sec
+The Message Payload Is Signed Using Ws-Security To Ensure Reliable Transport Between Client And Service.	sec
+A Query Allow List Or A Combination Of Depth Limiting And Amount Limiting Is Used To Prevent Graphql Or Data Layer Expression Denial Of Service (Dos) As A Result Of Expensive, Nested Queries. For More Advanced Scenarios, Query Cost Analysis Should Be Used.	sec
+Graphql Or Other Data Layer Authorization Logic Should Be Implemented At The Business Logic Layer Instead Of The Graphql Layer.	sec
+The Application Build And Deployment Processes Are Performed In A Secure And Repeatable Way, Such As Ci / Cd Automation, Automated Configuration Management, And Automated Deployment Scripts.	sec
+Compiler Flags Are Configured To Enable All Available Buffer Overflow Protections And Warnings, Including Stack Randomization, Data Execution Prevention, And To Break The Build If An Unsafe Pointer, Memory, Format String, Integer, Or String Operations Are Found.	sec
+Server Configuration Is Hardened As Per The Recommendations Of The Application Server And Frameworks In Use.	sec
+The Application, Configuration, And All Dependencies Can Be Re-Deployed Using Automated Deployment Scripts, Built From A Documented And Tested Runbook In A Reasonable Time, Or Restored From Backups In A Timely Fashion.	sec
+Authorized Administrators Can Verify The Integrity Of All Security-Relevant Configurations To Detect Tampering.	sec
+All Components Are Up To Date, Preferably Using A Dependency Checker During Build Or Compile Time.	sec
+All Unneeded Features, Documentation, Samples, Configurations Are Removed, Such As Sample Applications, Platform Documentation, And Default Or Example Users.	sec
+If Application Assets, Such As Javascript Libraries, Css Or Web Fonts, Are Hosted Externally On A Content Delivery Network (Cdn) Or External Provider, Subresource Integrity (Sri) Is Used To Validate The Integrity Of The Asset.	sec
+Third Party Components Come From Pre-Defined, Trusted And Continually Maintained Repositories.	sec
+An Inventory Catalog Is Maintained Of All Third Party Libraries In Use.	sec
+The Attack Surface Is Reduced By Sandboxing Or Encapsulating Third Party Libraries To Expose Only The Required Behaviour Into The Application.	sec
+Web Or Application Server And Framework Error Messages Are Configured To Deliver User Actionable, Customized Responses To Eliminate Any Unintended Security Disclosures.	sec
+Web Or Application Server And Application Framework Debug Modes Are Disabled In Production To Eliminate Debug Features, Developer Consoles, And Unintended Security Disclosures.	sec
+The Http Headers Or Any Part Of The Http Response Do Not Expose Detailed Version Information Of System Components.	sec
+Every Http Response Contains A Content-Type Header. Text/*, */*+Xml And Application/Xml Content Types Should Also Specify A Safe Character Set (E.G., Utf-8, Iso-8859-1).	sec
+"All Api Responses Contain A Content-Disposition: Attachment; Filename=""Api.Json"" Header (Or Other Appropriate Filename For The Content Type)."	sec
+A Content Security Policy (Csp) Response Header Is In Place That Helps Mitigate Impact For Xss Attacks Like Html, Dom, Json, And Javascript Injection Vulnerabilities.	sec
+All Responses Contain A X-Content-Type-Options: Nosniff Header.	sec
+A Strict-Transport-Security Header Is Included On All Responses And For All Subdomains, Such As Strict-Transport-Security: Max-Age=15724800; Includesubdomains.	sec
+"A Suitable ""Referrer-Policy"" Header Is Included, Such As ""No-Referrer"" Or ""Same-Origin""."	sec
+The Content Of A Web Application Cannot Be Embedded In A Third-Party Site By Default And That Embedding Of The Exact Resources Is Only Allowed Where Necessary By Using Suitable Content-Security-Policy: Frame-Ancestors And X-Frame-Options Response Headers.	sec
+The Application Server Only Accepts The Http Methods In Use By The Application/Api, Including Pre-Flight Options, And Logs/Alerts On Any Requests That Are Not Valid For The Application Context.	sec
+The Supplied Origin Header Is Not Used For Authentication Or Access Control Decisions, As The Origin Header Can Easily Be Changed By An Attacker.	sec
+"The Cross-Origin Resource Sharing (Cors) Access-Control-Allow-Origin Header Uses A Strict Allow List Of Trusted Domains And Subdomains To Match Against And Does Not Support The ""Null"" Origin."	sec
+Http Headers Added By A Trusted Proxy Or Sso Devices, Such As A Bearer Token, Are Authenticated By The Application.	sec

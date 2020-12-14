@@ -39,9 +39,9 @@ parser.add_argument(
 )
 parser.add_argument(
     "--owasp",
-    default="./Datasets/OWASP.csv",
+    default="./Datasets/OWASP",
     type=str,
-    help="Path to OWASP Application Security Verification Standard csv file",
+    help="Path to OWASP Application Security Verification Standard folder",
 )
 parser.add_argument(
     "-o",
@@ -58,7 +58,7 @@ parser.add_argument(
 args = parser.parse_args()
 
 
-def read_seqreq(path, resulting_dataset):
+def read_secreq(path, resulting_dataset):
     for f in os.listdir(path):
         filepath = os.path.join(path, f)
         dataset = pd.read_csv(
@@ -142,25 +142,56 @@ def read_cchit(path, resulting_dataset):
     return resulting_dataset.append(df)
 
 
+def prepare_owasp_text(text):
+    verify_pattern = "^(Verify that)|^(Verify)"
+    link_pattern = "\(\[(C\d+(, )*)+].*\)$"
+    text = re.sub(f'{verify_pattern}|{link_pattern}', "", text).strip()
+    return text.title()
+
+
+def read_owasp_v4(path, owasp_dataset):
+    owasp_v4_data = pd.read_csv(path, sep=",", usecols=["req_description"])
+    owasp_v4_data = owasp_v4_data.rename(columns={"req_description": "Text"})
+
+    owasp_v4_data["Text"] = owasp_v4_data["Text"].apply(prepare_owasp_text)
+    return owasp_dataset.append(owasp_v4_data)
+
+
+def read_owasp_v3(path, owasp_dataset):
+    columns = ["Detail"]
+    owasp_v3_data = pd.read_excel(path, usecols=columns)
+    owasp_v3_data = owasp_v3_data.rename(columns={"Detail": "Text"})
+    owasp_v3_data.reset_index()
+    columns_upd = ["Description"]
+    stop_phrases = '|'.join(
+        ["Business Logic Section", "Deprecated", "EMPTY REQUIREMENT"])
+    owasp_v3_upd_data = pd.read_excel(path, sheet_name=1, usecols=columns_upd)
+    owasp_v3_upd_data = owasp_v3_upd_data[~owasp_v3_upd_data["Description"].str.contains(
+        stop_phrases)]
+    owasp_v3_upd_data = owasp_v3_upd_data.rename(
+        columns={"Description": "Text"})
+    owasp_v3_upd_data.reset_index()
+
+    owasp_v3_data = owasp_v3_data.append(owasp_v3_upd_data)
+    owasp_v3_data["Text"] = owasp_v3_data["Text"].apply(prepare_owasp_text)
+    return owasp_dataset.append(owasp_v3_data)
+
+
 def read_owasp(path, resulting_dataset):
-    owasp_data = pd.read_csv(path, sep=",", usecols=["req_description"])
-    owasp_data = owasp_data.rename(columns={"req_description": "Text"})
-
-    def prepare_text(text):
-        verify_pattern = "^(Verify that)|^(Verify)"
-        link_pattern = "\(\[(C\d+(, )*)+].*\)$"
-        text = re.sub(f'{verify_pattern}|{link_pattern}', "", text).strip()
-        return text.title()
-
-    owasp_data["Text"] = owasp_data["Text"].apply(prepare_text)
-    owasp_data["Label"] = SEC_LABEL
-    return resulting_dataset.append(owasp_data)
+    owasp_dataset = pd.DataFrame(columns=["Text"])
+    path_v3 = os.path.join(path, "OWASP_3.0.1.xlsx")
+    path_v4 = os.path.join(path, "OWASP_4.0.csv")
+    owasp_dataset = read_owasp_v4(path_v4, owasp_dataset)
+    owasp_dataset = read_owasp_v3(path_v3, owasp_dataset)
+    owasp_dataset = owasp_dataset.drop_duplicates()
+    owasp_dataset["Label"] = SEC_LABEL
+    return resulting_dataset.append(owasp_dataset)
 
 
 def read_datasets(args):
     columns = ["Text", "Label"]
     resulting_dataset = pd.DataFrame(columns=columns)
-    resulting_dataset = read_seqreq(args.sec_req, resulting_dataset)
+    resulting_dataset = read_secreq(args.sec_req, resulting_dataset)
     resulting_dataset = read_promise(args.promise, resulting_dataset)
     resulting_dataset = read_concord(
         args.concord, resulting_dataset, args.min_len)

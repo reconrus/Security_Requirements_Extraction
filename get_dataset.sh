@@ -31,8 +31,11 @@ if [ ! -f CCHIT.xls ]; then
 fi
 
 # OWASP Application Security Verification Standard
-if [ ! -f OWASP.csv ]; then
-    wget -O OWASP.csv https://raw.githubusercontent.com/OWASP/ASVS/v4.0.2/4.0/docs_en/OWASP%20Application%20Security%20Verification%20Standard%204.0.2-en.csv
+if [ ! -d OWASP ]; then
+    mkdir OWASP && cd OWASP
+    wget -O OWASP_3.0.1.xlsx https://github.com/OWASP/ASVS/blob/master/3.0.1/ASVS-excel-v3.0.1.xlsx?raw=true
+    wget -O OWASP_4.0.csv https://raw.githubusercontent.com/OWASP/ASVS/v4.0.2/4.0/docs_en/OWASP%20Application%20Security%20Verification%20Standard%204.0.2-en.csv
+    cd ..
 fi
 
 cd ..
@@ -41,4 +44,4 @@ cd ..
 pip3 install pandas liac-arff xlrd
 python3 prepare_data.py --sec_req ./RawDatasets/SecReq --promise ./RawDatasets/nfr/nfr.arff \
     --concord ./RawDatasets/NFRClassifier/gate/application-resources/Requirements/ \
-    --cchit ./RawDatasets/CCHIT.xls --owasp ./RawDatasets/OWASP.csv
+    --cchit ./RawDatasets/CCHIT.xls --owasp ./RawDatasets/OWASP

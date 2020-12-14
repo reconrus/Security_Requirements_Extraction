@@ -2962,3 +2962,218 @@ The Application Server Only Accepts The Http Methods In Use By The Application/A
 The Supplied Origin Header Is Not Used For Authentication Or Access Control Decisions, As The Origin Header Can Easily Be Changed By An Attacker.	sec
 "The Cross-Origin Resource Sharing (Cors) Access-Control-Allow-Origin Header Uses A Strict Allow List Of Trusted Domains And Subdomains To Match Against And Does Not Support The ""Null"" Origin."	sec
 Http Headers Added By A Trusted Proxy Or Sso Devices, Such As A Bearer Token, Are Authenticated By The Application.	sec
+All Application Components Are Identified And Are Known To Be Needed.	sec
+All Components, Such As Libraries, Modules, And External Systems, That Are Not Part Of The Application But That The Application Relies On To Operate Are Identified.	sec
+A High-Level Architecture For The Application Has Been Defined.	sec
+All Application Components Are Defined In Terms Of The Business Functions And/Or Security Functions They Provide.	sec
+All Components That Are Not Part Of The Application But That The Application Relies On To Operate Are Defined In Terms Of The Functions, And/Or Security Functions, They Provide.	sec
+A Threat Model For The Target Application Has Been Produced And Covers Off Risks Associated With Spoofing, Tampering, Repudiation, Information Disclosure, And Elevation Of Privilege (Stride).	sec
+All Security Controls (Including Libraries That Call External Security Services) Have A Centralized Implementation.	sec
+Components Are Segregated From Each Other Via A Defined Security Control, Such As Network Segmentation, Firewall Rules, Or Cloud Based Security Groups.	sec
+The Application Has A Clear Separation Between The Data Layer, Controller Layer And The Display Layer, Such That Security Decisions Can Be Enforced On Trusted Systems.	sec
+There Is No Sensitive Business Logic, Secret Keys Or Other Proprietary Information In Client Side Code.	sec
+All Application Components, Libraries, Modules, Frameworks, Platform, And Operating Systems Are Free From Known Vulnerabilities.	sec
+All Pages And Resources By Default Require Authentication Except Those Specifically Intended To Be Public (Principle Of Complete Mediation).	sec
+Forms Containing Credentials Are Not Filled In By The Application. Pre-Filling By The Application Implies That Credentials Are Stored In Plaintext Or A Reversible Format, Which Is Explicitly Prohibited.	sec
+All Authentication Controls Are Enforced On The Server Side.	sec
+All Authentication Controls Fail Securely To Ensure Attackers Cannot Log In.	sec
+Password Entry Fields Allow, Or Encourage, The Use Of Passphrases, And Do Not Prevent Password Managers, Long Passphrases Or Highly Complex Passwords Being Entered.	sec
+All Account Identity Authentication Functions (Such As Update Profile, Forgot Password, Disabled / Lost Token, Help Desk Or Ivr) That Might Regain Access To The Account Are At Least As Resistant To Attack As The Primary Authentication Mechanism.	sec
+The Changing Password Functionality Includes The Old Password, The New Password, And A Password Confirmation.	sec
+All Authentication Decisions Can Be Logged, Without Storing Sensitive Session Identifiers Or Passwords. This Should Include Requests With Relevant Metadata Needed For Security Investigations.	sec
+Account Passwords Are One Way Hashed With A Salt, And There Is Sufficient Work Factor To Defeat Brute Force And Password Hash Recovery Attacks.	sec
+Credentials Are Transported Using A Suitable Encrypted Link And That All Pages/Functions That Require A User To Enter Credentials Are Done So Using An Encrypted Link.	sec
+The Forgotten Password Function And Other Recovery Paths Do Not Reveal The Current Password And That The New Password Is Not Sent In Clear Text To The User.	sec
+Information Enumeration Is Not Possible Via Login, Password Reset, Or Forgot Account Functionality.	sec
+There Are No Default Passwords In Use For The Application Framework Or Any Components Used By The Application (Such As “Admin/Password”).	sec
+Anti-Automation Is In Place To Prevent Breached Credential Testing, Brute Forcing, And Account Lockout Attacks.	sec
+All Authentication Credentials For Accessing Services External To The Application Are Encrypted And Stored In A Protected Location.	sec
+Forgotten Password And Other Recovery Paths Use A Totp Or Other Soft Token, Mobile Push, Or Other Offline Recovery Mechanism. Use Of A Random Value In An E-Mail Or Sms Should Be A Last Resort And Is Known Weak.	sec
+Account Lockout Is Divided Into Soft And Hard Lock Status, And These Are Not Mutually Exclusive. If An Account Is Temporarily Soft Locked Out Due To A Brute Force Attack, This Should Not Reset The Hard Lock Status.	sec
+"If Shared Knowledge Based Questions (Also Known As ""Secret Questions"") Are Required, The Questions Do Not Violate Privacy Laws And Are Sufficiently Strong To Protect Accounts From Malicious Recovery."	sec
+The System Can Be Configured To Disallow The Use Of A Configurable Number Of Previous Passwords.	sec
+Risk Based Re-Authentication, Two Factor Or Transaction Signing Is In Place For High Value Transactions.	sec
+Measures Are In Place To Block The Use Of Commonly Chosen Passwords And Weak Passphrases.	sec
+All Authentication Challenges, Whether Successful Or Failed, Should Respond In The Same Average Response Time.	sec
+Secrets, Api Keys, And Passwords Are Not Included In The Source Code, Or Online Source Code Repositories.	sec
+If An Application Allows Users To Authenticate, They Can Authenticate Using Two-Factor Authentication Or Other Strong Authentication, Or Any Similar Scheme That Provides Protection Against Username + Password Disclosure.	sec
+Administrative Interfaces Are Not Accessible To Untrusted Parties.	sec
+Browser Autocomplete, And Integration With Password Managers Are Permitted Unless Prohibited By Risk Based Policy.	sec
+There Is No Custom Session Manager, Or That The Custom Session Manager Is Resistant Against All Common Session Management Attacks.	sec
+Sessions Are Invalidated When The User Logs Out.	sec
+Sessions Timeout After A Specified Period Of Inactivity.	sec
+Sessions Timeout After An Administratively-Configurable Maximum Time Period Regardless Of Activity (An Absolute Timeout).	sec
+All Pages That Require Authentication Have Easy And Visible Access To Logout Functionality.	sec
+The Session Id Is Never Disclosed In Urls, Error Messages, Or Logs. This Includes Verifying That The Application Does Not Support Url Rewriting Of Session Cookies.	sec
+All Successful Authentication And Re-Authentication Generates A New Session And Session Id.	sec
+Only Session Ids Generated By The Application Framework Are Recognized As Active By The Application.	sec
+Session Ids Are Sufficiently Long, Random And Unique Across The Correct Active Session Base.	sec
+Session Ids Stored In Cookies Have Their Path Set To An Appropriately Restrictive Value For The Application, And Authentication Session Tokens Additionally Set The “Httponly” And “Secure” Attributes	sec
+The Application Limits The Number Of Active Concurrent Sessions.	sec
+An Active Session List Is Displayed In The Account Profile Or Similar Of Each User. The User Should Be Able To Terminate Any Active Session.	sec
+The User Is Prompted With The Option To Terminate All Other Active Sessions After A Successful Change Password Process.	sec
+Access To Sensitive Records Is Protected, Such That Only Authorized Objects Or Data Is Accessible To Each User (For Example, Protect Against Users Tampering With A Parameter To See Or Alter Another User'S Account).	sec
+Access Controls Fail Securely.	sec
+The Same Access Control Rules Implied By The Presentation Layer Are Enforced On The Server Side.	sec
+There Is A Centralized Mechanism (Including Libraries That Call External Authorization Services) For Protecting Access To Each Type Of Protected Resource.	sec
+All Access Control Decisions Can Be Logged And All Failed Decisions Are Logged.	sec
+The Application Or Framework Uses Strong Random Anti-Csrf Tokens Or Has Another Transaction Protection Mechanism.	sec
+The System Can Protect Against Aggregate Or Continuous Access Of Secured Functions, Resources, Or Data. For Example, Consider The Use Of A Resource Governor To Limit The Number Of Edits Per Hour Or To Prevent The Entire Database From Being Scraped By An Individual User.	sec
+The Application Correctly Enforces Context-Sensitive Authorisation So As To Not Allow Unauthorised Manipulation By Means Of Parameter Tampering.	sec
+The Runtime Environment Is Not Susceptible To Buffer Overflows, Or That Security Controls Prevent Buffer Overflows.	sec
+Server Side Input Validation Failures Result In Request Rejection And Are Logged.	sec
+Input Validation Routines Are Enforced On The Server Side.	sec
+A Single Input Validation Control Is Used By The Application For Each Type Of Data That Is Accepted.	sec
+All Sql Queries, Hql, Osql, Nosql And Stored Procedures, Calling Of Stored Procedures Are Protected By The Use Of Prepared Statements Or Query Parameterization, And Thus Not Susceptible To Sql Injection	sec
+The Application Is Not Susceptible To Ldap Injection, Or That Security Controls Prevent Ldap Injection.	sec
+The Application Is Not Susceptible To Os Command Injection, Or That Security Controls Prevent Os Command Injection.	sec
+The Application Is Not Susceptible To Remote File Inclusion (Rfi) Or Local File Inclusion (Lfi) When Content Is Used That Is A Path To A File.	sec
+The Application Is Not Susceptible To Common Xml Attacks, Such As Xpath Query Tampering, Xml External Entity Attacks, And Xml Injection Attacks.	sec
+Ensure That All String Variables Placed Into Html Or Other Web Client Code Is Either Properly Contextually Encoded Manually, Or Utilize Templates That Automatically Encode Contextually To Ensure The Application Is Not Susceptible To Reflected, Stored And Dom Cross-Site Scripting (Xss) Attacks.	sec
+If The Application Framework Allows Automatic Mass Parameter Assignment (Also Called Automatic Variable Binding) From The Inbound Request To A Model, Verify That Security Sensitive Fields Such As “A Ccountbalance ”, “R Ole ” Or “P Assword ” Are Protected From Malicious Automatic Binding.	sec
+The Application Has Defenses Against Http Parameter Pollution Attacks, Particularly If The Application Framework Makes No Distinction About The Source Of Request Parameters (Get, Post, Cookies, Headers, Environment, Etc.)	sec
+Client Side Validation Is Used As A Second Line Of Defense, In Addition To Server Side Validation.	sec
+All Input Data Is Validated, Not Only Html Form Fields But All Sources Of Input Such As Rest Calls, Query Parameters, Http Headers, Cookies, Batch Files, Rss Feeds, Etc; Using Positive Validation (Whitelisting), Then Lesser Forms Of Validation Such As Greylisting (Eliminating Known Bad Strings), Or Rejecting Bad Inputs (Blacklisting).	sec
+Structured Data Is Strongly Typed And Validated Against A Defined Schema Including Allowed Characters, Length And Pattern (E.G. Credit Card Numbers Or Telephone, Or Validating That Two Related Fields Are Reasonable, Such As Validating Suburbs And Zip Or Post Codes Match).	sec
+Unstructured Data Is Sanitized To Enforce Generic Safety Measures Such As Allowed Characters And Length, And Characters Potentially Harmful In Given Context Should Be Escaped (E.G. Natural Names With Unicode Or Apostrophes, Such As ねこ Or O'Hara)	sec
+Make Sure Untrusted Html From Wysiwyg Editors Or Similar Are Properly Sanitized With An Html Sanitizer And Handle It Appropriately According To The Input Validation Task And Encoding Task.	sec
+For Auto-Escaping Template Technology, If Ui Escaping Is Disabled, Ensure That Html Sanitization Is Enabled Instead.	sec
+Data Transferred From One Dom Context To Another, Uses Safe Javascript Methods, Such As Using .Innertext And .Val.	sec
+When Parsing Json In Browsers, That Json.Parse Is Used To Parse Json On The Client. Do Not Use Eval() To Parse Json On The Client.	sec
+Authenticated Data Is Cleared From Client Storage, Such As The Browser Dom, After The Session Is Terminated.	sec
+All Cryptographic Modules Fail Securely, And Errors Are Handled In A Way That Does Not Enable Oracle Padding.	sec
+All Random Numbers, Random File Names, Random Guids, And Random Strings Are Generated Using The Cryptographic Module’S Approved Random Number Generator When These Random Values Are Intended To Be Not Guessable By An Attacker.	sec
+Cryptographic Algorithms Used By The Application Have Been Validated Against Fips 140-2 Or An Equivalent Standard.	sec
+Cryptographic Modules Operate In Their Approved Mode According To Their Published Security Policies.	sec
+There Is An Explicit Policy For How Cryptographic Keys Are Managed (E.G., Generated, Distributed, Revoked, And Expired). Verify That This Key Lifecycle Is Properly Enforced.	sec
+All Consumers Of Cryptographic Services Do Not Have Direct Access To Key Material. Isolate Cryptographic Processes, Including Master Secrets And Consider The Use Of A Virtualized Or Physical Hardware Key Vault (Hsm).	sec
+Personally Identifiable Information Should Be Stored Encrypted At Rest And Ensure That Communication Goes Via Protected Channels.	sec
+Sensitive Passwords Or Key Material Maintained In Memory Is Overwritten With Zeros As Soon As It No Longer Required, To Mitigate Memory Dumping Attacks.	sec
+All Keys And Passwords Are Replaceable, And Are Generated Or Replaced At Installation Time.	sec
+The Application Does Not Output Error Messages Or Stack Traces Containing Sensitive Data That Could Assist An Attacker, Including Session Id, Software/Framework Versions And Personal Information	sec
+Error Handling Logic In Security Controls Denies Access By Default.	sec
+Security Logging Controls Provide The Ability To Log Success And Particularly Failure Events That Are Identified As Security-Relevant.	sec
+All Events That Include Untrusted Data Will Not Execute As Code In The Intended Log Viewing Software.	sec
+The Application Does Not Log Sensitive Data As Defined Under Local Privacy Laws Or Regulations, Organizational Sensitive Data As Defined By A Risk Assessment, Or Sensitive Authentication Data That Could Assist An Attacker, Including User’S Session Identifiers, Passwords, Hashes, Or Api Tokens.	sec
+All Non-Printable Symbols And Field Separators Are Properly Encoded In Log Entries, To Prevent Log Injection.	sec
+Log Fields From Trusted And Untrusted Sources Are Distinguishable In Log Entries.	sec
+An Audit Log Or Similar Allows For Non-Repudiation Of Key Transactions.	sec
+Security Logs Have Some Form Of Integrity Checking Or Controls To Prevent Unauthorized Modification.	sec
+The Logs Are Stored On A Different Partition Than The Application Is Running With Proper Log Rotation.	sec
+Time Sources Should Be Synchronized To Ensure Logs Have The Correct Time	sec
+All Forms Containing Sensitive Information Have Disabled Client Side Caching, Including Autocomplete Features.	sec
+The List Of Sensitive Data Processed By The Application Is Identified, And That There Is An Explicit Policy For How Access To This Data Must Be Controlled, Encrypted And Enforced Under Relevant Data Protection Directives.	sec
+All Sensitive Data Is Sent To The Server In The Http Message Body Or Headers (I.E., Url Parameters Are Never Used To Send Sensitive Data).	sec
+"The Application Sets Appropriate Anti-Caching Headers As Per The Risk Of The Application, Such As The Following: 
+Expires: Tue, 03 Jul 2001 06:00:00 Gmt
+Last-Modified: {Now} Gmt
+Cache-Control: No-Store, No-Cache, Must-Revalidate, Max-Age=0
+Cache-Control: Post-Check=0, Pre-Check=0
+Pragma: No-Cache"	sec
+On The Server, All Cached Or Temporary Copies Of Sensitive Data Stored Are Protected From Unauthorized Access Or Purged/Invalidated After The Authorized User Accesses The Sensitive Data.	sec
+There Is A Method To Remove Each Type Of Sensitive Data From The Application At The End Of The Required Retention Policy.	sec
+The Application Has The Ability To Detect And Alert On Abnormal Numbers Of Requests For Data Harvesting For An Example Screen Scraping.	sec
+Data Stored In Client Side Storage (Such As Html5 Local Storage, Session Storage, Indexeddb, Regular Cookies Or Flash Cookies) Does Not Contain Sensitive Data Or Pii.	sec
+Accessing Sensitive Data Is Logged, If The Data Is Collected Under Relevant Data Protection Directives Or Where Logging Of Accesses Is Required.	sec
+Sensitive Information Maintained In Memory Is Overwritten With Zeros As Soon As It No Longer Required, To Mitigate Memory Dumping Attacks.	sec
+A Path Can Be Built From A Trusted Ca To Each Transport Layer Security (Tls) Server Certificate, And That Each Server Certificate Is Valid.	sec
+Tls Is Used For All Connections (Including Both External And Backend Connections) That Are Authenticated Or That Involve Sensitive Data Or Functions, And Does Not Fall Back To Insecure Or Unencrypted Protocols. Ensure The Strongest Alternative Is The Preferred Algorithm.	sec
+Certificate Paths Are Built And Verified For All Client Certificates Using Configured Trust Anchors And Revocation Information.	sec
+All Connections To External Systems That Involve Sensitive Information Or Functions Are Authenticated.	sec
+There Is A Single Standard Tls Implementation That Is Used By The Application That Is Configured To Operate In An Approved Mode Of Operation.	sec
+Tls Certificate Public Key Pinning (Hpkp) Is Implemented With Production And Backup Public Keys. For More Information, Please See The References Below.	sec
+Http Strict Transport Security Headers Are Included On All Requests And For All Subdomains, Such As Strict-Transport-Security: Max-Age=15724800; Includesubdomains	sec
+Production Website Url Has Been Submitted To Preloaded List Of Strict Transport Security Domains Maintained By Web Browser Vendors. Please See The References Below.	sec
+Ensure Forward Secrecy Ciphers Are In Use To Mitigate Passive Attackers Recording Traffic.	sec
+Proper Certification Revocation, Such As Online Certificate Status Protocol (Oscp) Stapling, Is Enabled And Configured.	sec
+Only Strong Algorithms, Ciphers, And Protocols Are Used, Through All The Certificate Hierarchy, Including Root And Intermediary Certificates Of Your Selected Certifying Authority.	sec
+The Tls Settings Are In Line With Current Leading Practice, Particularly As Common Configurations, Ciphers, And Algorithms Become Insecure.	sec
+The Application Accepts Only A Defined Set Of Required Http Request Methods, Such As Get And Post Are Accepted, And Unused Methods (E.G. Trace, Put, And Delete) Are Explicitly Blocked.	sec
+Every Http Response Contains A Content Type Header Specifying A Safe Character Set (E.G., Utf-8, Iso 8859-1).	sec
+A Suitable X-Frame-Options Header Is In Use For Sites Where Content Should Not Be Viewed In A 3Rd-Party X-Frame	sec
+"All Api Responses Contain X-Content-Type-Options: Nosniff And Content-Disposition: Attachment; Filename=""Api.Json"" (Or Other Appropriate Filename For The Content Type)."	sec
+A Content Security Policy (Cspv2) Is In Place That Helps Mitigate Common Dom, Xss, Json, And Javascript Injection Vulnerabilities.	sec
+The X-Xss-Protection: 1; Mode=Block Header Is In Place.	sec
+All Malicious Activity Is Adequately Sandboxed, Containerized Or Isolated To Delay And Deter Attackers From Attacking Other Applications.	sec
+The Application Source Code, And As Many Third Party Libraries As Possible, Does Not Contain Back Doors, Easter Eggs, And Logic Flaws In Authentication, Access Control, Input Validation, And The Business Logic Of High Value Transactions.	sec
+The Application Will Only Process Business Logic Flows In Sequential Step Order, With All Steps Being Processed In Realistic Human Time, And Not Process Out Of Order, Skipped Steps, Process Steps From Another  User, Or Too Quickly Submitted Transactions.	sec
+The Application Has Business Limits And Correctly Enforces On A Per User Basis, With Configurable Alerting And Automated Reactions To Automated Or Unusual Attack.	sec
+Url Redirects And Forwards Only Allow Whitelisted Destinations, Or Show A Warning When Redirecting To Potentially Untrusted Content.	sec
+Untrusted File Data Submitted To The Application Is Not Used Directly With File I/O Commands, Particularly To Protect Against Path Traversal, Local File Include, File Mime Type, And Os Command Injection Vulnerabilities.	sec
+Files Obtained From Untrusted Sources Are Validated To Be Of Expected Type And Scanned By Antivirus Scanners To Prevent Upload Of Known Malicious Content.	sec
+Untrusted Data Is Not Used Within Inclusion, Class Loader, Or Reflection Capabilities To Prevent Remote/Local File Inclusion Vulnerabilities.	sec
+Untrusted Data Is Not Used Within Cross-Domain Resource Sharing (Cors) To Protect Against Arbitrary Remote Content.	sec
+Files Obtained From Untrusted Sources Are Stored Outside The Webroot, With Limited Permissions, Preferably With Strong Validation.	sec
+The Web Or Application Server Is Configured By Default To Deny Access To Remote Resources Or Systems Outside The Web Or Application Server.	sec
+The Application Code Does Not Execute Uploaded Data Obtained From Untrusted Sources.	sec
+Do Not Use Flash, Active-X, Silverlight, Nacl, Client-Side Java Or Other Client Side Technologies Not Supported Natively Via W3C Browser Standards.	sec
+Id Values Stored On The Device And Retrievable By Other Applications, Such As The Udid Or Imei Number Are Not Used As Authentication Tokens.	sec
+The Mobile App Does Not Store Sensitive Data Onto Potentially Unencrypted Shared Resources On The Device (E.G. Sd Card Or Shared Folders).	sec
+Sensitive Data Is Not Stored Unprotected On The Device, Even In System Protected Areas Such As Key Chains.	sec
+Secret Keys, Api Tokens, Or Passwords Are Dynamically Generated In Mobile Applications.	sec
+The Mobile App Prevents Leaking Of Sensitive Information (For Example, Screenshots Are Saved Of The Current Application As The Application Is Backgrounded Or Writing Sensitive Information In Console).	sec
+The Application Is Requesting Minimal Permissions For Required Functionality And Resources.	sec
+The Application Sensitive Code Is Laid Out Unpredictably In Memory (For Example Aslr).	sec
+There Are Anti-Debugging Techniques Present That Are Sufficient Enough To Deter Or Delay Likely Attackers From Injecting Debuggers Into The Mobile App (For Example Gdb).	sec
+The App Does Not Export Sensitive Activities, Intents, Content Providers Etc., For Other Mobile Apps On The Same Device To Exploit.	sec
+The App Validates Input To Exported Activities, Intents, Or Content Providers.	sec
+The Same Encoding Style Is Used Between The Client And The Server.	sec
+Access To Administration And Management Functions Within The Web Service Application Is Limited To Web Service Administrators.	sec
+Xml Or Json Schema Is In Place And Verified Before Accepting Input.	sec
+All Input Is Limited To An Appropriate Size Limit.	sec
+Soap Based Web Services Are Compliant With Web Services-Interoperability (Ws-I) Basic Profile At Minimum. This Essentially Means Tls Encryption.	sec
+"The Use Of Session-Based Authentication And Authorization. Please Refer To Sections 2, 3 And 4 For Further Guidance. Avoid The Use Of Static ""Api Keys"" And Similar."	sec
+The Rest Service Is Protected From Cross-Site Request Forgery Via The Use Of At Least One Or More Of The Following: Origin Checks, Double Submit Cookie Pattern, Csrf Nonces, And Referrer Checks.	sec
+The Rest Service Explicitly Check The Incoming Content-Type To Be The Expected One, Such As Application/Xml Or Application/Json.	sec
+The Message Payload Is Signed To Ensure Reliable Transport Between Client And Service, Using Json Web Signing Or Ws-Security For Soap Requests.	sec
+Alternative And Less Secure Access Paths Do Not Exist.	sec
+All Components Should Be Up To Date With Proper Security Configuration(S) And Version(S). This Should Include Removal Of Unneeded Configurations And Folders Such As Sample Applications, Platform Documentation, And Default Or Example Users.	sec
+Communications Between Components, Such As Between The Application Server And The Database Server, Should Be Encrypted, Particularly When The Components Are In Different Containers Or On Different Systems.	sec
+Communications Between Components, Such As Between The Application Server And The Database Server Should Be Authenticated Using An Account With The Least Necessary Privileges.	sec
+Application Deployments Are Adequately Sandboxed, Containerized Or Isolated To Delay And Deter Attackers From Attacking Other Applications.	sec
+The Application Build And Deployment Processes Are Performed In A Secure Fashion.	sec
+Authorised Administrators Have The Capability To Verify The Integrity Of All Security-Relevant Configurations To Ensure That They Have Not Been Tampered With.	sec
+All Application Components Are Signed.	sec
+Third Party Components Come From Trusted Repositories.	sec
+Ensure That Build Processes For System Level Languages Have All Security Flags Enabled, Such As Aslr, Dep, And Security Checks.	sec
+All Application Assets Are Hosted By The Application, Such As Javascript Libraries, Css Stylesheets And Web Fonts Are Hosted By The Application Rather Than Rely On A Cdn Or External Provider.	sec
+If A Maximum Number Of Authentication Attempts Is Exceeded, The Account Is Locked For A Period Of Time Long Enough To Deter Brute Force Attacks.	sec
+All Authentication Controls (Including Libraries That Call External Authentication Services) Have A Centralized Implementation.	sec
+Re-Authentication Is Required Before Any Application- Specific Sensitive Operations Are Permitted.	sec
+After An Administratively- Configurable Period Of Time, Authentication Credentials Expire.	sec
+All Authentication Credentials For Accessing Services External To The Application Are Encrypted And Stored In A Protected Location (Not In Source Code).	sec
+All Code Implementing Or Using Authentication Controls Is Not Affected By Any Malicious Code.	sec
+If An Application Allows Users To Authenticate, They Use A Proven Secure Authentication Mechanism.	sec
+The Session Id Is Changed Upon Re-Authentication	sec
+The Session Id Is Changed Or Cleared On Logout	sec
+All Code Implementing Or Using Session Management Controls Is Not Affected By Any Malicious Code	sec
+"Authenticated Session Tokens Using Cookies Are Protected By The Use Of ""Httponly""."	sec
+"Authenticated Session Tokens Using Cookies Are Protected With The ""Secure"" Attribute."	sec
+Users Can Only Access Secured Urls For Which They Possess Specific Authorization.	sec
+Users Can Only Access Secured Data Files For Which They Possess Specific Authorization.	sec
+Limitations On Input And Access Imposed By The Business On The Application (Such As Daily Transaction Limits Or Sequencing Of Tasks) Cannot Be Bypassed.	sec
+All Code Implementing Or Using Access Controls Is Not Affected By Any Malicious Code.	sec
+A Positive Validation Pattern Is Defined And Applied To All Input	sec
+A Character Set, Such As Utf-8, Is Specified For All Sources Of Input	sec
+All Input Validation Failures Are Logged.	sec
+All Input Data Is Canonicalized For All Downstream Decoders Or Interpreters Prior To Validation.	sec
+All Input Validation Controls Are Not Affected By Any Malicious Code	sec
+The Runtime Environment Is Not Susceptible To Xml Injections Or That Security Controls Prevents Xml Injections	sec
+For Each Type Of Output Encoding/Escaping Performed By The Application, There Is A Single Security Control For That Type Of Output For The Intended Destination	sec
+All Cryptographic Functions Used To Protect Secrets From The Application User Are Implemented Server Side	sec
+Access To Any Master Secret(S) Is Protected From Unauthorized Access (A Master Secret Is An Application Credential Stored As Plaintext On Disk That Is Used To Protect Access To Security Configuration Information).	sec
+Password Hashes Are Salted When They Are Created	sec
+Cryptographic Module Failures Are Logged	sec
+All Code Supporting Or Using A Cryptographic Module Is Not Affected By Any Malicious Code	sec
+All Error Handling Is Performed On Trusted Devices	sec
+All Logging Controls Are Implemented On The Server.	sec
+There Is A Single Application-Level Logging Implementation That Is Used By The Software.	sec
+A Log Analysis Tool Is Available Which Allows The Analyst To Search For Log Events Based On Combinations Of Search Criteria Across All Fields In The Log Record Format Supported By This System.	sec
+All Code Implementing Or Using Error Handling And Logging Controls Is Not Affected By Any Malicious Code.	sec
+Logging Is Performed Before Executing The Transaction. If Logging Was Unsuccessful (E.G. Disk Full, Insufficient Permissions) The Application Fails Safe. This Is For When Integrity And Non-Repudiation Are A Must.	sec
+Failed Tls Connections Do Not Fall Back To An Insecure Http Connection	sec
+All Connections To External Systems That Involve Sensitive Information Or Functions Use An Account That Has Been Set Up To Have The Minimum Privileges Necessary For The Application To Function Properly	sec
+Specific Character Encodings Are Defined For All Connections (E.G., Utf-8).	sec
+The Application Covers Off Risks Associated With Spoofing, Tampering, Repudiation, Information Disclosure, And Elevation Of Privilege (Stride).	sec
+Parameters Obtained From Untrusted Sources Are Not Used In Manipulating Filenames, Pathnames Or Any File System Object Without First Being Canonicalized And Input Validated To Prevent Local File Inclusion Attacks.	sec
+The Client Validates Ssl Certificates	sec

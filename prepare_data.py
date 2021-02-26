@@ -97,15 +97,20 @@ def parse_concord_xml(path, resulting_dataset, min_len):
         for annotation in annotations:
             start_node = annotation.get("StartNode")
             is_sec = False
+            is_requirement = False
             for feature in annotation:
                 if (
                     feature.find("Value").text == "yes"
                     and feature.find("Name").text == "security"
                 ):
                     is_sec = True
+                    is_requirement = True
                     break
+                if feature.find("Value").text == "yes":
+                    is_requirement = True
+
             class_ = SEC_LABEL if is_sec else NONSEC_LABEL
-            if len(units[start_node]) > min_len:
+            if is_requirement:
                 data.append([units[start_node], class_])
     df = pd.DataFrame(data, columns=resulting_dataset.columns)
     return resulting_dataset.append(df)

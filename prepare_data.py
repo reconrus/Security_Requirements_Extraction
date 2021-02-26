@@ -81,7 +81,7 @@ def read_promise(path, resulting_dataset):
     return resulting_dataset.append(df)
 
 
-def parse_concord_xml(path, resulting_dataset, min_len):
+def parse_concord_xml(path, resulting_dataset):
     tree = ET.parse(path)
     root = tree.getroot()
     units = dict()
@@ -116,11 +116,11 @@ def parse_concord_xml(path, resulting_dataset, min_len):
     return resulting_dataset.append(df)
 
 
-def read_concord(path, resulting_dataset, min_len):
+def read_concord(path, resulting_dataset):
     for filepath in os.listdir(path):
         if filepath.endswith("xml"):
             resulting_dataset = parse_concord_xml(
-                os.path.join(path, filepath), resulting_dataset, min_len
+                os.path.join(path, filepath), resulting_dataset
             )
     return resulting_dataset
 
@@ -198,8 +198,7 @@ def read_datasets(args):
     resulting_dataset = pd.DataFrame(columns=columns)
     resulting_dataset = read_secreq(args.sec_req, resulting_dataset)
     resulting_dataset = read_promise(args.promise, resulting_dataset)
-    resulting_dataset = read_concord(
-        args.concord, resulting_dataset, args.min_len)
+    resulting_dataset = read_concord(args.concord, resulting_dataset)
     resulting_dataset = read_cchit(args.cchit, resulting_dataset)
     resulting_dataset = read_owasp(args.owasp, resulting_dataset)
 

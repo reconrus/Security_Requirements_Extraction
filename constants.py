@@ -18,3 +18,6 @@ MODEL_FILENAME = f"{MODEL_TYPE}.pt"
 SEC_LABEL = "sec"
 NONSEC_LABEL = "nonsec"
 OTHER_LABEL = "other"
+
+SEC_IDX = 1
+NON_SEC_IDX = 0

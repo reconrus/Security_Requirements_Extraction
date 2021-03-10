@@ -70,6 +70,7 @@ def read_secreq(path, resulting_dataset):
         )
         resulting_dataset = resulting_dataset.append(dataset)
     resulting_dataset['Text'] = resulting_dataset['Text'].apply(str.strip)
+    resulting_dataset['Label'].replace('xyz', 'sec', inplace=True)
     return resulting_dataset.dropna()
 
 

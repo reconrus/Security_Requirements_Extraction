@@ -2,24 +2,24 @@ import logging
 import os
 import re
 from argparse import ArgumentParser
+from typing import Optional, Union
 
-import numpy as np
 import pandas as pd
 import torch
-from sklearn.metrics import (
-    accuracy_score, precision_recall_fscore_support
-)
+from streamlit import progress
+from torch.utils.data import DataLoader
 from transformers import (
     T5Tokenizer, T5ForConditionalGeneration,
 )
+from tqdm import tqdm
 
 from dataset import (
-    read_dataframe, write_dataframe, SecReqDataset,
+    prepare_labels_mappings, read_dataframe, 
+    write_dataframe, SecReqDataset,
 )
 from constants import (
-    MAX_LENGTH, PREDICTING_APPLICATION_NAME,
-    TMP_FOLDER_NAME, MODEL_FOLDER, 
-    MODEL_FILENAME, PREDICT_DATASET_PATH,
+    MAX_LENGTH, PREDICTING_APPLICATION_NAME, MODEL_TYPE,
+    TMP_FOLDER_NAME, MODEL_FILENAME, PREDICT_DATASET_PATH,
 )
 from train import load_model
 
@@ -28,7 +28,7 @@ logger = logging.getLogger(PREDICTING_APPLICATION_NAME)
 def setup_parser(parser):
     parser.add_argument(
         "-p", "--predict_dataset",
-        help="path to predict dataset" 
+        help="path to predict dataset",
     )
     parser.add_argument(
         "-m", "--model_name",
@@ -42,7 +42,7 @@ def setup_parser(parser):
     )
     parser.add_argument(
         "-l", "--max_len",
-        help="maximum input sequence length"
+        help="maximum input sequence length",
         default=MAX_LENGTH,
     ),
     parser.add_argument(
@@ -69,19 +69,32 @@ def prepare_data(dataframe, model_type, max_len):
     return tokenizer
 
 
-def predict(model_path):
-    model = load_model(model_path)
-    
-    dataset = torch.load(PREDICT_DATASET_PATH)
-    loader = DataLoader(dataset, batch_size=64)
+def predict(model: Union[T5ForConditionalGeneration, str], 
+            dataframe: Optional[pd.DataFrame] = None,
+            tokenizer: T5Tokenizer = None,
+            streamlit_bar: bool = False):
+    model = load_model(model) if isinstance(model, str) else model
+    if dataframe is None:
+        dataset = torch.load(PREDICT_DATASET_PATH)
+    else:
+        dataset = SecReqDataset(dataframe, tokenizer, train=False) 
+    loader = DataLoader(dataset, batch_size=4)
     
     outputs = []
-    for batch in tqdm(iter(loader), total=len(loader)):
+    
+    if streamlit_bar:
+        st_bar = progress(0)
+
+    for i, batch in enumerate(tqdm(iter(loader), total=len(loader))):
         outs = model.generate(
             batch['input_ids'].to(model.device), 
             attention_mask=batch['attention_mask'].to(model.device)
         )
         outputs.extend(outs)
+
+        if streamlit_bar:
+            st_bar.progress(i / (len(loader) - 1))
+
     return outputs
 
 
@@ -90,7 +103,7 @@ def process_predictions(tokenizer, predictions, dataframe):
     processed_labels = [re.sub("<pad>|</s>", "", label).strip() for label in predicted_labels]
     
     dataframe["Label"] = processed_labels
-    return dataset
+    return dataframe
 
 
 def main():

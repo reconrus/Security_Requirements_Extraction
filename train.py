@@ -10,13 +10,15 @@ from sklearn.metrics import (
 )
 from transformers import (
     T5Tokenizer, T5ForConditionalGeneration,
-    Trainer, TrainingArguments,
+    Trainer, TrainingArguments
 )
 
-from dataset import read_dataframe, SecReqDataset
+from dataset import (
+    prepare_labels_mappings, read_dataframe, SecReqDataset,
+)
 from constants import (
     MAX_LENGTH, MODEL_TYPE, DEFAULT_EPOCHS,
-    SEC_LABEL, NONSEC_LABEL,
+    SEC_LABEL, NONSEC_LABEL, SEC_IDX, NON_SEC_IDX,
     TRAINING_APPLICATION_NAME,
     TMP_FOLDER_NAME, MODEL_FOLDER, MODEL_FILENAME,
     TRAIN_DATASET_PATH, VALID_DATASET_PATH,
@@ -41,7 +43,7 @@ def setup_parser(parser):
     )
     parser.add_argument(
         "-l", "--max_len",
-        help="maximum input sequence length"
+        help="maximum input sequence length",
         default=MAX_LENGTH,
     )
     parser.add_argument(
@@ -55,22 +57,16 @@ def setup_parser(parser):
         default=DEFAULT_EPOCHS,
     )
 
-def prepare_labels_mappings(tokenizer):
-    global idxs_to_label
-    labels = [SEC_LABEL, NONSEC_LABEL]
-    sec_idxs, non_sec_idxs = tokenizer.prepare_seq2seq_batch(labels)['input_ids']
-    idxs_to_label = {
-        tuple(sec_idxs): 1,
-        tuple(non_sec_idxs): 0,
-    }
-
 
 def compute_metrics(pred):
     labels = pred.label_ids
     preds = pred.predictions[0].argmax(-1)
 
     def _convert_to_labels(idxs):
-      label = idxs_to_label.get(tuple(idxs), -1)
+    #   label = idxs_to_label.get(tuple(idxs), -1)
+    # assuming that it is better to have excess non-security requirements
+    # labeled as security than miss any security variable
+      label = idxs_to_label.get(tuple(idxs), SEC_IDX) 
       return label
 
     targets = np.fromiter(map(_convert_to_labels, labels), dtype=np.int)
@@ -148,19 +144,18 @@ def prepare_data(train_path, valid_path, model_type, max_len):
     logger.info("===Finished data preparation===")
 
 
-def main():
-    parser = ArgumentParser(prog=TRAINING_APPLICATION_NAME)
-    setup_parser(parser)
-    arguments = parser.parse_args()
-
-    prepare_data(arguments.train_path, arguments.valid_path, 
-                 arguments.model_type, arguments.max_len)
-    model = train(arguments.epochs)
+def train(args):
+    prepare_data(args.train_path, args.valid_path, 
+                 args.model_type, args.max_len)
+    model = train(args.epochs)
 
     if not os.path.isdir(MODEL_FOLDER):
         os.mkdir(MODEL_FOLDER)
-    model.save_pretrained(os.path.join(MODEL_FOLDER, arguments.output_model_name))
+    model.save_pretrained(os.path.join(MODEL_FOLDER, args.output_model_name))
 
 
-if __name__=="__main__":
-    main()
+if __name__=="__main__":    
+    parser = ArgumentParser(prog=TRAINING_APPLICATION_NAME)
+    setup_parser(parser)
+    arguments = parser.parse_args()
+    train(arguments)

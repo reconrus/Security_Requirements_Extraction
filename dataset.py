@@ -2,7 +2,10 @@ import pandas as pd
 import torch
 from torch.utils.data import Dataset
 
-from constants import MAX_LENGTH
+from constants import (
+  MAX_LENGTH, SEC_IDX, NON_SEC_IDX,
+  SEC_LABEL, NONSEC_LABEL,
+)
 
 class SecReqDataset(Dataset):
   def __init__(self, original_dataframe, tokenizer, train=True, max_len=MAX_LENGTH):
@@ -66,3 +69,13 @@ def read_dataframe(path):
 
 def write_dataframe(df, path):
     df.to_csv(path, sep="\t")
+
+  
+def prepare_labels_mappings(tokenizer):
+    global idxs_to_label
+    labels = [SEC_LABEL, NONSEC_LABEL]
+    sec_idxs, non_sec_idxs = tokenizer.prepare_seq2seq_batch(labels)['input_ids']
+    idxs_to_label = {
+        tuple(sec_idxs): SEC_IDX,
+        tuple(non_sec_idxs): NON_SEC_IDX,
+    }

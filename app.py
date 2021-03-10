@@ -25,6 +25,7 @@ def download_file_and_save(url, path):
         f.write(response.content)
 
 
+@st.cache
 def download_model():
     if not os.path.exists(MODEL_FOLDER):
         os.mkdir(MODEL_FOLDER)
@@ -32,14 +33,12 @@ def download_model():
        return
 
     os.mkdir(MODEL_PATH)
-    st.markdown("Downloading model...")
     download_file_and_save(CONFIG_URL, CONFIG_PATH)        
     download_file_and_save(PT_URL, PT_PATH)        
-    st.markdown("Finished model downloading.")
 
 
 @st.cache()
-def load_t5():
+def load_model():
     download_model()
     tokenizer = T5Tokenizer.from_pretrained(MODEL_TYPE)
     model = T5ForConditionalGeneration.from_pretrained(MODEL_PATH)
@@ -73,7 +72,7 @@ def retrieve_sentences_from_lines(lines: List[str]) -> List[str]:
 
 def retrieve_security_relevant_sentences(sentences) -> List[str]:
     dataframe = pd.DataFrame(sentences, columns=["Text"])
-    classification_model, tokenizer = load_t5()
+    classification_model, tokenizer = load_model()
     raw_predictions = predict(classification_model, dataframe, tokenizer, True)
     predictions_dataframe = process_predictions(tokenizer, raw_predictions, dataframe)
     security_dataframe = predictions_dataframe[predictions_dataframe["Label"] == SEC_LABEL]

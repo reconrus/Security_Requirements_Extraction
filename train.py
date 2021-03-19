@@ -23,6 +23,8 @@ from constants import (
     TRAINING_APPLICATION_NAME, TMP_FOLDER_NAME, YAML_CONFIG_PATH,
     TRAIN_DATASET_PATH, VALID_DATASET_PATH, MODEL_FOLDER,
 )
+from metrics import f1_score_with_invalid
+
 
 logger = logging.getLogger(TRAINING_APPLICATION_NAME)
 
@@ -44,9 +46,11 @@ def compute_metrics(pred):
     wrong_predictions_number = wrong_predictions.shape[0]
 
     acc = accuracy_score(targets, predictions)
+    f1 = f1_score_with_invalid(targets, predictions)
+
     targets = np.delete(targets, wrong_predictions)
     predictions = np.delete(predictions, wrong_predictions)
-    precision, recall, f1, _ = precision_recall_fscore_support(targets, predictions, average='binary')
+    precision, recall, _, _ = precision_recall_fscore_support(targets, predictions, average='binary')
 
     return {
         'accuracy': acc,

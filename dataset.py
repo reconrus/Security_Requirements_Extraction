@@ -1,10 +1,13 @@
+import os
+
 import pandas as pd
 import torch
 from torch.utils.data import Dataset
 
 from constants import (
   MAX_LENGTH, SEC_IDX, NON_SEC_IDX,
-  SEC_LABEL, NONSEC_LABEL,
+  SEC_LABEL, NONSEC_LABEL, 
+  COLUMNS, DOCUMENT_COLUMN,
 )
 
 class SecReqDataset(Dataset):
@@ -62,7 +65,7 @@ class SecReqDataset(Dataset):
       return encodings
 
 
-def read_dataframe(path): 
+def read_dataframe(path):
     dataset = pd.read_csv(path, sep="\t")
     return dataset
 
@@ -70,7 +73,28 @@ def read_dataframe(path):
 def write_dataframe(df, path):
     df.to_csv(path, sep="\t")
 
-  
+
+def read_documents(dataset_path, document_names):
+    documents = pd.DataFrame(columns=COLUMNS + [DOCUMENT_COLUMN])
+    for document_name in document_names:
+        document_path = os.path.join(dataset_path, f"{document_name}.csv")
+        document_df = read_dataframe(document_path)
+        document_df[DOCUMENT_COLUMN] = document_name
+        documents = documents.append(document_df)
+    return documents
+
+
+def read_data(datasets_folder, datasets_paths):
+    resulting_dataframe = pd.DataFrame(columns=COLUMNS + [DOCUMENT_COLUMN])
+    for dataset, document_names in datasets_paths.items():
+        datasets_path = os.path.join(datasets_path, dataset)
+        documents_df = read_documents(datasets_path, document_names)
+        resulting_dataframe = resulting_dataframe.append(documents_df)
+    return resulting_dataframe
+
+
+idxs_to_label = {}
+
 def prepare_labels_mappings(tokenizer):
     global idxs_to_label
     labels = [SEC_LABEL, NONSEC_LABEL]

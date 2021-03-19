@@ -1,6 +1,7 @@
 import logging
 import os
-from argparse import ArgumentParser
+import yaml
+from collections import defaultdict
 
 import numpy as np
 import pandas as pd
@@ -8,54 +9,22 @@ import torch
 from sklearn.metrics import (
     accuracy_score, precision_recall_fscore_support
 )
+from sklearn.model_selection import StratifiedKFold
 from transformers import (
     T5Tokenizer, T5ForConditionalGeneration,
     Trainer, TrainingArguments
 )
 
 from dataset import (
-    prepare_labels_mappings, read_dataframe, SecReqDataset,
+    idxs_to_label, prepare_labels_mappings, read_data, read_dataframe, SecReqDataset,
 )
 from constants import (
-    MAX_LENGTH, MODEL_TYPE, DEFAULT_EPOCHS,
-    SEC_LABEL, NONSEC_LABEL, SEC_IDX, NON_SEC_IDX,
-    TRAINING_APPLICATION_NAME,
-    TMP_FOLDER_NAME, MODEL_FOLDER, MODEL_FILENAME,
-    TRAIN_DATASET_PATH, VALID_DATASET_PATH,
+    SEC_LABEL, NONSEC_LABEL, SEC_IDX, NON_SEC_IDX, COLUMNS,
+    TRAINING_APPLICATION_NAME, TMP_FOLDER_NAME, YAML_CONFIG_PATH,
+    TRAIN_DATASET_PATH, VALID_DATASET_PATH, MODEL_FOLDER,
 )
 
 logger = logging.getLogger(TRAINING_APPLICATION_NAME)
-
-
-def setup_parser(parser):
-    parser.add_argument(
-        "-d", "--train_path",
-        help="path to train dataset",
-    )
-    parser.add_argument(
-        "-v", "--valid_path",
-        help="path to valid dataset",
-    )
-    parser.add_argument(
-        "-o", "--output_model_name",
-        help="model output name",
-        default=MODEL_FILENAME,
-    )
-    parser.add_argument(
-        "-l", "--max_len",
-        help="maximum input sequence length",
-        default=MAX_LENGTH,
-    )
-    parser.add_argument(
-        "-m", "--model_type",
-        help="T5 model version (e.g. t5-small)",
-        default=MODEL_TYPE,
-    )
-    parser.add_argument(
-        "-e", "--epochs",
-        help="number of epochs to train model",
-        default=DEFAULT_EPOCHS,
-    )
 
 
 def compute_metrics(pred):
@@ -66,8 +35,8 @@ def compute_metrics(pred):
     #   label = idxs_to_label.get(tuple(idxs), -1)
     # assuming that it is better to have excess non-security requirements
     # labeled as security than miss any security variable
-      label = idxs_to_label.get(tuple(idxs), SEC_IDX) 
-      return label
+        label = idxs_to_label.get(tuple(idxs), SEC_IDX)
+        return label
 
     targets = np.fromiter(map(_convert_to_labels, labels), dtype=np.int)
     predictions  = np.fromiter(map(_convert_to_labels, preds), dtype=np.int)
@@ -95,22 +64,22 @@ def load_model(model_path, device="cuda"):
     return model
 
 
-def train(epochs):
-    model = load_model(arguments.model_type)
-    
-    training_args = TrainingArguments(    
+def train(model_type, epochs):
+    model = load_model(model_type)
+
+    training_args = TrainingArguments(
         num_train_epochs=epochs,
-        warmup_steps=300,              
-        weight_decay=0.01,              
+        warmup_steps=300,
+        weight_decay=0.01,
         evaluation_strategy="epoch",
     )
 
     train_dataset  = torch.load(TRAIN_DATASET_PATH)
     valid_dataset = torch.load(VALID_DATASET_PATH)
-    
+
     logger.info("===Started model training===")
     trainer = Trainer(
-        model=model,                        
+        model=model,
         args=training_args,
         train_dataset=train_dataset,
         eval_dataset=valid_dataset,
@@ -120,18 +89,16 @@ def train(epochs):
     trainer.train()
     logger.info("===Finished model training===")
 
-    return model
+    evaluation = trainer.evaluate()
+    return evaluation
 
 
-def prepare_data(train_path, valid_path, model_type, max_len):
+def prepare_data(train_dataframe, valid_dataframe, model_type, max_len):
     logger.info("===Started tokenizer loading===")
     tokenizer = T5Tokenizer.from_pretrained(model_type)
     logger.info("===Finished tokenizer loading===")
 
     logger.info("===Started data preparation===")
-    train_dataframe = read_dataframe(train_path)
-    valid_dataframe = read_dataframe(valid_path)
-    
     train_dataset = SecReqDataset(train_dataframe, tokenizer, True, max_len)
     valid_dataset = SecReqDataset(valid_dataframe, tokenizer, True, max_len)
 
@@ -144,18 +111,52 @@ def prepare_data(train_path, valid_path, model_type, max_len):
     logger.info("===Finished data preparation===")
 
 
-def train(args):
-    prepare_data(args.train_path, args.valid_path, 
-                 args.model_type, args.max_len)
-    model = train(args.epochs)
+def cross_evaluation(model_type, full_train, epochs, max_len):
+    skf = StratifiedKFold(n_splits=10)
 
-    if not os.path.isdir(MODEL_FOLDER):
-        os.mkdir(MODEL_FOLDER)
-    model.save_pretrained(os.path.join(MODEL_FOLDER, args.output_model_name))
+    metrics = defaultdict(list)
+
+    for train_index, valid_index in skf.split(full_train["Text"], full_train["Label"]):
+        train_df = full_train.iloc[train_index]
+        valid_df = full_train.iloc[valid_index]
+        prepare_data(train_df, valid_df, model_type, max_len)
+
+        evaluation = train(model_type, epochs)
+        for key, value in evaluation.items():
+            metrics[key].append(value)
+
+    mean_metrics = {key: np.mean(value) for key, value in metrics.items()}
+    return mean_metrics
 
 
-if __name__=="__main__":    
-    parser = ArgumentParser(prog=TRAINING_APPLICATION_NAME)
-    setup_parser(parser)
-    arguments = parser.parse_args()
-    train(arguments)
+def train_and_evaluate(model_type, train_dataframe, valid_dataframe,
+                       epochs, max_len, validation_type):
+
+    if validation_type == "p-validation":
+        prepare_data(train_dataframe, valid_dataframe, model_type, max_len)
+        metrics = train(model_type, epochs)
+    elif validation_type == "cross-validation":
+        metrics = cross_evaluation(model_type, train_dataframe, epochs, max_len)
+    else:
+        logger.exception("Unsupported validation method")
+
+    print("Evaluation results: ", metrics)
+
+
+if __name__=="__main__":
+    with open(YAML_CONFIG_PATH, "r") as file:
+        # The FullLoader parameter handles the conversion from YAML
+        # scalar values to Python the dictionary format
+        training_parameters = yaml.load(file, Loader=yaml.FullLoader)
+    datasets_path = training_parameters["datasets_path"]
+    train_datasets = training_parameters["train_datasets"]
+    valid_datasets = training_parameters["valid_datasets"]
+    train_dataframe = read_data(datasets_path, train_datasets)
+    valid_dataframe = read_data(datasets_path, valid_datasets)
+    train_and_evaluate(model_type=training_parameters["model_type"],
+                       train_dataframe=train_dataframe,
+                       valid_dataframe=valid_dataframe,
+                       epochs=training_parameters["epochs"],
+                       max_len=training_parameters["max_len"],
+                       validation_type=training_parameters["validation"],
+                       )

@@ -1,7 +1,7 @@
 #!/bin/sh
 
-mkdir RawDatasets
-cd RawDatasets
+mkdir raw
+cd raw
 
 # SecReq Dataset
 if [ ! -d SecReq ]; then
@@ -33,15 +33,15 @@ fi
 # OWASP Application Security Verification Standard
 if [ ! -d OWASP ]; then
     mkdir OWASP && cd OWASP
-    wget -O OWASP_3.0.1.xlsx https://github.com/OWASP/ASVS/blob/master/3.0.1/ASVS-excel-v3.0.1.xlsx?raw=true
+    wget -O OWASP_3.0.1.xls https://github.com/OWASP/ASVS/blob/master/3.0.1/ASVS-excel-v3.0.1.xlsx?raw=true
     wget -O OWASP_4.0.csv https://raw.githubusercontent.com/OWASP/ASVS/v4.0.2/4.0/docs_en/OWASP%20Application%20Security%20Verification%20Standard%204.0.2-en.csv
     cd ..
 fi
 
 cd ..
-[ ! -d env ] && python3 -m venv env
-. ./env/bin/activate
-pip3 install pandas liac-arff xlrd
-python3 prepare_data.py --sec_req ./RawDatasets/SecReq --promise ./RawDatasets/nfr/nfr.arff \
-    --concord ./RawDatasets/NFRClassifier/gate/application-resources/Requirements/ \
-    --cchit ./RawDatasets/CCHIT.xls --owasp ./RawDatasets/OWASP
+[ ! -d ../env ] && python3 -m venv ../env
+. ../env/bin/activate
+pip3 install pandas liac-arff xlrd 
+python3 prepare_data.py --sec_req ./raw/SecReq --promise ./raw/nfr/nfr.arff \
+    --concord ./raw/NFRClassifier/gate/application-resources/Requirements/ \
+    --cchit ./raw/CCHIT.xls --owasp ./raw/OWASP

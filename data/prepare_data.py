@@ -1,88 +1,89 @@
 import os
 import re
+from functools import partial 
+from typing import Dict
+from xml.etree import ElementTree as ET
 
 import arff
 import argparse
 import pandas as pd
 
-from xml.etree import ElementTree as ET
-
 SEC_LABEL = "sec"
 NONSEC_LABEL = "nonsec"
-
-parser = argparse.ArgumentParser(
-    description="Data unification script for Security Requirements Extraction task"
-)
-parser.add_argument(
-    "--sec_req",
-    default="./Datasets/SecReq",
-    type=str,
-    help="Path to folder with CPN, ePurse and GPS datasets",
-)
-parser.add_argument(
-    "--promise",
-    default="./Datasets/PROMISE/nfr/nfr.arff",
-    type=str,
-    help="Path to extracted PROMISE arff file. \nFor now there is a need to manually delete comment on line 45",
-)
-parser.add_argument(
-    "--concord",
-    default="./Datasets/NFRClassifier/gate/application-resources/Requirements/",
-    type=str,
-    help="Path to folder with Concord xml data files",
-)
-parser.add_argument(
-    "--cchit",
-    default="./Datasets/CCHIT.xls",
-    type=str,
-    help="Path to CCHIT Excel Sheet",
-)
-parser.add_argument(
-    "--owasp",
-    default="./Datasets/OWASP",
-    type=str,
-    help="Path to OWASP Application Security Verification Standard folder",
-)
-parser.add_argument(
-    "-o",
-    default="result.csv",
-    type=str,
-    help="Output file path",
-)
-parser.add_argument(
-    "--min_len",
-    default=3,
-    type=int,
-    help="Minimum number of characters in a classification unit",
-)
-args = parser.parse_args()
+COLUMNS = ["Text", "Label"]
+ALL_KEY = "all"
 
 
-def read_secreq(path, resulting_dataset):
-    for f in os.listdir(path):
-        filepath = os.path.join(path, f)
+def setup_parser(parser):
+    parser.add_argument(
+        "--sec_req",
+        default="./Datasets/SecReq",
+        type=str,
+        help="Path to folder with CPN, ePurse and GPS datasets",
+    )
+    parser.add_argument(
+        "--promise",
+        default="./Datasets/PROMISE/nfr/nfr.arff",
+        type=str,
+        help="Path to extracted PROMISE arff file. \nFor now there is a need to manually delete comment on line 45",
+    )
+    parser.add_argument(
+        "--concord",
+        default="./Datasets/NFRClassifier/gate/application-resources/Requirements/",
+        type=str,
+        help="Path to folder with Concord xml data files",
+    )
+    parser.add_argument(
+        "--cchit",
+        default="./Datasets/CCHIT.xls",
+        type=str,
+        help="Path to CCHIT Excel Sheet",
+    )
+    parser.add_argument(
+        "--owasp",
+        default="./Datasets/OWASP",
+        type=str,
+        help="Path to OWASP Application Security Verification Standard folder",
+    )
+    parser.add_argument(
+        "-o",
+        default="processed",
+        type=str,
+        help="Output folder",
+    )
+
+
+def read_secreq(path) -> Dict[str, pd.DataFrame]:
+    read_documents = {}
+    secreq_dataset = pd.DataFrame(columns=COLUMNS)
+    for filename in os.listdir(path):
+        filepath = os.path.join(path, filename)
         dataset = pd.read_csv(
             filepath,
             sep=";",
             header=None,
-            names=resulting_dataset.columns,
+            names=COLUMNS,
             engine="python",
         )
-        resulting_dataset = resulting_dataset.append(dataset)
-    resulting_dataset['Text'] = resulting_dataset['Text'].apply(str.strip)
-    resulting_dataset['Label'].replace('xyz', 'sec', inplace=True)
-    return resulting_dataset.dropna()
+        dataset['Label'].replace('xyz', 'sec', inplace=True)
+        dataset['Text'] = dataset['Text'].apply(str.strip)
+        dataset = dataset.dropna()
+        read_documents[filename] = dataset
+        secreq_dataset = secreq_dataset.append(dataset)
+
+    read_documents[ALL_KEY] = secreq_dataset
+    return read_documents
 
 
-def read_promise(path, resulting_dataset):
+def read_promise(path) -> Dict[str, pd.DataFrame]:
     data = arff.load(open(path, "r", encoding="cp1252"))
     adjust_class = lambda x: SEC_LABEL if x == "SE" else NONSEC_LABEL
     data = [[row[1].strip(), adjust_class(row[2])] for row in data["data"]]
-    df = pd.DataFrame(data, columns=resulting_dataset.columns)
-    return resulting_dataset.append(df)
+    promise_dataset = pd.DataFrame(data, columns=COLUMNS)
+    return {ALL_KEY: promise_dataset}
 
 
-def parse_concord_xml(path, resulting_dataset):
+def parse_concord_xml(path) -> pd.DataFrame:
     tree = ET.parse(path)
     root = tree.getroot()
     units = dict()
@@ -113,20 +114,24 @@ def parse_concord_xml(path, resulting_dataset):
             class_ = SEC_LABEL if is_sec else NONSEC_LABEL
             if is_requirement:
                 data.append([units[start_node], class_])
-    df = pd.DataFrame(data, columns=resulting_dataset.columns)
-    return resulting_dataset.append(df)
+    dataset = pd.DataFrame(data, columns=COLUMNS)
+    return dataset
 
 
-def read_concord(path, resulting_dataset):
-    for filepath in os.listdir(path):
-        if filepath.endswith("xml"):
-            resulting_dataset = parse_concord_xml(
-                os.path.join(path, filepath), resulting_dataset
-            )
-    return resulting_dataset
+def read_concord(path) -> Dict[str, pd.DataFrame]:
+    read_documents = {}
+    concord_dataset = pd.DataFrame(columns=COLUMNS)
+    for filename in os.listdir(path):
+        if not filename.endswith("xml"):
+            continue
+        dataset = parse_concord_xml(os.path.join(path, filename))
+        read_documents[filename] = dataset
+        concord_dataset = concord_dataset.append(dataset)
+    read_documents[ALL_KEY] = concord_dataset
+    return read_documents
 
 
-def read_cchit(path, resulting_dataset):
+def read_cchit(path) -> Dict[str, pd.DataFrame]:
     columns = ["Criteria #", "Criteria", "Comments"]
     cchit_data = pd.read_excel(path, header=5, usecols=columns)
     cchit_data = cchit_data[cchit_data[columns[0]].notna()].dropna()
@@ -142,13 +147,12 @@ def read_cchit(path, resulting_dataset):
     labels = cchit_data[columns[0]].map(prepare_label)
     texts = cchit_data[columns[1:]].apply(prepare_text, axis=1)
 
-    data = {resulting_dataset.columns[0]: texts,
-            resulting_dataset.columns[1]: labels}
-    df = pd.DataFrame(data).dropna()
-    return resulting_dataset.append(df)
+    data = {COLUMNS[0]: texts, COLUMNS[1]: labels}
+    cchit_dataset = pd.DataFrame(data).dropna()
+    return {ALL_KEY: cchit_dataset}
 
 
-def prepare_owasp_text(text):
+def prepare_owasp_text(text: str) -> str:
     verify_pattern = "^(Verify that)|^(Verify)"
     link_pattern = "\(\[(C\d+(, )*)+].*\)$"
     text = re.sub(f'{verify_pattern}|{link_pattern}', "", text).strip()
@@ -183,29 +187,59 @@ def read_owasp_v3(path, owasp_dataset):
     return owasp_dataset.append(owasp_v3_data)
 
 
-def read_owasp(path, resulting_dataset):
+def read_owasp(path) -> Dict[str, pd.DataFrame]:
     owasp_dataset = pd.DataFrame(columns=["Text"])
-    path_v3 = os.path.join(path, "OWASP_3.0.1.xlsx")
+    path_v3 = os.path.join(path, "OWASP_3.0.1.xls")
     path_v4 = os.path.join(path, "OWASP_4.0.csv")
     owasp_dataset = read_owasp_v4(path_v4, owasp_dataset)
     owasp_dataset = read_owasp_v3(path_v3, owasp_dataset)
     owasp_dataset = owasp_dataset.drop_duplicates()
     owasp_dataset["Label"] = SEC_LABEL
-    return resulting_dataset.append(owasp_dataset)
+    return {ALL_KEY: owasp_dataset}
 
 
-def read_datasets(args):
-    columns = ["Text", "Label"]
-    resulting_dataset = pd.DataFrame(columns=columns)
-    resulting_dataset = read_secreq(args.sec_req, resulting_dataset)
-    resulting_dataset = read_promise(args.promise, resulting_dataset)
-    resulting_dataset = read_concord(args.concord, resulting_dataset)
-    resulting_dataset = read_cchit(args.cchit, resulting_dataset)
-    resulting_dataset = read_owasp(args.owasp, resulting_dataset)
+def write_documents(documents: Dict[str, pd.DataFrame], path: str):
+    if not os.path.isdir(path):
+        os.mkdir(path)
+    for original_name, dataframe in documents.items():
+        name = "{}.csv".format(os.path.splitext(original_name)[0])
+        document_path = os.path.join(path, name)
+        dataframe.to_csv(document_path, sep="\t", index=False)
 
-    resulting_dataset = resulting_dataset.drop_duplicates()
-    resulting_dataset.to_csv(args.o, sep="\t", index=False)
+
+def read_and_save_datasets(args):
+    dataset_names = ["secreq", "promise", "concord", "cchit", "owasp"]
+    read_functions = {
+        "secreq": partial(read_secreq, args.sec_req),
+        "promise": partial(read_promise, args.promise),
+        "concord": partial(read_concord, args.concord),
+        "cchit": partial(read_cchit, args.cchit),
+        "owasp": partial(read_owasp, args.owasp),
+    }
+
+    merged_dataset = pd.DataFrame(columns=COLUMNS)
+
+    if not os.path.isdir(args.o):
+        os.mkdir(args.o)
+
+    for dataset_name in dataset_names:
+        documents = read_functions[dataset_name]()
+        path = os.path.join(args.o, dataset_name)
+        write_documents(documents, path)
+        merged_dataset = merged_dataset.append(documents["all"])
+
+    merged_dataset = merged_dataset.drop_duplicates()
+    joined_path = os.path.join(args.o, "joined")
+    if not os.path.isdir(joined_path):
+        os.mkdir(joined_path)
+    merged_dataset_path = os.path.join(joined_path, "all.csv")
+    merged_dataset.to_csv(merged_dataset_path, sep="\t", index=False)
 
 
 if __name__ == "__main__":
-    read_datasets(args)
+    parser = argparse.ArgumentParser(
+        description="Data unification script for Security Requirements Extraction task"
+    )
+    setup_parser(parser)
+    args = parser.parse_args()
+    read_and_save_datasets(args)

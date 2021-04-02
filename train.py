@@ -45,10 +45,10 @@ def compute_metrics(pred, invalid_to_sec=False):
         label = idxs_to_label.get(tuple(idxs), label_to_set)
         return label
 
-    targets = np.fromiter(map(_convert_to_labels, labels), dtype=np.int)
-    predictions  = np.fromiter(map(_convert_to_labels, preds), dtype=np.int)
+    targets = np.fromiter(map(_convert_to_labels, labels), dtype=np.int32)
+    predictions  = np.fromiter(map(_convert_to_labels, preds), dtype=np.int32)
 
-    invalid_idx_mask = np.logical_and(predictions != SEC_IDX, predictions != NON_SEC_IDX)
+    invalid_idx_mask = predictions == -1
     predictions[invalid_idx_mask] = 1 - targets[invalid_idx_mask]
 
     acc = accuracy_score(targets, predictions)
@@ -79,12 +79,13 @@ def train(model_type, epochs):
         evaluation_strategy="epoch",
         load_best_model_at_end = True,
         metric_for_best_model='f1',
+        output_dir='models',
     )
 
     train_dataset  = torch.load(TRAIN_DATASET_PATH)
     valid_dataset = torch.load(VALID_DATASET_PATH)
 
-    early_stopping_callback = EarlyStoppingCallback(0.1, 0.005)
+    early_stopping_callback = EarlyStoppingCallback(3, 0.1)
 
     logger.info("===Started model training===")
     trainer = Trainer(
@@ -93,7 +94,7 @@ def train(model_type, epochs):
         train_dataset=train_dataset,
         eval_dataset=valid_dataset,
         compute_metrics=compute_metrics,
-        callbacks=[early_stopping_callback],
+        # callbacks=[early_stopping_callback],
     )
 
     trainer.train()

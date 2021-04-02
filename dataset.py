@@ -18,7 +18,7 @@ class SecReqDataset(Dataset):
     self._load_dataset(original_dataframe)
 
   def __getitem__(self, idx):
-    item = {key: torch.Tensor(val[idx]) for key, val in self.data.items()}
+    item = {key: val[idx] for key, val in self.data.items()}
     return item
 
   def __len__(self):
@@ -42,7 +42,8 @@ class SecReqDataset(Dataset):
         encodings = self.tokenizer.prepare_seq2seq_batch(
             df.inputs.to_list(),
             df.targets.to_list(),
-            max_length=self.max_len
+            max_length=self.max_len,
+            return_tensors="pt",
             )
         encodings = {
             'input_ids': encodings['input_ids'], 
@@ -99,7 +100,5 @@ def prepare_labels_mappings(tokenizer):
     global idxs_to_label
     labels = [SEC_LABEL, NONSEC_LABEL]
     sec_idxs, non_sec_idxs = tokenizer.prepare_seq2seq_batch(labels)['input_ids']
-    idxs_to_label = {
-        tuple(sec_idxs): SEC_IDX,
-        tuple(non_sec_idxs): NON_SEC_IDX,
-    }
+    idxs_to_label[tuple(sec_idxs)] = SEC_IDX
+    idxs_to_label[tuple(non_sec_idxs)] = NON_SEC_IDX

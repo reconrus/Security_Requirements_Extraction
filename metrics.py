@@ -21,5 +21,5 @@ def f1_score_with_invalid(targets, predictions):
 
 
 def append_metrics_to_file(metrics, file_path):
-    metrics_df = pd.DataFrame(metrics)
+    metrics_df = pd.DataFrame({key: [value] for key, value in metrics.items()})
     metrics_df.to_csv(file_path, mode="a", header=False)

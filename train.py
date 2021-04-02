@@ -77,6 +77,7 @@ def train(model_type, epochs):
         warmup_steps=300,
         weight_decay=0.01,
         evaluation_strategy="epoch",
+        metric_for_best_model='f1',
         output_dir='models',
     )
 

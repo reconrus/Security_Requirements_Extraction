@@ -11,12 +11,14 @@ from sklearn.metrics import (
 )
 from sklearn.model_selection import StratifiedKFold
 from transformers import (
-    T5Tokenizer, T5ForConditionalGeneration,
-    Trainer, TrainingArguments
+    EarlyStoppingCallback, T5Tokenizer,
+    T5ForConditionalGeneration,
+    Trainer, TrainingArguments,
 )
 
 from dataset import (
-    idxs_to_label, prepare_labels_mappings, read_data, read_dataframe, SecReqDataset,
+    idxs_to_label, prepare_labels_mappings,
+    read_data, read_dataframe, SecReqDataset,
 )
 from constants import (
     SEC_LABEL, NONSEC_LABEL, SEC_IDX, NON_SEC_IDX, COLUMNS,
@@ -29,35 +31,34 @@ from metrics import f1_score_with_invalid
 logger = logging.getLogger(TRAINING_APPLICATION_NAME)
 
 
-def compute_metrics(pred):
+def compute_metrics(pred, invalid_to_sec=False):
+    """
+    :param invalid_to_sec: map invalid prediction to security or not.
+        True assumes that it is better to have excess non-security requirements
+        labeled as security than miss any security variable
+    """
     labels = pred.label_ids
     preds = pred.predictions[0].argmax(-1)
 
     def _convert_to_labels(idxs):
-    #   label = idxs_to_label.get(tuple(idxs), -1)
-    # assuming that it is better to have excess non-security requirements
-    # labeled as security than miss any security variable
-        label = idxs_to_label.get(tuple(idxs), SEC_IDX)
+        label_to_set = SEC_IDX if invalid_to_sec else -1
+        label = idxs_to_label.get(tuple(idxs), label_to_set)
         return label
 
     targets = np.fromiter(map(_convert_to_labels, labels), dtype=np.int)
     predictions  = np.fromiter(map(_convert_to_labels, preds), dtype=np.int)
-    wrong_predictions = np.where((predictions == -1))[0]
-    wrong_predictions_number = wrong_predictions.shape[0]
+
+    invalid_idx_mask = np.logical_and(predictions != SEC_IDX, predictions != NON_SEC_IDX)
+    predictions[invalid_idx_mask] = 1 - targets[invalid_idx_mask]
 
     acc = accuracy_score(targets, predictions)
-    f1 = f1_score_with_invalid(targets, predictions)
-
-    targets = np.delete(targets, wrong_predictions)
-    predictions = np.delete(predictions, wrong_predictions)
-    precision, recall, _, _ = precision_recall_fscore_support(targets, predictions, average='binary')
+    precision, recall, f1, _ = precision_recall_fscore_support(targets, predictions, average='binary')
 
     return {
         'accuracy': acc,
         'f1': f1,
         'precision': precision,
         'recall': recall,
-        'wrong_predictions': wrong_predictions_number,
     }
 
 
@@ -76,10 +77,14 @@ def train(model_type, epochs):
         warmup_steps=300,
         weight_decay=0.01,
         evaluation_strategy="epoch",
+        load_best_model_at_end = True,
+        metric_for_best_model='f1',
     )
 
     train_dataset  = torch.load(TRAIN_DATASET_PATH)
     valid_dataset = torch.load(VALID_DATASET_PATH)
+
+    early_stopping_callback = EarlyStoppingCallback(0.1, 0.005)
 
     logger.info("===Started model training===")
     trainer = Trainer(
@@ -88,13 +93,16 @@ def train(model_type, epochs):
         train_dataset=train_dataset,
         eval_dataset=valid_dataset,
         compute_metrics=compute_metrics,
+        callbacks=[early_stopping_callback],
     )
 
     trainer.train()
     logger.info("===Finished model training===")
 
-    evaluation = trainer.evaluate()
-    return evaluation
+    evaluation_with_invalid = trainer.evaluate()
+    trainer.compute_metrics = lambda x: compute_metrics(x, invalid_to_sec=True)
+    evalutaion_with_sec = trainer.evaluate()
+    return [evaluation_with_invalid, evalutaion_with_sec]
 
 
 def prepare_data(train_dataframe, valid_dataframe, model_type, max_len):
@@ -118,7 +126,8 @@ def prepare_data(train_dataframe, valid_dataframe, model_type, max_len):
 def cross_evaluation(model_type, full_train, epochs, max_len):
     skf = StratifiedKFold(n_splits=10)
 
-    metrics = defaultdict(list)
+    metrics_with_invalid = defaultdict(list)
+    metrics_with_sec = defaultdict(list)
 
     for train_index, valid_index in skf.split(full_train["Text"], full_train["Label"]):
         train_df = full_train.iloc[train_index]
@@ -126,11 +135,14 @@ def cross_evaluation(model_type, full_train, epochs, max_len):
         prepare_data(train_df, valid_df, model_type, max_len)
 
         evaluation = train(model_type, epochs)
-        for key, value in evaluation.items():
-            metrics[key].append(value)
+        for key, value in evaluation[0].items():
+            metrics_with_invalid[key].append(value)
+        for key, value in evaluation[1].items():
+            metrics_with_sec[key].append(value)
 
-    mean_metrics = {key: np.mean(value) for key, value in metrics.items()}
-    return mean_metrics
+    mean_metrics_invalid = {key: np.mean(value) for key, value in metrics_with_invalid.items()}
+    metrics_with_sec = {key: np.mean(value) for key, value in metrics_with_sec.items()}
+    return [mean_metrics_invalid, metrics_with_sec]
 
 
 def train_and_evaluate(model_type, train_dataframe, valid_dataframe,
@@ -144,7 +156,9 @@ def train_and_evaluate(model_type, train_dataframe, valid_dataframe,
     else:
         logger.exception("Unsupported validation method")
 
-    print("Evaluation results: ", metrics)
+    print("Evaluation results: \n")
+    print("Invalid predictions set as incorrect: ", metrics[0])
+    print("Invalid predictions set as security: ", metrics[1])
 
 
 if __name__=="__main__":

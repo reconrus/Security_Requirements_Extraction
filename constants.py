@@ -1,5 +1,8 @@
 import os
 
+COLUMNS = ["Text", "Label"]
+DOCUMENT_COLUMN = "document"
+
 TRAINING_APPLICATION_NAME = "training-script"
 PREDICTING_APPLICATION_NAME = "predicting-script"
 
@@ -23,8 +26,10 @@ OTHER_LABEL = "other"
 SEC_IDX = 1
 NON_SEC_IDX = 0
 
-PT_URL = "https://www.dropbox.com/s/2bf5gdlb90tdwsw/pytorch_model.bin?dl=1"
-CONFIG_URL = "https://www.dropbox.com/s/dpq4f238mhzegwh/config.json?dl=1"
+MODEL_PT_URL = "https://www.dropbox.com/s/2bf5gdlb90tdwsw/pytorch_model.bin?dl=1"
+MODEL_CONFIG_URL = "https://www.dropbox.com/s/dpq4f238mhzegwh/config.json?dl=1"
 
-PT_PATH = os.path.join(MODEL_PATH, "pytorch_model.bin")
-CONFIG_PATH = os.path.join(MODEL_PATH, "config.json")
+MODEL_PT_PATH = os.path.join(MODEL_PATH, "pytorch_model.bin")
+MODEL_CONFIG_PATH = os.path.join(MODEL_PATH, "config.json")
+
+YAML_CONFIG_PATH = "configuration.yaml"

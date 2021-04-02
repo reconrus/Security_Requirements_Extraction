@@ -77,9 +77,6 @@ def retrieve_lines_from_pdf_file(file_buffer: Optional[io.BytesIO]=None) -> List
     return filtered_lines
 
 if __name__=="__main__":
-    # with open("test_file.pdf", "rb") as fin:
-    # with open("test_1.pdf", "rb") as fin:
-    # with open("0000 - inventory.pdf", "rb") as fin:
     with open("2003 - agentmom.pdf", "rb") as fin:
         with open("file.txt", "w+") as fout:
             f = io.BytesIO(fin.read())

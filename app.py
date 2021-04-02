@@ -11,9 +11,9 @@ from transformers import (
 )
 
 from constants import (
-    MODEL_FOLDER, MODEL_PATH, MODEL_TYPE, 
-    SEC_LABEL, NONSEC_LABEL, CONFIG_URL,
-    PT_PATH, CONFIG_PATH, PT_URL,
+    MODEL_FOLDER, MODEL_PATH, MODEL_TYPE,
+    SEC_LABEL, MODEL_CONFIG_URL,
+    MODEL_PT_PATH, MODEL_CONFIG_PATH, MODEL_PT_URL,
 )   
 from pdf_processing import filter_line, retrieve_lines_from_pdf_file, preprocess
 from predict import predict, process_predictions
@@ -33,8 +33,8 @@ def download_model():
        return
 
     os.mkdir(MODEL_PATH)
-    download_file_and_save(CONFIG_URL, CONFIG_PATH)        
-    download_file_and_save(PT_URL, PT_PATH)        
+    download_file_and_save(MODEL_CONFIG_URL, MODEL_CONFIG_PATH)        
+    download_file_and_save(MODEL_PT_URL, MODEL_PT_PATH)        
 
 
 @st.cache()

@@ -11,8 +11,7 @@ from sklearn.metrics import (
 )
 from sklearn.model_selection import StratifiedKFold
 from transformers import (
-    EarlyStoppingCallback, T5Tokenizer,
-    T5ForConditionalGeneration,
+    T5Tokenizer, T5ForConditionalGeneration,
     Trainer, TrainingArguments,
 )
 
@@ -20,6 +19,7 @@ from dataset import (
     idxs_to_label, prepare_labels_mappings,
     read_data, read_dataframe, SecReqDataset,
 )
+from callback import EarlyStoppingCallback
 from constants import (
     SEC_LABEL, NONSEC_LABEL, SEC_IDX, NON_SEC_IDX, COLUMNS,
     TRAINING_APPLICATION_NAME, TMP_FOLDER_NAME, YAML_CONFIG_PATH,
@@ -85,7 +85,7 @@ def train(model_type, epochs):
     train_dataset  = torch.load(TRAIN_DATASET_PATH)
     valid_dataset = torch.load(VALID_DATASET_PATH)
 
-    early_stopping_callback = EarlyStoppingCallback(3, 0.1)
+    early_stopping_callback = EarlyStoppingCallback()
 
     logger.info("===Started model training===")
     trainer = Trainer(
@@ -94,7 +94,7 @@ def train(model_type, epochs):
         train_dataset=train_dataset,
         eval_dataset=valid_dataset,
         compute_metrics=compute_metrics,
-        # callbacks=[early_stopping_callback],
+        callbacks=[early_stopping_callback],
     )
 
     trainer.train()

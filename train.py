@@ -25,7 +25,7 @@ from constants import (
     TRAINING_APPLICATION_NAME, TMP_FOLDER_NAME, YAML_CONFIG_PATH,
     TRAIN_DATASET_PATH, VALID_DATASET_PATH, MODEL_FOLDER,
 )
-from metrics import f1_score_with_invalid
+from metrics import append_metrics_to_file
 
 
 logger = logging.getLogger(TRAINING_APPLICATION_NAME)
@@ -141,17 +141,22 @@ def cross_evaluation(model_type, full_train, epochs, max_len):
         for key, value in evaluation[1].items():
             metrics_with_sec[key].append(value)
 
+        append_metrics_to_file(evaluation[0], f"reverse_{metrics_file_path}")
+        append_metrics_to_file(evaluation[1], f"security_{metrics_file_path}")
+
     mean_metrics_invalid = {key: np.mean(value) for key, value in metrics_with_invalid.items()}
     metrics_with_sec = {key: np.mean(value) for key, value in metrics_with_sec.items()}
     return [mean_metrics_invalid, metrics_with_sec]
 
 
 def train_and_evaluate(model_type, train_dataframe, valid_dataframe,
-                       epochs, max_len, validation_type):
+                       epochs, max_len, validation_type, metrics_file_path):
 
     if validation_type == "p-validation":
         prepare_data(train_dataframe, valid_dataframe, model_type, max_len)
         metrics = train(model_type, epochs)
+        append_metrics_to_file(metrics[0], f"reverse_{metrics_file_path}")
+        append_metrics_to_file(metrics[1], f"security_{metrics_file_path}")
     elif validation_type == "cross-validation":
         metrics = cross_evaluation(model_type, train_dataframe, epochs, max_len)
     else:
@@ -172,10 +177,12 @@ if __name__=="__main__":
     valid_datasets = training_parameters["valid_datasets"]
     train_dataframe = read_data(datasets_path, train_datasets)
     valid_dataframe = read_data(datasets_path, valid_datasets)
+    metrics_file_path = training_parameters["metrics_file"]
     train_and_evaluate(model_type=training_parameters["model_type"],
                        train_dataframe=train_dataframe,
                        valid_dataframe=valid_dataframe,
                        epochs=training_parameters["epochs"],
                        max_len=training_parameters["max_len"],
                        validation_type=training_parameters["validation"],
+                       metrics_file_path=metrics_file_path,
                        )

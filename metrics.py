@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 import sklearn.metrics
 
 
@@ -17,3 +18,8 @@ def f1_score_with_invalid(targets, predictions):
     # For any prediction != 0 or 1, set it to the opposite of what the target is
     predictions[invalid_idx_mask] = 1 - targets[invalid_idx_mask]
     return {"f1": 100 * sklearn.metrics.f1_score(targets, predictions)}
+
+
+def append_metrics_to_file(metrics, file_path):
+    metrics_df = pd.DataFrame(metrics)
+    metrics_df.to_csv(file_path, mode="a", header=False)

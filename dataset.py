@@ -14,11 +14,11 @@ class SecReqDataset(Dataset):
   def __init__(self, original_dataframe, tokenizer, train=True, max_len=MAX_LENGTH):
     self.tokenizer = tokenizer
     self.train = train
-    self._load_dataset(original_dataframe)
     self.max_len = max_len
+    self._load_dataset(original_dataframe)
 
   def __getitem__(self, idx):
-    item = {key: torch.tensor(val[idx]) for key, val in self.data.items()}
+    item = {key: torch.Tensor(val[idx]) for key, val in self.data.items()}
     return item
 
   def __len__(self):
@@ -40,8 +40,8 @@ class SecReqDataset(Dataset):
   def _convert_to_features(self, df):
       if self.train:
         encodings = self.tokenizer.prepare_seq2seq_batch(
-            df.inputs.to_list(), 
-            df.targets.to_list(), 
+            df.inputs.to_list(),
+            df.targets.to_list(),
             max_length=self.max_len
             )
         encodings = {
@@ -87,7 +87,7 @@ def read_documents(dataset_path, document_names):
 def read_data(datasets_folder, datasets_paths):
     resulting_dataframe = pd.DataFrame(columns=COLUMNS + [DOCUMENT_COLUMN])
     for dataset, document_names in datasets_paths.items():
-        datasets_path = os.path.join(datasets_path, dataset)
+        datasets_path = os.path.join(datasets_folder, dataset)
         documents_df = read_documents(datasets_path, document_names)
         resulting_dataframe = resulting_dataframe.append(documents_df)
     return resulting_dataframe

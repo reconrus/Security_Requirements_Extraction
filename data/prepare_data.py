@@ -78,9 +78,14 @@ def read_secreq(path) -> Dict[str, pd.DataFrame]:
 def read_promise(path) -> Dict[str, pd.DataFrame]:
     data = arff.load(open(path, "r", encoding="cp1252"))
     adjust_class = lambda x: SEC_LABEL if x == "SE" else NONSEC_LABEL
-    data = [[row[1].strip(), adjust_class(row[2])] for row in data["data"]]
-    promise_dataset = pd.DataFrame(data, columns=COLUMNS)
-    return {ALL_KEY: promise_dataset}
+    data = [[row[0], row[1].strip(), adjust_class(row[2])] for row in data["data"]]
+    promise_dataset = pd.DataFrame(data, columns=['document'] + COLUMNS)
+    
+    documents = {ALL_KEY: promise_dataset[COLUMNS]}
+    for i in range(1, 11):
+        document = promise_dataset[promise_dataset['document'] == str(i)][COLUMNS]
+        documents[str(i)] = document
+    return documents
 
 
 def parse_concord_xml(path) -> pd.DataFrame:

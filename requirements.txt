@@ -1,3 +1,4 @@
+xlrd==1.2.0
 sentencepiece==0.1.95
 transformers==4.3.3
 streamlit==0.78.0

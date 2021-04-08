@@ -66,8 +66,14 @@ class SecReqDataset(Dataset):
       return encodings
 
 
-def read_dataframe(path):
+def read_dataframe(path, oversampling=False):
     dataset = pd.read_csv(path, sep="\t", dtype={"Label": str})
+    if oversampling:
+      max_size = dataset['Label'].value_counts().max()
+      lst = [dataset]
+      security = dataset[dataset["Label"] == SEC_LABEL]
+      lst.append(security.sample(max_size-len(security), replace=True))
+      dataset = pd.concat(lst)
     return dataset
 
 
@@ -75,21 +81,21 @@ def write_dataframe(df, path):
     df.to_csv(path, sep="\t")
 
 
-def read_documents(dataset_path, document_names):
+def read_documents(dataset_path, document_names, oversampling=False):
     documents = pd.DataFrame(columns=COLUMNS + [DOCUMENT_COLUMN])
     for document_name in document_names:
         document_path = os.path.join(dataset_path, f"{document_name}.csv")
-        document_df = read_dataframe(document_path)
+        document_df = read_dataframe(document_path, oversampling=oversampling)
         document_df[DOCUMENT_COLUMN] = document_name
         documents = documents.append(document_df)
     return documents
 
 
-def read_data(datasets_folder, datasets_paths):
+def read_data(datasets_folder, datasets_paths, oversampling=False):
     resulting_dataframe = pd.DataFrame(columns=COLUMNS + [DOCUMENT_COLUMN])
     for dataset, document_names in datasets_paths.items():
         datasets_path = os.path.join(datasets_folder, dataset)
-        documents_df = read_documents(datasets_path, document_names)
+        documents_df = read_documents(datasets_path, document_names, oversampling=oversampling)
         resulting_dataframe = resulting_dataframe.append(documents_df)
     return resulting_dataframe
 

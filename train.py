@@ -174,7 +174,8 @@ if __name__=="__main__":
     datasets_path = training_parameters["datasets_path"]
     train_datasets = training_parameters["train_datasets"]
     valid_datasets = training_parameters["valid_datasets"]
-    train_dataframe = read_data(datasets_path, train_datasets)
+    oversampling = training_parameters["oversampling"]
+    train_dataframe = read_data(datasets_path, train_datasets, oversampling)
     valid_dataframe = read_data(datasets_path, valid_datasets)
     metrics_file_path = training_parameters["metrics_file"]
     train_and_evaluate(model_type=training_parameters["model_type"],

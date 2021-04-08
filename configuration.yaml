@@ -4,7 +4,7 @@ max_len: 100
 model_save_name: t5-small.pt
 datasets_path: data/processed
 metrics_file: metrics.csv
-
+oversampling: true
 
 validation: cross-validation
 # cross-validation: stratified cross-validation, test_datasets are ignored

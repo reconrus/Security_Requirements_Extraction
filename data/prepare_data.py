@@ -1,6 +1,6 @@
 import os
 import re
-from functools import partial 
+from functools import partial
 from typing import Dict
 from xml.etree import ElementTree as ET
 
@@ -8,8 +8,8 @@ import arff
 import argparse
 import pandas as pd
 
-SEC_LABEL = "sec"
-NONSEC_LABEL = "nonsec"
+SEC_LABEL = "true"
+NONSEC_LABEL = "false"
 COLUMNS = ["Text", "Label"]
 ALL_KEY = "all"
 
@@ -65,7 +65,9 @@ def read_secreq(path) -> Dict[str, pd.DataFrame]:
             names=COLUMNS,
             engine="python",
         )
-        dataset['Label'].replace('xyz', 'sec', inplace=True)
+        dataset['Label'].replace('xyz', SEC_LABEL, inplace=True)
+        dataset['Label'].replace('sec', SEC_LABEL, inplace=True)
+        dataset['Label'].replace('nonsec', NONSEC_LABEL, inplace=True)
         dataset['Text'] = dataset['Text'].apply(str.strip)
         dataset = dataset.dropna()
         read_documents[filename] = dataset

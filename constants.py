@@ -19,8 +19,8 @@ MODEL_TYPE = "t5-small"
 MODEL_FILENAME = f"{MODEL_TYPE}-with-pure.pt"
 MODEL_PATH = os.path.join(MODEL_FOLDER, MODEL_FILENAME)
 
-SEC_LABEL = "sec"
-NONSEC_LABEL = "nonsec"
+SEC_LABEL = "true"
+NONSEC_LABEL = "false"
 OTHER_LABEL = "other"
 
 SEC_IDX = 1

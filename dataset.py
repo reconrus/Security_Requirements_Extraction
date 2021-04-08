@@ -68,9 +68,9 @@ class SecReqDataset(Dataset):
 
 def oversample_dataset(dataset):
     max_size = dataset['Label'].value_counts().max()
-    if max_size:
-      lst = [dataset]
-      security = dataset[dataset["Label"] == SEC_LABEL]
+    lst = [dataset]
+    security = dataset[dataset["Label"] == SEC_LABEL]
+    if len(security):
       lst.append(security.sample(max_size-len(security), replace=True))
       dataset = pd.concat(lst)
     return dataset

@@ -18,6 +18,7 @@ from transformers import (
 from dataset import (
     idxs_to_label, prepare_labels_mappings,
     read_data, read_dataframe, SecReqDataset,
+    oversample_dataset,
 )
 from callback import EarlyStoppingCallback
 from constants import (
@@ -105,12 +106,14 @@ def train(model_type, epochs):
     return [evaluation_with_invalid, evalutaion_with_sec]
 
 
-def prepare_data(train_dataframe, valid_dataframe, model_type, max_len):
+def prepare_data(train_dataframe, valid_dataframe, model_type, max_len, oversampling):
     logger.info("===Started tokenizer loading===")
     tokenizer = T5Tokenizer.from_pretrained(model_type)
     logger.info("===Finished tokenizer loading===")
 
     logger.info("===Started data preparation===")
+    if oversampling:
+        train_dataframe = oversample_dataset(train_dataframe)
     train_dataset = SecReqDataset(train_dataframe, tokenizer, True, max_len)
     valid_dataset = SecReqDataset(valid_dataframe, tokenizer, True, max_len)
 
@@ -123,7 +126,7 @@ def prepare_data(train_dataframe, valid_dataframe, model_type, max_len):
     logger.info("===Finished data preparation===")
 
 
-def cross_evaluation(model_type, full_train, epochs, max_len):
+def cross_evaluation(model_type, full_train, epochs, max_len, oversampling):
     skf = StratifiedKFold(n_splits=10)
 
     metrics_with_invalid = defaultdict(list)
@@ -132,7 +135,7 @@ def cross_evaluation(model_type, full_train, epochs, max_len):
     for train_index, valid_index in skf.split(full_train["Text"], full_train["Label"]):
         train_df = full_train.iloc[train_index]
         valid_df = full_train.iloc[valid_index]
-        prepare_data(train_df, valid_df, model_type, max_len)
+        prepare_data(train_df, valid_df, model_type, max_len, oversampling)
 
         evaluation = train(model_type, epochs)
         for key, value in evaluation[0].items():
@@ -149,15 +152,16 @@ def cross_evaluation(model_type, full_train, epochs, max_len):
 
 
 def train_and_evaluate(model_type, train_dataframe, valid_dataframe,
-                       epochs, max_len, validation_type, metrics_file_path):
+                       epochs, max_len, validation_type,
+                       metrics_file_path, oversampling):
 
     if validation_type == "p-validation":
-        prepare_data(train_dataframe, valid_dataframe, model_type, max_len)
+        prepare_data(train_dataframe, valid_dataframe, model_type, max_len, False)
         metrics = train(model_type, epochs)
         append_metrics_to_file(metrics[0], f"reverse_{metrics_file_path}")
         append_metrics_to_file(metrics[1], f"security_{metrics_file_path}")
     elif validation_type == "cross-validation":
-        metrics = cross_evaluation(model_type, train_dataframe, epochs, max_len)
+        metrics = cross_evaluation(model_type, train_dataframe, epochs, max_len, oversampling)
     else:
         logger.exception("Unsupported validation method")
 
@@ -175,7 +179,8 @@ if __name__=="__main__":
     train_datasets = training_parameters["train_datasets"]
     valid_datasets = training_parameters["valid_datasets"]
     oversampling = training_parameters["oversampling"]
-    train_dataframe = read_data(datasets_path, train_datasets, oversampling)
+    cross_validation = training_parameters["validation"] == "cross-validation"
+    train_dataframe = read_data(datasets_path, train_datasets, oversampling and not cross_validation)
     valid_dataframe = read_data(datasets_path, valid_datasets)
     metrics_file_path = training_parameters["metrics_file"]
     train_and_evaluate(model_type=training_parameters["model_type"],
@@ -185,4 +190,5 @@ if __name__=="__main__":
                        max_len=training_parameters["max_len"],
                        validation_type=training_parameters["validation"],
                        metrics_file_path=metrics_file_path,
+                       oversampling=oversampling,
                        )

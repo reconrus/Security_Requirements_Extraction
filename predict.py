@@ -112,7 +112,7 @@ def main():
     arguments = parser.parse_args()
 
     dataframe = read_dataframe(arguments.predict_dataset)
-    tokenizer = prepare_data(dataframe, arguments.model_type, arguments.max_len)
+    tokenizer = prepare_data(dataframe, arguments.model_type, arguments.max_len, False)
     predictions = predict(arguments.model_name)
     
     dataframe = process_predictions(tokenizer, predictions, dataframe)

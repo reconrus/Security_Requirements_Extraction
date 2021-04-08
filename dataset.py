@@ -66,14 +66,19 @@ class SecReqDataset(Dataset):
       return encodings
 
 
-def read_dataframe(path, oversampling=False):
-    dataset = pd.read_csv(path, sep="\t", dtype={"Label": str})
-    if oversampling:
-      max_size = dataset['Label'].value_counts().max()
+def oversample_dataset(dataset):
+    max_size = dataset['Label'].value_counts().max()
+    if max_size:
       lst = [dataset]
       security = dataset[dataset["Label"] == SEC_LABEL]
       lst.append(security.sample(max_size-len(security), replace=True))
       dataset = pd.concat(lst)
+    return dataset
+
+
+def read_dataframe(path, oversampling=False):
+    dataset = pd.read_csv(path, sep="\t", dtype={"Label": str})
+    dataset = oversample_dataset(dataset) if oversampling else dataset
     return dataset
 
 

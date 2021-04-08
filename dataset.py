@@ -67,7 +67,7 @@ class SecReqDataset(Dataset):
 
 
 def read_dataframe(path):
-    dataset = pd.read_csv(path, sep="\t")
+    dataset = pd.read_csv(path, sep="\t", dtype={"Label": str})
     return dataset
 
 

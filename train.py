@@ -80,6 +80,7 @@ def train(model_type, epochs):
         evaluation_strategy="epoch",
         metric_for_best_model='f1',
         output_dir='models',
+        load_best_model_at_end=True,
     )
 
     train_dataset  = torch.load(TRAIN_DATASET_PATH)

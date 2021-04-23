@@ -1,5 +1,6 @@
 import logging
 import os
+import shutil
 import yaml
 from collections import defaultdict
 
@@ -30,6 +31,11 @@ from metrics import append_metrics_to_file
 
 
 logger = logging.getLogger(TRAINING_APPLICATION_NAME)
+
+
+def clear_models_folder():
+    shutil.rmtree(MODEL_FOLDER)
+    os.mkdir(MODEL_FOLDER)
 
 
 def compute_metrics(pred, invalid_to_sec=False):
@@ -79,7 +85,7 @@ def train(model_type, epochs):
         weight_decay=0.01,
         evaluation_strategy="epoch",
         metric_for_best_model='f1',
-        output_dir='models',
+        output_dir=MODEL_FOLDER,
         load_best_model_at_end=True,
     )
 
@@ -127,7 +133,7 @@ def prepare_data(train_dataframe, valid_dataframe, model_type, max_len, oversamp
     logger.info("===Finished data preparation===")
 
 
-def cross_evaluation(model_type, full_train, epochs, max_len, oversampling):
+def cross_evaluation(model_type, full_train, epochs, max_len, oversampling, clear_models_dir):
     skf = StratifiedKFold(n_splits=10)
 
     metrics_with_invalid = defaultdict(list)
@@ -146,6 +152,8 @@ def cross_evaluation(model_type, full_train, epochs, max_len, oversampling):
 
         append_metrics_to_file(evaluation[0], f"reverse_{metrics_file_path}")
         append_metrics_to_file(evaluation[1], f"security_{metrics_file_path}")
+        if clear_models_dir:
+            clear_models_folder()
 
     mean_metrics_invalid = {key: np.mean(value) for key, value in metrics_with_invalid.items()}
     metrics_with_sec = {key: np.mean(value) for key, value in metrics_with_sec.items()}
@@ -154,17 +162,19 @@ def cross_evaluation(model_type, full_train, epochs, max_len, oversampling):
 
 def train_and_evaluate(model_type, train_dataframe, valid_dataframe,
                        epochs, max_len, validation_type,
-                       metrics_file_path, oversampling):
-
+                       metrics_file_path, oversampling, clear_models_dir):
     if validation_type == "p-validation":
         prepare_data(train_dataframe, valid_dataframe, model_type, max_len, False)
         metrics = train(model_type, epochs)
         append_metrics_to_file(metrics[0], f"reverse_{metrics_file_path}")
         append_metrics_to_file(metrics[1], f"security_{metrics_file_path}")
     elif validation_type == "cross-validation":
-        metrics = cross_evaluation(model_type, train_dataframe, epochs, max_len, oversampling)
+        metrics = cross_evaluation(model_type, train_dataframe, epochs, max_len, oversampling, clear_models_dir)
     else:
         logger.exception("Unsupported validation method")
+
+    if clear_models_dir:
+        clear_models_folder()
 
     print("Evaluation results: \n")
     print("Invalid predictions set as incorrect: ", metrics[0])
@@ -192,4 +202,5 @@ if __name__=="__main__":
                        validation_type=training_parameters["validation"],
                        metrics_file_path=metrics_file_path,
                        oversampling=oversampling,
+                       clear_models_dir=training_parameters["clear_models_dir"],
                        )

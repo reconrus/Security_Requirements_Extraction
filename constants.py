@@ -6,7 +6,7 @@ DOCUMENT_COLUMN = "document"
 TRAINING_APPLICATION_NAME = "training-script"
 PREDICTING_APPLICATION_NAME = "predicting-script"
 
-MODEL_FOLDER = "./models"
+MODEL_FOLDER = "models"
 
 TMP_FOLDER_NAME = "tmp"
 TRAIN_DATASET_PATH = os.path.join(TMP_FOLDER_NAME, "train_data.pt")

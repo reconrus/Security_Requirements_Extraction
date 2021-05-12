@@ -93,7 +93,7 @@ def read_promise(path) -> Dict[str, pd.DataFrame]:
     promise_dataset = pd.DataFrame(data, columns=['document'] + COLUMNS)
     
     documents = {ALL_KEY: promise_dataset[COLUMNS]}
-    for i in range(1, 11):
+    for i in range(1, 16):
         document = promise_dataset[promise_dataset['document'] == str(i)][COLUMNS]
         documents[str(i)] = document
     return documents

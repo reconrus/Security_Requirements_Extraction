@@ -7,11 +7,20 @@ from xml.etree import ElementTree as ET
 import arff
 import argparse
 import pandas as pd
+import yaml
 
-SEC_LABEL = "true"
-NONSEC_LABEL = "false"
+
 COLUMNS = ["Text", "Label"]
 ALL_KEY = "all"
+
+YAML_CONFIG_PATH = "../configuration.yaml"
+
+
+with open(YAML_CONFIG_PATH, "r") as file:
+    #TODO избавиться от этих костылей
+    training_parameters = yaml.load(file, Loader=yaml.FullLoader)
+SEC_LABEL = training_parameters["sec_label"]
+NONSEC_LABEL = training_parameters["nonsec_label"]
 
 
 def setup_parser(parser):

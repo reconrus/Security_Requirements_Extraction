@@ -16,6 +16,7 @@ from transformers import (
     Trainer, TrainingArguments,
 )
 
+import constants
 from dataset import (
     idxs_to_label, prepare_labels_mappings,
     read_data, read_dataframe, SecReqDataset,
@@ -194,6 +195,8 @@ if __name__=="__main__":
     train_dataframe = read_data(datasets_path, train_datasets, oversampling and not cross_validation)
     valid_dataframe = read_data(datasets_path, valid_datasets)
     metrics_file_path = training_parameters["metrics_file"]
+    constants.SEC_LABEL = training_parameters["sec_label"]
+    constants.NONSEC_LABEL = training_parameters["nonsec_label"]
     train_and_evaluate(model_type=training_parameters["model_type"],
                        train_dataframe=train_dataframe,
                        valid_dataframe=valid_dataframe,

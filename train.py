@@ -101,7 +101,8 @@ def prepare_data(train_dataframe: pd.DataFrame,
 
 def cross_evaluation(model_type: str, full_train: pd.DataFrame,
                      epochs: int, max_len: int, oversampling: bool,
-                     clear_models_dir: bool, labels_data: LabelsData):
+                     clear_models_dir: bool, labels_data: LabelsData,
+                     metrics_file_path: str):
     skf = StratifiedKFold(n_splits=10)
 
     metrics_with_invalid = defaultdict(list)
@@ -144,7 +145,8 @@ def train_and_evaluate(model_type: str, train_dataframe: pd.DataFrame,
                                    max_len=max_len,
                                    oversampling=oversampling, 
                                    clear_models_dir=clear_models_dir, 
-                                   labels_data=labels_data)
+                                   labels_data=labels_data,
+                                   metrics_file_path=metrics_file_path)
     else:
         logger.exception("Unsupported validation method")
 

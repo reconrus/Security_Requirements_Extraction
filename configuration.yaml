@@ -6,6 +6,7 @@ datasets_path: data/processed
 metrics_file: metrics.csv
 oversampling: true
 clear_models_dir: true
+early_stopping: true
 
 sec_label: "true"
 nonsec_label: "false"

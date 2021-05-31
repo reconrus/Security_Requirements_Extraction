@@ -1,5 +1,6 @@
 import logging
 import os
+import random
 import shutil
 from collections import defaultdict
 
@@ -39,7 +40,7 @@ def load_model(model_path: str, device: str = "cuda"):
     return model
 
 
-def train(model_type: str, epochs: int, labels_data: LabelsData):
+def train(model_type: str, epochs: int, labels_data: LabelsData, seed: int):
     model = load_model(model_type)
 
     training_args = TrainingArguments(
@@ -50,6 +51,7 @@ def train(model_type: str, epochs: int, labels_data: LabelsData):
         metric_for_best_model='f1',
         output_dir=MODEL_FOLDER,
         load_best_model_at_end=True,
+        seed=seed,
     )
 
     train_dataset  = torch.load(TRAIN_DATASET_PATH)
@@ -76,7 +78,7 @@ def train(model_type: str, epochs: int, labels_data: LabelsData):
     return [evaluation_with_invalid, evalutaion_with_sec]
 
 
-def prepare_data(train_dataframe: pd.DataFrame, 
+def prepare_data(train_dataframe: pd.DataFrame,
                  valid_dataframe: pd.DataFrame,
                  model_type: str, max_len: int,
                  oversampling: bool, labels_data: LabelsData):
@@ -102,7 +104,7 @@ def prepare_data(train_dataframe: pd.DataFrame,
 def cross_evaluation(model_type: str, full_train: pd.DataFrame,
                      epochs: int, max_len: int, oversampling: bool,
                      clear_models_dir: bool, labels_data: LabelsData,
-                     metrics_file_path: str):
+                     metrics_file_path: str, seed: int):
     skf = StratifiedKFold(n_splits=10)
 
     metrics_with_invalid = defaultdict(list)
@@ -113,7 +115,7 @@ def cross_evaluation(model_type: str, full_train: pd.DataFrame,
         valid_df = full_train.iloc[valid_index]
         prepare_data(train_df, valid_df, model_type, max_len, oversampling, labels_data)
 
-        evaluation = train(model_type, epochs, labels_data)
+        evaluation = train(model_type, epochs, labels_data, seed)
         for key, value in evaluation[0].items():
             metrics_with_invalid[key].append(value)
         for key, value in evaluation[1].items():
@@ -132,21 +134,23 @@ def cross_evaluation(model_type: str, full_train: pd.DataFrame,
 def train_and_evaluate(model_type: str, train_dataframe: pd.DataFrame,
                        valid_dataframe: pd.DataFrame, epochs: int,
                        max_len: int, validation_type: str, metrics_file_path: str,
-                       oversampling: bool, clear_models_dir: bool, labels_data: LabelsData):
+                       oversampling: bool, clear_models_dir: bool, 
+                       labels_data: LabelsData, seed: int):
     if validation_type == "p-validation":
         prepare_data(train_dataframe, valid_dataframe, model_type, max_len, False, labels_data)
-        metrics = train(model_type, epochs, labels_data)
+        metrics = train(model_type, epochs, labels_data, seed)
         append_metrics_to_file(metrics[0], f"reverse_{metrics_file_path}")
         append_metrics_to_file(metrics[1], f"security_{metrics_file_path}")
     elif validation_type == "cross-validation":
-        metrics = cross_evaluation(model_type=model_type, 
+        metrics = cross_evaluation(model_type=model_type,
                                    full_train=train_dataframe,
                                    epochs=epochs,
                                    max_len=max_len,
-                                   oversampling=oversampling, 
-                                   clear_models_dir=clear_models_dir, 
+                                   oversampling=oversampling,
+                                   clear_models_dir=clear_models_dir,
                                    labels_data=labels_data,
-                                   metrics_file_path=metrics_file_path)
+                                   metrics_file_path=metrics_file_path,
+                                   seed=seed)
     else:
         logger.exception("Unsupported validation method")
 
@@ -158,8 +162,16 @@ def train_and_evaluate(model_type: str, train_dataframe: pd.DataFrame,
     print("Invalid predictions set as security: ", metrics[1])
 
 
+def set_seeds(seed):
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    torch.use_deterministic_algorithms(True)
+
+
 if __name__=="__main__":
     configuration = TrainConfiguration.from_yaml(YAML_CONFIG_PATH)
+    set_seeds(configuration.seed)
     train_and_evaluate(model_type=configuration.model_type,
                        train_dataframe=configuration.train_dataframe,
                        valid_dataframe=configuration.valid_dataframe,
@@ -170,4 +182,5 @@ if __name__=="__main__":
                        oversampling=configuration.oversampling,
                        clear_models_dir=configuration.clear_models_dir,
                        labels_data=configuration.labels_data,
+                       seed=configuration.seed,
                        )

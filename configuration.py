@@ -18,6 +18,7 @@ class TrainConfiguration:
     oversampling: bool
     clear_models_dir: bool
     early_stopping: bool
+    seed: int
     validation_type: str
     train_dataframe: pd.DataFrame
     valid_dataframe: pd.DataFrame
@@ -41,6 +42,7 @@ class TrainConfiguration:
         clear_models_dir = training_parameters["clear_models_dir"],
         validation_type = training_parameters["validation"]
         early_stopping = training_parameters["early_stopping"]
+        seed = training_parameters["seed"]
         cross_validation = validation_type == "cross-validation"
 
         labels_data = LabelsData(training_parameters["sec_label"], training_parameters["nonsec_label"])
@@ -62,6 +64,7 @@ class TrainConfiguration:
             oversampling=oversampling,
             clear_models_dir=clear_models_dir,
             early_stopping=early_stopping,
+            seed=seed,
             validation_type=validation_type,
             train_dataframe=train_dataframe,
             valid_dataframe=valid_dataframe,

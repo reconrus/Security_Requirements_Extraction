@@ -7,6 +7,7 @@ metrics_file: metrics.csv
 oversampling: true
 clear_models_dir: true
 early_stopping: true
+seed: 42
 
 sec_label: "true"
 nonsec_label: "false"

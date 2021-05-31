@@ -1,20 +1,36 @@
 import os
+from dataclasses import dataclass
+from typing import Dict, List, Tuple
 
 import pandas as pd
-import torch
 from torch.utils.data import Dataset
 
 from constants import (
   MAX_LENGTH, SEC_IDX, NON_SEC_IDX,
-  SEC_LABEL, NONSEC_LABEL, 
   COLUMNS, DOCUMENT_COLUMN,
 )
 
+
+class LabelsData:
+    def __init__(self, sec_label, non_sec_label):
+        self.sec_label = sec_label
+        self.non_sec_label = non_sec_label
+        self.idxs_to_label = {}
+
+    def prepare_labels_mappings(self, tokenizer):
+        labels = [self.sec_label, self.non_sec_label]
+        sec_idxs, non_sec_idxs = tokenizer.prepare_seq2seq_batch(labels)['input_ids']
+        self.idxs_to_label[tuple(sec_idxs)] = SEC_IDX
+        self.idxs_to_label[tuple(non_sec_idxs)] = NON_SEC_IDX
+
+
 class SecReqDataset(Dataset):
-  def __init__(self, original_dataframe, tokenizer, train=True, max_len=MAX_LENGTH):
+  def __init__(self, original_dataframe: pd.DataFrame, tokenizer, 
+               labels_data: LabelsData, train: bool = True, max_len: int = MAX_LENGTH):
     self.tokenizer = tokenizer
     self.train = train
     self.max_len = max_len
+    self.labels_data = labels_data
     self._load_dataset(original_dataframe)
 
   def __getitem__(self, idx):
@@ -59,26 +75,26 @@ class SecReqDataset(Dataset):
             return_tensors="pt"
             )
         encodings = {
-            'input_ids': encodings['input_ids'], 
+            'input_ids': encodings['input_ids'],
             'attention_mask': encodings['attention_mask'],
         }
 
       return encodings
 
 
-def oversample_dataset(dataset):
+def oversample_dataset(dataset: pd.DataFrame, labels_data: LabelsData):
     max_size = dataset['Label'].value_counts().max()
     lst = [dataset]
-    security = dataset[dataset["Label"] == SEC_LABEL]
+    security = dataset[dataset["Label"] == labels_data.sec_label]
     if len(security):
       lst.append(security.sample(max_size-len(security), replace=True))
       dataset = pd.concat(lst)
     return dataset
 
 
-def read_dataframe(path, oversampling=False):
+def read_dataframe(path: str, labels_data: LabelsData, oversampling: bool = False):
     dataset = pd.read_csv(path, sep="\t", dtype={"Label": str})
-    dataset = oversample_dataset(dataset) if oversampling else dataset
+    dataset = oversample_dataset(dataset, labels_data) if oversampling else dataset
     return dataset
 
 
@@ -86,30 +102,22 @@ def write_dataframe(df, path):
     df.to_csv(path, sep="\t")
 
 
-def read_documents(dataset_path, document_names, oversampling=False):
+def read_documents(dataset_path: str, document_names: List[str],
+                   labels_data: LabelsData, oversampling: bool = False):
     documents = pd.DataFrame(columns=COLUMNS + [DOCUMENT_COLUMN])
     for document_name in document_names:
         document_path = os.path.join(dataset_path, f"{document_name}.csv")
-        document_df = read_dataframe(document_path, oversampling=oversampling)
+        document_df = read_dataframe(document_path, labels_data, oversampling=oversampling)
         document_df[DOCUMENT_COLUMN] = document_name
         documents = documents.append(document_df)
     return documents
 
 
-def read_data(datasets_folder, datasets_paths, oversampling=False):
+def read_data(datasets_folder: str, datasets_paths: List[str],
+              labels_data: LabelsData, oversampling: bool = False):
     resulting_dataframe = pd.DataFrame(columns=COLUMNS + [DOCUMENT_COLUMN])
     for dataset, document_names in datasets_paths.items():
         datasets_path = os.path.join(datasets_folder, dataset)
-        documents_df = read_documents(datasets_path, document_names, oversampling=oversampling)
+        documents_df = read_documents(datasets_path, document_names, labels_data, oversampling=oversampling)
         resulting_dataframe = resulting_dataframe.append(documents_df)
     return resulting_dataframe
-
-
-idxs_to_label = {}
-
-def prepare_labels_mappings(tokenizer):
-    global idxs_to_label
-    labels = [SEC_LABEL, NONSEC_LABEL]
-    sec_idxs, non_sec_idxs = tokenizer.prepare_seq2seq_batch(labels)['input_ids']
-    idxs_to_label[tuple(sec_idxs)] = SEC_IDX
-    idxs_to_label[tuple(non_sec_idxs)] = NON_SEC_IDX

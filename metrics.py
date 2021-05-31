@@ -1,6 +1,11 @@
 import numpy as np
 import pandas as pd
-import sklearn.metrics
+from sklearn.metrics import (
+    accuracy_score, f1_score, precision_recall_fscore_support
+)
+
+from constants import SEC_IDX
+from dataset import LabelsData
 
 
 def f1_score_with_invalid(targets, predictions):
@@ -17,9 +22,40 @@ def f1_score_with_invalid(targets, predictions):
     invalid_idx_mask = np.logical_and(predictions != 0, predictions != 1)
     # For any prediction != 0 or 1, set it to the opposite of what the target is
     predictions[invalid_idx_mask] = 1 - targets[invalid_idx_mask]
-    return {"f1": 100 * sklearn.metrics.f1_score(targets, predictions)}
+    return {"f1": 100 * f1_score(targets, predictions)}
 
 
 def append_metrics_to_file(metrics, file_path):
     metrics_df = pd.DataFrame({key: [value] for key, value in metrics.items()})
     metrics_df.to_csv(file_path, mode="a", header=False)
+
+
+def compute_metrics(pred, labels_data: LabelsData, invalid_to_sec=False):
+    """
+    :param invalid_to_sec: map invalid prediction to security or not.
+        True assumes that it is better to have excess non-security requirements
+        labeled as security than miss any security variable
+    """
+    labels = pred.label_ids
+    preds = pred.predictions[0].argmax(-1)
+
+    def _convert_to_labels(idxs):
+        label_to_set = SEC_IDX if invalid_to_sec else -1
+        label = labels_data.idxs_to_label.get(tuple(idxs), label_to_set)
+        return label
+
+    targets = np.fromiter(map(_convert_to_labels, labels), dtype=np.int32)
+    predictions  = np.fromiter(map(_convert_to_labels, preds), dtype=np.int32)
+
+    invalid_idx_mask = predictions == -1
+    predictions[invalid_idx_mask] = 1 - targets[invalid_idx_mask]
+
+    acc = accuracy_score(targets, predictions)
+    precision, recall, f1, _ = precision_recall_fscore_support(targets, predictions, average='binary')
+
+    return {
+        'accuracy': acc,
+        'f1': f1,
+        'precision': precision,
+        'recall': recall,
+    }

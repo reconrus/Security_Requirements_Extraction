@@ -1,34 +1,27 @@
 import logging
 import os
 import shutil
-import yaml
 from collections import defaultdict
 
 import numpy as np
 import pandas as pd
 import torch
-from sklearn.metrics import (
-    accuracy_score, precision_recall_fscore_support
-)
 from sklearn.model_selection import StratifiedKFold
 from transformers import (
     T5Tokenizer, T5ForConditionalGeneration,
     Trainer, TrainingArguments,
 )
 
-import constants
 from dataset import (
-    idxs_to_label, prepare_labels_mappings,
-    read_data, read_dataframe, SecReqDataset,
-    oversample_dataset,
+    oversample_dataset, LabelsData, SecReqDataset,
 )
 from callback import EarlyStoppingCallback
+from configuration import TrainConfiguration
 from constants import (
-    SEC_LABEL, NONSEC_LABEL, SEC_IDX, NON_SEC_IDX, COLUMNS,
     TRAINING_APPLICATION_NAME, TMP_FOLDER_NAME, YAML_CONFIG_PATH,
     TRAIN_DATASET_PATH, VALID_DATASET_PATH, MODEL_FOLDER,
 )
-from metrics import append_metrics_to_file
+from metrics import append_metrics_to_file, compute_metrics
 
 
 logger = logging.getLogger(TRAINING_APPLICATION_NAME)
@@ -39,45 +32,14 @@ def clear_models_folder():
     os.mkdir(MODEL_FOLDER)
 
 
-def compute_metrics(pred, invalid_to_sec=False):
-    """
-    :param invalid_to_sec: map invalid prediction to security or not.
-        True assumes that it is better to have excess non-security requirements
-        labeled as security than miss any security variable
-    """
-    labels = pred.label_ids
-    preds = pred.predictions[0].argmax(-1)
-
-    def _convert_to_labels(idxs):
-        label_to_set = SEC_IDX if invalid_to_sec else -1
-        label = idxs_to_label.get(tuple(idxs), label_to_set)
-        return label
-
-    targets = np.fromiter(map(_convert_to_labels, labels), dtype=np.int32)
-    predictions  = np.fromiter(map(_convert_to_labels, preds), dtype=np.int32)
-
-    invalid_idx_mask = predictions == -1
-    predictions[invalid_idx_mask] = 1 - targets[invalid_idx_mask]
-
-    acc = accuracy_score(targets, predictions)
-    precision, recall, f1, _ = precision_recall_fscore_support(targets, predictions, average='binary')
-
-    return {
-        'accuracy': acc,
-        'f1': f1,
-        'precision': precision,
-        'recall': recall,
-    }
-
-
-def load_model(model_path, device="cuda"):
+def load_model(model_path: str, device: str = "cuda"):
     logger.info("===Started model loading===")
     model = T5ForConditionalGeneration.from_pretrained(model_path).to(device)
     logger.info("===Finished model loading===")
     return model
 
 
-def train(model_type, epochs):
+def train(model_type: str, epochs: int, labels_data: LabelsData):
     model = load_model(model_type)
 
     training_args = TrainingArguments(
@@ -101,7 +63,7 @@ def train(model_type, epochs):
         args=training_args,
         train_dataset=train_dataset,
         eval_dataset=valid_dataset,
-        compute_metrics=compute_metrics,
+        compute_metrics=lambda x: compute_metrics(x, labels_data),
         callbacks=[early_stopping_callback],
     )
 
@@ -109,19 +71,22 @@ def train(model_type, epochs):
     logger.info("===Finished model training===")
 
     evaluation_with_invalid = trainer.evaluate()
-    trainer.compute_metrics = lambda x: compute_metrics(x, invalid_to_sec=True)
+    trainer.compute_metrics = lambda x: compute_metrics(x, labels_data, invalid_to_sec=True)
     evalutaion_with_sec = trainer.evaluate()
     return [evaluation_with_invalid, evalutaion_with_sec]
 
 
-def prepare_data(train_dataframe, valid_dataframe, model_type, max_len, oversampling):
+def prepare_data(train_dataframe: pd.DataFrame, 
+                 valid_dataframe: pd.DataFrame,
+                 model_type: str, max_len: int,
+                 oversampling: bool, labels_data: LabelsData):
     logger.info("===Started tokenizer loading===")
     tokenizer = T5Tokenizer.from_pretrained(model_type)
     logger.info("===Finished tokenizer loading===")
 
     logger.info("===Started data preparation===")
     if oversampling:
-        train_dataframe = oversample_dataset(train_dataframe)
+        train_dataframe = oversample_dataset(train_dataframe, labels_data)
     train_dataset = SecReqDataset(train_dataframe, tokenizer, True, max_len)
     valid_dataset = SecReqDataset(valid_dataframe, tokenizer, True, max_len)
 
@@ -130,11 +95,13 @@ def prepare_data(train_dataframe, valid_dataframe, model_type, max_len, oversamp
     torch.save(train_dataset, TRAIN_DATASET_PATH)
     torch.save(valid_dataset, VALID_DATASET_PATH)
 
-    prepare_labels_mappings(tokenizer)
+    labels_data.prepare_labels_mappings(tokenizer)
     logger.info("===Finished data preparation===")
 
 
-def cross_evaluation(model_type, full_train, epochs, max_len, oversampling, clear_models_dir):
+def cross_evaluation(model_type: str, full_train: pd.DataFrame,
+                     epochs: int, max_len: int, oversampling: bool,
+                     clear_models_dir: bool, labels_data: LabelsData):
     skf = StratifiedKFold(n_splits=10)
 
     metrics_with_invalid = defaultdict(list)
@@ -143,9 +110,9 @@ def cross_evaluation(model_type, full_train, epochs, max_len, oversampling, clea
     for train_index, valid_index in skf.split(full_train["Text"], full_train["Label"]):
         train_df = full_train.iloc[train_index]
         valid_df = full_train.iloc[valid_index]
-        prepare_data(train_df, valid_df, model_type, max_len, oversampling)
+        prepare_data(train_df, valid_df, model_type, max_len, oversampling, labels_data)
 
-        evaluation = train(model_type, epochs)
+        evaluation = train(model_type, epochs, labels_data)
         for key, value in evaluation[0].items():
             metrics_with_invalid[key].append(value)
         for key, value in evaluation[1].items():
@@ -161,16 +128,23 @@ def cross_evaluation(model_type, full_train, epochs, max_len, oversampling, clea
     return [mean_metrics_invalid, metrics_with_sec]
 
 
-def train_and_evaluate(model_type, train_dataframe, valid_dataframe,
-                       epochs, max_len, validation_type,
-                       metrics_file_path, oversampling, clear_models_dir):
+def train_and_evaluate(model_type: str, train_dataframe: pd.DataFrame,
+                       valid_dataframe: pd.DataFrame, epochs: int,
+                       max_len: int, validation_type: str, metrics_file_path: str,
+                       oversampling: bool, clear_models_dir: bool, labels_data: LabelsData):
     if validation_type == "p-validation":
-        prepare_data(train_dataframe, valid_dataframe, model_type, max_len, False)
-        metrics = train(model_type, epochs)
+        prepare_data(train_dataframe, valid_dataframe, model_type, max_len, False, labels_data)
+        metrics = train(model_type, epochs, labels_data)
         append_metrics_to_file(metrics[0], f"reverse_{metrics_file_path}")
         append_metrics_to_file(metrics[1], f"security_{metrics_file_path}")
     elif validation_type == "cross-validation":
-        metrics = cross_evaluation(model_type, train_dataframe, epochs, max_len, oversampling, clear_models_dir)
+        metrics = cross_evaluation(model_type=model_type, 
+                                   full_train=train_dataframe,
+                                   epochs=epochs,
+                                   max_len=max_len,
+                                   oversampling=oversampling, 
+                                   clear_models_dir=clear_models_dir, 
+                                   labels_data=labels_data)
     else:
         logger.exception("Unsupported validation method")
 
@@ -183,27 +157,15 @@ def train_and_evaluate(model_type, train_dataframe, valid_dataframe,
 
 
 if __name__=="__main__":
-    with open(YAML_CONFIG_PATH, "r") as file:
-        # The FullLoader parameter handles the conversion from YAML
-        # scalar values to Python the dictionary format
-        training_parameters = yaml.load(file, Loader=yaml.FullLoader)
-    datasets_path = training_parameters["datasets_path"]
-    train_datasets = training_parameters["train_datasets"]
-    valid_datasets = training_parameters["valid_datasets"]
-    oversampling = training_parameters["oversampling"]
-    cross_validation = training_parameters["validation"] == "cross-validation"
-    train_dataframe = read_data(datasets_path, train_datasets, oversampling and not cross_validation)
-    valid_dataframe = read_data(datasets_path, valid_datasets)
-    metrics_file_path = training_parameters["metrics_file"]
-    constants.SEC_LABEL = training_parameters["sec_label"]
-    constants.NONSEC_LABEL = training_parameters["nonsec_label"]
-    train_and_evaluate(model_type=training_parameters["model_type"],
-                       train_dataframe=train_dataframe,
-                       valid_dataframe=valid_dataframe,
-                       epochs=training_parameters["epochs"],
-                       max_len=training_parameters["max_len"],
-                       validation_type=training_parameters["validation"],
-                       metrics_file_path=metrics_file_path,
-                       oversampling=oversampling,
-                       clear_models_dir=training_parameters["clear_models_dir"],
+    configuration = TrainConfiguration.from_yaml(YAML_CONFIG_PATH)
+    train_and_evaluate(model_type=configuration.model_type,
+                       train_dataframe=configuration.train_dataframe,
+                       valid_dataframe=configuration.valid_dataframe,
+                       epochs=configuration.epochs,
+                       max_len=configuration.max_len,
+                       validation_type=configuration.validation_type,
+                       metrics_file_path=configuration.metrics_file_path,
+                       oversampling=configuration.oversampling,
+                       clear_models_dir=configuration.clear_models_dir,
+                       labels_data=configuration.labels_data,
                        )

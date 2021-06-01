@@ -1,10 +1,23 @@
 from dataclasses import dataclass
-from typing import List
+from typing import Dict, List
 
-import pandas as pd
 import yaml
 
 from dataset import read_data, LabelsData
+
+
+class Datasets:
+    def __init__(self, config_path: str, datasets_path: str, labels_data: LabelsData, oversample: bool):
+        with open(config_path, "r") as file:
+            # The FullLoader parameter handles the conversion from YAML
+            # scalar values to Python the dictionary format
+            parameters = yaml.load(file, Loader=yaml.FullLoader)
+    
+        self.train_datasets = parameters.train_datasets
+        self.valid_datasets = parameters.valid_datasets
+
+        self.train_dataframe = read_data(datasets_path, self.train_datasets, labels_data, oversample)
+        self.valid_dataframe = read_data(datasets_path, self.valid_datasets, labels_data)
 
 
 @dataclass
@@ -13,17 +26,14 @@ class TrainConfiguration:
     epochs: int
     max_len: int
     datasets_path: str
-    train_datasets: List[str]
-    valid_datasets: List[str]
     oversampling: bool
     clear_models_dir: bool
     early_stopping: bool
     seed: int
     validation_type: str
-    train_dataframe: pd.DataFrame
-    valid_dataframe: pd.DataFrame
     metrics_file_path: str
     labels_data: LabelsData
+    datasets: Datasets
 
     @staticmethod
     def from_yaml(config_path: str):
@@ -36,8 +46,6 @@ class TrainConfiguration:
         epochs = training_parameters["epochs"]
         max_len = training_parameters["max_len"]
         datasets_path = training_parameters["datasets_path"]
-        train_datasets = training_parameters["train_datasets"]
-        valid_datasets = training_parameters["valid_datasets"]
         oversampling = training_parameters["oversampling"]
         clear_models_dir = training_parameters["clear_models_dir"],
         validation_type = training_parameters["validation"]
@@ -47,29 +55,26 @@ class TrainConfiguration:
 
         labels_data = LabelsData(training_parameters["sec_label"], training_parameters["nonsec_label"])
 
-        train_dataframe = read_data(
-            datasets_path, train_datasets, labels_data,
-            oversampling and not cross_validation)
-        valid_dataframe = read_data(datasets_path, valid_datasets, labels_data)
-        
         metrics_file_path = training_parameters["metrics_file"]
+
+        datasets = Datasets(config_path=training_parameters.datasets_config_path,
+                            datasets_path=datasets_path,
+                            labels_data=labels_data,
+                            oversample=oversampling and not cross_validation)
 
         configuration = TrainConfiguration(
             model_type=model_type,
             epochs=epochs,
             max_len=max_len,
             datasets_path=datasets_path,
-            train_datasets=train_datasets,
-            valid_datasets=valid_datasets,
             oversampling=oversampling,
             clear_models_dir=clear_models_dir,
             early_stopping=early_stopping,
             seed=seed,
             validation_type=validation_type,
-            train_dataframe=train_dataframe,
-            valid_dataframe=valid_dataframe,
             metrics_file_path=metrics_file_path,
             labels_data=labels_data,
+            datasets=datasets,
         )
 
         return configuration

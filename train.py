@@ -2,6 +2,7 @@ import logging
 import os
 import random
 import shutil
+import sys
 from collections import defaultdict
 
 import numpy as np
@@ -19,7 +20,7 @@ from dataset import (
 from callback import EarlyStoppingCallback
 from configuration import TrainConfiguration
 from constants import (
-    TRAINING_APPLICATION_NAME, TMP_FOLDER_NAME, YAML_CONFIG_PATH,
+    TRAINING_APPLICATION_NAME, TMP_FOLDER_NAME,
     TRAIN_DATASET_PATH, VALID_DATASET_PATH, MODEL_FOLDER,
 )
 from metrics import append_metrics_to_file, compute_metrics
@@ -170,11 +171,12 @@ def set_seeds(seed):
 
 
 if __name__=="__main__":
-    configuration = TrainConfiguration.from_yaml(YAML_CONFIG_PATH)
+    config_path = sys.argv[1]
+    configuration = TrainConfiguration.from_yaml(config_path)
     set_seeds(configuration.seed)
     train_and_evaluate(model_type=configuration.model_type,
-                       train_dataframe=configuration.train_dataframe,
-                       valid_dataframe=configuration.valid_dataframe,
+                       train_dataframe=configuration.datasets.train_dataframe,
+                       valid_dataframe=configuration.datasets.valid_dataframe,
                        epochs=configuration.epochs,
                        max_len=configuration.max_len,
                        validation_type=configuration.validation_type,

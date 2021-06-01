@@ -1,0 +1,7 @@
+train_datasets:
+  secreq:
+    - CPN
+    - GPS
+valid_datasets:
+  secreq:
+    - ePurse-selective

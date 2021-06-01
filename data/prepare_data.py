@@ -1,5 +1,6 @@
 import os
 import re
+import sys
 from functools import partial
 from typing import Dict
 from xml.etree import ElementTree as ET
@@ -13,17 +14,15 @@ import yaml
 COLUMNS = ["Text", "Label"]
 ALL_KEY = "all"
 
-YAML_CONFIG_PATH = "../configuration.yaml"
-
-
-with open(YAML_CONFIG_PATH, "r") as file:
-    #TODO избавиться от этих костылей
-    training_parameters = yaml.load(file, Loader=yaml.FullLoader)
-SEC_LABEL = training_parameters["sec_label"]
-NONSEC_LABEL = training_parameters["nonsec_label"]
+labels = {}
 
 
 def setup_parser(parser):
+    parser.add_argument(
+        "--config_path",
+        type=str,
+        help="Path to YAML config where labels are provided"
+    )
     parser.add_argument(
         "--sec_req",
         default="./Datasets/SecReq",
@@ -74,9 +73,9 @@ def read_secreq(path) -> Dict[str, pd.DataFrame]:
             names=COLUMNS,
             engine="python",
         )
-        dataset['Label'].replace('xyz', SEC_LABEL, inplace=True)
-        dataset['Label'].replace('sec', SEC_LABEL, inplace=True)
-        dataset['Label'].replace('nonsec', NONSEC_LABEL, inplace=True)
+        dataset['Label'].replace('xyz', labels['sec'], inplace=True)
+        dataset['Label'].replace('sec', labels['sec'], inplace=True)
+        dataset['Label'].replace('nonsec', labels['nonsec'], inplace=True)
         dataset['Text'] = dataset['Text'].apply(str.strip)
         dataset = dataset.dropna()
         read_documents[filename] = dataset
@@ -88,7 +87,7 @@ def read_secreq(path) -> Dict[str, pd.DataFrame]:
 
 def read_promise(path) -> Dict[str, pd.DataFrame]:
     data = arff.load(open(path, "r", encoding="cp1252"))
-    adjust_class = lambda x: SEC_LABEL if x == "SE" else NONSEC_LABEL
+    adjust_class = lambda x: labels['sec'] if x == "SE" else labels['nonsec']
     data = [[row[0], row[1].strip(), adjust_class(row[2])] for row in data["data"]]
     promise_dataset = pd.DataFrame(data, columns=['document'] + COLUMNS)
     
@@ -127,7 +126,7 @@ def parse_concord_xml(path) -> pd.DataFrame:
                 if feature.find("Value").text == "yes":
                     is_requirement = True
 
-            class_ = SEC_LABEL if is_sec else NONSEC_LABEL
+            class_ = labels['sec'] if is_sec else labels['nonsec']
             if is_requirement:
                 data.append([units[start_node], class_])
     dataset = pd.DataFrame(data, columns=COLUMNS)
@@ -152,7 +151,7 @@ def read_cchit(path) -> Dict[str, pd.DataFrame]:
     cchit_data = pd.read_excel(path, header=5, usecols=columns)
     cchit_data = cchit_data[cchit_data[columns[0]].notna()].dropna()
 
-    prepare_label = lambda criteria: SEC_LABEL if "SC" in criteria else NONSEC_LABEL
+    prepare_label = lambda criteria: labels['sec'] if "SC" in criteria else labels['nonsec']
 
     def prepare_text(texts):
         if type(texts[1]) == str:
@@ -210,7 +209,7 @@ def read_owasp(path) -> Dict[str, pd.DataFrame]:
     owasp_dataset = read_owasp_v4(path_v4, owasp_dataset)
     owasp_dataset = read_owasp_v3(path_v3, owasp_dataset)
     owasp_dataset = owasp_dataset.drop_duplicates()
-    owasp_dataset["Label"] = SEC_LABEL
+    owasp_dataset["Label"] = labels['sec']
     return {ALL_KEY: owasp_dataset}
 
 
@@ -250,6 +249,15 @@ def read_and_save_datasets(args):
         os.mkdir(joined_path)
     merged_dataset_path = os.path.join(joined_path, "all.csv")
     merged_dataset.to_csv(merged_dataset_path, sep="\t", index=False)
+
+
+def set_labels(args):
+    with open(args.config_path, "r") as file:
+        #TODO избавиться от этих костылей
+        parameters = yaml.load(file, Loader=yaml.FullLoader)
+    global labels
+    labels['sec'] = parameters["sec_label"]
+    labels['nonsec'] = parameters["nonsec_label"]
 
 
 if __name__ == "__main__":

@@ -1,9 +1,9 @@
-model_type: t5-small
-epochs: 1
-max_len: 100
-model_save_name: t5-small.pt
+model_type: t5-base
+epochs: 15
+max_len: 200
+model_save_name: t5-base.pt
 datasets_path: data/processed
-metrics_file: metrics.csv
+metrics_file: base_lopo_tf_os_metrics.csv
 oversampling: true
 clear_models_dir: true
 early_stopping: true
@@ -12,8 +12,7 @@ seed: 42
 sec_label: "true"
 nonsec_label: "false"
 
-validation: cross-validation
+validation: p-validation
 # cross-validation: stratified cross-validation, test_datasets are ignored
 # p-validation: training on one projects and testing on others 
-
 datasets_config_path: configs/datasets_config.yaml

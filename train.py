@@ -182,6 +182,7 @@ if __name__=="__main__":
                        epochs=configuration.epochs,
                        max_len=configuration.max_len,
                        validation_type=configuration.validation_type,
+                       metrics_folder=configuration.metrics_folder,
                        metrics_file_path=configuration.metrics_file_path,
                        oversampling=configuration.oversampling,
                        clear_models_dir=configuration.clear_models_dir,

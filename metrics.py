@@ -1,3 +1,5 @@
+import os
+
 import numpy as np
 import pandas as pd
 from sklearn.metrics import (
@@ -27,6 +29,8 @@ def f1_score_with_invalid(targets, predictions):
 
 def append_metrics_to_file(metrics, metrics_folder, file_name):
     metrics_df = pd.DataFrame({key: [value] for key, value in metrics.items()})
+    if not os.path.exists(metrics_folder):
+        os.makedirs(metrics_folder)
     file_path = os.path.join(metrics_folder, file_name)
     metrics_df.to_csv(file_path, mode="a", header=False)
 

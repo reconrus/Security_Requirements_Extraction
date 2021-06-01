@@ -41,7 +41,6 @@ fi
 cd ..
 # [ ! -d ../env ] && python3 -m venv ../env
 # . ../env/bin/activate
-pip3 install pandas liac-arff xlrd 
 # python3 prepare_data.py --sec_req ./raw/SecReq --promise ./raw/nfr/nfr.arff \
 #     --concord ./raw/NFRClassifier/gate/application-resources/Requirements/ \
 #     --cchit ./raw/CCHIT.xls --owasp ./raw/OWASP

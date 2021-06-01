@@ -14,7 +14,7 @@ import yaml
 COLUMNS = ["Text", "Label"]
 ALL_KEY = "all"
 
-labels = {}
+LABELS = {}
 
 
 def setup_parser(parser):
@@ -73,9 +73,9 @@ def read_secreq(path) -> Dict[str, pd.DataFrame]:
             names=COLUMNS,
             engine="python",
         )
-        dataset['Label'].replace('xyz', labels['sec'], inplace=True)
-        dataset['Label'].replace('sec', labels['sec'], inplace=True)
-        dataset['Label'].replace('nonsec', labels['nonsec'], inplace=True)
+        dataset['Label'].replace('xyz', LABELS['sec'], inplace=True)
+        dataset['Label'].replace('sec', LABELS['sec'], inplace=True)
+        dataset['Label'].replace('nonsec', LABELS['nonsec'], inplace=True)
         dataset['Text'] = dataset['Text'].apply(str.strip)
         dataset = dataset.dropna()
         read_documents[filename] = dataset
@@ -87,7 +87,7 @@ def read_secreq(path) -> Dict[str, pd.DataFrame]:
 
 def read_promise(path) -> Dict[str, pd.DataFrame]:
     data = arff.load(open(path, "r", encoding="cp1252"))
-    adjust_class = lambda x: labels['sec'] if x == "SE" else labels['nonsec']
+    adjust_class = lambda x: LABELS['sec'] if x == "SE" else LABELS['nonsec']
     data = [[row[0], row[1].strip(), adjust_class(row[2])] for row in data["data"]]
     promise_dataset = pd.DataFrame(data, columns=['document'] + COLUMNS)
     
@@ -126,7 +126,7 @@ def parse_concord_xml(path) -> pd.DataFrame:
                 if feature.find("Value").text == "yes":
                     is_requirement = True
 
-            class_ = labels['sec'] if is_sec else labels['nonsec']
+            class_ = LABELS['sec'] if is_sec else LABELS['nonsec']
             if is_requirement:
                 data.append([units[start_node], class_])
     dataset = pd.DataFrame(data, columns=COLUMNS)
@@ -151,7 +151,7 @@ def read_cchit(path) -> Dict[str, pd.DataFrame]:
     cchit_data = pd.read_excel(path, header=5, usecols=columns)
     cchit_data = cchit_data[cchit_data[columns[0]].notna()].dropna()
 
-    prepare_label = lambda criteria: labels['sec'] if "SC" in criteria else labels['nonsec']
+    prepare_label = lambda criteria: LABELS['sec'] if "SC" in criteria else LABELS['nonsec']
 
     def prepare_text(texts):
         if type(texts[1]) == str:
@@ -209,7 +209,7 @@ def read_owasp(path) -> Dict[str, pd.DataFrame]:
     owasp_dataset = read_owasp_v4(path_v4, owasp_dataset)
     owasp_dataset = read_owasp_v3(path_v3, owasp_dataset)
     owasp_dataset = owasp_dataset.drop_duplicates()
-    owasp_dataset["Label"] = labels['sec']
+    owasp_dataset["Label"] = LABELS['sec']
     return {ALL_KEY: owasp_dataset}
 
 
@@ -255,9 +255,8 @@ def set_labels(args):
     with open(args.config_path, "r") as file:
         #TODO избавиться от этих костылей
         parameters = yaml.load(file, Loader=yaml.FullLoader)
-    global labels
-    labels['sec'] = parameters["sec_label"]
-    labels['nonsec'] = parameters["nonsec_label"]
+    LABELS['sec'] = parameters["sec_label"]
+    LABELS['nonsec'] = parameters["nonsec_label"]
 
 
 if __name__ == "__main__":

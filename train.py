@@ -105,7 +105,7 @@ def prepare_data(train_dataframe: pd.DataFrame,
 def cross_evaluation(model_type: str, full_train: pd.DataFrame,
                      epochs: int, max_len: int, oversampling: bool,
                      clear_models_dir: bool, labels_data: LabelsData,
-                     metrics_file_path: str, seed: int):
+                     metrics_folder: str, metrics_file_path: str, seed: int):
     skf = StratifiedKFold(n_splits=10)
 
     metrics_with_invalid = defaultdict(list)
@@ -122,8 +122,8 @@ def cross_evaluation(model_type: str, full_train: pd.DataFrame,
         for key, value in evaluation[1].items():
             metrics_with_sec[key].append(value)
 
-        append_metrics_to_file(evaluation[0], f"reverse_{metrics_file_path}")
-        append_metrics_to_file(evaluation[1], f"security_{metrics_file_path}")
+        append_metrics_to_file(evaluation[0], metrics_folder, f"reverse_{metrics_file_path}")
+        append_metrics_to_file(evaluation[1], metrics_folder, f"security_{metrics_file_path}")
         if clear_models_dir:
             clear_models_folder()
 
@@ -134,14 +134,15 @@ def cross_evaluation(model_type: str, full_train: pd.DataFrame,
 
 def train_and_evaluate(model_type: str, train_dataframe: pd.DataFrame,
                        valid_dataframe: pd.DataFrame, epochs: int,
-                       max_len: int, validation_type: str, metrics_file_path: str,
+                       max_len: int, validation_type: str,
+                       metrics_folder: str, metrics_file_path: str,
                        oversampling: bool, clear_models_dir: bool, 
                        labels_data: LabelsData, seed: int):
     if validation_type == "p-validation":
         prepare_data(train_dataframe, valid_dataframe, model_type, max_len, False, labels_data)
         metrics = train(model_type, epochs, labels_data, seed)
-        append_metrics_to_file(metrics[0], f"reverse_{metrics_file_path}")
-        append_metrics_to_file(metrics[1], f"security_{metrics_file_path}")
+        append_metrics_to_file(metrics[0], metrics_folder, f"reverse_{metrics_file_path}")
+        append_metrics_to_file(metrics[1], metrics_folder, f"security_{metrics_file_path}")
     elif validation_type == "cross-validation":
         metrics = cross_evaluation(model_type=model_type,
                                    full_train=train_dataframe,
@@ -150,6 +151,7 @@ def train_and_evaluate(model_type: str, train_dataframe: pd.DataFrame,
                                    oversampling=oversampling,
                                    clear_models_dir=clear_models_dir,
                                    labels_data=labels_data,
+                                   metrics_folder=metrics_folder,
                                    metrics_file_path=metrics_file_path,
                                    seed=seed)
     else:

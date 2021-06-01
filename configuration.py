@@ -13,8 +13,8 @@ class Datasets:
             # scalar values to Python the dictionary format
             parameters = yaml.load(file, Loader=yaml.FullLoader)
     
-        self.train_datasets = parameters.train_datasets
-        self.valid_datasets = parameters.valid_datasets
+        self.train_datasets = parameters["train_datasets"]
+        self.valid_datasets = parameters["valid_datasets"]
 
         self.train_dataframe = read_data(datasets_path, self.train_datasets, labels_data, oversample)
         self.valid_dataframe = read_data(datasets_path, self.valid_datasets, labels_data)
@@ -31,6 +31,7 @@ class TrainConfiguration:
     early_stopping: bool
     seed: int
     validation_type: str
+    metrics_folder: str
     metrics_file_path: str
     labels_data: LabelsData
     datasets: Datasets
@@ -55,9 +56,10 @@ class TrainConfiguration:
 
         labels_data = LabelsData(training_parameters["sec_label"], training_parameters["nonsec_label"])
 
+        metrics_folder = training_parameters["metrics_folder"]
         metrics_file_path = training_parameters["metrics_file"]
 
-        datasets = Datasets(config_path=training_parameters.datasets_config_path,
+        datasets = Datasets(config_path=training_parameters["datasets_config_path"],
                             datasets_path=datasets_path,
                             labels_data=labels_data,
                             oversample=oversampling and not cross_validation)
@@ -72,6 +74,7 @@ class TrainConfiguration:
             early_stopping=early_stopping,
             seed=seed,
             validation_type=validation_type,
+            metrics_folder=metrics_folder,
             metrics_file_path=metrics_file_path,
             labels_data=labels_data,
             datasets=datasets,

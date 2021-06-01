@@ -53,6 +53,8 @@ def train(model_type: str, epochs: int, labels_data: LabelsData, seed: int):
         output_dir=MODEL_FOLDER,
         load_best_model_at_end=True,
         seed=seed,
+        overwrite_output_dir=True,
+        save_total_limit=2,
     )
 
     train_dataset  = torch.load(TRAIN_DATASET_PATH)

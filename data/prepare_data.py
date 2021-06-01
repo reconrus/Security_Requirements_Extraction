@@ -266,4 +266,5 @@ if __name__ == "__main__":
     )
     setup_parser(parser)
     args = parser.parse_args()
+    set_labels(args)
     read_and_save_datasets(args)

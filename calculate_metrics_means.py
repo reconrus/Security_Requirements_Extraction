@@ -11,6 +11,8 @@ overall = pd.DataFrame(columns=["name", "acc", "precision", "recall", "f1"])
 
 for path in os.listdir("metrics"):
     full_path = os.path.join("metrics", path)
+    if os.path.isdir(full_path):
+        continue
     data = pd.read_csv(full_path, names=columns, header=None)
     data = data[data['f1'] != 0]
     overall.loc[len(overall)] = [path, 100 * data["acc"].mean(), 100 * data["precision"].mean(), 100 * data["recall"].mean(), 100 * data["f1"].mean()]

@@ -1,5 +1,5 @@
 model_type: t5-small
-epochs: 15
+epochs: 20
 max_len: 200
 model_save_name: t5-small.pt
 datasets_path: data/processed
@@ -8,7 +8,7 @@ metrics_file: small_cross_tf_metrics.csv
 oversampling: false
 clear_models_dir: true
 early_stopping: true
-seed: 42
+seed: 68732
 
 sec_label: "true"
 nonsec_label: "false"

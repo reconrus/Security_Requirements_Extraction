@@ -3,8 +3,9 @@ from transformers import TrainerCallback
 
 
 class EarlyStoppingCallback(TrainerCallback):
-    def __init__(self):
-        self.last_metric = None
+    def __init__(self, tolerance=2):
+        self.best_metric = None
+        self.tolerance = tolerance
 
     def on_evaluate(self, args, state, control, metrics, **kwargs):
         metric_to_check = args.metric_for_best_model
@@ -18,10 +19,14 @@ class EarlyStoppingCallback(TrainerCallback):
             )
             return
 
-        if self.last_metric and metric_value < self.last_metric:
-            control.should_training_stop = True
+        if self.best_metric and metric_value < self.best_metric:
+            if self.tolerance:
+                self.tolerance -= 1
+            else:
+                control.should_training_stop = True
 
-        self.last_metric = metric_value
+        if not self.best_metric or self.best_metric < metric_value:
+            self.best_metric = metric_value
 
         if metric_value == 1:
             control.should_training_stop = True

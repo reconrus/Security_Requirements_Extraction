@@ -71,7 +71,7 @@ class SecReqDataset(Dataset):
             df.inputs.to_list(), 
             padding=True,
             truncation=True, 
-            max_length=MAX_LENGTH, 
+            max_length=self.max_len, 
             return_tensors="pt"
             )
         encodings = {

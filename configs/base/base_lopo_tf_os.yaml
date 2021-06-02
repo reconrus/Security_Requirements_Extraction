@@ -1,5 +1,5 @@
 model_type: t5-base
-epochs: 15
+epochs: 20
 max_len: 200
 model_save_name: t5-base.pt
 datasets_path: data/processed

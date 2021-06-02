@@ -92,8 +92,8 @@ def prepare_data(train_dataframe: pd.DataFrame,
     logger.info("===Started data preparation===")
     if oversampling:
         train_dataframe = oversample_dataset(train_dataframe, labels_data)
-    train_dataset = SecReqDataset(train_dataframe, tokenizer, True, max_len)
-    valid_dataset = SecReqDataset(valid_dataframe, tokenizer, True, max_len)
+    train_dataset = SecReqDataset(train_dataframe, tokenizer, labels_data, True, max_len)
+    valid_dataset = SecReqDataset(valid_dataframe, tokenizer, labels_data, True, max_len)
 
     if not os.path.isdir(TMP_FOLDER_NAME):
         os.mkdir(TMP_FOLDER_NAME)
@@ -108,7 +108,7 @@ def cross_evaluation(model_type: str, full_train: pd.DataFrame,
                      epochs: int, max_len: int, oversampling: bool,
                      clear_models_dir: bool, labels_data: LabelsData,
                      metrics_folder: str, metrics_file_path: str, seed: int):
-    skf = StratifiedKFold(n_splits=10)
+    skf = StratifiedKFold(n_splits=10, shuffle=True, random_state=seed)
 
     metrics_with_invalid = defaultdict(list)
     metrics_with_sec = defaultdict(list)

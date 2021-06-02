@@ -171,7 +171,7 @@ def set_seeds(seed):
     random.seed(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)
-    torch.use_deterministic_algorithms(True)
+    # torch.use_deterministic_algorithms(True)
 
 
 if __name__=="__main__":

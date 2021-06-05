@@ -16,6 +16,9 @@ class Datasets:
         self.train_datasets = parameters["train_datasets"]
         self.valid_datasets = parameters["valid_datasets"]
 
+        print(f'Using train datasets: {self.train_datasets}')
+        print(f'Using valid datasets: {self.valid_datasets}')
+
         self.train_dataframe = read_data(datasets_path, self.train_datasets, labels_data, oversample)
         self.valid_dataframe = read_data(datasets_path, self.valid_datasets, labels_data)
 

@@ -33,4 +33,4 @@ MODEL_PT_PATH = os.path.join(MODEL_PATH, "pytorch_model.bin")
 MODEL_CONFIG_PATH = os.path.join(MODEL_PATH, "config.json")
 
 YAML_CONFIG_PATH = "configuration.yaml"
-DATASETS_CONFIG_PATH = "configs\datasets_config.yaml"
+DATASETS_CONFIG_PATH = os.path.join("configs", "datasets_config.yaml")

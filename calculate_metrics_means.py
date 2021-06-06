@@ -3,10 +3,16 @@ import pandas as pd
 from tabulate import tabulate
 
 columns = ['loss', 'acc', 'f1', 'precision', 'recall', 'runtime', 'samples_per_second', 'epoch']
-resulting_columns = ["name", "acc", "precision", "recall", "f1"]
+resulting_columns = ["Model", "Invalid predictions", "Accuracy", "Precision", "Recall", "F1-score"]
 overall_cross = pd.DataFrame(columns=resulting_columns)
 overall_lopo = pd.DataFrame(columns=resulting_columns)
 overall_pfold = pd.DataFrame(columns=resulting_columns)
+
+def parse_model_name(name):
+    model_type = 'T5-small' if 'small' in name else 'T5-base'
+    classes = '-tf' if '_tf' in name else ''
+    oversampling = '-os' if '_os' in name else ''
+    return f'{model_type}{classes}{oversampling}'
 
 for path in sorted(os.listdir("metrics")):
     full_path = os.path.join("metrics", path)
@@ -14,21 +20,28 @@ for path in sorted(os.listdir("metrics")):
         continue
     data = pd.read_csv(full_path, names=columns, header=None)
     data = data[data['f1'] != 0]
-    name = path.replace('.csv', '').replace('_', ' ')
-    if 'cross' in name:
+    if 'cross' in path:
         overall = overall_cross
-    elif 'lopo' in name:
+    elif 'lopo' in path:
         overall = overall_lopo
     else:
-        overall = overall_pfold   
-    overall.loc[len(overall)] = [name, 100 * data["acc"].mean(), 100 * data["precision"].mean(), 100 * data["recall"].mean(), 100 * data["f1"].mean()]
+        overall = overall_pfold
+    name = parse_model_name(path)
+    invalid = 'inverse' if 'reverse' in path else 'security'
+    overall.loc[len(overall)] = [name, invalid, 100 * data["acc"].mean(), 100 * data["precision"].mean(), 100 * data["recall"].mean(), 100 * data["f1"].mean()]
     # print(full_path, "f1: ", data["f1"].mean(), " precision: ", data["precision"].mean(), " recall: ", data["recall"].mean())
 
 # print("NoRBERT cross-evaluation f1: 91%, precision: 90%, recall: 92%")
 # print("NoRBERT loPo-evaluation f1: 87%, precision: 82%, recall: 92%")
-overall_cross.loc[len(overall)] = ["NoRBERT cross-evaluation", "-", 92, 90, 91]
-overall_lopo.loc[len(overall)] = ["NoRBERT loPo-evaluation", "-", 92, 82, 87]
-overall_pfold.loc[len(overall)] = ["NoRBERT pfold-evaluation", "-", 88, 92, 90]
+overall_cross = overall_cross.round(2)
+overall_lopo = overall_lopo.round(2)
+overall_pfold = overall_pfold.round(2)
+overall_cross.loc[len(overall)] = ["NoRBERT", "-", "-", 92, 90, 91]
+overall_lopo.loc[len(overall)] = ["NoRBERT", "-", "-", 92, 82, 87]
+overall_pfold.loc[len(overall)] = ["NoRBERT", "-", "-", 88, 92, 90]
 print(tabulate(overall_cross, headers = 'keys', tablefmt = 'psql'))
 print(tabulate(overall_lopo, headers = 'keys', tablefmt = 'psql'))
 print(tabulate(overall_pfold, headers = 'keys', tablefmt = 'psql'))
+overall_cross.to_latex('metrics/tables/cross.tex', index=False)
+overall_lopo.to_latex('metrics/tables/lopo.tex', index=False)
+overall_pfold.to_latex('metrics/tables/pfold.tex', index=False)

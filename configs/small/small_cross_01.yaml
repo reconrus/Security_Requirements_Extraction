@@ -1,0 +1,19 @@
+model_type: t5-small
+epochs: 20
+max_len: 200
+model_save_name: t5-small.pt
+datasets_path: data/processed
+metrics_folder: metrics
+metrics_file: small_cross_01_metrics.csv
+oversampling: false
+clear_models_dir: true
+early_stopping: true
+seed: 42
+
+sec_label: "1"
+nonsec_label: "0"
+
+validation: cross-validation
+# cross-validation: stratified cross-validation, test_datasets are ignored
+# p-validation: training on one projects and testing on others 
+datasets_config_path: configs/datasets_config.yaml

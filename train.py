@@ -113,11 +113,14 @@ def cross_evaluation(model_type: str, full_train: pd.DataFrame,
     metrics_with_invalid = defaultdict(list)
     metrics_with_sec = defaultdict(list)
 
+    cross_train_file = 'cross_train.txt'
+    cross_valid_file = 'cross_valid.txt'
     for train_index, valid_index in skf.split(full_train["Text"], full_train["Label"]):
         train_df = full_train.iloc[train_index]
         valid_df = full_train.iloc[valid_index]
+        train_df.to_csv(cross_train_file, mode='a+')
+        valid_df.to_csv(cross_valid_file, mode='a+')
         prepare_data(train_df, valid_df, model_type, max_len, oversampling, labels_data)
-
         evaluation = train(model_type, epochs, labels_data, seed)
         for key, value in evaluation[0].items():
             metrics_with_invalid[key].append(value)

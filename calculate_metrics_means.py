@@ -10,12 +10,19 @@ overall_pfold = pd.DataFrame(columns=resulting_columns)
 
 def parse_model_name(name):
     model_type = 'T5-small' if 'small' in name else 'T5-base'
-    classes = '-tf' if '_tf' in name else ''
+    if '_tf' in name:
+        classes = '-tf'
+    elif '_01' in name:
+        classes = '-01'
+    else:
+        classes = ''
     oversampling = '-os' if '_os' in name else ''
     return f'{model_type}{classes}{oversampling}'
 
-for path in sorted(os.listdir("metrics")):
-    full_path = os.path.join("metrics", path)
+METRICS_FOLDER = "metrics"
+
+for path in sorted(os.listdir(METRICS_FOLDER)):
+    full_path = os.path.join(METRICS_FOLDER, path)
     if os.path.isdir(full_path):
         continue
     data = pd.read_csv(full_path, names=columns, header=None)
@@ -36,9 +43,9 @@ for path in sorted(os.listdir("metrics")):
 overall_cross = overall_cross.round(2)
 overall_lopo = overall_lopo.round(2)
 overall_pfold = overall_pfold.round(2)
-overall_cross.loc[len(overall)] = ["NoRBERT", "-", "-", 92, 90, 91]
-overall_lopo.loc[len(overall)] = ["NoRBERT", "-", "-", 92, 82, 87]
-overall_pfold.loc[len(overall)] = ["NoRBERT", "-", "-", 88, 92, 90]
+overall_cross.loc[len(overall_cross)] = ["NoRBERT", "-", "-", 92, 90, 91]
+overall_lopo.loc[len(overall_lopo)] = ["NoRBERT", "-", "-", 92, 82, 87]
+overall_pfold.loc[len(overall_pfold)] = ["NoRBERT", "-", "-", 88, 92, 90]
 print(tabulate(overall_cross, headers = 'keys', tablefmt = 'psql'))
 print(tabulate(overall_lopo, headers = 'keys', tablefmt = 'psql'))
 print(tabulate(overall_pfold, headers = 'keys', tablefmt = 'psql'))
